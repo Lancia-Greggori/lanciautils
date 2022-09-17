@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# $1: browser
+# $2: function
+# $3: bookmark file for the url function ( optional )
+
+set -eu
+
+[ "$#" -gt 3 ] && exit 1
+
+alias print='notify-send'
+
+PROMPT=''
+
+case "$2" in
+
+	google|searx) PROMPT='Enter search term: ' ;;
+
+	wikipedia) PROMPT='Enter wikipedia search term: ' ;;
+
+	url) PROMPT='Enter url: ' ;;
+
+	*) print "Error: action \"$2\" undefined" && exit 1 ;;
+
+esac
+
+BROWSER="$1"
+
+PROMPT="$BROWSER | $PROMPT"
+
+if [ -n "${3:+x}" ]; then
+
+	INPUT="$(grep -Eo 'http(s|)://[a-z0-9A-Z/.%]+' "$3" | sed -r -e 's|http(s\|)://(www.\|)||' -e 's/"//g' -e 's|/$||' | dmenu -p "$PROMPT")"
+
+else
+
+	INPUT="$(dmenu -p "$PROMPT" < /dev/null)"
+
+fi
+
+case "$2" in
+
+	google) exec $BROWSER "https://google.com/search?q=$INPUT" ;;
+
+	searx) exec $BROWSER "https://searx.org/search?q=$INPUT" ;;
+
+	wikipedia) exec $BROWSER "https://en.wikipedia.org/w/index.php?search=$INPUT" ;;
+
+	url) 
+		if [ -z "$INPUT" ]; then
+
+			exec $BROWSER
+
+		else
+
+			INPUT="$(echo "$INPUT" | sed -r 's/http(s|):\/\///')"
+
+			if [ "$(echo "$INPUT" | tr '.' ' ' | wc -w)" -gt 2 ]; then
+
+				exec $BROWSER "https://$INPUT"
+
+			else
+
+				exec $BROWSER "https://www.$INPUT"
+
+			fi
+				
+
+		fi ;;
+esac
+

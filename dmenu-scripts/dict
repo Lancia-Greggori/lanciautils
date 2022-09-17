@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+alias clip='xclip -selection clipboard'
+
+INPUT="$(dmenu -p 'Enter your word:' < /dev/null)"
+
+SPELL_OUTPUT="$(echo "$INPUT" | spell | sed -e '/^$/d' -e '/^Hunspell/d')"
+
+if echo "$SPELL_OUTPUT" | grep "#${INPUT}0"; then
+
+	notify-send "Error: no word \"$INPUT\" found in the dictionary"
+
+	exit 1
+
+elif echo "$SPELL_OUTPUT" | grep '^\*$'; then
+
+	notify-send 'Word correct'
+
+elif echo "$SPELL_OUTPUT" | grep "+ [[:alnum:]]\+"; then
+
+	SINGULAR_WORD="$(echo "$SPELL_OUTPUT" | sed 's/\+ //')"
+
+	echo "$SINGULAR_WORD" | dmenu -p "\"$INPUT\" is the plural form of:" | clip
+
+else
+
+	echo "$SPELL_OUTPUT" | cut -d':' -f2 | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | clip
+
+fi

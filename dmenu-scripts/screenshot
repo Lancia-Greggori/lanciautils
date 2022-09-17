@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -eu
+
+# 3 screenshot options: --full: the entire screen, --window: the focused window, --region: selected region
+
+[ "$#" -ne 1 ] && exit 1
+
+SCREENSHOT_DIR="$HOME/Screenshot"
+
+[ ! -e "$SCREENSHOT_DIR" ] && mkdir "$SCREENSHOT_DIR"
+
+DATE="$(show-date)"
+
+[ ! -e "$SCREENSHOT_DIR/$DATE" ] && mkdir "$SCREENSHOT_DIR/$DATE"
+
+NUM=0
+
+for i in $(seq 1 1000); do
+
+	[ -e "$SCREENSHOT_DIR/$DATE/$i.png" ] && continue
+
+	NUM="$i"
+
+	break
+
+done
+
+FILE="$SCREENSHOT_DIR/$DATE/$NUM.png"
+
+case "$1" in
+
+	--full) scrot "$FILE" ;;
+	--window) scrot -u "$FILE" ;;
+	--region) scrot -s "$FILE" ;;
+	*) echo 'Error: argument not recongnized' && print_help && exit 1 ;;
+
+esac
+
+xclip -selection clipboard -t image/png -i "$FILE"
