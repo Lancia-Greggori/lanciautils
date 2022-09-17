@@ -11,14 +11,25 @@ void read_file(FILE *fp)
 		putchar(character);
 
 		character = fgetc(fp);
-
 	}
-
 }
 
 int main(int argc, char *argv[])
 {
-	if(argc < 2) read_file(sdtin);
+	if(argc < 2) read_file(stdin);
 
-	return 0
+	else
+	{
+		FILE *fp;
+
+		for(int i = 1; i < argc; i++)
+		{
+			fp = fopen(argv[i], "r");
+
+			read_file(fp);
+		}
+
+	}
+
+	return 0;
 }
