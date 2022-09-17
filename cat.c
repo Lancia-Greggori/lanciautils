@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 void read_file(FILE *fp)
 {
@@ -25,7 +26,14 @@ int main(int argc, char *argv[])
 
 		for(int i = 1; i < argc; i++)
 		{
-			if(access(argv[i], F_OK) != 0)
+			if(strcmp(argv[i], "-") == 0)
+			{
+				read_file(stdin);
+
+				continue;
+			}
+
+			else if(access(argv[i], F_OK) != 0)
 			{
 				fprintf(stderr, "Error: %s does not exist\n", argv[i]);
 
