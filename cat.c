@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 void read_file(FILE *fp)
 {
@@ -24,6 +25,20 @@ int main(int argc, char *argv[])
 
 		for(int i = 1; i < argc; i++)
 		{
+			if(access(argv[i], F_OK) != 0)
+			{
+				fprintf(stderr, "Error: %s does not exist\n", argv[i]);
+
+				continue;
+			}
+
+			else if(access(argv[i], R_OK) != 0)
+			{
+				fprintf(stderr, "Error: %s is not readable\n", argv[i]);
+
+				continue;
+			}
+
 			fp = fopen(argv[i], "r");
 
 			read_file(fp);
