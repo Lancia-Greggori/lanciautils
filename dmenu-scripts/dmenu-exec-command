@@ -16,6 +16,4 @@ if ! which "$EXE" 1>/dev/null; then
 
 fi
 
-[ -n "$*" ] && [ "$1" = '--with-output' ] && exec notify-send "$($COMMAND)"
-
 exec $COMMAND
