@@ -1,0 +1,21 @@
+#!/bin/sh
+
+FILE="$(find /var/log -name "$1" 2>/dev/null)"
+
+if [ "$(echo "$FILE" | wc -l)" -gt 1 ]; then
+
+	echo 'Error: two files with the same name exist'
+
+	exit 1
+
+elif [ ! -r "$FILE" ]; then
+
+	echo 'Error: file unreadable'
+
+	exit 1
+
+else
+
+	tail -f "$FILE"
+
+fi

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# make a copy of the given file argument suffixed with .original
+
+set -e
+
+[ "$#" -ne '1' ] && echo 'Error: need one argument' && exit 1
+
+[ ! -f "$1" ] && echo 'Error: not a file' && exit 1
+
+exec cp -v "$1" "$1".original

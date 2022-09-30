@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -eu
+
+LOG_FILE='/var/log/tor.log'
+
+while true; do
+
+	if tail -n1 "$LOG_FILE" | grep -F 'Bootstrapped 10%' 1>/dev/null; then
+
+		priv servrest tor
+
+	fi
+
+	sleep 5m
+
+done

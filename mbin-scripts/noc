@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# noc: no comment
+
+set -eu
+
+PATTERN='^[ \t]\+*#\+'
+
+if [ -z "$*" ]; then
+
+	STDIN="$(cat)"
+
+	echo "$STDIN" | grep -v "$PATTERN" | uniq
+
+else
+
+	grep -v "$PATTERN" "$@" | uniq
+
+fi

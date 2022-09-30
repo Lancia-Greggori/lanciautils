@@ -1,0 +1,54 @@
+#!/bin/sh
+
+
+BACKUP_DIR="$HOME/.backup/tars"
+
+HELP="USAGE: $0 [ directories to take a tar.gz backup of and put them in $BACKUP_DIR ]"
+
+[ -z "$*" ] && printf 'Error: no arguments provided\n%s\n' "$HELP" && exit 1
+
+for arg in "$@"; do
+
+	if [ ! -d "$arg" ]; then
+
+		printf 'Error: %s is not a directory\n%s\n' "$arg" "$HELP"
+
+		exit 1
+
+	fi
+
+done
+
+[ ! -e "$BACKUP_DIR" ] && mkdir -p "$BACKUP_DIR"
+
+DATE="$(date '+%Y-%m-%d_%H-%M-%S')"
+
+# get the full path of the given directory
+# strip the name of the directory from that full path, and you get the parent
+# directories of the directory
+# use these strings that contain parent directories for tar to change into them,
+# and the backup the given directory
+
+for dir in "$@"; do
+
+	FULL_PATH="$(readlink -f "$dir")"
+
+	echo "Backing up $FULL_PATH"
+
+	DIR_NAME="$(basename "$FULL_PATH")"
+
+	if echo "$DIR_NAME" | grep '^\.'; then
+
+		FILE_NAME="$(echo "$DIR_NAME" | sed 's/^\./dot-/')"
+
+	else
+
+		FILE_NAME="$DIR_NAME"
+
+	fi
+
+	PARENT_DIRS="$(echo "$FULL_PATH" | sed "s/$DIR_NAME//g")"
+
+	tar czvf "${BACKUP_DIR}/${FILE_NAME}_${DATE}.tar.gz" -C "$PARENT_DIRS" "./$DIR_NAME"
+
+done

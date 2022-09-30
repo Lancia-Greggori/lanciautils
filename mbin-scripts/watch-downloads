@@ -1,0 +1,90 @@
+#!/bin/sh
+
+set -eu
+
+DIR="$HOME/Downloads"
+
+PDF_DIR="$DIR/PDFs"
+
+COMPRESSED_DIR="$DIR/compressed"
+
+TORRENT_FILES_DIR="$DIR/torrent-files"
+
+APK_FOLER="$DIR/apps"
+
+PICS_FOLDER="$DIR/pics"
+
+make_dir()
+{
+	if [ ! -e "$1" ]; then mkdir "$1"; fi
+
+}
+
+make_dir "$PDF_DIR"
+
+make_dir "$COMPRESSED_DIR"
+
+make_dir "$TORRENT_FILES_DIR"
+
+make_dir "$APK_FOLER"
+
+make_dir "$PICS_FOLDER"
+
+unset make_dir
+
+# $1: filename ending pattern, $2: the directory to move the files into
+
+move_files()
+{
+
+	PATTERN="$1"; DESTINATION_DIR="$2";
+	
+	find "$DIR" -maxdepth 1 -mindepth 1 -type f -iname "*$PATTERN" | while read -r file; do
+
+		FILE_NAME="$(basename "$file")"
+
+		if [ -e "$DESTINATION_DIR/$FILE_NAME" ]; then
+
+			for i in $(seq 1 1000); do
+
+				[ -e "$DESTINATION_DIR/${FILE_NAME}.${i}" ] && continue
+
+				FILE_NAME="${FILE_NAME}.${i}" && break
+
+			done
+				
+		fi
+
+		mv "$file" "$DESTINATION_DIR/$FILE_NAME"
+
+	done
+
+}
+
+
+while true; do
+
+	sleep 1s
+
+	# check if nobody has anything open in $DIR, then proceed
+	if lsof -u "$USER" | grep -F "$(readlink -f "$DIR")" 1>/dev/null; then continue; fi
+
+	move_files '.pdf' "$PDF_DIR"
+
+	move_files '.gz' "$COMPRESSED_DIR"
+
+	move_files '.zip' "$COMPRESSED_DIR"
+
+	move_files '.rar' "$COMPRESSED_DIR"
+
+	move_files '.torrent' "$TORRENT_FILES_DIR"
+
+	move_files '.apk' "$APK_FOLER"
+
+	move_files '.jpeg' "$PICS_FOLDER"
+
+	move_files '.jpg' "$PICS_FOLDER"
+
+	move_files '.png' "$PICS_FOLDER"
+
+done
