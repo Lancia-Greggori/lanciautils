@@ -16,4 +16,4 @@ if ! which "$EXE" 1>/dev/null; then
 
 fi
 
-exec $COMMAND
+exec notify-send "$(eval $COMMAND)"
