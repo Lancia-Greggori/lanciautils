@@ -2,16 +2,43 @@
 
 set -eu
 
-LOG_FILE='/var/log/tor.log'
-
 while true; do
 
-	if tail -n1 "$LOG_FILE" | grep -F 'Bootstrapped 10%' 1>/dev/null; then
+	sleep 1m
+
+	# If the tor is stuck on 10%, keep restarting it until it passes that mark
+	if grep -o 'Bootstrapped [0-9]\?[0-9][0-9]%' /var/log/tor.log | uniq | tail -n1 | grep -F 'Bootstrapped 10%'; then
 
 		priv servrest tor
 
+		continue
+
 	fi
 
-	sleep 5m
+	while true; do
+
+		sleep 1m
+
+		TRIES=0
+
+		if curl --silent -L --socks5 'localhost:9050' html.duckduckgo.com 1>/dev/null; then
+
+			TRIES=0
+
+		else
+
+			TRIES="$((TRIES + 1))"
+
+		fi
+
+		if [ "$TRIES" -gt 5 ]; then
+
+			priv servrest tor
+
+			break
+
+		fi
+
+	done
 
 done
