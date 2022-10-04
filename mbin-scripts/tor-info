@@ -4,6 +4,6 @@ set -eu
 
 LOG_FILE='/var/log/tor.log'
 
-grep 'Bootstrapped [0-9]\?[0-9][0-9]%' "$LOG_FILE" | tail | sed '$d'
+grep 'Bootstrapped [0-9]\?[0-9][0-9]%' "$LOG_FILE" | tail 
 
 tail -f "$LOG_FILE" | grep 'Bootstrapped [0-9]\?[0-9][0-9]%' 
