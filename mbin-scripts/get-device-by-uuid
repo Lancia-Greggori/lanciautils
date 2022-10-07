@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -eu
+
+[ "$#" -ne 1 ] && exit 1
+
+UUID="$1"
+
+if ! echo "$UUID" | grep -i '^[a-z0-9-]\+$' 1>/dev/null; then
+
+	echo 'Error: UUID in bad form' 1>&2
+
+	exit 1
+
+fi
+
+BLKID_OUTPUT="$(blkid)"
+
+if echo "$BLKID_OUTPUT" | grep -F "$UUID" 1>/dev/null; then
+
+	echo "$BLKID_OUTPUT" | grep -F "$UUID" | cut -d':' -f1
+
+else
+
+	exit 1
+
+fi
