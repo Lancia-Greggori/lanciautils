@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -eu
+
+LOG_FILE="/var/log/$(basename "$0").log"
+
+printf '' > "$LOG_FILE"
+
+DATE_PATTERN='+%Y-%M-%d_%H-%M'
+
+COUNTER=0
+
+while true; do
+
+	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
+	
+		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address 'https://html.duckduckgo.com' 1>/dev/null"; then
+
+			echo "$(date "$DATE_PATTERN") curl Success" >> "$LOG_FILE"
+
+		else
+
+			echo "$(date "$DATE_PATTERN") curl Failed" >> "$LOG_FILE"
+
+		fi
+	
+	done
+
+	if [ "$COUNTER" -eq 50 ]; then
+
+		printf '' > "$LOG_FILE"
+
+		COUNTER=0
+
+	else
+
+		COUNTER="$((COUNTER + 1))"
+
+	fi
+
+	sleep 30s
+
+done
+
