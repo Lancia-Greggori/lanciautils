@@ -1,0 +1,34 @@
+#!/usr/bin/openrc-run
+
+SVCNAME=tor
+supervisor="supervise-daemon"
+command=/usr/bin/tor
+num_id='x'
+pidfile="/run/tor/supervise-tor-${num_id}.pid"
+config_file="/etc/tor/torrc-${num_id}"
+command_args="-f ${config_file} --hush"
+command_args_background="--runasdaemon 1 --pidfile ${pidfile}"
+retry=${GRACEFUL_TIMEOUT:-60}
+stopsig=INT
+log_file="/var/log/tor-${num_id}.log"
+data_dir="/var/lib/tor-${num_id}"
+
+extra_commands="checkconfig"
+description="Anonymizing overlay network for TCP"
+description_checkconfig="Check for valid config file"
+
+checkconfig() {
+	${command} -f ${config_file} --verify-config --hush > /dev/null 2>&1
+	if [ $? -ne 0 ] ; then
+		eerror "Tor configuration ${config_file} is not valid."
+		return 1
+	fi
+}
+
+start_pre() {
+	checkconfig || return 1
+	checkpath -f -F -m 0644 -o tor:tor ${log_file}
+	checkpath -d -m 0700 -o tor:tor ${data_dir}
+	checkpath -d -m 0755 -o tor:tor /run/tor
+}
+

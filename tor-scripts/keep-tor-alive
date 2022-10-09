@@ -12,6 +12,10 @@ COUNTER=0
 
 while true; do
 
+	sleep 30s
+
+	ps -A -o cmd | cut -d' ' -f1 | grep '\btor\b' 1>/dev/null || continue
+
 	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
 	
 		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address 'https://html.duckduckgo.com' 1>/dev/null"; then
@@ -38,7 +42,4 @@ while true; do
 
 	fi
 
-	sleep 30s
-
 done
-
