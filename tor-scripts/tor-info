@@ -10,4 +10,4 @@ PATTERN='Bootstrapped [0-9]\?[0-9]\?[0-9]%'
 
 grep "$PATTERN" "$LOG_FILE" | tail
 
-tail -f "$LOG_FILE" | grep "$PATTERN"
+tail -n1 -f "$LOG_FILE" | grep "$PATTERN"

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -eu
+
+[ "$#" -eq 0 ] && exit 1
+
+DIRS='/usr/local/mbin /home/lancia/.lsr/mbin'
+
+for file in "$@"; do
+
+	FILE_NAME="$(basename "$file")"
+
+	for dir in $DIRS; do
+
+		TARGET_FILE="$dir/$FILE_NAME"
+
+		if [ "$TARGET_FILE" = "$file" ]; then
+
+			echo "Error: $TARGET_FILE and $file are the same, skipping..."
+
+			continue
+
+		elif [ -e "$TARGET_FILE" ] && ! diff -q "$TARGET_FILE" "$file"; then
+
+			echo "showing diff for $TARGET_FILE and $file"
+
+			diff "$TARGET_FILE" "$file"
+
+		else
+
+			echo "no difference between $TARGET_FILE and $file"
+
+		fi
+
+	done
+
+done
