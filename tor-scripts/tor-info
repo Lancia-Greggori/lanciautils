@@ -2,12 +2,4 @@
 
 set -eu
 
-LOG_FILE="/var/log/tor-$1.log"
-
-[ ! -e "$LOG_FILE" ] && echo "Error: file $LOG_FILE non existent" && exit 1
-
-PATTERN='Bootstrapped [0-9]\?[0-9]\?[0-9]%'
-
-grep "$PATTERN" "$LOG_FILE" | tail
-
-tail -n1 -f "$LOG_FILE" | grep "$PATTERN"
+watch -n1 "tail -n1000 /var/log/tor* | grep -E '^==>.*<==$|Bootstrapped'"

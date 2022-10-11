@@ -28,8 +28,14 @@ while true; do
 
 			echo "$(date "$DATE_PATTERN") curl for $socks5_address Failed" >> "$LOG_FILE"
 
-		fi
+		fi &
 	
+	done
+
+	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ 'https://html.duckduckgo.com'"; do
+
+		sleep 30s
+
 	done
 
 	if [ "$COUNTER" -eq 50 ]; then
