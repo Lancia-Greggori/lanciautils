@@ -32,7 +32,7 @@ while true; do
 	
 	done
 
-	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ 'https://html.duckduckgo.com'"; do
+	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ 'https://html.duckduckgo.com'" 1>/dev/null; do
 
 		sleep 30s
 
