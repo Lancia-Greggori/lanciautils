@@ -2,15 +2,13 @@
 
 set -eu
 
-# 3 screenshot options: --full: the entire screen, --window: the focused window, --region: selected region
-
 [ "$#" -ne 1 ] && exit 1
 
 SCREENSHOT_DIR="$HOME/Screenshot"
 
-[ ! -e "$SCREENSHOT_DIR" ] && mkdir "$SCREENSHOT_DIR"
-
 DATE="$(show-date)"
+
+[ ! -e "$SCREENSHOT_DIR" ] && mkdir "$SCREENSHOT_DIR"
 
 [ ! -e "$SCREENSHOT_DIR/$DATE" ] && mkdir "$SCREENSHOT_DIR/$DATE"
 
@@ -30,10 +28,10 @@ FILE="$SCREENSHOT_DIR/$DATE/$NUM.png"
 
 case "$1" in
 
-	--full) scrot "$FILE" ;;
-	--window) scrot -u "$FILE" ;;
-	--region) scrot -s "$FILE" ;;
-	*) echo 'Error: argument not recongnized' && print_help && exit 1 ;;
+	full) import -window root "$FILE" ;;
+	window) import -window "$(xwininfo | grep -F 'wininfo: Window id:' | cut -d' ' -f4)" "$FILE" ;;
+	region) import "$FILE" ;;
+	*) echo 'Error: argument not recongnized' && exit 1 ;;
 
 esac
 

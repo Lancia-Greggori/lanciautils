@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eu
+
+case "$(printf 'US English\nSpanish\nPersian\n' | dmenu)" in
+
+	'US English') setxkbmap us ;;
+
+	Spanish) setxkbmap es ;;
+
+	Persian) setxkbmap ir ;;
+
+esac
