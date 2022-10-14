@@ -57,7 +57,7 @@ checkconfig()
 
 		return 1
 
-	elif grep -r "$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -Fv "${config_file}:"; then
+	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -Fv "${config_file}:"; then
 
 		eerror "The socks port used in ${config_file} is already used somewhere else in other config files"
 

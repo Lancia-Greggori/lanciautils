@@ -6,11 +6,11 @@ set -eu
 
 LOG_FILE="/var/log/$(basename "$0").log"
 
-printf '' > "$LOG_FILE"
-
 DATE_PATTERN='+%Y-%M-%d_%H-%M'
 
-COUNTER=0
+URL='https://html.duckduckgo.com'
+
+printf '' > "$LOG_FILE"
 
 while true; do
 
@@ -20,7 +20,7 @@ while true; do
 
 	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
 	
-		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address 'https://html.duckduckgo.com' 1>/dev/null"; then
+		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address $URL 1>/dev/null"; then
 
 			echo "$(date "$DATE_PATTERN") curl for $socks5_address Succeeded" >> "$LOG_FILE"
 
@@ -32,22 +32,10 @@ while true; do
 	
 	done
 
-	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ 'https://html.duckduckgo.com'" 1>/dev/null; do
+	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
 
 		sleep 1s
 
 	done
-
-	if [ "$COUNTER" -eq 50 ]; then
-
-		printf '' > "$LOG_FILE"
-
-		COUNTER=0
-
-	else
-
-		COUNTER="$((COUNTER + 1))"
-
-	fi
 
 done
