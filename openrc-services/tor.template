@@ -18,7 +18,8 @@ else
 fi
 
 pidfile="/run/tor/supervise-tor-${id}.pid"
-config_file="/etc/tor/torrc-${id}"
+config_dir="/etc/tor"
+config_file="${config_dir}/torrc-${id}"
 command_args="-f ${config_file} --hush"
 command_args_background="--runasdaemon 1 --pidfile ${pidfile}"
 retry=${GRACEFUL_TIMEOUT:-60}
@@ -32,7 +33,13 @@ description_checkconfig="Check for valid config file"
 
 checkconfig()
 {
-	if [ ! -e "${config_file}" ]; then
+	if [ "$(dirname "${config_file}")" != "${config_dir}" ]; then
+
+		eerror "${config_file} should be in ${config_dir}"
+
+		return 1
+
+	elif [ ! -e "${config_file}" ]; then
 
 		eerror "Tor configuration ${config_file} does not exist."
 
@@ -47,6 +54,12 @@ checkconfig()
 	elif ! grep '^Log' ${config_file} | grep "${id}.log$" 1>/dev/null; then
 
 		eerror "Bad Log option in ${config_file}"
+
+		return 1
+
+	elif grep -r "$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -Fv "${config_file}:"; then
+
+		eerror "The socks port used in ${config_file} is already used somewhere else in other config files"
 
 		return 1
 
