@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -eu
+
+LOG_FILE='/var/log/keep-tor-alive.log'
+
+
