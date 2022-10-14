@@ -2,4 +2,12 @@
 
 set -eu
 
-watch -n1 "tail -n1000 /var/log/tor* | grep -E '^==>.*<==$|Bootstrapped'"
+for log_file in /var/log/tor*; do
+
+	echo "=======$log_file======="
+
+	grep 'Bootstrapped' "$log_file" | tail -n1
+
+	echo
+
+done
