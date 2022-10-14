@@ -4,6 +4,8 @@ set -eu
 
 [ "$(id -u)" -ne 0 ] && echo 'Error: you must be root' 1>&2 && exit 1
 
+cd /tmp
+
 LOG_FILE="/var/log/$(basename "$0").log"
 
 DATE_PATTERN='+%Y-%M-%d_%H-%M'

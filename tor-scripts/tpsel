@@ -2,6 +2,26 @@
 
 set -eu
 
-LOG_FILE='/var/log/keep-tor-alive.log'
+DEPENDENT_PROGRAM='keep-tor-alive'
 
+LOG_FILE="/var/log/$DEPENDENT_PROGRAM.log"
 
+if ! pgrep -f "$DEPENDENT_PROGRAM" 1>/dev/null; then
+
+	echo "Error: the script depends on the program $DEPENDENT_PROGRAM however it is not running" 1>&2
+
+	exit 1
+
+fi
+
+[ ! -s "$LOG_FILE" ] && echo "Error: $LOG_FILE empty" 1>&2 && exit 1
+
+if ! GREP_OUTPUT="$(grep -F 'Succeeded' "$LOG_FILE")"; then
+
+	echo 'Error: no suitable tor address with a successful connection found' 1>&2
+
+	exit 1
+
+fi
+
+echo "$GREP_OUTPUT" | tail -n1 | cut -d' ' -f4

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -eu
+
+FULL_ADDR="$(tpsel)"
+
+ADDR="${FULL_ADDR%%:*}"
+
+PORT="${FULL_ADDR##*:}"
+
+torsocks -a "$ADDR" -P "$PORT" "$@"
