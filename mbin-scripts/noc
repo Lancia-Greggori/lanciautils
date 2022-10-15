@@ -8,9 +8,10 @@ PATTERN='^[ \t]\+*#\+'
 
 if [ -z "$*" ]; then
 
-	STDIN="$(cat)"
+	#STDIN="$(cat)"
 
-	echo "$STDIN" | grep -v "$PATTERN" | uniq
+	#echo "$STDIN" | grep -v "$PATTERN" | uniq
+	grep -v "$PATTERN" | uniq
 
 else
 

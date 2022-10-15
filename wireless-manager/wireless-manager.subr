@@ -1,0 +1,272 @@
+#!/bin/sh
+
+DEV='wlan0'
+
+CONFIG_DIRECTORY='/etc/wpa_supplicant'
+
+WPA_SUPPLICANT_LOGFILE='/var/log/wpa.log'
+
+PRIORITY_FILE='/etc/wireless-manager.priorities'
+
+TMP_FILE="/tmp/wm.tmp.${PPID}"
+
+
+ALLOWED_FIRST_ARG_FUNCTION_NAMES='start|stop|restart'
+
+ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS='list-ssids|info'
+
+ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS='auto-scan|priority-scan|manual-ssid-scan'
+
+
+alias check_for_empty_second_arg="if [ -z $2 ]; then echo 'Error: no second argument given'; print_help; exit 1; fi"
+
+
+print_help()
+{
+	cat <<EOF
+$0 [OPTION] ...
+Allowed options:
+	[$ALLOWED_FIRST_ARG_FUNCTION_NAMES] [$ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS] [[SSID name in case manual-ssid-scan was chosen]]
+	[$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS]
+EOF
+}
+
+need_root()
+{
+	if [ "$(id -u)" != 0 ]; then 
+		
+		echo 'Error: this actions has to be executed as root' 
+		
+		exit 1
+
+	fi
+}
+
+bring_interface_up()
+{
+	if ! ifconfig | grep -F "$DEV" 1>/dev/null; then
+	
+		ifconfig "$DEV" up
+	
+	fi
+}
+
+kill_wpa_supplicant()
+{
+	need_root
+
+	if pgrep -f wpa_supplicant 1>/dev/null; then
+
+		if ! pkill wpa_supplicant; then
+
+			echo 'Error: could not kill wpa_supplicant, aborting program'
+
+			exit 1
+
+		fi
+
+	fi
+}
+
+check_for_too_many_results()
+{
+		if [ "$(echo "$1" | wc -l | cut -d' ' -f1)" -gt 1 ]; then
+		       
+			echo "error: there more than one file that contains the SSID $2" 
+			
+			exit 1
+
+		fi
+}
+
+output_ssid_names()
+{
+	iw "$DEV" scan | grep -F SSID | sed 's/	SSID: //g' 
+}
+
+start_auto_scan()
+{
+	need_root
+
+	bring_interface_up
+
+	{
+		output_ssid_names | while read -r ssid; do
+
+			CONFIG_FILE="$(grep -Flr "ssid=\"$ssid\"" "$CONFIG_DIRECTORY")" || continue
+
+			check_for_too_many_results "$CONFIG_FILE" "$ssid"
+
+			wpa_supplicant -c "$CONFIG_FILE" -i "$DEV" >"$WPA_SUPPLICANT_LOGFILE" 2>&1 & 
+			
+			break
+
+		done 
+
+		if ! pgrep -f wpa_supplicant 1>/dev/null; then
+			
+			echo 'Error: no suitable wireless network found to connect to using auto-scan' 
+			
+			exit 1
+
+		fi
+	} &
+}
+
+start_priority_scan()
+{
+	need_root
+
+	bring_interface_up
+
+	if [ ! -e "$PRIORITY_FILE" ]; then
+		
+		echo "Error: the priority file at $PRIORITY_FILE does not exist" 
+		
+		exit 1
+
+	elif [ ! -s "$PRIORITY_FILE" ]; then
+
+		echo "Error: priority file at $PRIORITY_FILE is empty"
+
+		exit 1
+
+	fi
+
+	touch "$TMP_FILE"
+
+	{
+		output_ssid_names | while read -r ssid; do
+
+			if grep -r "ssid=\"$ssid\"" "$CONFIG_DIRECTORY" 1>/dev/null && grep "$ssid" "$PRIORITY_FILE" 1>/dev/null; then
+				
+				echo "$ssid" >> "$TMP_FILE"
+
+			fi
+
+		done
+
+		if [ ! -s "$TMP_FILE" ]; then
+
+		 	echo "Error: no suitable wireless network with an SSID found in $PRIORITY_FILE" 
+			
+			exit 1
+		
+		fi
+
+		while read -r priority_ssid; do
+
+			while read -r discovered_ssid; do
+
+				if [ "$discovered_ssid" = "$priority_ssid" ]; then
+
+					if CONFIG_FILE="$(grep -lr "ssid=\"$discovered_ssid\"" "$CONFIG_DIRECTORY")"; then
+
+						check_for_too_many_results "$CONFIG_FILE" "$discovered_ssid"
+
+						wpa_supplicant -c "$CONFIG_FILE" -i "$DEV" >"$WPA_SUPPLICANT_LOGFILE" 2>&1 &
+
+						break
+
+					else
+
+						echo "Error: no matching configuration file found for SSID $discovered_ssid"
+
+						exit 1
+					
+					fi
+
+				fi
+
+			done<"$TMP_FILE"
+
+			if pgrep -f wpa_supplicant 1>/dev/null; then
+
+				rm "$TMP_FILE"
+
+				break
+
+			fi
+
+		done <"$PRIORITY_FILE"
+	} &
+}
+
+start_manual_ssid_scan()
+{
+	need_root
+
+	bring_interface_up
+
+	kill_wpa_supplicant
+
+	if CONFIG_FILE="$(grep -lr "ssid=\"$1\"" "$CONFIG_DIRECTORY")"; then
+
+		check_for_too_many_results "$CONFIG_FILE" "$1"
+
+		wpa_supplicant -c "$CONFIG_FILE" -i "$DEV" >"$WPA_SUPPLICANT_LOGFILE" 2>&1 &
+
+		exit 0
+
+	else
+
+		echo "Error: no matching configuration file found for SSID $1"
+
+		exit 1
+
+	fi
+}
+
+show_info()
+{
+	if pgrep -f wpa_supplicant 1>/dev/null; then
+
+		[ ! -e "$WPA_SUPPLICANT_LOGFILE" ] && echo "Error: logfile for wpa_supplicant at $WPA_SUPPLICANT_LOGFILE does not exist" && exit 1
+
+		echo "command: $(ps -A -o cmd | grep '^wpa_supplicant')"
+
+		IP="$(ip address show dev wlan0 | grep -o 'inet [0-9.]\+' | sed 's/inet //g')"
+
+		SSID="$(grep -o "SSID='.\+'" "$WPA_SUPPLICANT_LOGFILE" | sed "s/SSID='//; s/'$//" | uniq)"
+
+		printf 'SSID: %s\nIP: %s\n' "$SSID" "$IP"
+
+		echo 'Summary of CTRL events:'
+
+		grep -F 'CTRL-EVENT' "$WPA_SUPPLICANT_LOGFILE"
+
+	else
+
+		echo 'Error: wpa_supplicant process not running'
+
+		exit 1
+
+	fi
+}
+
+# arg1: scan type
+# arg2: SSID name in case manual-ssid-scan was chosen
+start_desired_scan()
+{
+	case "$1" in
+
+		auto-scan) start_auto_scan ;;
+
+		priority-scan) start_priority_scan ;;
+
+		manual-ssid-scan) 
+
+			if [ -z "$2" ]; then
+
+				echo 'Error: no SSID name was given'
+
+				exit 1
+
+			else
+
+				start_manual_ssid_scan "$2"
+
+			fi ;;
+
+	esac
+}
