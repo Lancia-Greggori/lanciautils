@@ -8,7 +8,7 @@ cd /tmp
 
 LOG_FILE="/var/log/$(basename "$0").log"
 
-DATE_PATTERN='+%Y-%M-%d_%H-%M'
+DATE_PATTERN='+%Y-%m(%b)-%d %H:%M'
 
 URL='https://html.duckduckgo.com'
 

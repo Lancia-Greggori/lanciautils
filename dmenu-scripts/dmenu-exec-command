@@ -2,18 +2,26 @@
 
 set -eu
 
-COMMAND="$(dmenu < /dev/null)"
+INPUT="$(dmenu < /dev/null)"
 
-[ -z "$COMMAND" ] && exit 0
+[ -z "$INPUT" ] && exit 0
 
-EXE="$(echo "$COMMAND" | cut -d' ' -f1)"
+COMMAND="$(echo "$INPUT" | cut -d' ' -f1)"
 
-if ! which "$EXE" 1>/dev/null; then
+if ! which "$COMMAND" 1>/dev/null; then
 
-	notify-send "Error: command $EXE not found"
+	notify-send "Error: command $COMMAND not found"
 
 	exit 1
 
 fi
 
-exec notify-send "$(eval $COMMAND)"
+OUTPUT="$(eval $INPUT)" || {
+
+	echo "Error executing command $INPUT"
+
+	exit 1
+
+}
+
+notify-send "$OUTPUT"
