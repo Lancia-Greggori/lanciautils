@@ -13,12 +13,12 @@ else
 
 fi
 
-if [ "$#" -eq 0 ] || [ "$#" -gt 3 ]; then 
-	
+if [ "$#" -eq 0 ] || [ "$#" -gt 3 ]; then
+
 	echo 'Error: need at least one argument'
 
 	print_help
-	
+
 	exit 1
 
 elif [ "$1" = '--help' ] || [ "$1" = '-h' ] || [ "$1" = 'help' ]; then
@@ -79,4 +79,4 @@ elif [ "$1" = restart ]; then
 
 	start_desired_scan "$2" "$3"
 
-fi	
+fi

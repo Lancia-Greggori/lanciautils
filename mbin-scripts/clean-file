@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+sed -i'' -e 's/	\+$//g' -e 's/ $//g' "$1"
