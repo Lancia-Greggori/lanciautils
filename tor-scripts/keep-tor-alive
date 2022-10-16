@@ -21,7 +21,7 @@ while true; do
 	ps -A -o cmd | cut -d' ' -f1 | grep '\btor\b' 1>/dev/null || continue
 
 	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
-	
+
 		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address $URL 1>/dev/null"; then
 
 			echo "$(date "$DATE_PATTERN") curl for $socks5_address Succeeded" >> "$LOG_FILE"
@@ -31,7 +31,7 @@ while true; do
 			echo "$(date "$DATE_PATTERN") curl for $socks5_address Failed" >> "$LOG_FILE"
 
 		fi &
-	
+
 	done
 
 	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do

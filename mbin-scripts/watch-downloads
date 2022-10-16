@@ -38,7 +38,7 @@ move_files()
 	DESTINATION_DIR="$2"
 
 	for pattern in $1; do
-	
+
 		find "$DIR" -maxdepth 1 -mindepth 1 -type f -iname "*$pattern" | while read -r file; do
 
 			FILE_NAME="$(basename "$file")"

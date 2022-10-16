@@ -2,4 +2,10 @@
 
 set -eu
 
-sed -i'' -e 's/	\+$//g' -e 's/ $//g' "$1"
+[ "$#" -eq 0 ] && exit 1
+
+for file in "$@"; do
+
+	sed -i'' -e 's/	\+$//g' -e 's/ $//g' "$file"
+
+done

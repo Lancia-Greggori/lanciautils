@@ -46,7 +46,7 @@ case "$2" in
 
 	wikipedia) exec $BROWSER "https://en.wikipedia.org/w/index.php?search=$INPUT" ;;
 
-	url) 
+	url)
 		if [ -z "$INPUT" ]; then
 
 			exec $BROWSER
@@ -64,7 +64,7 @@ case "$2" in
 				exec $BROWSER "https://www.$INPUT"
 
 			fi
-				
+
 
 		fi ;;
 esac
