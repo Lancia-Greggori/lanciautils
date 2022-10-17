@@ -10,17 +10,17 @@ PROGRAM_NAME="$(basename "$0")"
 
 if ! pgrep -f "$DEPENDENT_PROGRAM" 1>/dev/null; then
 
-	echo "$PROGRAM_NAME: the script depends on the program $DEPENDENT_PROGRAM however it is not running" 1>&2
-
-	exit 1
+	echo "$PROGRAM_NAME: this program depends on the program $DEPENDENT_PROGRAM, however, it is not running, this might cause some problems" 1>&2
 
 fi
 
-[ ! -s "$LOG_FILE" ] && echo "$PROGRAM_NAME: $LOG_FILE empty" 1>&2 && exit 1
+[ ! -e "$LOG_FILE" ] && echo "$PROGRAM_NAME: $LOG_FILE does not exist" 1>&2 && exit 1
+
+[ ! -s "$LOG_FILE" ] && echo "$PROGRAM_NAME: $LOG_FILE is empty" 1>&2 && exit 1
 
 GREP_OUTPUT="$(grep -F 'Succeeded' "$LOG_FILE")" || {
 
-	echo '$PROGRAM_NAME: no suitable tor address with a successful connection found' 1>&2
+	echo "$PROGRAM_NAME: no suitable tor address that has a successful connection to the tor network was found" 1>&2
 
 	exit 1
 
