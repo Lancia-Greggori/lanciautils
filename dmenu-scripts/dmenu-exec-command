@@ -2,23 +2,23 @@
 
 set -eu
 
-INPUT="$(dmenu < /dev/null)"
+COMMAND="$(dmenu < /dev/null)"
 
-[ -z "$INPUT" ] && exit 0
+[ -z "$COMMAND" ] && exit 0
 
-COMMAND="$(echo "$INPUT" | cut -d' ' -f1)"
+PROGRAM="$(echo "$COMMAND" | cut -d' ' -f1)"
 
-if ! which "$COMMAND" 1>/dev/null; then
+if ! which "$PROGRAM" 1>/dev/null 2>&1; then
 
-	notify-send "Error: command $COMMAND not found"
+	notify-send "Error: command $PROGRAM not found"
 
 	exit 1
 
 fi
 
-OUTPUT="$(eval $INPUT)" || {
+OUTPUT="$(eval $COMMAND 2>&1)" || {
 
-	echo "Error executing command $INPUT"
+	notify-send "$(printf "Error executing command \"%s\", output:\n%s" "$COMMAND" "$OUTPUT")"
 
 	exit 1
 
