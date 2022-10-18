@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 				putchar(p[j]);
 			}
 
-			putchar(' ');
+			if(i != (argc-1)) putchar(' ');
 		}
 
 		putchar('\n');
