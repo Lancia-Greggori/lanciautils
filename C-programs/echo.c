@@ -1,9 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-
-#define BUFFER_SIZE 100
-
-char buffer[BUFFER_SIZE];
 
 int main(int argc, char *argv[])
 {
@@ -13,19 +8,21 @@ int main(int argc, char *argv[])
 
 	else
 	{
-		for(int i = BUFFER_SIZE; i < BUFFER_SIZE; i++)
-		{
-			buffer[i] = '\0';
-		}
+		char *p;
 
 		for(int i = 1; i < argc; i++)
 		{
-			strcat(buffer, argv[i]);
+			char *p = argv[i];
 
-			strcat(buffer, " ");
+			for(int j = 0; p[j] != '\0'; j++)
+			{
+				putchar(p[j]);
+			}
+
+			putchar(' ');
 		}
 
-		puts(buffer);
+		putchar('\n');
 	}
 
 	return 0;
