@@ -10,7 +10,7 @@ PROGRAM="$(echo "$COMMAND" | cut -d' ' -f1)"
 
 if ! which "$PROGRAM" 1>/dev/null 2>&1; then
 
-	notify-send "Error: command $PROGRAM not found"
+	notify-send "Error: command \"$PROGRAM\" not found"
 
 	exit 1
 
