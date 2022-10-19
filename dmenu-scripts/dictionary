@@ -6,23 +6,25 @@ alias clip='xclip -selection clipboard'
 
 INPUT="$(dmenu -p 'Enter your word:' < /dev/null)"
 
-SPELL_OUTPUT="$(echo "$INPUT" | spell | sed -e '/^$/d' -e '/^Hunspell/d')"
+SPELL_OUTPUT="$(echo "$INPUT" | hunspell | sed -e '/^$/d' -e '/^Hunspell/d')"
 
-if echo "$SPELL_OUTPUT" | grep "#${INPUT}0"; then
+if echo "$SPELL_OUTPUT" | grep -q "#${INPUT}0"; then
 
 	notify-send "Error: no word \"$INPUT\" found in the dictionary"
 
 	exit 1
 
-elif echo "$SPELL_OUTPUT" | grep '^\*$'; then
+elif echo "$SPELL_OUTPUT" | grep -q '^\*$'; then
 
 	notify-send 'Word correct'
 
-elif echo "$SPELL_OUTPUT" | grep "+ [[:alnum:]]\+"; then
+	echo "$INPUT" | clip
+
+elif echo "$SPELL_OUTPUT" | grep -q '+ [[:alnum:]]\+'; then
 
 	SINGULAR_WORD="$(echo "$SPELL_OUTPUT" | sed 's/\+ //')"
 
-	echo "$SINGULAR_WORD" | dmenu -p "\"$INPUT\" is the plural form of:" | clip
+	printf '%s\n%s' "$SINGULAR_WORD" "$INPUT" | dmenu -p "\"$INPUT\" is the plural form of \"$SINGULAR_WORD\"" | clip
 
 else
 
