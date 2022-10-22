@@ -18,7 +18,7 @@ fi
 
 OUTPUT="$(eval $COMMAND 2>&1)" || {
 
-	notify-send "$(printf "Error executing command \"%s\", output:\n%s" "$COMMAND" "$OUTPUT")"
+	notify-send "$(printf 'Command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
 
 	exit 1
 
