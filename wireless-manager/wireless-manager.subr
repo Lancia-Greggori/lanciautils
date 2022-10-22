@@ -8,7 +8,7 @@ WPA_SUPPLICANT_LOGFILE='/var/log/wpa.log'
 
 PRIORITY_FILE='/etc/wireless-manager.priorities'
 
-TMP_FILE="/tmp/wm.tmp.${PPID}"
+TMP_FILE="$(mktemp /tmp/wireless-manager-tmp-XXX)"
 
 
 ALLOWED_FIRST_ARG_FUNCTION_NAMES='start|stop|restart'
