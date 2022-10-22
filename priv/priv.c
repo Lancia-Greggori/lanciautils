@@ -9,8 +9,6 @@
 #define MAX_ALLOWED_CMDLINE_ARG_SIZE 100
 #define MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE MAX_ALLOWED_CMDLINE_ARG_SIZE
 
-extern char **environ;
-
 int main(int argc, char *argv[])
 {
 	int cmdline_arg_size = 0;
@@ -97,7 +95,7 @@ int main(int argc, char *argv[])
 			{
 				setuid(0);
 
-				environ = NULL;
+				clearenv();
 
 				setenv("PATH", AUTHORISED_PATH, 1);
 
