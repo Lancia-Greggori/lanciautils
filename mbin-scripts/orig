@@ -2,10 +2,28 @@
 
 # make a copy of the given file argument suffixed with .original
 
-set -e
+set -eu
 
-[ "$#" -ne '1' ] && echo 'Error: need one argument' && exit 1
+[ "$#" -eq 0 ] && exit 1
 
-[ ! -f "$1" ] && echo 'Error: not a file' && exit 1
+for file in "$@"; do
 
-exec cp -v "$1" "$1".original
+	[ ! -f "$file" ] && echo "Error: \"$file\" not a file" 1>&2 && exit 1
+
+done
+
+for file in "$@"; do
+
+	NUM=1
+
+	for num in $(seq 1 1000); do
+
+		[ -e "${file}.original.${NUM}" ] && NUM="$((NUM+1))" && continue
+
+		break
+
+	done
+
+	cp -v "$file" "${file}.original.${NUM}"
+
+done
