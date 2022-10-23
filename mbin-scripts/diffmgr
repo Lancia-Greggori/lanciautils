@@ -22,13 +22,15 @@ for file in "$@"; do
 
 			continue
 
-		elif [ -e "$TARGET_FILE" ] && ! diff -q "$TARGET_FILE" "$file"; then
-
-			diff "$TARGET_FILE" "$file" || continue
-
 		else
 
-			echo "no difference between $TARGET_FILE and $file"
+			echo "---- $TARGET_FILE $file ----"
+
+			head -n1 "$file" | grep -q '^#!' && {
+
+				diff "$TARGET_FILE" "$file" || continue
+
+			}
 
 		fi
 
