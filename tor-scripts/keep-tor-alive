@@ -40,4 +40,16 @@ while true; do
 
 	done
 
+	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -eq 30 ]; then
+
+		TMP_FILE="$(mktemp)"
+
+		grep 'Succeeded$' "$LOG_FILE" | tail -n10 > "$TMP_FILE"
+
+		cat "$TMP_FILE" > "$LOG_FILE"
+
+		rm "$TMP_FILE"
+
+	fi
+
 done
