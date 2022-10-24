@@ -18,9 +18,6 @@ ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS='list-ssids|info'
 ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS='auto-scan|priority-scan|manual-ssid-scan'
 
 
-alias check_for_empty_second_arg="if [ -z $2 ]; then echo 'Error: no second argument given'; print_help; exit 1; fi"
-
-
 print_help()
 {
 	cat <<EOF
@@ -29,6 +26,17 @@ Allowed options:
 	[$ALLOWED_FIRST_ARG_FUNCTION_NAMES] [$ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS] [[SSID name in case manual-ssid-scan was chosen]]
 	[$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS]
 EOF
+}
+
+check_for_empty_arg()
+{
+	if [ -z "$1" ]; then
+
+		print_help
+
+		exit 1
+
+	fi
 }
 
 need_root()

@@ -8,4 +8,4 @@ FILTER_PATTERN='^"contextE(n|s)"|^"translation"|^"textE(n|s)"|"(feminine|masculi
 
 curl --silent -L --socks5 "$(tpsel)" --user-agent "$USERAGENT" "https://www.spanishdict.com/translate/$1" | grep -o '"[^"]\+":"[^"]\+"' | \
 
-	grep -E "$FILTER_PATTERN" | sed -e 's/"//g' -e 's/:/: /g' 
+	grep -E "$FILTER_PATTERN" | sed -e 's/"//g' -e 's/:/: /g'

@@ -6,6 +6,8 @@ set -eu
 
 for file in "$@"; do
 
+	[ -L "$file" ] && continue
+
 	sed -i'' -e 's/	\+$//g' -e 's/ $//g' "$file"
 
 done

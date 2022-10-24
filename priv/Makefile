@@ -5,10 +5,10 @@ priv: priv.c
 
 install: priv
 	strip priv
-	install -m 4755 priv $(PREFIX)/mbin/
+	install -m 4755 priv $(PREFIX)/umbin/
 
-clean: 
+clean:
 	rm -f priv
 
 uninstall:
-	rm -f $(PREFIX)/mbin/priv
+	rm -f $(PREFIX)/umbin/priv

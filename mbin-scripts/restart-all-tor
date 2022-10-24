@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -eu
+
+[ "$(id -u)" -ne 0 ] && exit 1
+
+rc-status | cut -d' ' -f2 | grep '^tor' | while read -r daemon; do
+
+	rc-service "$daemon" restart
+
+done

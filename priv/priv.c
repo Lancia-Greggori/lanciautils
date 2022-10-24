@@ -5,7 +5,7 @@
 
 #define DEFAULT_ALLOWED_COMMANDS_FILE "/etc/priv.commands"
 #define AUTHORISED_UID 1000
-#define AUTHORISED_PATH "/bin:/sbin:/usr/local/mbin"
+#define AUTHORISED_PATH "/bin:/sbin:/usr/local/umbin"
 #define MAX_ALLOWED_CMDLINE_ARG_SIZE 100
 #define MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE MAX_ALLOWED_CMDLINE_ARG_SIZE
 
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	fp = fopen(DEFAULT_ALLOWED_COMMANDS_FILE, "r");
 
 	char temp_array[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
- 
+
 	int character = 0;
 
 	for(int i = 0; character != EOF; i++)

@@ -4,7 +4,7 @@ set -eu
 
 [ "$#" -eq 0 ] && exit 1
 
-DIRS='/usr/local/mbin /home/lancia/.lsr/mbin'
+DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
 
 for file in "$@"; do
 
