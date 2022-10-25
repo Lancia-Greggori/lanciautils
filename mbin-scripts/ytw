@@ -2,4 +2,22 @@
 
 set -eu
 
+[ "$#" -eq 0 ] && exit 1
 
+OPTIONS=''; URL=''
+
+for arg in "$@"; do
+
+	case "$arg" in
+
+		*youtube.com*) URL="$arg" ;;
+
+		--mp3) OPTIONS='--extract-audio --audio-format mp3 --audio-quality 0' ;;
+
+		*) echo "Error: arg \"$arg\" not recognized" 1>&2 && exit 1 ;;
+
+	esac
+
+done
+
+youtube-dl $OPTIONS "$URL"
