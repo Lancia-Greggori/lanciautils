@@ -1,23 +1,34 @@
-PREFIX=/usr/local
+CC = cc -Wall -g
+BIN_DIR = /usr/local/umbin
+
+define install_binary
+	strip $(1)
+	install -v -m 0755 ./$(1) $(BIN_DIR)
+endef
 
 nothing:
 	@echo make what?
 
 echo: echo.c
-	cc -g echo.c -o echo
+	$(CC) echo.c -o echo
 
 install-echo: echo
-	strip echo
-	install -v -m 0755 ./echo /usr/local/umbin/
+	$(install_binary echo)
 
 cat: cat.c
-	cc -g cat.c -o cat
+	$(CC) cat.c -o cat
 
 install-cat: cat
-	strip cat
-	install -v -m 0755 ./cat /usr/local/umbin/
+	$(install_binary cat)
 
-install-all: install-echo install-cat
+priv: priv.c
+	$(CC) priv.c -o priv
+
+install-priv: priv
+	strip priv
+	install -m 4755 priv $(BIN_DIR)
+
+install-all: install-echo install-cat install-priv
 
 clean:
-	rm -f echo cat
+	rm -f echo cat priv

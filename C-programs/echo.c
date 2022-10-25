@@ -8,8 +8,6 @@ int main(int argc, char *argv[])
 
 	else
 	{
-		char *p;
-
 		for(int i = 1; i < argc; i++)
 		{
 			char *p = argv[i];
