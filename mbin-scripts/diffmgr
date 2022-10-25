@@ -8,6 +8,8 @@ DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
 
 for file in "$@"; do
 
+	[ ! -f "$file" ] && continue
+
 	FILE_NAME="$(basename "$file")"
 
 	for dir in $DIRS; do
@@ -24,13 +26,17 @@ for file in "$@"; do
 
 		else
 
-			echo "---- $TARGET_FILE $file ----"
+			if head -n1 "$file" | grep -q '^#!'; then
 
-			head -n1 "$file" | grep -q '^#!' && {
+				OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
 
-				diff "$TARGET_FILE" "$file" || continue
+				echo "---- $TARGET_FILE $file ----"
 
-			}
+				echo "$OUTPUT"
+
+				}
+
+			fi
 
 		fi
 
