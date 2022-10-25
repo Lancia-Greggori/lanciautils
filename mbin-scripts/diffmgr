@@ -6,6 +6,8 @@ set -eu
 
 DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
 
+EXIT_CODE=0
+
 for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
@@ -30,9 +32,11 @@ for file in "$@"; do
 
 				OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
 
-				echo "---- $TARGET_FILE $file ----"
+					echo "---- $TARGET_FILE $file ----"
 
-				echo "$OUTPUT"
+					echo "$OUTPUT"
+
+					EXIT_CODE=1
 
 				}
 
@@ -43,3 +47,5 @@ for file in "$@"; do
 	done
 
 done
+
+exit "$EXIT_CODE"
