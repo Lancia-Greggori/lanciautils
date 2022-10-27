@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -eu
+
+[ "$#" -eq 0 ] && exit 1
+
+exec env -i su nobody -s /bin/sh -c "$*"
