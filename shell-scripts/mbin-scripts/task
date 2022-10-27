@@ -1,0 +1,36 @@
+#!/bin/sh
+set -eu
+[ "$#" -eq 0 ] && exit 1
+FILE="$HOME"/.tasks
+TASK_ID='t:'
+CATEGORY_ID='c:'
+detect_bad_statement()
+{
+	if grep -q "$1" "$FILE"; then
+		echo "Error: bad statement \"$1\" in tasks file, remove it" 
+		exit 1
+	fi
+}
+check_if_arg_provided()
+{
+	if [ "$#" -ne "$1" ]; then
+		echo "Error: argument number $1 not provided"
+		exit 1
+	fi
+}
+detect_bad_statement "^${CATEGORY_ID}all$"
+case "$1" in
+	add) echo "${TASK_ID}$2" >> "$FILE" ;;
+	category)
+		case "$2" in
+			add) check_if_arg_provided 3 && echo "${CATEGORY_ID}$2" >> "$FILE" ;;
+			del) check_if_arg_provided 3 && 
+		esac
+	;;
+	list)
+		case "$2" in
+			all) cat "$FILE" ;;
+			*)
+
+	*) exit 1 ;;
+esac
