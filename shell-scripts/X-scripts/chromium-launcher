@@ -2,9 +2,16 @@
 
 set -e
 
+PROXY="$(tpsel)" || {
+
+	notify-send 'Selecting proxy failed, not launching chromium...'
+	exit 1
+
+}
+
 case "$1" in
 
-	primary-tor) exec chromium --proxy-server="socks5://$(tpsel)" ;;
+	primary-tor) exec chromium --proxy-server="socks5://$PROXY" ;;
 
 	secondary-tor)
 
@@ -12,7 +19,7 @@ case "$1" in
 
 		[ ! -e "$DIR" ] && exit 1
 
-		chromium --proxy-server="socks5://$(tpsel)" --user-data-dir="$DIR"
+		exec chromium --proxy-server="socks5://$PROXY" --user-data-dir="$DIR"
 
 	;;
 

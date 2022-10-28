@@ -2,8 +2,6 @@
 
 set -eu
 
-[ "$(id -u)" -ne 0 ] && exit 1
-
 IS_TTY=false
 
 LAPTOP_RESOLUTION='1366 768'
