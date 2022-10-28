@@ -5,7 +5,6 @@ set -eu
 [ "$#" -eq 0 ] && exit 1
 
 DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
-
 EXIT_CODE=0
 
 for file in "$@"; do
@@ -13,6 +12,29 @@ for file in "$@"; do
 	[ ! -f "$file" ] && continue
 
 	FILE_NAME="$(basename "$file")"
+	COUNTER=0
+
+	for dir in $DIRS; do
+
+		[ -e "$dir/$FILE_NAME" ] && COUNTER="$((COUNTER + 1))"
+
+	done
+
+	[ "$COUNTER" -eq 0 ] && continue
+
+	if [ "$COUNTER" -gt 1 ]; then
+
+		TARGET_FILE="$dir/$FILE_NAME"
+
+		echo "---- Warning! file \"$file\" exists in multiple locations:"
+
+		for dir in $DIRS; do
+
+			[ -e "$dir/$FILE_NAME" ] && echo "$dir/$FILE_NAME"
+
+		done
+
+	fi
 
 	for dir in $DIRS; do
 
@@ -23,7 +45,6 @@ for file in "$@"; do
 		if [ "$TARGET_FILE" = "$file" ]; then
 
 			echo "Error: $TARGET_FILE and $file are the same, skipping..."
-
 			continue
 
 		else
@@ -31,11 +52,8 @@ for file in "$@"; do
 			if head -n1 "$file" | grep -q '^#!'; then
 
 				OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
-
 					echo "---- $TARGET_FILE $file ----"
-
 					echo "$OUTPUT"
-
 					EXIT_CODE=1
 
 				}

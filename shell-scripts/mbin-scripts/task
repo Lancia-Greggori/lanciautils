@@ -7,7 +7,7 @@ CATEGORY_ID='c:'
 detect_bad_statement()
 {
 	if grep -q "$1" "$FILE"; then
-		echo "Error: bad statement \"$1\" in tasks file, remove it" 
+		echo "Error: bad statement \"$1\" in tasks file, remove it"
 		exit 1
 	fi
 }
@@ -24,7 +24,7 @@ case "$1" in
 	category)
 		case "$2" in
 			add) check_if_arg_provided 3 && echo "${CATEGORY_ID}$2" >> "$FILE" ;;
-			del) check_if_arg_provided 3 && 
+			del) check_if_arg_provided 3 &&
 		esac
 	;;
 	list)
