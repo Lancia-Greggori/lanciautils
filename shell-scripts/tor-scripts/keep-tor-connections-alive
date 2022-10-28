@@ -40,7 +40,7 @@ while true; do
 
 	done
 
-	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -eq 30 ]; then
+	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 50 ]; then
 
 		TMP_FILE="$(mktemp)"
 
