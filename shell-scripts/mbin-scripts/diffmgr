@@ -5,6 +5,7 @@ set -eu
 [ "$#" -eq 0 ] && exit 1
 
 DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
+
 EXIT_CODE=0
 
 for file in "$@"; do
@@ -12,6 +13,7 @@ for file in "$@"; do
 	[ ! -f "$file" ] && continue
 
 	FILE_NAME="$(basename "$file")"
+
 	COUNTER=0
 
 	for dir in $DIRS; do
@@ -26,7 +28,7 @@ for file in "$@"; do
 
 		TARGET_FILE="$dir/$FILE_NAME"
 
-		echo "---- Warning! file \"$file\" exists in multiple locations:"
+		echo "---- Warning! file \"$file\" exists in multiple locations:" 1>&2
 
 		for dir in $DIRS; do
 
@@ -44,7 +46,7 @@ for file in "$@"; do
 
 		if [ "$TARGET_FILE" = "$file" ]; then
 
-			echo "Error: $TARGET_FILE and $file are the same, skipping..."
+			echo "Error: $TARGET_FILE and $file are the same, skipping..." 1>&2
 			continue
 
 		else

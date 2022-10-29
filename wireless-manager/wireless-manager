@@ -3,74 +3,40 @@
 set -e
 
 if [ ! -e './wireless-manager.subr' ]; then
-
-	echo 'Fatal Error: the subroutine file was not found'
-
+	print_error 'Fatal: the subroutine file was not found'
 	exit 1
 else
-
 	. ./wireless-manager.subr
-
 fi
 
 if [ "$#" -eq 0 ] || [ "$#" -gt 3 ]; then
-
 	print_help
-
 	exit 1
-
 elif [ "$1" = '--help' ] || [ "$1" = '-h' ] || [ "$1" = 'help' ]; then
-
 	print_help
-
 	exit 0
-
 elif ! echo "$1" | grep -E "^($ALLOWED_FIRST_ARG_FUNCTION_NAMES|$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS)$" 1>/dev/null; then
-
 	print_help
-
 	exit 1
-
 elif [ -n "$2" ] && ! echo "$2" | grep -E "^($ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS)$" 1>/dev/null; then
-
 	print_help
-
 	exit 1
-
 fi
-
 case "$1" in
-
 	info) show_info ;;
-
 	list-ssids) need_root && iw "$DEV" scan | grep -F SSID ;;
-
 	stop) kill_wpa_supplicant ;;
-
 	start)
-
 		check_for_empty_arg "$2"
-
 		if pgrep -f wpa_supplicant 1>/dev/null; then
-
-			echo "Error: there is already a wpa_supplicant process already running, use \"$0 stop\" to kill it and try again"
-
+			print_error "there is already a wpa_supplicant process already running, use \"$PROGRAM_NAME stop\" to kill it and try again"
 			exit 1
-
 		fi
-
 		start_desired_scan "$2" "$3"
-
 	;;
-
 	restart)
-
 		check_for_empty_arg "$2"
-
 		kill_wpa_supplicant
-
 		start_desired_scan "$2" "$3"
-
 	;;
-
 esac

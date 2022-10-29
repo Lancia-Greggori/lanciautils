@@ -9,15 +9,19 @@ PROGRAM_NAME="$(basename "$0")"
 
 print_error() { echo "$PROGRAM_NAME: Error: $1" 1>&2 ; }
 
-for command in "$@"; do
+for arg in "$@"; do
 
-	EXE="${command%% *}"
+	COMMAND="${arg%% *}"
 
-	command -v "$EXE" 1>/dev/null || {
-		print_error "command \"$EXE\" not found"
+	COMM_OUTPUT="$(command -v "$COMMAND")" || {
+		print_error "command \"$COMMAND\" not found"
+		continue
+	}
+	[ ! -f "$COMM_OUTPUT" ] && {
+		print_error "command \"$COMMAND\" must be a regular file in the filesystem"
 		continue
 	}
 
-	eval nohup "$command" 0<&- 1>/dev/null 2>&1 &
+	eval nohup "$arg" 0<&- 1>/dev/null 2>&1 &
 
 done
