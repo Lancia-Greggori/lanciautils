@@ -1,15 +1,19 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#define BUFFER_SIZE 100
+
 int main(void)
 {
-	char character = '\0';
+	char buffer[BUFFER_SIZE];
+	char *rt = 0;
 
 	while(true)
 	{
-		puts("--- $ ");
-		if( (character = getchar()) == EOF ) break;
-		putchar(character);
+		printf("--- $ ");
+		rt = fgets(buffer, BUFFER_SIZE, stdin);
+		if(rt == NULL) { putchar('\n'); break; }
+		fputs(buffer, stdout);
 	}
 
 	return 0;
