@@ -143,6 +143,7 @@ start_manual_ssid_scan()
 	need_root
 	bring_interface_up
 	kill_wpa_supplicant
+
 	if CONFIG_FILE="$(grep -lr "ssid=\"$1\"" "$CONFIG_DIRECTORY")"; then
 		check_for_too_many_results "$CONFIG_FILE" "$1"
 		wpa_supplicant -c "$CONFIG_FILE" -i "$DEV" >"$WPA_SUPPLICANT_LOGFILE" 2>&1 &
