@@ -4,7 +4,7 @@ set -eu
 
 [ "$#" -eq 0 ] && exit 1
 
-DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin'
+DIRS='/usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc'
 
 EXIT_CODE=0
 
