@@ -45,7 +45,9 @@ case "$1" in
 		echo "${TASK_ID}$2" >> "$FILE"
 	;;
 
-	l)
+	l|l,c)
+		[ "$2" = 'all' ] && sed "s/^${TASK_ID}//; s/^${CATEGORY_ID}/---/" "$FILE" && exit 0
+
 		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)" 
 
 		[ -z "$NUM" ] && {
@@ -57,7 +59,7 @@ case "$1" in
 		while true; do
 			i="$((i+1))"
 			OUTPUT="$(sed -n "${i}p" "$FILE")"
-			echo "$OUTPUT" | grep -q "^${CATEGORY_ID}" && break
+			echo "$OUTPUT" | grep -qv "^${TASK_ID}" && break
 			echo "$OUTPUT" | sed "s/^${TASK_ID}//"
 		done
 
