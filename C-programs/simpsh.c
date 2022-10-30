@@ -13,7 +13,6 @@ int main(void)
 		printf("--- $ ");
 		rt = fgets(buffer, BUFFER_SIZE, stdin);
 		if(rt == NULL) { putchar('\n'); break; }
-		fputs(buffer, stdout);
 	}
 
 	return 0;
