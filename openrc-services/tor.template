@@ -1,16 +1,12 @@
 #!/usr/bin/openrc-run
 
-SVCNAME=tor
 supervisor="supervise-daemon"
 command=/usr/bin/tor
 
 if [ ! -L "${RC_SERVICE}" ]; then
 	eerror 'This service file is a template, use links to this template file with names in the form of tor-XXX'
-
 	return 1
-fi
-
-if ! echo "${RC_SVCNAME}" | grep '^tor-' 1>/dev/null; then
+elif ! echo "${RC_SVCNAME}" | grep -q '^tor-'; then
 	eerror 'Link name must be in the form of tor-XXX'
 	return 1
 else
@@ -36,43 +32,35 @@ checkconfig()
 	if [ "$(dirname "${config_file}")" != "${config_dir}" ]; then
 
 		eerror "${config_file} should be in ${config_dir}"
-
 		return 1
 
 	elif [ ! -e "${config_file}" ]; then
 
 		eerror "Tor configuration ${config_file} does not exist."
-
 		return 1
 
 	elif ! grep '^DataDirectory' ${config_file} | grep "${id}$" 1>/dev/null; then
 
 		eerror "Bad DataDirectory option in ${config_file}"
-
 		return 1
 
 	elif ! grep '^Log' ${config_file} | grep "${id}.log$" 1>/dev/null; then
 
 		eerror "Bad Log option in ${config_file}"
-
 		return 1
 
 	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -Fv "${config_file}:"; then
 
 		eerror "The socks port used in ${config_file} is already used somewhere else in other config files"
-
 		return 1
 
 	fi
 
-	${command} -f ${config_file} --verify-config --hush > /dev/null 2>&1
+	"${command}" -f "${config_file}" --verify-config --hush 1>/dev/null 2>&1
 
 	if [ $? -ne 0 ] ; then
-
 		eerror "Tor configuration ${config_file} is not valid."
-
 		return 1
-
 	fi
 }
 

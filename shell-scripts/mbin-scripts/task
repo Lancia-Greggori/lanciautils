@@ -46,7 +46,7 @@ case "$1" in
 	;;
 
 	l|l,c)
-		[ "$2" = 'all' ] && sed "s/^${TASK_ID}//; s/^${CATEGORY_ID}/---/" "$FILE" && exit 0
+		[ "$2" = 'all' ] && exec sed "s/^${TASK_ID}//; s/^${CATEGORY_ID}/---/" "$FILE"
 
 		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)" 
 
