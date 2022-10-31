@@ -4,11 +4,30 @@ set -eu
 
 print_error() { echo "${0##*/}: Error: $1" ; }
 
+needed_number_of_args()
+{
+	[ "$#" -lt "$1" ] && {
+		print_error "need at least $1 arguments"
+		exit 1
+	}
+}
+
 FILE="$HOME/.tasks"
 TASK_ID='t:'
 CATEGORY_ID='c:'
+RESERVED_CATEGORY_KEYWORDS='all'
 NUM=''
 OUTPUT=''
+
+[ ! -e "$FILE" ] && touch "$FILE"
+
+for keyword in $RESERVED_CATEGORY_KEYWORDS; do
+	OUTPUT="$(grep "^${CATEGORY_ID}$keyword" "$FILE")" && {
+		print_error 'reserved keywords used as categories in:'
+		echo "$OUTPUT"
+		exit 1
+	}
+done
 
 OUTPUT="$(sort "$FILE" | uniq -cd)" && [ -n "$OUTPUT" ] && {
 	print_error 'there are duplicate categories in the tasks file, remove it:'
@@ -17,7 +36,7 @@ OUTPUT="$(sort "$FILE" | uniq -cd)" && [ -n "$OUTPUT" ] && {
 }
 
 grep -m1 -qvE "^($TASK_ID|$CATEGORY_ID)" "$FILE" && {
-	print_error 'bad file, clean it'
+	print_error 'file contains something other than what is allowed'
 	exit 1
 }
 
@@ -26,6 +45,8 @@ grep -m1 -qvE "^($TASK_ID|$CATEGORY_ID)" "$FILE" && {
 case "$1" in
 
 	a|a,t)
+		needed_number_of_args 3
+
 		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)"
 
 		[ -z "$NUM" ] && {
@@ -37,6 +58,8 @@ case "$1" in
 	;;
 
 	a,c)
+		needed_number_of_args 2
+
 		grep -q "${TASK_ID}$2" "$FILE" && {
 			print_error "category \"$2\" already exists"
 			exit 1
@@ -46,6 +69,8 @@ case "$1" in
 	;;
 
 	l|l,c)
+		needed_number_of_args 2
+
 		[ "$2" = 'all' ] && exec sed "s/^${TASK_ID}//; s/^${CATEGORY_ID}/---/" "$FILE"
 
 		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)"
