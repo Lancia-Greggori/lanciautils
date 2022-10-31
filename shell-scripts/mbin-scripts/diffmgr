@@ -12,7 +12,7 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	FILE_NAME="$(basename "$file")"
+	FILE_NAME="${file##*/}"
 
 	COUNTER=0
 
