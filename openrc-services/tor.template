@@ -1,8 +1,5 @@
 #!/usr/bin/openrc-run
 
-supervisor="supervise-daemon"
-command=/usr/bin/tor
-
 if [ ! -L "${RC_SERVICE}" ]; then
 	eerror 'This service file is a template, use links to this template file with names in the form of tor-XXX'
 	return 1
@@ -13,51 +10,41 @@ else
 	id="${RC_SVCNAME##tor-}"
 fi
 
+supervisor='supervise-daemon'
+command='/usr/bin/tor'
 pidfile="/run/tor/supervise-tor-${id}.pid"
-config_dir="/etc/tor"
+config_dir='/etc/tor'
 config_file="${config_dir}/torrc-${id}"
 command_args="-f ${config_file} --hush"
 command_args_background="--runasdaemon 1 --pidfile ${pidfile}"
-retry=${GRACEFUL_TIMEOUT:-60}
-stopsig=INT
+retry="${GRACEFUL_TIMEOUT:-60}"
+stopsig='INT'
 log_file="/var/log/tor-${id}.log"
 data_dir="/var/lib/tor-${id}"
 
-extra_commands="checkconfig"
-description="Anonymizing overlay network for TCP"
-description_checkconfig="Check for valid config file"
+extra_commands='checkconfig'
+description='Anonymizing overlay network for TCP'
+description_checkconfig='Check for valid config file'
 
 checkconfig()
 {
 	if [ "$(dirname "${config_file}")" != "${config_dir}" ]; then
-
 		eerror "${config_file} should be in ${config_dir}"
 		return 1
-
 	elif [ ! -e "${config_file}" ]; then
-
 		eerror "Tor configuration ${config_file} does not exist."
 		return 1
-
-	elif ! grep '^DataDirectory' ${config_file} | grep "${id}$" 1>/dev/null; then
-
+	elif ! grep '^DataDirectory' ${config_file} | grep -q "${id}$"; then
 		eerror "Bad DataDirectory option in ${config_file}"
 		return 1
-
-	elif ! grep '^Log' ${config_file} | grep "${id}.log$" 1>/dev/null; then
-
+	elif ! grep '^Log' ${config_file} | grep -q "${id}.log$"; then
 		eerror "Bad Log option in ${config_file}"
 		return 1
-
-	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -Fv "${config_file}:"; then
-
+	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "${config_file}")" ${config_dir} | grep -qFv "${config_file}:"; then
 		eerror "The socks port used in ${config_file} is already used somewhere else in other config files"
 		return 1
-
 	fi
-
 	"${command}" -f "${config_file}" --verify-config --hush 1>/dev/null 2>&1
-
 	if [ $? -ne 0 ] ; then
 		eerror "Tor configuration ${config_file} is not valid."
 		return 1
@@ -66,8 +53,7 @@ checkconfig()
 
 start_pre() {
 	checkconfig || return 1
-	checkpath -f -F -m 0644 -o tor:tor ${log_file}
-	checkpath -d -m 0700 -o tor:tor ${data_dir}
+	checkpath -f -F -m 0644 -o tor:tor "${log_file}"
+	checkpath -d -m 0700 -o tor:tor "${data_dir}"
 	checkpath -d -m 0755 -o tor:tor /run/tor
 }
-

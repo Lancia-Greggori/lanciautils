@@ -26,7 +26,7 @@ grep -m1 -qvE "^($TASK_ID|$CATEGORY_ID)" "$FILE" && {
 case "$1" in
 
 	a|a,t)
-		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)" 
+		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)"
 
 		[ -z "$NUM" ] && {
 			print_error "category \"$2\" not found"
@@ -48,7 +48,7 @@ case "$1" in
 	l|l,c)
 		[ "$2" = 'all' ] && exec sed "s/^${TASK_ID}//; s/^${CATEGORY_ID}/---/" "$FILE"
 
-		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)" 
+		NUM="$(grep -n "${CATEGORY_ID}$2" "$FILE" | cut -d':' -f1)"
 
 		[ -z "$NUM" ] && {
 			print_error "category \"$2\" not found"
