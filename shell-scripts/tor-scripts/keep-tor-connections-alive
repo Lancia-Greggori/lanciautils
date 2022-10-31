@@ -6,7 +6,7 @@ set -eu
 
 cd /tmp
 
-LOG_FILE="/var/log/$(basename "$0").log"
+LOG_FILE="/var/log/${0##*/}.log"
 
 DATE_PATTERN='+%Y-%m(%b)-%d %H:%M'
 
