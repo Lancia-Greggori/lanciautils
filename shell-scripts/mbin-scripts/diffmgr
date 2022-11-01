@@ -28,7 +28,7 @@ for file in "$@"; do
 
 		TARGET_FILE="$dir/$FILE_NAME"
 
-		echo "---- Warning! file \"$file\" exists in multiple locations:" 1>&2
+		echo "---- Warning! file \"$file\" exists in multiple locations:"
 
 		for dir in $DIRS; do
 

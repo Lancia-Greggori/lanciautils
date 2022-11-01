@@ -1,7 +1,22 @@
 #!/bin/sh
 
-set -eux
+set -eu
+
+PROGRAM_NAME="${0##*/}"
+
+[ ! -e PKGBUILD ] && {
+	echo "$PROGRAM_NAME: Fatal Error: PKGBUILD file not found" 1>&2
+	exit 1
+}
 
 [ "$#" -ne 1 ] && exit 1
 
-makepkg --printsrcinfo > .SRCINFO && git add PKGBUILD .SRCINFO && git commit -m "$1" && git push
+[ ! -e .gitignore ] && echo "$PROGRAM_NAME: Warning: .gitignore file not found"
+
+FILES='PKGBUILD .SRCINFO'
+
+for optional_file in .gitignore .install; do
+	[ -e "$optional_file" ] && FILES="$FILES $optional_file"
+done
+
+makepkg --printsrcinfo > .SRCINFO && git add $FILES && git commit -m "$1" && git push
