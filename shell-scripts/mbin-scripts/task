@@ -7,7 +7,7 @@ print_error() { echo "${0##*/}: Error: $1" ; }
 needed_number_of_args()
 {
 	[ "$#" -lt "$1" ] && {
-		print_error "need at least $1 arguments"
+		print_error "need at least $1 argument(s)"
 		exit 1
 	}
 }
@@ -19,26 +19,32 @@ RESERVED_CATEGORY_KEYWORDS='all'
 NUM=''
 OUTPUT=''
 
-[ ! -e "$FILE" ] && touch "$FILE"
+if [ ! -e "$FILE" ]; then
 
-for keyword in $RESERVED_CATEGORY_KEYWORDS; do
-	OUTPUT="$(grep "^${CATEGORY_ID}$keyword" "$FILE")" && {
-		print_error 'reserved keywords used as categories in:'
+	touch "$FILE"
+
+else
+
+	for keyword in $RESERVED_CATEGORY_KEYWORDS; do
+		OUTPUT="$(grep "^${CATEGORY_ID}$keyword" "$FILE")" && {
+			print_error 'reserved keywords used as categories in:'
+			echo "$OUTPUT"
+			exit 1
+		}
+	done
+	
+	OUTPUT="$(sort "$FILE" | uniq -cd)" && [ -n "$OUTPUT" ] && {
+		print_error 'there are duplicate categories in the tasks file, remove it:'
 		echo "$OUTPUT"
 		exit 1
 	}
-done
+	
+	grep -m1 -qvE "^($TASK_ID|$CATEGORY_ID)" "$FILE" && {
+		print_error 'file contains something other than what is allowed'
+		exit 1
+	}
 
-OUTPUT="$(sort "$FILE" | uniq -cd)" && [ -n "$OUTPUT" ] && {
-	print_error 'there are duplicate categories in the tasks file, remove it:'
-	echo "$OUTPUT"
-	exit 1
-}
-
-grep -m1 -qvE "^($TASK_ID|$CATEGORY_ID)" "$FILE" && {
-	print_error 'file contains something other than what is allowed'
-	exit 1
-}
+fi
 
 [ "$#" -eq 0 ] && exit 1
 
