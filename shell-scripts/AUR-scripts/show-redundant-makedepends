@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+[ "$#" -eq 0 ] && exit 1
+
+SED_REMOVE_ENDING_SPACE_PATTERN='s/ \+$//'
+
+BASE_DEVEL_PKGS="$(pacman -Sg base-devel | cut -d' ' -f2 | tr '\n' ' ' | sed "$SED_REMOVE_ENDING_SPACE_PATTERN")" 
+BASE_DEVEL_PKGS="$BASE_DEVEL_PKGS awk roff yacc"
+
+for pkgbuild in "$@"; do
+
+	MAKEDEPENDS_ARRAY="$(grep '^makedepends=' "$pkgbuild" | tr '\n' ' ' | sed -e 's/makedepends=//' -e "s/[()'\"]//g" -e "$SED_REMOVE_ENDING_SPACE_PATTERN")" 
+
+	[ -z "$MAKEDEPENDS_ARRAY" ] && {
+		echo "${0##*/}: Error: makedepends array not found in file \"$pkgbuild\"" 1>&2
+		continue
+	}
+
+	for base_devel_pkg in $BASE_DEVEL_PKGS; do
+
+		for makedepends_array_pkg in $MAKEDEPENDS_ARRAY; do
+			[ "$base_devel_pkg" = "$makedepends_array_pkg" ] && echo "found redundant package: $base_devel_pkg"
+		done
+	
+	done
+
+done
