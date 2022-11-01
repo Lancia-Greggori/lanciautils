@@ -18,13 +18,13 @@ elif echo "$SPELL_OUTPUT" | grep -q '^\*$'; then
 
 	notify-send 'Word correct'
 
-	echo "$INPUT" | clip
+	echo "$INPUT" | tr -d '\n' | clip
 
 elif echo "$SPELL_OUTPUT" | grep -q '+ [[:alnum:]]\+'; then
 
 	SINGULAR_WORD="$(echo "$SPELL_OUTPUT" | sed 's/\+ //')"
 
-	printf '%s\n%s' "$SINGULAR_WORD" "$INPUT" | dmenu -p "\"$INPUT\" is the plural form of \"$SINGULAR_WORD\"" | clip
+	printf '%s\n%s' "$SINGULAR_WORD" "$INPUT" | dmenu -p "\"$INPUT\" is the plural form of \"$SINGULAR_WORD\"" | tr -d '\n' | clip
 
 else
 

@@ -2,22 +2,24 @@
 
 set -eu
 
-print_error() { echo "${0##*/}: Error: $1" ; }
-
-needed_number_of_args()
-{
-	[ "$#" -lt "$1" ] && {
-		print_error "need at least $1 argument(s)"
-		exit 1
-	}
-}
-
 FILE="$HOME/.tasks"
 TASK_ID='t:'
 CATEGORY_ID='c:'
 RESERVED_CATEGORY_KEYWORDS='all'
 NUM=''
 OUTPUT=''
+CMDLINE_NUMBER_OF_ARGS="$#"
+
+print_error() { echo "${0##*/}: Error: $1" ; }
+
+needed_number_of_args()
+{
+	if [ "$CMDLINE_NUMBER_OF_ARGS" -lt "$1" ]; then
+		print_error "need at least $1 argument(s)"
+		exit 1
+	fi
+}
+
 
 if [ ! -e "$FILE" ]; then
 
@@ -66,12 +68,12 @@ case "$1" in
 	a,c)
 		needed_number_of_args 2
 
-		grep -q "${TASK_ID}$2" "$FILE" && {
+		grep -q "${CATEGORY_ID}$2" "$FILE" && {
 			print_error "category \"$2\" already exists"
 			exit 1
 		}
 
-		echo "${TASK_ID}$2" >> "$FILE"
+		echo "${CATEGORY_ID}$2" >> "$FILE"
 	;;
 
 	l|l,c)
@@ -86,6 +88,7 @@ case "$1" in
 			exit 1
 		}
 
+		echo "---$2"
 		i="$NUM"
 		while true; do
 			i="$((i+1))"
