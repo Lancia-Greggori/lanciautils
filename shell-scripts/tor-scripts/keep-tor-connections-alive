@@ -4,52 +4,47 @@ set -eu
 
 [ "$(id -u)" -ne 0 ] && echo 'Error: you must be root' 1>&2 && exit 1
 
-cd /tmp
-
 LOG_FILE="/var/log/${0##*/}.log"
-
 DATE_PATTERN='+%Y-%m(%b)-%d %H:%M'
-
 URL='https://html.duckduckgo.com'
+
+write_log() { echo "$(date "$DATE_PATTERN"): $2" >> "$LOG_FILE" ; }
+
+cd /tmp
 
 printf '' > "$LOG_FILE"
 
 while true; do
 
 	sleep 30s
-
-	ps -A -o cmd | cut -d' ' -f1 | grep '\btor\b' 1>/dev/null || continue
+	ps -A -o cmd | cut -d' ' -f1 | grep -q '\btor\b' || {
+		write_log "Warning: could not find any tor daemon"
+		continue
+	}
 
 	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
 
 		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address $URL 1>/dev/null"; then
 
-			echo "$(date "$DATE_PATTERN") curl for $socks5_address Succeeded" >> "$LOG_FILE"
+			write_log "curl for $socks5_address Succeeded"
 
 		else
 
-			echo "$(date "$DATE_PATTERN") curl for $socks5_address Failed" >> "$LOG_FILE"
+			write_log "curl for $socks5_address Failed"
 
 		fi &
 
 	done
 
 	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
-
 		sleep 1s
-
 	done
 
 	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 50 ]; then
-
 		TMP_FILE="$(mktemp)"
-
 		grep 'Succeeded$' "$LOG_FILE" | tail -n10 > "$TMP_FILE"
-
 		cat "$TMP_FILE" > "$LOG_FILE"
-
 		rm "$TMP_FILE"
-
 	fi
 
 done
