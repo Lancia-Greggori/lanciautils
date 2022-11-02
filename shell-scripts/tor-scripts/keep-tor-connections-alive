@@ -2,13 +2,15 @@
 
 set -eu
 
-[ "$(id -u)" -ne 0 ] && echo 'Error: you must be root' 1>&2 && exit 1
+. /etc/sh.subr
 
-LOG_FILE="/var/log/${0##*/}.log"
+[ "$(id -u)" -ne 0 ] && print_error 'you must be root' && exit 1
+
+LOG_FILE="/var/log/$PROGRAM_NAME.log"
 DATE_PATTERN='+%Y-%m(%b)-%d %H:%M'
 URL='https://html.duckduckgo.com'
 
-write_log() { echo "$(date "$DATE_PATTERN"): $2" >> "$LOG_FILE" ; }
+write_log() { echo "$(date "$DATE_PATTERN"): $1" >> "$LOG_FILE" ; }
 
 cd /tmp
 

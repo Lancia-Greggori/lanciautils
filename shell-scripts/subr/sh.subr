@@ -1,0 +1,4 @@
+PROGRAM_NAME="${0##*/}"
+
+print_error(){ echo "$PROGRAM_NAME: [ERROR]: $1" 1>&2 ; }
+print_warning(){ echo "$PROGRAM_NAME: [WARNING]: $1" 1>&2 ; }

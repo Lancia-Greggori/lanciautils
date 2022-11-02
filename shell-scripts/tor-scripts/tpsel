@@ -2,21 +2,20 @@
 
 set -eu
 
+. /etc/sh.subr
+
 DEPENDENT_PROGRAM='keep-tor-connections-alive'
 LOG_FILE="/var/log/$DEPENDENT_PROGRAM.log"
-PROGRAM_NAME="${0##*/}"
 
 if ! pgrep -f "$DEPENDENT_PROGRAM" 1>/dev/null; then
-
-	echo "$PROGRAM_NAME: this program depends on the program $DEPENDENT_PROGRAM, however, it is not running, this might cause some problems" 1>&2
-
+	print_warning "this program depends on the program $DEPENDENT_PROGRAM, however, it is not running, this might cause some problems"
 fi
 
-[ ! -e "$LOG_FILE" ] && echo "$PROGRAM_NAME: $LOG_FILE does not exist" 1>&2 && exit 1
-[ ! -s "$LOG_FILE" ] && echo "$PROGRAM_NAME: $LOG_FILE is empty" 1>&2 && exit 1
+[ ! -e "$LOG_FILE" ] && print_error "$LOG_FILE does not exist" && exit 1
+[ ! -s "$LOG_FILE" ] && print_error "$LOG_FILE is empty" && exit 1
 
 GREP_OUTPUT="$(grep -F 'Succeeded' "$LOG_FILE")" || {
-	echo "$PROGRAM_NAME: Warning: no suitable tor address that has a successful connection to the tor network was found" 1>&2
+	print_error 'no suitable tor address that has a successful connection to the tor network was found'
 	exit 1
 }
 
