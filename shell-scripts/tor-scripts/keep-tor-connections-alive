@@ -20,7 +20,7 @@ while true; do
 
 	sleep 30s
 	ps -A -o cmd | cut -d' ' -f1 | grep -q '\btor\b' || {
-		write_log "Warning: could not find any tor daemon"
+		write_log "[WARNING]: could not find any tor daemon"
 		continue
 	}
 

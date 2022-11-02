@@ -2,19 +2,18 @@
 
 set -eu
 
+. /etc/sh.subr
+
 DEV='wlan0'
 
 CONFIG_DIRECTORY='/etc/wpa_supplicant'
 WPA_SUPPLICANT_LOGFILE='/var/log/wpa.log'
 PRIORITY_FILE='/etc/wireless-manager.priorities'
 TMP_FILE="$(mktemp /tmp/wireless-manager-tmp-XXX)"
-PROGRAM_NAME="${0##*/}"
 
 ALLOWED_FIRST_ARG_FUNCTION_NAMES='start|stop|restart'
 ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS='list-ssids|info'
 ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS='auto-scan|priority-scan|manual-ssid-scan'
-
-print_error() { echo "$PROGRAM_NAME: Error: $1" ; }
 
 print_help()
 {

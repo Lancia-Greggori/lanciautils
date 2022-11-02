@@ -2,12 +2,10 @@
 
 set -eu
 
+. /etc/sh.subr
+
 [ "$(id -u)" -ne 0 ] && exit 1
 [ "$#" -eq 0 ] && exit 1
-
-PROGRAM_NAME="${0##*/}"
-
-print_error() { echo "$PROGRAM_NAME: Error: $1" 1>&2 ; }
 
 for arg in "$@"; do
 

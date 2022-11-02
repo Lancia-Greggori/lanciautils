@@ -2,6 +2,8 @@
 
 set -eu
 
+. /etc/sh.subr
+
 FILE="$HOME/.tasks"
 TASK_ID='t:'
 CATEGORY_ID='c:'
@@ -10,8 +12,6 @@ NUM=''
 OUTPUT=''
 CMDLINE_NUMBER_OF_ARGS="$#"
 
-print_error() { echo "${0##*/}: Error: $1" ; }
-
 needed_number_of_args()
 {
 	if [ "$CMDLINE_NUMBER_OF_ARGS" -lt "$1" ]; then
@@ -19,7 +19,6 @@ needed_number_of_args()
 		exit 1
 	fi
 }
-
 
 if [ ! -e "$FILE" ]; then
 
@@ -49,6 +48,7 @@ else
 fi
 
 [ "$#" -eq 0 ] && exit 1
+
 
 case "$1" in
 
