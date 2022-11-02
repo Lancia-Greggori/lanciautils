@@ -5,21 +5,17 @@ set -eu
 . /etc/sh.subr
 
 [ "$(id -u)" -ne 0 ] && exit 1
-[ "$#" -eq 0 ] && exit 1
+[ "$#" -ne 1 ] && exit 1
 
-for arg in "$@"; do
+COMMAND="${1%% *}"
 
-	COMMAND="${arg%% *}"
+COMM_OUTPUT="$(command -v "$COMMAND")" || {
+	print_error "command \"$COMMAND\" not found"
+	continue
+}
+[ ! -f "$COMM_OUTPUT" ] && {
+	print_error "command \"$COMMAND\" must be a regular file in the filesystem"
+	continue
+}
 
-	COMM_OUTPUT="$(command -v "$COMMAND")" || {
-		print_error "command \"$COMMAND\" not found"
-		continue
-	}
-	[ ! -f "$COMM_OUTPUT" ] && {
-		print_error "command \"$COMMAND\" must be a regular file in the filesystem"
-		continue
-	}
-
-	eval nohup "$arg" 0<&- 1>/dev/null 2>&1 &
-
-done
+eval exec nohup "$1" 0<&- 1>/dev/null 2>&1 &

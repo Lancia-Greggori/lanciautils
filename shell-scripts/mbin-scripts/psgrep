@@ -7,4 +7,4 @@ set -eu
 PS_OUTPUT="$(ps -A -o user,group,tty,cmd)"
 
 echo "$PS_OUTPUT" | head -n1
-echo "$PS_OUTPUT" | grep -E "$1"
+echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "/bin/sh $0 $1"
