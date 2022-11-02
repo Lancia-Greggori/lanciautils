@@ -28,11 +28,11 @@ while true; do
 
 		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address $URL 1>/dev/null"; then
 
-			write_log "curl for $socks5_address Succeeded"
+			write_log "[CURL SUCCESS]: $socks5_address"
 
 		else
 
-			write_log "curl for $socks5_address Failed"
+			write_log "[CURL FAIL]: $socks5_address"
 
 		fi &
 
@@ -44,7 +44,7 @@ while true; do
 
 	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 50 ]; then
 		TMP_FILE="$(mktemp)"
-		grep 'Succeeded$' "$LOG_FILE" | tail -n10 > "$TMP_FILE"
+		grep -F '[CURL SUCCESS]' "$LOG_FILE" | tail -n10 > "$TMP_FILE"
 		cat "$TMP_FILE" > "$LOG_FILE"
 		rm "$TMP_FILE"
 	fi
