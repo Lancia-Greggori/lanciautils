@@ -1,7 +1,7 @@
 #!/bin/sh
 
-set -eu
+set -e
 
 FULL_ADDR="$(tpsel)"
 
-torsocks -a "${FULL_ADDR%%:*}" -P "${FULL_ADDR##*:}" "$@"
+exec torsocks -a "${FULL_ADDR%%:*}" -P "${FULL_ADDR##*:}" "$@"

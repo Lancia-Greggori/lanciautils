@@ -15,7 +15,7 @@ fi
 [ ! -s "$LOG_FILE" ] && print_error "$LOG_FILE is empty" && exit 1
 
 GREP_OUTPUT="$(grep -F '[CURL SUCCESS]' "$LOG_FILE")" || {
-	print_error 'no suitable tor address that has a successful connection to the tor network was found'
+	print_error "no suitable tor address that has a successful connection to the tor network was found in logfile $LOG_FILE"
 	exit 1
 }
 
