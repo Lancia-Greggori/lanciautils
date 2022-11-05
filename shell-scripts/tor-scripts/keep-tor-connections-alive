@@ -7,10 +7,12 @@ set -eu
 [ "$(id -u)" -ne 0 ] && print_error 'you must be root' && exit 1
 
 LOG_FILE="/var/log/$PROGRAM_NAME.log"
-DATE_PATTERN='+%Y-%m(%b)-%d %H:%M'
 URL='https://html.duckduckgo.com'
+SOCKS5_ADDRESS=''
+PID=''
+TMP_FILE=''
 
-write_log() { echo "$(date "$DATE_PATTERN"): $1" >> "$LOG_FILE" ; }
+write_log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOG_FILE" ; }
 
 cd /tmp
 
@@ -24,18 +26,15 @@ while true; do
 		continue
 	}
 
-	ss -lpn | grep '\btor\b' | sed 's/ \+/ /g' | cut -d' ' -f5 | while read -r socks5_address; do
+	ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g' | while read -r tor_info_line; do
+		SOCKS5_ADDRESS="$(echo "$tor_info_line" | cut -d' ' -f5)"
+		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
 
-		if env -i su nobody -s /bin/sh -c "curl --silent -L --socks5 $socks5_address $URL 1>/dev/null"; then
-
-			write_log "[CURL SUCCESS]: $socks5_address"
-
+		if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec curl --silent -L --socks5 $SOCKS5_ADDRESS $URL 0<&- 2>&1 1>/dev/null"; then
+			write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
 		else
-
-			write_log "[CURL FAIL]: $socks5_address"
-
+			write_log "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
 		fi &
-
 	done
 
 	while ps -A -o cmd | grep "curl --silent -L --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do

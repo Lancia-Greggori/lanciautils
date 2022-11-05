@@ -8,7 +8,6 @@ FILE="$HOME/.tasks"
 TASK_ID='t:'
 CATEGORY_ID='c:'
 RESERVED_CATEGORY_KEYWORDS='all'
-NUM=''
 OUTPUT=''
 CMDLINE_NUMBER_OF_ARGS="$#"
 
@@ -105,6 +104,11 @@ case "$1" in
 		list_category "$2"
 	;;
 
+	s,c)
+		needed_number_of_args 2
+
+		
+	;;
 	*) print_error "argument \"$1\" not recongnized" && exit 1 ;;
 
 esac
