@@ -6,6 +6,6 @@ set -eu
 
 rc-status | cut -d' ' -f2 | grep '^tor' | while read -r daemon; do
 
-	rc-service "$daemon" restart
+	rc-service "$daemon" "$1"
 
 done
