@@ -26,4 +26,5 @@ echo "$GREP_OUTPUT" | tac | while read -r line; do
 	ps -p "$PID" 1>/dev/null || continue
 
 	echo "$line" | grep -oE '([0-9]{1,3}.){3}[0-9]{1,3}:[0-9]+'
+	break
 done

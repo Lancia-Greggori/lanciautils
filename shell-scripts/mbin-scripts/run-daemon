@@ -4,7 +4,7 @@ set -eu
 
 . /etc/sh.subr
 
-[ "$#" -ne 1 ] && exit 1
+[ "$#" -eq 0 ] && exit 1
 
 COMMAND="${1%% *}"
 
@@ -17,4 +17,4 @@ COMM_OUTPUT="$(command -v "$COMMAND")" || {
 	continue
 }
 
-eval exec nohup "$1" 0<&- 1>/dev/null 2>&1 &
+eval exec nohup "$@" 0<&- 1>/dev/null 2>&1 &
