@@ -25,7 +25,7 @@ printf '' > "$LOG_FILE"
 while true; do
 
 	sleep 30s
-	ps -A -o cmd | cut -d' ' -f1 | grep -q '\btor\b' || {
+	ps -A -o cmd | cut -d' ' -f1 | grep -q '^/.*tor$' || {
 		write_log '[WARNING]: could not find any tor daemon'
 		continue
 	}
@@ -47,7 +47,7 @@ while true; do
 
 	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 100 ]; then
 
-		while ps -A -o cmd | grep -q "curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL"; do
+		while pgrep -f "curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL"; do
 			sleep 1s
 		done
 
