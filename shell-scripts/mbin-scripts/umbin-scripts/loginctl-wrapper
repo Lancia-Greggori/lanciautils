@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -eu
+
+[ "$#" -gt 1 ] && exit 1
+
+. /etc/sh.subr
+
+if [ "$PROGRAM_NAME" != 'poweroff' ] && [ "$PROGRAM_NAME" != 'reboot' ]; then
+	exit 1
+fi
+
+pgrep Xorg 1>/dev/null && {
+	print_error "an Xorg session is already running, cannot $PROGRAM_NAME"
+	exit 1
+}
+
+WHO_OUTPUT="$(who)"
+
+echo "$WHO_OUTPUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
+	print_error "somebody else is logged in, cannot poweroff:"
+	echo "$WHO_OUTPUT"
+	exit 1
+}
+
+[ "$#" -eq 1 ] && case "$1" in
+	-f|--force) exec loginctl "$PROGRAM_NAME";;
+	*) exit 1 ;;
+esac
+
+loginctl "$PROGRAM_NAME"

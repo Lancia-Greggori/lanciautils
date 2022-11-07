@@ -24,13 +24,13 @@ else
 			exit 1
 		}
 	done
-	
+
 	OUTPUT="$(sort "$FILE" | uniq -cd)" && [ -n "$OUTPUT" ] && {
 		print_error 'there are duplicate categories in the tasks file, remove it:'
 		echo "$OUTPUT"
 		exit 1
 	}
-	
+
 	OUTPUT="$(grep -m1 -nvE "^($TASK_ID|$CATEGORY_ID)" "$FILE")" && {
 		print_error 'bad file format:'
 		echo "$OUTPUT"
@@ -92,7 +92,7 @@ case "$1" in
 			print_error "category \"$2\" already exists"
 			exit 1
 		}
-		
+
 		write "${CATEGORY_ID}$2"
 	;;
 
@@ -107,7 +107,7 @@ case "$1" in
 	s,c)
 		needed_number_of_args 2
 
-		
+
 	;;
 	*) print_error "argument \"$1\" not recongnized" && exit 1 ;;
 

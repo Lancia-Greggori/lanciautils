@@ -40,9 +40,9 @@ while true; do
 				write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
 			else
 				write_log "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
-			fi &
+			fi
 
-		fi
+		fi &
 	done
 
 	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 100 ]; then
