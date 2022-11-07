@@ -10,13 +10,7 @@ if [ "$PROGRAM_NAME" != 'poweroff' ] && [ "$PROGRAM_NAME" != 'reboot' ]; then
 	exit 1
 fi
 
-pgrep Xorg 1>/dev/null && {
-	print_error "an Xorg session is already running, cannot $PROGRAM_NAME"
-	exit 1
-}
-
 WHO_OUTPUT="$(who)"
-
 echo "$WHO_OUTPUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	print_error "somebody else is logged in, cannot poweroff:"
 	echo "$WHO_OUTPUT"
@@ -27,5 +21,10 @@ echo "$WHO_OUTPUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	-f|--force) exec loginctl "$PROGRAM_NAME";;
 	*) exit 1 ;;
 esac
+
+pgrep Xorg 1>/dev/null && {
+	print_error "an Xorg session is already running, cannot $PROGRAM_NAME"
+	exit 1
+}
 
 loginctl "$PROGRAM_NAME"
