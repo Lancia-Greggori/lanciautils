@@ -34,7 +34,7 @@ while true; do
 		SOCKS5_ADDRESS="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
 
-		if ! ps -A -o cmd | grep -q "curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL"; then
+		if ! pgrep -f "curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL"; then
 
 			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 2>&1 1>/dev/null"; then
 				write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
