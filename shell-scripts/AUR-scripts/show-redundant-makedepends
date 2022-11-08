@@ -6,12 +6,12 @@ set -eu
 
 SED_REMOVE_ENDING_SPACE_PATTERN='s/ \+$//'
 
-BASE_DEVEL_PKGS="$(pacman -Sg base-devel | cut -d' ' -f2 | tr '\n' ' ' | sed "$SED_REMOVE_ENDING_SPACE_PATTERN")" 
+BASE_DEVEL_PKGS="$(pacman -Sg base-devel | cut -d' ' -f2 | tr '\n' ' ' | sed "$SED_REMOVE_ENDING_SPACE_PATTERN")"
 BASE_DEVEL_PKGS="$BASE_DEVEL_PKGS awk roff yacc"
 
 for pkgbuild in "$@"; do
 
-	MAKEDEPENDS_ARRAY="$(grep '^makedepends=' "$pkgbuild" | tr '\n' ' ' | sed -e 's/makedepends=//' -e "s/[()'\"]//g" -e "$SED_REMOVE_ENDING_SPACE_PATTERN")" 
+	MAKEDEPENDS_ARRAY="$(grep '^makedepends=' "$pkgbuild" | tr '\n' ' ' | sed -e 's/makedepends=//' -e "s/[()'\"]//g" -e "$SED_REMOVE_ENDING_SPACE_PATTERN")"
 
 	[ -z "$MAKEDEPENDS_ARRAY" ] && {
 		echo "${0##*/}: Error: makedepends array not found in file \"$pkgbuild\"" 1>&2

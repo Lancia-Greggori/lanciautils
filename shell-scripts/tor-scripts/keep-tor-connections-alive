@@ -15,6 +15,7 @@ CURL_OPTIONS='--silent -L'
 SOCKS5_ADDRESS=''
 PID=''
 TMP_FILE=''
+TOR_DAEMONS=''
 
 write_log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOG_FILE" ; }
 
@@ -25,12 +26,15 @@ printf '' > "$LOG_FILE"
 while true; do
 
 	sleep 30s
-	ps -A -o cmd | cut -d' ' -f1 | grep -q '^/.*tor$' || {
+
+	TOR_DAEMONS="$(ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g')"
+
+	[ -z "$TOR_DAEMONS" ] && {
 		write_log '[WARNING]: could not find any tor daemon'
 		continue
 	}
 
-	ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g' | while read -r tor_info_line; do
+	echo "$TOR_DAEMONS" | while read -r tor_info_line; do
 		SOCKS5_ADDRESS="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
 

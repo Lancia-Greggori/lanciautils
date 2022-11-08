@@ -8,6 +8,6 @@ for file in "$@"; do
 
 	[ -L "$file" ] && continue
 
-	sed -i'' -e 's/	\+$//' -e 's/^[ 	]\+$//' "$file"
+	sed -i -e 's/[ 	]\+$//' -e 's/^[ 	]\+$//' "$file"
 
 done
