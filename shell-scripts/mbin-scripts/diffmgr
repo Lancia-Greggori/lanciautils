@@ -12,13 +12,13 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	FILE_NAME="${file##*/}"
+	FILENAME="${file##*/}"
 
 	COUNTER=0
 
 	for dir in $DIRS; do
 
-		[ -e "$dir/$FILE_NAME" ] && COUNTER="$((COUNTER + 1))"
+		[ -e "$dir/$FILENAME" ] && COUNTER="$((COUNTER + 1))"
 
 	done
 
@@ -26,13 +26,13 @@ for file in "$@"; do
 
 	if [ "$COUNTER" -gt 1 ]; then
 
-		TARGET_FILE="$dir/$FILE_NAME"
+		TARGET_FILE="$dir/$FILENAME"
 
 		echo "---- Warning! file \"$file\" exists in multiple locations:"
 
 		for dir in $DIRS; do
 
-			[ -e "$dir/$FILE_NAME" ] && echo "$dir/$FILE_NAME"
+			[ -e "$dir/$FILENAME" ] && echo "$dir/$FILENAME"
 
 		done
 
@@ -40,7 +40,7 @@ for file in "$@"; do
 
 	for dir in $DIRS; do
 
-		TARGET_FILE="$dir/$FILE_NAME"
+		TARGET_FILE="$dir/$FILENAME"
 
 		[ ! -e "$TARGET_FILE" ] && continue
 

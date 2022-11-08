@@ -17,14 +17,14 @@ move_files()
 
 	for pattern in $1; do
 		find "$DIR" -maxdepth 1 -mindepth 1 -type f -iname "*$pattern" | while read -r file; do
-			FILE_NAME="$(basename "$file")"
-			if [ -e "$DESTINATION_DIR/$FILE_NAME" ]; then
+			FILENAME="$(basename "$file")"
+			if [ -e "$DESTINATION_DIR/$FILENAME" ]; then
 				for i in $(seq 1 1000); do
-					[ -e "$DESTINATION_DIR/${FILE_NAME}.${i}" ] && continue
-					FILE_NAME="${FILE_NAME}.${i}" && break
+					[ -e "$DESTINATION_DIR/${FILENAME}.${i}" ] && continue
+					FILENAME="${FILENAME}.${i}" && break
 				done
 			fi
-			mv "$file" "$DESTINATION_DIR/$FILE_NAME"
+			mv "$file" "$DESTINATION_DIR/$FILENAME"
 		done
 	done
 }

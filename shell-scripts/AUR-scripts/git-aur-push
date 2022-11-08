@@ -2,16 +2,16 @@
 
 set -eu
 
-PROGRAM_NAME="${0##*/}"
+. /etc/sh.subr
 
 [ ! -e PKGBUILD ] && {
-	echo "$PROGRAM_NAME: Fatal Error: PKGBUILD file not found" 1>&2
+	print_error "PKGBUILD file not found"
 	exit 1
 }
 
 [ "$#" -ne 1 ] && exit 1
 
-[ ! -e .gitignore ] && echo "$PROGRAM_NAME: Warning: .gitignore file not found"
+[ ! -e .gitignore ] && print_warning ".gitignore file not found"
 
 FILES='PKGBUILD .SRCINFO'
 
