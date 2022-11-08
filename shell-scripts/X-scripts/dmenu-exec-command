@@ -11,11 +11,11 @@ command -v "$EXE" 1>/dev/null 2>&1 || {
 	exit 1
 }
 
-[ "$#" -eq 1 ] && [ "$1" = '-s' ] && exec eval "$COMMAND"
-
 OUTPUT="$(eval "$COMMAND" 2>&1)" || {
 	notify-send "$(printf '[ERROR]: command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
 	exit 1
 }
 
+[ "$#" -eq 1 ] && [ "$1" = '-s' ] && exit 0
+	
 exec notify-send "$OUTPUT"
