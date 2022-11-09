@@ -3,11 +3,5 @@
 set -eu
 
 for log_file in /var/log/tor*; do
-
-	echo "=======$log_file======="
-
-	grep 'Bootstrapped' "$log_file" | tail -n1
-
-	echo
-
+	printf '%s\n%s\n\n' "=======$log_file=======" "$(grep -F 'Bootstrapped' "$log_file" | tail -n1)"
 done
