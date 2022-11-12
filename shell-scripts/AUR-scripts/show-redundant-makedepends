@@ -26,11 +26,9 @@ for pkgbuild in "$@"; do
 	[ "$PRINT_FILENAME" = 'true' ] && echo "analysing file: $pkgbuild"
 
 	for base_devel_pkg in $BASE_DEVEL_PKGS; do
-
 		for makedepends_array_pkg in $MAKEDEPENDS_ARRAY; do
 			[ "$base_devel_pkg" = "$makedepends_array_pkg" ] && echo "found redundant package: $base_devel_pkg"
 		done
-
 	done
 
 done
