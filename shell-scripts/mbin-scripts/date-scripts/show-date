@@ -1,8 +1,3 @@
-#!/bin/sh
-
-set -e
-
-[ -z "$1" ] && exec date '+%Y-%m-%d'
-
+#!/bin/sh -e
 [ "$1" = '--full' ] && exec date '+%Y-%m-%d_%H-%M-%S'
-
+exec date '+%Y-%m-%d'
