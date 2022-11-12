@@ -1,0 +1,18 @@
+#!/bin/sh -eu
+
+[ "$#" -eq 0 ] && exit 1
+
+. /etc/sh.subr
+
+BUSYBOX_AVAILABLE_COMMANDS="$(busybox | awk '/^Currently defined functions/ {P=1} P' | sed '1d; s/[     ]\+//g; s/,$//' | tr ',' '\n')"
+
+for arg in "$@"; do
+	echo "$BUSYBOX_AVAILABLE_COMMANDS" | grep -q "^${arg}$" || {
+		print_error "\"$arg\" not in available busybox commands"
+		exit 1
+	}
+done
+		
+for arg in "$@"; do
+	ln -vs ../../bin/busybox /usr/local/busybox/"$arg"
+done
