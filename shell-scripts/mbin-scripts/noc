@@ -1,6 +1,2 @@
 #!/bin/sh -e
-if [ "$#" -eq 0 ]; then
-	grep -v '^[ 	]\+*#\+' | uniq
-else
-	grep -v '^[ 	]\+*#\+' "$@" | uniq
-fi
+grep -Ev '^[ 	]*#+|^$' "$*"
