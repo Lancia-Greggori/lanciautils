@@ -1,6 +1,5 @@
-#!/bin/sh
+#!/bin/sh -eu
 
-set -eu
 
 [ "$#" -ne 1 ] && echo 'Error: need only one argument' 1>&2 && exit 1
 

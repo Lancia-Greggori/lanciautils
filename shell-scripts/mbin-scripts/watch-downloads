@@ -1,6 +1,5 @@
-#!/bin/sh
+#!/bin/sh -eu
 
-set -eu
 
 DIR="$HOME/Downloads"
 PDF_DIR="$DIR/PDFs"

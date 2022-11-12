@@ -1,8 +1,7 @@
-#!/bin/sh
+#!/bin/sh -eu
 
 # make a copy of the given file argument suffixed with .original
 
-set -eu
 
 [ "$#" -eq 0 ] && exit 1
 
