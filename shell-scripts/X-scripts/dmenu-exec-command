@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -eu
+#!/bin/sh -eu
 
 COMMAND="$(dmenu < /dev/null)"
 [ -z "$COMMAND" ] && exit 0

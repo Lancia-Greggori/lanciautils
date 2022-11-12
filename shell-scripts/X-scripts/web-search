@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/sh -eu
 
 # $1: browser
 # $2: function
 # $3: bookmark file for the url function ( optional )
 
-set -eu
 
 [ "$#" -gt 3 ] && exit 1
 

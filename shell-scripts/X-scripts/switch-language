@@ -1,6 +1,5 @@
-#!/bin/sh
+#!/bin/sh -eu
 
-set -eu
 
 case "$(printf 'US English\nSpanish\nPersian\n' | dmenu)" in
 
