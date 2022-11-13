@@ -1,9 +1,8 @@
 #!/bin/sh -eu
 
-
 [ "$#" -ne 1 ] && exit 1
 
-PS_OUTPUT="$(ps -A -o user,group,tty,cmd)"
+PS_OUTPUT="$(ps -A -o pid,user,group,tty,cmd)"
 
 echo "$PS_OUTPUT" | head -n1
-echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "/bin/sh $0 $1"
+echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "/bin/sh.*${0##*/}"
