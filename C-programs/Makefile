@@ -25,4 +25,4 @@ install-priv: priv
 install-all: install-echo install-cat install-priv
 
 clean:
-	echo *.c | sed 's/\.c//g' | ls -l
+	echo *.c | sed 's/\.c//g' | xargs rm -f
