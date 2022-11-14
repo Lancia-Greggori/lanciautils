@@ -1,12 +1,10 @@
 #!/bin/sh -eu
 
-
 [ "$#" -ne 1 ] && exit 1
 
 SCREENSHOT_DIR="$HOME/Screenshot"
 DATE="$(show-date)"
-[ ! -e "$SCREENSHOT_DIR" ] && mkdir "$SCREENSHOT_DIR"
-[ ! -e "$SCREENSHOT_DIR/$DATE" ] && mkdir "$SCREENSHOT_DIR/$DATE"
+[ ! -e "$SCREENSHOT_DIR/$DATE" ] && mkdir -p "$SCREENSHOT_DIR/$DATE"
 
 NUM=0
 for i in $(seq 1 1000); do
