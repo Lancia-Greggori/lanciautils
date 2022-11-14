@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
 	if(cmdline_arg_size > MAX_ALLOWED_CMDLINE_ARG_SIZE)
 	{
-		fprintf(stderr, "Error: size of passed command line argument(s) is longer than the max allowed %i characters\n", MAX_ALLOWED_CMDLINE_ARG_SIZE);
+		fprintf(stderr, "priv: [ERROR]: size of passed command line argument(s) is longer than the max allowed %i characters\n", MAX_ALLOWED_CMDLINE_ARG_SIZE);
 
 		return 1;
 	}
@@ -27,21 +27,21 @@ int main(int argc, char *argv[])
 
 	if(argc < 2)
 	{
-		fprintf(stderr, "Error: priv needs at least one argument\n");
+		fprintf(stderr, "priv: [ERROR]: priv needs at least one argument\n");
 
 		return 1;
 	}
 
 	else if( access(DEFAULT_ALLOWED_COMMANDS_FILE, R_OK) != 0 )
 	{
-		fprintf(stderr, "Error: %s is either not readable or does not exist\n", DEFAULT_ALLOWED_COMMANDS_FILE);
+		fprintf(stderr, "priv: [ERROR]: %s is either not readable or does not exist\n", DEFAULT_ALLOWED_COMMANDS_FILE);
 
 		return 1;
 	}
 
 	else if( ( uid = getuid() ) != AUTHORISED_UID )
 	{
-		fprintf(stderr, "Error: the user executing this program with uid %i does not match the allowed uid %i, permission denied\n", uid, AUTHORISED_UID);
+		fprintf(stderr, "priv: [ERROR]: the user executing this program with uid %i does not match the allowed uid %i, permission denied\n", uid, AUTHORISED_UID);
 
 		return 1;
 	}
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 
 		if(i > MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE)
 		{
-			fprintf(stderr, "Error: one of the lines in config file %s is higher than the allowed %i character limit (excluding the newline)\n", \
+			fprintf(stderr, "priv: [ERROR]: one of the lines in config file %s is higher than the allowed %i character limit (excluding the newline)\n", \
 					DEFAULT_ALLOWED_COMMANDS_FILE, MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE);
 
 			return 1;
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 		else temp_array[i] = character;
 	}
 
-	fprintf(stderr, "Error: the command you entered was not found in %s\n", DEFAULT_ALLOWED_COMMANDS_FILE);
+	fprintf(stderr, "priv: [ERROR]: the command you entered was not found in %s\n", DEFAULT_ALLOWED_COMMANDS_FILE);
 
 	return 1;
 }

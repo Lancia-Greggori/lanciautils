@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
 			}
 			else if(access(argv[i], F_OK) != 0)
 			{
-				fprintf(stderr, "cat: [ERROR]: %s does not exist\n", argv[i]);
+				fprintf(stderr, "cat: [ERROR]: \"%s\": no such file or directory\n", argv[i]);
 				continue;
 			}
 			else if(access(argv[i], R_OK) != 0)
 			{
-				fprintf(stderr, "cat: [ERROR]: %s is not readable\n", argv[i]);
+				fprintf(stderr, "cat: [ERROR]:\"%s\" is not readable\n", argv[i]);
 				continue;
 			}
 			fp = fopen(argv[i], "r");
