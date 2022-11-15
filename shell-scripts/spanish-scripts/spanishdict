@@ -2,7 +2,7 @@
 
 [ "$#" -ne 1 ] && exit 1
 
-FILTER_PATTERN='^"contextE(n|s)"|^"translation"|^"textE(n|s)"|"(feminine|masculine|masculine or feminine) noun"'
+FILTER_PATTERN='^"(contextE|textE)(n|s)"|^"translation"|"(feminine|masculine|masculine or feminine) noun"'
 
-curl --silent -L --user-agent "$USERAGENT" "https://www.spanishdict.com/translate/$1" | grep -o '"[^"]\+":"[^"]\+"' | \
+curl --silent -L --user-agent "$USER_AGENT" "https://www.spanishdict.com/translate/$1" | grep -o '"[^"]\+":"[^"]\+"' | \
 	grep -E "$FILTER_PATTERN" | sed -e 's/"//g' -e 's/:/: /'
