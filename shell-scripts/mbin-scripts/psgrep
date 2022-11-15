@@ -5,4 +5,4 @@
 PS_OUTPUT="$(ps -A -o pid,user,group,tty,cmd)"
 
 echo "$PS_OUTPUT" | head -n1
-echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "/bin/sh.*${0##*/}"
+echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "${0##*/} $1"
