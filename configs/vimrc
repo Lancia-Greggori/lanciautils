@@ -25,10 +25,12 @@ nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
 nnoremap <C-d> <insert>
 nnoremap <C-v> :read !xclip -selection clipboard -o<nl>
+nnoremap <C-c> :.w !xclip -selection clipboard<nl>
 
 inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
 inoremap <C-v> <Esc>:read !xclip -selection clipboard -o<nl><insert>
+inoremap <C-z> <Esc><undo><insert>
+inoremap <C-c> :.w !xclip -selection clipboard<nl>
 
-vnoremap <C-c> :'<,'>w !xclip -selection clipboard<nl>
-vnoremap <C-l> :'\<,'\>w !xclip -selection clipboard<nl>
+vnoremap <C-c> :w !xclip -selection clipboard<nl>
