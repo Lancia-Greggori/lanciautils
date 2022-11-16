@@ -21,19 +21,23 @@ set ttymouse=""
 set mouse=""
 set shortmess=aI
 
+map <F1> <NOP>
+map <C-n> <NOP>
+vnoremap <C-z> <NOP>
+
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
 nnoremap <C-p> :read !xclip -selection clipboard -o<nl>
 nnoremap <C-c> :.w !xclip -selection clipboard<nl>
+nnoremap <C-n> :bn<nl>
+nnoremap <C-m> :bp<nl>
 
 inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
 inoremap <C-p> <Esc>:read !xclip -selection clipboard -o<nl><insert>
+inoremap <C-v> <Esc>:read !xclip -selection clipboard -o<nl><insert>
 inoremap <C-z> <Esc><undo><insert>
 inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
 
 vnoremap <C-c> y<nl>:call system('xclip', @0)<nl>
-
-map <F1> <NOP>
-vnoremap <C-z> <NOP>
