@@ -3,6 +3,12 @@
 [ "$#" -ne 1 ] && exit 1
 
 SINTAXIS_CLASS_KEYWORD='YrbPuc'
-CURL_OUTPUT="$(curl --silent --user-agent "$USER_AGENT" --location "https://google.com/search?q=$1+significado")"
+OUTPUT=''
 
-echo "$CURL_OUTPUT" | grep -o "class=\"$SINTAXIS_CLASS_KEYWORD\">[^<]\+" | sed 's/[^>]*>//'
+CURL_OUTPUT="$(curl --silent --user-agent "$USER_AGENT" --location "https://google.com/search?q=$1+significado")"
+[ -z "$CURL_OUTPUT" ] && exit 1
+
+OUTPUT="$(echo "$CURL_OUTPUT" | grep -o "class=\"$SINTAXIS_CLASS_KEYWORD\">[^<]\+")"
+[ -z "$OUTPUT" ] && exit 1
+
+echo "$OUTPUT" | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
