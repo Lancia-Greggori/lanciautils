@@ -34,3 +34,5 @@ inoremap <C-z> <Esc><undo><insert>
 inoremap <C-c> :.w !xclip -selection clipboard<nl>
 
 vnoremap <C-c> :w !xclip -selection clipboard<nl>
+
+map <F1> <NOP>

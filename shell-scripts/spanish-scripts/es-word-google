@@ -9,6 +9,6 @@ CURL_OUTPUT="$(curl --silent --user-agent "$USER_AGENT" --location "https://goog
 [ -z "$CURL_OUTPUT" ] && exit 1
 
 OUTPUT="$(echo "$CURL_OUTPUT" | grep -o "class=\"$SINTAXIS_CLASS_KEYWORD\">[^<]\+")"
-[ -z "$OUTPUT" ] && exit 1
+[ -z "$OUTPUT" ] && exit 2
 
 echo "$OUTPUT" | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
