@@ -10,6 +10,7 @@ jmp()
 jmp_add()
 {
 	[ "$#" -gt 2 ] && return 1
+	[ ! -e "$1" ] && return 2
 	DIR="$(echo "$1" | sed -e 's|^\./||' -e 's|/.*$||')"
 	if [ "$#" -eq 1 ]; then
 		echo "$DIR:$(readlink -f "$1")" >> "$JMP_FILE"
