@@ -1,0 +1,19 @@
+JMP_FILE="$HOME/.jmp_dirs"
+
+jmp()
+{
+	[ "$#" -ne 1 ] && return 1
+	[ ! -e "$JMP_FILE" ] && return 2
+	cd "$(grep -m1 "^$1" "$JMP_FILE" | cut -d':' -f2)" || return 3
+}
+
+jmp_add()
+{
+	[ "$#" -gt 2 ] && return 1
+	DIR="$(echo "$1" | sed -e 's|^\./||' -e 's|/.*$||')"
+	if [ "$#" -eq 1 ]; then
+		echo "$DIR:$(readlink -f "$1")" >> "$JMP_FILE"
+	else
+		echo "$DIR:$(readlink -f "$2")" >> "$JMP_FILE"
+	fi
+}
