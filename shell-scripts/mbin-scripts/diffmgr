@@ -19,20 +19,15 @@ for file in "$@"; do
 	done
 
 	[ "$COUNTER" -eq 0 ] && continue
-
-	if [ "$COUNTER" -gt 1 ]; then
+	[ "$COUNTER" -gt 1 ] && {
 
 		TARGET_FILE="$dir/$FILENAME"
-
 		echo "---- Warning! file \"$file\" exists in multiple locations:"
-
 		for dir in $DIRS; do
-
 			[ -e "$dir/$FILENAME" ] && echo "$dir/$FILENAME"
-
 		done
 
-	fi
+	}
 
 	for dir in $DIRS; do
 
@@ -50,7 +45,7 @@ for file in "$@"; do
 
 				echo "---- $TARGET_FILE $file ----"
 				echo "$OUTPUT"
-				EXIT_CODE=1
+				[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
 
 			}
 
