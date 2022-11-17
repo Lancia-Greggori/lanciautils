@@ -11,7 +11,7 @@ alias j=jmp
 jmp_add()
 {
 	[ "$#" -gt 2 ] && return 1
-	NAME="$(echo "$1" | sed -e 's|^\./||' -e 's|/.*$||')"
+	NAME="$(basename "$1")"
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
 	if [ "$#" -eq 1 ]; then
 		[ ! -e "$1" ] && return 2
