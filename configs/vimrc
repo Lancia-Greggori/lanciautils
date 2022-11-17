@@ -23,7 +23,16 @@ set shortmess=aI
 
 map <F1> <NOP>
 map <C-n> <NOP>
+
 noremap <C-z> <NOP>
+
+cnoremap <C-x> <Esc>
+
+onoremap <C-x> <Esc>
+
+xnoremap <C-x> <Esc>
+
+lnoremap <C-x> <Esc>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
@@ -41,3 +50,4 @@ inoremap <C-z> <Esc><undo><insert>
 inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
 
 vnoremap <C-c> y<nl>:call system('xclip -selection clipboard', @0)<nl>
+vnoremap <C-x> <Esc>

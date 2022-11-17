@@ -1,5 +1,7 @@
+#!/usr/bin/openrc-run
+
 command='/usr/local/busybox/syslogd'
-command_args='-n'
+command_args='-n -s 2000 -b 5 -t'
 supervisor='supervise-daemon'
 
 depend()
@@ -10,4 +12,9 @@ depend()
 	provide logger
 }
 
-start_pre() { [ ! -e "$command" ] || ln -s ../../bin/busybox "$command" ; }
+start_pre()
+{ 
+	if [ ! -e "$command" ]; then
+		ln -s ../../bin/busybox "$command"
+	fi
+}
