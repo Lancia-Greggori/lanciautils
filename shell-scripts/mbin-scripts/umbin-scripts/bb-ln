@@ -4,7 +4,7 @@
 
 . /etc/sh.subr
 
-BUSYBOX_AVAILABLE_COMMANDS="$(busybox | awk '/^Currently defined functions/ {P=1} P' | sed '1d; s/[     ]\+//g; s/,$//' | tr ',' '\n')"
+BUSYBOX_AVAILABLE_COMMANDS="$(busybox | awk '/^Currently defined functions/ {P=1} P' | tr ',' '\n' | sed '/^$/d; s/[  ]\+//g')"
 
 for arg in "$@"; do
 	echo "$BUSYBOX_AVAILABLE_COMMANDS" | grep -q "^${arg}$" || {
