@@ -1,10 +1,8 @@
 #!/bin/sh -eu
 
-
 [ "$#" -eq 0 ] && exit 1
 
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc'
-
 EXIT_CODE=0
 
 for file in "$@"; do
@@ -12,7 +10,6 @@ for file in "$@"; do
 	[ ! -f "$file" ] && continue
 
 	FILENAME="${file##*/}"
-
 	COUNTER=0
 
 	for dir in $DIRS; do
@@ -40,7 +37,6 @@ for file in "$@"; do
 	for dir in $DIRS; do
 
 		TARGET_FILE="$dir/$FILENAME"
-
 		[ ! -e "$TARGET_FILE" ] && continue
 
 		if [ "$TARGET_FILE" = "$file" ]; then
@@ -50,16 +46,13 @@ for file in "$@"; do
 
 		else
 
-			if head -n1 "$file" | grep -q '^#!'; then
+			OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
 
-				OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
-					echo "---- $TARGET_FILE $file ----"
-					echo "$OUTPUT"
-					EXIT_CODE=1
+				echo "---- $TARGET_FILE $file ----"
+				echo "$OUTPUT"
+				EXIT_CODE=1
 
-				}
-
-			fi
+			}
 
 		fi
 
