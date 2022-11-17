@@ -1,4 +1,4 @@
 #!/bin/sh -e
-for log_file in /var/log/tor*; do
+for log_file in /var/log/tor/tor*; do
 	printf '%s\n%s\n\n' "=======$log_file=======" "$(grep -F 'Bootstrapped' "$log_file" | tail -n1)"
 done
