@@ -39,7 +39,7 @@ while true; do
 
 		if ! pgrep -f "curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL" 1>/dev/null; then
 
-			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 2>&1 1>/dev/null"; then
+			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 1>/dev/null 2>&1"; then
 				write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
 			else
 				write_log "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
