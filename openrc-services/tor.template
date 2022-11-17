@@ -51,7 +51,8 @@ checkconfig()
 	}
 }
 
-start_pre() {
+start_pre()
+{
 	checkconfig || return 1
 	checkpath -f -F -m 0644 -o tor:tor "${log_file}"
 	checkpath -d -m 0700 -o tor:tor "${data_dir}"

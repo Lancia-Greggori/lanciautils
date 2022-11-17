@@ -1,0 +1,13 @@
+command='/usr/local/busybox/syslogd'
+command_args='-n'
+supervisor='supervise-daemon'
+
+depend()
+{
+	need localmount
+	use clock hostname
+	after bootmisc
+	provide logger
+}
+
+start_pre() { [ ! -e "$command" ] || ln -s ../../bin/busybox "$command" ; }

@@ -1,5 +1,5 @@
 cat
-priv
 echo
-simpsh
+priv
 run-daemon
+simpsh
