@@ -1,0 +1,13 @@
+#!/usr/bin/openrc-run
+
+supervisor='supervise-daemon'
+command='/usr/bin/dnsmasq'
+command_args='-k'
+
+depend()
+{
+	provide dns
+	need localmount net
+	after bootmisc
+	use logger
+}
