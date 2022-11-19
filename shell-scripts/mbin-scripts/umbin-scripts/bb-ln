@@ -4,13 +4,8 @@
 
 . /etc/sh.subr
 
-BUSYBOX_AVAILABLE_COMMANDS="$(busybox | awk '/^Currently defined functions/ {P=1} P' | tr ',' '\n' | sed '/^$/d; s/[  ]\+//g')"
-
 for arg in "$@"; do
-	echo "$BUSYBOX_AVAILABLE_COMMANDS" | grep -q "^${arg}$" || {
-		print_error "\"$arg\" not in available busybox commands"
-		exit 1
-	}
+	busybox "$arg" || exit "$?"
 done
 		
 for arg in "$@"; do
