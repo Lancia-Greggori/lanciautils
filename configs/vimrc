@@ -23,16 +23,10 @@ set shortmess=aI
 
 map <F1> <NOP>
 map <C-n> <NOP>
-
-noremap <C-z> <NOP>
-
-cnoremap <C-x> <Esc>
-
-onoremap <C-x> <Esc>
-
-xnoremap <C-x> <Esc>
-
-lnoremap <C-x> <Esc>
+map <C-z> <NOP>
+map <C-n> <NOP>
+map <C-m> <NOP>
+map <C-x> <NOP>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
