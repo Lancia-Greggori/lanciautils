@@ -1,7 +1,8 @@
 #!/bin/sh -eu
 
-
 [ "$(id -u)" -ne 0 ] && exit 1
+
+. /usr/local/subr/io.subr
 
 CONF_DIR='/etc/wpa_supplicant'
 SSID=''
@@ -12,7 +13,7 @@ read -r -p 'SSID: ' SSID
 CONF_FILE="$CONF_DIR/$SSID.conf"
 
 if [ -e "$CONF_FILE" ]; then
-	echo "Error: there is already a file named $SSID.conf in $CONF_DIR"
+	print_error "there is already a file named $SSID.conf in $CONF_DIR"
 	exit 1
 fi
 

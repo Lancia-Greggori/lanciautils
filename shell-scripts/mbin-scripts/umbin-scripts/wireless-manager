@@ -66,7 +66,7 @@ kill_wpa_supplicant()
 check_for_too_many_results()
 {
 	if [ "$(echo "$1" | wc -l | cut -d' ' -f1)" -gt 1 ]; then
-		echo "error: there more than one file that contains the SSID $2"
+		print_error "there more than one file that contains the SSID $2"
 		exit 1
 	fi
 }
