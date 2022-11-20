@@ -2,27 +2,21 @@
 
 # make a copy of the given file argument suffixed with .original
 
-
 [ "$#" -eq 0 ] && exit 1
+
+. /usr/local/subr/io.subr
 
 for file in "$@"; do
 
-	[ ! -f "$file" ] && echo "Error: \"$file\" not a file" 1>&2 && exit 1
+	[ ! -f "$file" ] && print_error "\"$file\" is not a file" && exit 2
 
 done
 
 for file in "$@"; do
-
 	NUM=1
-
 	for num in $(seq 1 1000); do
-
 		[ -e "${file}.original.${NUM}" ] && NUM="$((NUM+1))" && continue
-
 		break
-
 	done
-
 	cp -v "$file" "${file}.original.${NUM}"
-
 done
