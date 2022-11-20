@@ -18,7 +18,7 @@ case "$1" in
 	full) import -window root "$FILE" ;;
 	window) import -window "$(xwininfo | grep -F 'wininfo: Window id:' | cut -d' ' -f4)" "$FILE" ;;
 	region) import "$FILE" ;;
-	*) echo 'Error: argument not recongnized' && exit 1 ;;
+	*) exit 2 ;;
 esac
 
 xclip -selection clipboard -t image/png -i "$FILE"
