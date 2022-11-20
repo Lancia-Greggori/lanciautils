@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define DEFAULT_ALLOWED_COMMANDS_FILE "/etc/priv.commands"
+#define DEFAULT_ALLOWED_COMMANDS_FILE "/letc/priv.commands"
 #define AUTHORISED_UID 1000
 #define AUTHORISED_PATH "/bin:/sbin:/usr/local/umbin"
 #define MAX_ALLOWED_CMDLINE_ARG_SIZE 100

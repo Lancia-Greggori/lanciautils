@@ -7,8 +7,3 @@ depend()
 {
 	after local	
 }
-
-start_pre()
-{
-	checkpath -d -m 0755 /var/log/tor
-}
