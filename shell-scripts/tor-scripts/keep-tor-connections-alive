@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 . /usr/local/subr/io.subr
 
 [ "$(id -u)" -ne 0 ] && {
@@ -20,6 +19,8 @@ write_log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOG_FILE" ; }
 
 cd /tmp
 
+TMP_FILE="${LOG_FILE##*/}"
+[ ! -e "$TMP_FILE" ] && mkdir -p "$TMP_FILE"
 printf '' > "$LOG_FILE"
 
 while true; do

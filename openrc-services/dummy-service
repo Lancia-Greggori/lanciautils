@@ -1,0 +1,11 @@
+#!/usr/bin/openrc-run
+
+set -x
+
+command='ls'
+command_args='-l'
+
+depend()
+{
+	provide dummy-service
+}
