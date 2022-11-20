@@ -3,7 +3,7 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /etc/sh.subr
+. /usr/local/subr/io.subr
 
 SED_REMOVE_ENDING_SPACE_PATTERN='s/ \+$//'
 

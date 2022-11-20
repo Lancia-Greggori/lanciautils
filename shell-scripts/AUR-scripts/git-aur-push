@@ -1,7 +1,7 @@
 #!/bin/sh -eu
 
 
-. /etc/sh.subr
+. /usr/local/subr/io.subr
 
 [ ! -e PKGBUILD ] && {
 	print_error "PKGBUILD file not found"
