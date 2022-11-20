@@ -5,5 +5,5 @@ command='/usr/local/umbin/keep-tor-connections-alive'
 
 depend()
 {
-	after local	
+	before local	
 }
