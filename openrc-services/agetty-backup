@@ -1,0 +1,12 @@
+#!/usr/bin/openrc-run
+
+description='start a backup agetty before the local service'
+supervisor='supervise-daemon'
+respawn_period="${respawn_period:-60}"
+command='/sbin/agetty'
+command_args_foreground='tty8 38400 linux'
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+	before local
+}
