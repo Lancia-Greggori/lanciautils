@@ -1,12 +1,10 @@
 #!/bin/sh -eu
 
-
 [ "$#" -eq 0 ] && exit 1
 
 for file in "$@"; do
 
 	[ -L "$file" ] && continue
-
 	sed -i -e 's/[ 	]\+$//' -e 's/^[ 	]\+$//' "$file"
 
 done
