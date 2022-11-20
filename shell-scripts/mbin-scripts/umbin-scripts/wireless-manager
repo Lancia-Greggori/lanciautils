@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 . /usr/local/subr/io.subr
 
 DEV='wlan0'
