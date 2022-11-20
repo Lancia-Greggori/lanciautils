@@ -1,5 +1,6 @@
 PROGRAM_NAME="${0##*/}"
 
+print(){ notify-send "$1" ; }
 print_msg(){ notify-send "$PROGRAM_NAME: [MSG]: $1" ; }
 print_error(){ notify-send "$PROGRAM_NAME: [ERROR]: $1" ; }
 print_warning(){ notify-send "$PROGRAM_NAME: [WARNING]: $1" ; }

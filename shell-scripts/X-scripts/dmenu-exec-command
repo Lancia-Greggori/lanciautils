@@ -1,19 +1,21 @@
 #!/bin/sh -eu
 
+. /usr/local/subr/X.io.subr
+
 COMMAND="$(dmenu < /dev/null)"
 [ -z "$COMMAND" ] && exit 0
 
 EXE="${COMMAND%% *}"
 command -v "$EXE" 1>/dev/null 2>&1 || {
-	notify-send "[ERROR]: executable \"$EXE\" not found"
+	print_error "executable \"$EXE\" not found"
 	exit 1
 }
 
 OUTPUT="$(eval "$COMMAND" 2>&1)" || {
-	notify-send "$(printf '[ERROR]: command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
+	print_error "$(printf 'command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
 	exit 2
 }
 
 [ "$#" -eq 1 ] && [ "$1" = '-s' ] && exit 0
 	
-exec notify-send "$OUTPUT"
+print "$OUTPUT"

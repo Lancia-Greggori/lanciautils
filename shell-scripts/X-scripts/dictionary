@@ -1,19 +1,19 @@
 #!/bin/sh -eu
 
-alias clip='xclip -selection clipboard'
+. /usr/local/subr/X.io.subr
 
 INPUT="$(dmenu -p 'Enter your word:' < /dev/null)"
 SPELL_OUTPUT="$(echo "$INPUT" | hunspell | sed -e '/^$/d' -e '/^Hunspell/d')"
 
 if echo "$SPELL_OUTPUT" | grep -q "#${INPUT}0"; then
-	notify-send "[ERROR]: no word \"$INPUT\" found in the dictionary"
+	print_error "no word \"$INPUT\" found in the dictionary"
 	exit 1
 elif echo "$SPELL_OUTPUT" | grep -q '^\*$'; then
-	notify-send 'Word correct'
-	echo "$INPUT" | tr -d '\n' | clip
+	print_msg 'Word correct'
+	echo "$INPUT" | tr -d '\n' | xclip -selection clipboard
 elif echo "$SPELL_OUTPUT" | grep -q '+ [[:alnum:]]\+'; then
 	SINGULAR_WORD="$(echo "$SPELL_OUTPUT" | sed 's/\+ //')"
-	printf '%s\n%s' "$SINGULAR_WORD" "$INPUT" | dmenu -p "\"$INPUT\" is the plural form of \"$SINGULAR_WORD\"" | tr -d '\n' | clip
+	printf '%s\n%s' "$SINGULAR_WORD" "$INPUT" | dmenu -p "\"$INPUT\" is the plural form of \"$SINGULAR_WORD\"" | tr -d '\n' | xclip -selection clipboard
 else
-	echo "$SPELL_OUTPUT" | cut -d':' -f2 | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | clip
+	echo "$SPELL_OUTPUT" | cut -d':' -f2 | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | xclip -selection clipboard
 fi
