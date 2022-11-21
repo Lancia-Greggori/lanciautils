@@ -3,7 +3,6 @@
 . /usr/local/subr/io.subr
 
 DEV='wlan0'
-
 CONFIG_DIRECTORY='/etc/wpa_supplicant'
 WPA_SUPPLICANT_LOGFILE='/var/log/wpa.log'
 PRIORITY_FILE='/etc/wireless-manager.priorities'

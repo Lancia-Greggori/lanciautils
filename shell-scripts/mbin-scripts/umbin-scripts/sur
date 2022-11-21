@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 [ "$#" -eq 0 ] && exit 1
 
-exec env -i su root -c "$*"
+exec env -i su - root -c "$*"
