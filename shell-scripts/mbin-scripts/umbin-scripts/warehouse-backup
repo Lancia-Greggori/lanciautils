@@ -1,7 +1,7 @@
 #!/bin/sh -eu
 
 [ "$(id -u)" -ne 0 ] && exit 1
-[ "$#" -ne 1 ] && exit 2
+[ "$#" -eq 0 ] && exit 2
 for arg in "$@"; do
 	[ ! -d "$arg" ] && exit 3
 done
