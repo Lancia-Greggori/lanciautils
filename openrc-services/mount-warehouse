@@ -9,12 +9,14 @@ depend()
 start()
 {
 	UUID='201b8180-2bd9-4676-90bd-903e3352422c'
-	blkid | grep -q "UUID=\"$UUID\"" || exit 0
-	DEV="$(get-device-by-uuid "$UUID")"
-	if fsck -n "$DEV" 1>/dev/null 2>&1; then
-		mount -o rw,nodev,nosuid,noexec,noatime,nodiratime "$DEV" /mnt/warehouse 
-	else
-		error "fsck error on $DEV"
-		exit 1
-	fi
+	{
+		blkid | grep -q "UUID=\"$UUID\"" || exit 0
+		DEV="$(get-device-by-uuid "$UUID")"
+		if fsck -n "$DEV" 1>/dev/null 2>&1; then
+			mount -o rw,nodev,nosuid,noexec,noatime,nodiratime "$DEV" /mnt/warehouse 
+		else
+			error "fsck error on $DEV"
+			exit 1
+		fi
+	} &
 }
