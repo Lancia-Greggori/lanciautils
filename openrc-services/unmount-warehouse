@@ -1,0 +1,13 @@
+#!/usr/bin/openrc-run
+
+depend()
+{
+	after killprocs
+}
+
+start()
+{
+	if mount | grep -qF 'on /mnt/warehouse'; then
+		umount /mnt/warehouse
+	fi
+}
