@@ -1,0 +1,11 @@
+#!/usr/bin/openrc-run
+
+command='/usr/local/umbin/wireless-manager'
+command_args='start priority-scan'
+supervisor=''
+
+depend()
+{
+	after net.lo
+	keyword -shutdown
+}
