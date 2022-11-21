@@ -1,0 +1,15 @@
+#!/bin/sh -eu
+
+case "$0" in
+	lmbin-install|li) TARGET_DIR='/home/lancia/.lsr/lmbin' ;;
+	umbin-install|ui) TARGET_DIR='/usr/local/umbin' ;;
+	*) exit 1 ;;
+esac
+
+for file in "$@"; do
+	[ ! -f "$file" ] && exit 2
+done
+
+for file in "$@"; do
+	install -m 0755 "$file" "$TARGET_DIR"
+done
