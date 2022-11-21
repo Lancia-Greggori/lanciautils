@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-case "$0" in
+case "${0##*/}" in
 	lmbin-install|li) TARGET_DIR='/home/lancia/.lsr/lmbin' ;;
 	umbin-install|ui) TARGET_DIR='/usr/local/umbin' ;;
 	*) exit 1 ;;
