@@ -2,8 +2,6 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/local/subr/io.subr
-
 for arg in "$@"; do
 	busybox "$arg" || exit "$?"
 done
