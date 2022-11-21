@@ -9,20 +9,19 @@ SSID=''
 PASSWORD=''
 
 read -r -p 'SSID: ' SSID
-
 CONF_FILE="$CONF_DIR/$SSID.conf"
 
-if [ -e "$CONF_FILE" ]; then
+[ -e "$CONF_FILE" ] && {
 	print_error "there is already a file named $SSID.conf in $CONF_DIR"
-	exit 1
-fi
+	exit 2
+}
 
 stty -echo
 read -r -p 'Password: ' PASSWORD
 echo
 stty echo
 
-cat <<EOF >"$CONF_FILE" && echo "File created at $CONF_FILE"
+cat <<EOF >"$CONF_FILE"
 network={
         ssid="$SSID"
         key_mgmt=WPA-PSK
