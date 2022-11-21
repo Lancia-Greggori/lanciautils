@@ -1,15 +1,16 @@
 #!/bin/sh -eu
 
+for file in "$@"; do
+	[ ! -f "$file" ] && exit 1
+done
+
 case "${0##*/}" in
-	lmbin-install|li) TARGET_DIR='/home/lancia/.lsr/lmbin' ;;
-	umbin-install|ui) TARGET_DIR='/usr/local/umbin' ;;
-	*) exit 1 ;;
+	li) TARGET_DIR='/home/lancia/.lsr/lmbin'; PERM=0755 ;;
+	ui) TARGET_DIR='/usr/local/umbin'; PERM=0755 ;;
+	si) TARGET_DIR='/usr/local/subr'; PERM=0644 ;;
+	*) exit 2 ;;
 esac
 
 for file in "$@"; do
-	[ ! -f "$file" ] && exit 2
-done
-
-for file in "$@"; do
-	install -m 0755 "$file" "$TARGET_DIR"
+	install -m "$PERM" "$file" "$TARGET_DIR"
 done
