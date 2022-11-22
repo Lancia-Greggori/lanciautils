@@ -6,50 +6,41 @@
 
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
 EXIT_CODE=0
+FILENAME=''
+
+diff_files()
+{
+	OUTPUT="$(diff "$1" "$2")" || {
+
+		echo "---- $1 $2 ----"
+		echo "$OUTPUT"
+		[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
+
+	}
+}
+
 
 for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
+	if grep "^$(readlink -f "$file"):" /letc/global-filelist; then
+		diff_files "$(cut -d':' -f1 /letc/global-filelist)" "$(cut -d':' -f2 /letc/global-filelist)"
+		continue
+	fi
+
 	FILENAME="${file##*/}"
-	COUNTER=0
-
-	for dir in $DIRS; do
-
-		[ -e "$dir/$FILENAME" ] && COUNTER="$((COUNTER + 1))"
-
-	done
-
-	[ "$COUNTER" -eq 0 ] && continue
-	[ "$COUNTER" -gt 1 ] && {
-
-		TARGET_FILE="$dir/$FILENAME"
-		print_warning "file \"$file\" exists in multiple locations:"
-		for dir in $DIRS; do
-			[ -e "$dir/$FILENAME" ] && echo "$dir/$FILENAME"
-		done
-
-	}
 
 	for dir in $DIRS; do
 
 		TARGET_FILE="$dir/$FILENAME"
 		[ ! -e "$TARGET_FILE" ] && continue
-
 		if [ "$TARGET_FILE" = "$file" ]; then
-
-			print_warning "$TARGET_FILE and $file are the same, skipping..." 1>&2
+			print_warning "$TARGET_FILE and $file are the same, skipping..."
 			continue
-
 		else
 
-			OUTPUT="$(diff "$TARGET_FILE" "$file")" || {
-
-				echo "---- $TARGET_FILE $file ----"
-				echo "$OUTPUT"
-				[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
-
-			}
+			diff_files "$file" "$TARGET_FILE"
 
 		fi
 
