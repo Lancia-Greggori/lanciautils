@@ -1,0 +1,12 @@
+#!/usr/bin/openrc-run
+
+depend()
+{
+	after killprocs
+	before save-cache
+}
+
+start()
+{
+	fscrypt lock /mnt/storage/encrypted
+}

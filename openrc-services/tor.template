@@ -21,6 +21,11 @@ log_file="/var/log/tor/tor-${id}.log"
 data_dir="/var/lib/tor/tor-${id}"
 extra_commands='checkconfig'
 
+depend()
+{
+	provide tor
+}
+
 checkconfig()
 {
 	if [ ! -e "$config_file" ]; then
@@ -44,7 +49,7 @@ checkconfig()
 start_pre()
 {
 	checkconfig || return 1
-	
+
 	checkpath -d -m 0755 -o tor:tor "${log_file%/*}"
 	checkpath -f -F -m 0644 -o tor:tor "$log_file"
 

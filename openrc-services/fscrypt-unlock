@@ -1,0 +1,23 @@
+#!/usr/bin/openrc-run
+
+depend()
+{
+	after local
+	before getty
+	keyword -shutdown
+}
+
+start()
+{
+	if [ ! -e /mnt/storage/encrypted ]; then
+		echo "encrypted storage at /mnt/storage/encrypted does not exist, skipping unlocking..."
+		exit 0
+	fi
+	read -r -p 'Do you want to unlock the encrypted storage? ' ANSWER
+	if [ "$ANSWER" = 'y' ]; then
+		echo "Hint: in times of hedonism, what will you do?"
+		fscrypt unlock /mnt/storage/encrypted
+	else
+		exit 0
+	fi
+}
