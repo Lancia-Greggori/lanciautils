@@ -10,7 +10,7 @@ jmp()
 }
 alias j=jmp
 
-jmp_add()
+jmp-add()
 {
 	[ "$#" -gt 2 ] && return 1
 	NAME="$(basename "$1")"
