@@ -4,7 +4,9 @@ jmp()
 {
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e "$JMP_FILE" ] && return 2
-	cd "$(grep -m1 "^$1" "$JMP_FILE" | cut -d':' -f2)" || return 3
+	DIR="$(grep -m1 "^$1" "$JMP_FILE" | cut -d':' -f2)"
+	[ -z "$DIR" ] && return 3
+	cd "$DIR" || return 4
 }
 alias j=jmp
 
@@ -18,6 +20,6 @@ jmp_add()
 		echo "$NAME:$(readlink -f "$1"| sed "$PATTERN")" >> "$JMP_FILE"
 	else
 		[ ! -e "$2" ] && return 2
-		echo "$1:$(readlink -f "$2"| sed "$PATTERN")" >> "$JMP_FILE"
+		echo "$2:$(readlink -f "$1"| sed "$PATTERN")" >> "$JMP_FILE"
 	fi
 }
