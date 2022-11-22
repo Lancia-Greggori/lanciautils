@@ -7,14 +7,23 @@
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
 EXIT_CODE=0
 OUTPUT=''
+VERBOSE=0
+for arg in "$@"; do
+	[ "$arg" = '-v' ] && VERBOSE=1
+	break
+done
 
 diff_files()
 {
-	echo "($1||||$2)" | sed 's|/mnt/storage/encrypted|/home|g'
-	OUTPUT="$(diff "$1" "$2")" || {
-		echo "$OUTPUT"
-		[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
-	}
+	if [ "$VERBOSE" -eq 1 ]; then
+		echo "($1||||$2)" | sed 's|/mnt/storage/encrypted|/home|g'
+		OUTPUT="$(diff "$1" "$2")" || {
+			echo "$OUTPUT"
+			[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
+		}
+	else
+		diff -q "$1" "$2"
+	fi
 }
 
 
