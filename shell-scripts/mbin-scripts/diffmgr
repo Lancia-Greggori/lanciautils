@@ -10,6 +10,7 @@ OUTPUT=''
 
 diff_files()
 {
+	echo "($1,$2)"
 	OUTPUT="$(diff "$1" "$2")" || {
 		echo "$OUTPUT"
 		[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
