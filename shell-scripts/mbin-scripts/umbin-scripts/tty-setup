@@ -5,7 +5,7 @@ DESKTOP_RESOLUTION='1920 1080'
 
 set_resolution() { exec fbset -xres "${1## *}" -yres "${1##* }" ; }
 
-if tty | grep -q '^/dev/tty'; then
+if tty | grep -Eq '^/dev/(tty|console)'; then
 
 	setfont /usr/share/kbd/consolefonts/LatGrkCyr-12x22.psfu.gz
 	if [ "$#" -eq 1 ] && [ "$1" = '--laptop-resolution' ]; then
