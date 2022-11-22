@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 DIR="$HOME/Downloads"
 PDF_DIR="$DIR/PDFs"
 COMPRESSED_DIR="$DIR/compressed"
