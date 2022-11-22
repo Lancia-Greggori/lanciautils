@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+[ "$(id -u)" -ne 0 ] && exit 1
+
+if [ "$1" = '--no-filter' ]; then
+
+	mkinitcpio -P 2>&1
+	printf '\n\n'
+	grub-mkconfig -o /boot/grub/grub.cfg 2>&1
+
+else
+
+	mkinitcpio -P 2>&1 | grep -Fv 'Possibly missing firmware for module:'
+	printf '\n\n'
+	grub-mkconfig -o /boot/grub/grub.cfg 2>&1 | grep -Evi 'os[-_]prober|systems on them will not be added'
+
+fi

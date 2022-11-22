@@ -1,0 +1,12 @@
+#!/usr/bin/openrc-run
+
+depend()
+{
+	before fscrypt-unlock
+	keyword -shutdown
+}
+
+start()
+{
+	tty-setup
+}
