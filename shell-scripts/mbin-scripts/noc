@@ -1,2 +1,2 @@
 #!/bin/sh -e
-exec grep -Ev '^[ 	]*#+|^$' "$@"
+exec grep -Ev '^[ 	]*(#|")+|^$' "$@"

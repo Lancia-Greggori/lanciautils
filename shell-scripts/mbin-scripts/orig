@@ -1,7 +1,5 @@
 #!/bin/sh -eu
 
-# make a copy of the given file argument suffixed with .original
-
 [ "$#" -eq 0 ] && exit 1
 
 . /usr/local/subr/io.subr
