@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$#" -ne 3 ] && exit 1
+
+exec echo "$(readlink -f "$1"):$(readlink -f "$2"):$3" >> /letc/global-filelist

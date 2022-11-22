@@ -1,21 +1,18 @@
 #!/bin/sh -eu
 
-. /usr/local/subr/io.subr
-
 [ "$#" -eq 0 ] && exit 1
+
+. /usr/local/subr/io.subr
 
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
 EXIT_CODE=0
-FILENAME=''
+OUTPUT=''
 
 diff_files()
 {
 	OUTPUT="$(diff "$1" "$2")" || {
-
-		echo "---- $1 $2 ----"
 		echo "$OUTPUT"
 		[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
-
 	}
 }
 
@@ -24,25 +21,16 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	if grep -q "^$(readlink -f "$file"):" /letc/global-filelist; then
-		diff_files "$(cut -d':' -f1 /letc/global-filelist)" "$(cut -d':' -f2 /letc/global-filelist)"
+	OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)" && {
+		diff_files "$(echo "$OUTPUT" | cut -d':' -f1)" "$(echo "$OUTPUT" | cut -d':' -f2)"
 		continue
-	fi
-
-	FILENAME="${file##*/}"
+	}
 
 	for dir in $DIRS; do
 
-		TARGET_FILE="$dir/$FILENAME"
+		TARGET_FILE="$dir/${file##*/}"
 		[ ! -e "$TARGET_FILE" ] && continue
-		if [ "$TARGET_FILE" = "$file" ]; then
-			print_warning "$TARGET_FILE and $file are the same, skipping..."
-			continue
-		else
-
-			diff_files "$file" "$TARGET_FILE"
-
-		fi
+		diff_files "$file" "$TARGET_FILE"
 
 	done
 
