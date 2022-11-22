@@ -13,5 +13,6 @@ case "${0##*/}" in
 esac
 
 for file in "$@"; do
-	install -v -m "$PERM" "$file" "$TARGET_DIR"
+	echo "$file --> $TARGET_DIR/$file"
+	install -m "$PERM" "$file" "$TARGET_DIR"
 done

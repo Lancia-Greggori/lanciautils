@@ -100,3 +100,4 @@ bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym --border button3 nop
 bindsym --whole-window $mod+button3 nop
+bindsym $mod+KP_End exec --no-startup-id st lynx lite.duckduckgo.com

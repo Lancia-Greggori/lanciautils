@@ -24,7 +24,7 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	if grep "^$(readlink -f "$file"):" /letc/global-filelist; then
+	if grep -q "^$(readlink -f "$file"):" /letc/global-filelist; then
 		diff_files "$(cut -d':' -f1 /letc/global-filelist)" "$(cut -d':' -f2 /letc/global-filelist)"
 		continue
 	fi
