@@ -1,6 +1,6 @@
 #!/bin/bash
 
-build() { 
+build() {
 	add_binary date
 	add_binary hdparm
 	add_runscript

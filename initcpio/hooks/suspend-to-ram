@@ -8,21 +8,21 @@ run_hook(){
 	DEV='/dev/disk/by-id/ata-Samsung_SSD_860_EVO_250GB_S59WNMFN802543N'
 
 	echo 0 > $FILE
-	
+
 	if ! echo "$((EPOCH_TIME + SEC))" > "$FILE"; then
-	
+
 		reboot -f
-	
+
 	fi
-	
+
 	if ! echo mem > /sys/power/state; then
-	
+
 		reboot -f
-	
+
 	fi
-	
+
 	sleep "$((SEC-1))"
-	
+
 	hdparm --security-freeze "$DEV"
 
 }

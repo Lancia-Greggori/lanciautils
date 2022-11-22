@@ -17,5 +17,5 @@ OUTPUT="$(eval "$COMMAND" 2>&1)" || {
 }
 
 [ "$#" -eq 1 ] && [ "$1" = '-s' ] && exit 0
-	
+
 print "$OUTPUT"

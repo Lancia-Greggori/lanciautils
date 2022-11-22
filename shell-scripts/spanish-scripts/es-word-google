@@ -14,10 +14,10 @@ if [ "$#" -eq 1 ]; then
 
 	CURL_OUTPUT="$(curl_command "$1")"
 	[ -z "$CURL_OUTPUT" ] && print_failure "[CURL FAILURE]" && exit 1
-	
+
 	OUTPUT="$(echo "$CURL_OUTPUT" | grep_class "$SINTAXIS_CLASS_KEYWORD")"
 	[ -z "$OUTPUT" ] && print_failure "[GREP FAILURE]" && exit 2
-	
+
 	echo "$OUTPUT" | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
 
 else
@@ -26,13 +26,13 @@ else
 
 		CURL_OUTPUT="$(curl_command "$word")"
 		[ -z "$CURL_OUTPUT" ] && print_failure "$word: [CURL FAILURE]" && continue
-		
+
 		OUTPUT="$(echo "$CURL_OUTPUT" | grep_class "$SINTAXIS_CLASS_KEYWORD")"
 		[ -z "$OUTPUT" ] && print_failure "$word: [GREP FAILURE]" && continue
-		
+
 		echo -n "$word: "
 		echo "$OUTPUT" | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
 
-	done	
+	done
 
 fi
