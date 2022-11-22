@@ -9,7 +9,6 @@ depend()
 
 start()
 {
-	tty-setup
 	if [ ! -e /mnt/storage/encrypted ]; then
 		echo "encrypted storage at /mnt/storage/encrypted does not exist, skipping unlocking..."
 		exit 0
