@@ -1,21 +1,17 @@
 #!/bin/sh -eu
 
-IS_TTY=false
 LAPTOP_RESOLUTION='1366 768'
 DESKTOP_RESOLUTION='1920 1080'
 
-set_resolution() { fbset -xres "${1## *}" -yres "${1##* }" ; }
+set_resolution() { exec fbset -xres "${1## *}" -yres "${1##* }" ; }
 
-tty | grep -qF '/dev/tty' && IS_TTY=true
-
-[ "$IS_TTY" = true ] && {
+if tty | grep -q '^/dev/tty'; then
 
 	setfont /usr/share/kbd/consolefonts/LatGrkCyr-12x22.psfu.gz
 	if [ "$#" -eq 1 ] && [ "$1" = '--laptop-resolution' ]; then
 		set_resolution "$LAPTOP_RESOLUTION"
-	elif fbset | grep -F "geometry $LAPTOP_RESOLUTION $DESKTOP_RESOLUTION" 1>/dev/null; then
+	elif fbset | grep -qF "geometry $LAPTOP_RESOLUTION $DESKTOP_RESOLUTION"; then
 		set_resolution "$DESKTOP_RESOLUTION"
 	fi
-}
 
-exit 0
+fi
