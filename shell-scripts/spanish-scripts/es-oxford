@@ -8,7 +8,7 @@ CURL_OUTPUT=''
 
 for word in "$@"; do
 
-	word="${word/[./\\]/}"
+	word="${word/./}"
 
 	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
 	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
