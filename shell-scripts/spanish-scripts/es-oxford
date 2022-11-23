@@ -6,6 +6,11 @@
 
 CURL_OUTPUT=''
 
+extract_class()
+{
+	grep -m"$1" -Eo "class=\"$2\"[^<]+" | sed -e 's/class=[^>]\+>//' -e '/^[ ,]*$/d' | tr '\n' ','
+}
+
 for word in "$@"; do
 
 	word="${word/./}"
@@ -14,7 +19,6 @@ for word in "$@"; do
 	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
 	echo "- $word"
 
-	printf '%s meaning: %s\n' '--' \
-		"$(echo "$CURL_OUTPUT" | grep -m3 -o 'class="trans dtrans"[^<]\+' | sed -e 's/class=[^>]\+>//' -e '/^[ ,]*$/d' | tr '\n' ',')"
+	printf '%s meaning: %s\n' '--' "$(echo "$CURL_OUTPUT" | extract_class 3 'trans dtrans')"
 
 done
