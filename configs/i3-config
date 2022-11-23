@@ -75,19 +75,25 @@ bar {
         status_command i3status
 }
 
+bindsym --border button3 nop
+bindsym --whole-window $mod+button3 nop
+
 bindsym $msh+Return exec st
-bindsym ctrl+Shift+p exec --no-startup-id dmenu-exec-command
-bindsym $msh+p exec --no-startup-id dmenu-exec-command -s
+bindsym ctrl+Shift+p exec dmenu-exec-command
+bindsym $msh+p exec dmenu-exec-command -s
+
 bindsym $msh+KP_Enter exec chromium
 bindsym $msh+KP_Page_Down exec chromium --proxy-server="socks5://$(tpsel)"
 bindsym $msh+KP_Down exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary
 bindsym $msh+KP_Delete exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary --proxy-server="socks5://$(tpsel)"
-bindsym --release Print exec --no-startup-id screenshot region
-bindsym --release $mod+Print exec --no-startup-id screenshot full
-bindsym $mod+Menu exec --no-startup-id dictionary
+bindsym $msh+KP_End exec st lynx -vikeys https://duckduckgo.com/lite/?q="$(dmenu -p 'duckduckgo | Enter search term: ' </dev/null || exit 0)"
+bindsym $msh+KP_Right exec st tsf lynx -vikeys https://duckduckgo.com/lite/?q="$(dmenu -p 'tor duckduckgo | Enter search term: ' </dev/null || exit 0)"
 bindsym $msh+KP_Left exec tor-unclean
 bindsym $msh+KP_Begin exec tor-clean
-bindsym $msh+KP_Right exec st cmus
+
+bindsym --release Print exec  screenshot region
+bindsym --release $mod+Print exec  screenshot full
+bindsym $mod+Menu exec  dictionary
 bindsym $msh+KP_Divide exec thunar
 bindsym $msh+KP_Multiply exec libreoffice
 bindsym $msh+KP_Add exec pavucontrol
@@ -95,9 +101,6 @@ bindsym $msh+KP_Subtract exec telegram-desktop
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
 bindsym $mod+Super_L exec --no-startup-id setxkbmap ir
-bindsym Scroll_Lock exec --no-startup-id setxkbmap us && slock
+bindsym Scroll_Lock exec setxkbmap us && slock
 bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym --border button3 nop
-bindsym --whole-window $mod+button3 nop
-bindsym $msh+KP_End exec st lynx -vikeys https://duckduckgo.com/lite/?q="$(dmenu -p 'Enter search term: ' </dev/null)"
