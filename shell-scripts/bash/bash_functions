@@ -2,6 +2,7 @@ JMP_FILE="$HOME/.jmp_dirs"
 
 jmp()
 {
+	local DIR
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e "$JMP_FILE" ] && return 2
 	DIR="$(grep -m1 "^$1" "$JMP_FILE" | cut -d':' -f2)"
@@ -12,6 +13,7 @@ alias j=jmp
 
 jmp-add()
 {
+	local NAME PATTERN
 	[ "$#" -gt 2 ] && return 1
 	NAME="$(basename "$1")"
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
