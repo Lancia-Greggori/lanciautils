@@ -40,7 +40,7 @@ need_root()
 
 bring_interface_up()
 {
-	if ! ifconfig | grep -F "$DEV" 1>/dev/null; then
+	if ! ifconfig | grep -q -F "$DEV"; then
 		ifconfig "$DEV" up
 	fi
 }
@@ -107,7 +107,7 @@ start_priority_scan()
 	touch "$TMP_FILE"
 	{
 		output_ssid_names | while read -r ssid; do
-			if grep -r "ssid=\"$ssid\"" "$CONFIG_DIRECTORY" 1>/dev/null && grep "$ssid" "$PRIORITY_FILE" 1>/dev/null; then
+			if grep -q -r "ssid=\"$ssid\"" "$CONFIG_DIRECTORY" && grep -q "$ssid" "$PRIORITY_FILE"; then
 				echo "$ssid" >> "$TMP_FILE"
 			fi
 		done
@@ -190,10 +190,10 @@ set +u
 if [ "$#" -eq 0 ] || [ "$#" -gt 3 ]; then
 	print_help
 	exit 1
-elif ! echo "$1" | grep -E "^($ALLOWED_FIRST_ARG_FUNCTION_NAMES|$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS)$" 1>/dev/null; then
+elif ! echo "$1" | grep -q -E "^($ALLOWED_FIRST_ARG_FUNCTION_NAMES|$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS)$"; then
 	print_help
 	exit 1
-elif [ -n "$2" ] && ! echo "$2" | grep -E "^($ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS)$" 1>/dev/null; then
+elif [ -n "$2" ] && ! echo "$2" | grep -q -E "^($ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS)$"; then
 	print_help
 	exit 1
 fi
