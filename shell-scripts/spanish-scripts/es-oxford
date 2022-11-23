@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 
 [ "$#" -eq 0 ] && exit 1
 
@@ -7,6 +7,8 @@
 CURL_OUTPUT=''
 
 for word in "$@"; do
+
+	word="${word/[./\\]/}"
 
 	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
 	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
