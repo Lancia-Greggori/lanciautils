@@ -4,24 +4,25 @@
 
 . /usr/local/subr/download.subr
 
-CURL_OUTPUT=''
-extract_class() #data #class keyword
+OUTPUT=''
+extract()
 {
-	echo "$CURL_OUTPUT" | grep -o 'class="YrbPuc">[^<]\+' | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
+	curl_command "$1" | grep -o 'class="YrbPuc">[^<]\+' | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
 }
 
 if [ "$#" -eq 1 ]; then
 
-	CURL_OUTPUT="$(curl_command "https://google.com/search?q=$1+significado")"
-	extract_class
+	printf '%s: ' "$word"
+	OUTPUT="$(extract "https://google.com/search?q=${1}+significado")"
+	[ -z "$OUTPUT" ] && echo '[ERROR]'
 
 else
 
 	for word in "$@"; do
 
-		CURL_OUTPUT="$(curl_command "$word")"
 		printf '%s: ' "$word"
-		extract_class
+		OUTPUT="$(extract "https://google.com/search?q=${word}+significado")"
+		[ -z "$OUTPUT" ] && echo '[ERROR]'
 
 	done
 
