@@ -4,15 +4,39 @@ for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
 done
 
-case "${0##*/}" in
+. /usr/local/subr/io.subr
+
+OUTPUT=''
+TARGET_DIR=''
+PERM=''
+
+case "$PROGRAM_NAME" in
 	li) TARGET_DIR='/home/lancia/.lsr/lmbin'; PERM=0755 ;;
 	ui) TARGET_DIR='/usr/local/umbin'; PERM=0755 ;;
 	si) TARGET_DIR='/usr/local/subr'; PERM=0644 ;;
 	eii) TARGET_DIR='/etc/init.d'; PERM=0755 ;;
-	*) exit 2 ;;
 esac
 
-for file in "$@"; do
-	echo "$file --> $TARGET_DIR/$file"
-	install -m "$PERM" "$file" "$TARGET_DIR"
-done
+if [ -n "$TARGET_DIR" ]; then
+
+	for file in "$@"; do
+		echo "$file --> $TARGET_DIR/$file"
+		install -m "$PERM" "$file" "$TARGET_DIR"
+	done
+
+else
+
+	for file in "$@"; do
+		if OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
+			TARGET_DIR="$(echo "$OUTPUT" | cut -d':' -f2)"
+			PERM="$(echo "$OUTPUT" | cut -d':' -f3)"
+			file="$(echo "$OUTPUT" | cut -d':' -f1)"
+			echo "$file --> $TARGET_DIR/${file##*/}" | sed 's|/mnt/storage/encrypted|/home|g'
+			install -m "$PERM" "$file" "$TARGET_DIR"
+		else
+			print_error "file \"$file\" not found in /letc/global-filelist"
+			exit 2
+		fi
+	done
+
+fi
