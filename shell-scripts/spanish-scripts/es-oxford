@@ -15,6 +15,6 @@ for word in "$@"; do
 	echo "- $word"
 
 	printf '%s meaning: %s\n' '--' \
-		"$(echo "$CURL_OUTPUT" | grep -m3 -o 'class="trans dtrans"[^<]\+' | sed -e 's/class="trans dtrans"[^>]*>//' -e '/^[ ,]*$/d' | uniq | tr '\n' ',')"
+		"$(echo "$CURL_OUTPUT" | grep -m3 -o 'class="trans dtrans"[^<]\+' | sed -e 's/class=[^>]\+>//' -e '/^[ ,]*$/d' | tr '\n' ',')"
 
 done
