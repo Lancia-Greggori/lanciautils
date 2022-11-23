@@ -1,10 +1,18 @@
 #!/bin/sh -eu
 
+[ "$#" -eq 0 ] && exit 1
+
 . /usr/local/subr/download.subr
+
+CURL_OUTPUT=''
 
 for word in "$@"; do
 
-	curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}" \
-		| grep -o 'class="trans dtrans"[^<]\+' | sed -e 's/class="trans dtrans"[^>]*>//' -e '/^[ ,]*$/d' | sort | uniq
+	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
+	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
+	echo "- $word"
+
+	printf '%s meaning: %s\n' '--' \
+		"$(echo "$CURL_OUTPUT" | grep -m3 -o 'class="trans dtrans"[^<]\+' | sed -e 's/class="trans dtrans"[^>]*>//' -e '/^[ ,]*$/d' | uniq | tr '\n' ',')"
 
 done
