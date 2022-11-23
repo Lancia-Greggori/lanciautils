@@ -1,0 +1,10 @@
+#!/bin/sh -eu
+
+. /usr/local/subr/download.subr
+
+for word in "$@"; do
+
+	curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}" \
+		| grep -o 'class="trans dtrans"[^<]\+' | sed -e 's/class="trans dtrans"[^>]*>//' -e '/^[ ,]*$/d' | sort | uniq
+
+done
