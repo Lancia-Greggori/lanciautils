@@ -1,4 +1,4 @@
-#!/bin/sh -u
+#!/bin/bash -eu
 
 [ "$#" -eq 0 ] && exit 1
 
