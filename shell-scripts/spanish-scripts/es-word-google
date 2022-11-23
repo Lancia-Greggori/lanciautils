@@ -12,17 +12,17 @@ extract()
 
 if [ "$#" -eq 1 ]; then
 
-	printf '%s: ' "$word"
 	OUTPUT="$(extract "https://google.com/search?q=${1}+significado")"
-	[ -z "$OUTPUT" ] && echo '[ERROR]'
+	[ -z "$OUTPUT" ] && OUTPUT='[ERROR]'
+	exec printf '%s: %s\n' "$1" "$OUTPUT"
 
 else
 
 	for word in "$@"; do
 
-		printf '%s: ' "$word"
 		OUTPUT="$(extract "https://google.com/search?q=${word}+significado")"
-		[ -z "$OUTPUT" ] && echo '[ERROR]'
+		[ -z "$OUTPUT" ] && OUTPUT='[ERROR]'
+		printf '%s: %s\n' "$word" "$OUTPUT"
 
 	done
 
