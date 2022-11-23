@@ -1,4 +1,0 @@
-extract_class() #data #class keyword
-{
-	echo "$1" | grep -o "class=\"$2\">[^<]\+" | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
-}

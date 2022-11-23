@@ -2,25 +2,25 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/local/subr/html.subr
-
-SINTAXIS_CLASS_KEYWORD='YrbPuc'
-OUTPUT=''
 CURL_OUTPUT=''
 
 curl_command(){ curl --silent --user-agent "$USER_AGENT" --location "https://google.com/search?q=$1+significado" ; }
+extract_class() #data #class keyword
+{
+	echo "$CURL_OUTPUT" | grep -o 'class="YrbPuc">[^<]\+' | sed -e 's/[^>]*>//' -e 's/&#183;/./g'
+}
 
 if [ "$#" -eq 1 ]; then
 
 	CURL_OUTPUT="$(curl_command "$1")"
-	extract_class "$CURL_OUTPUT" "$SINTAXIS_CLASS_KEYWORD"
+	extract_class
 
 else
 
 	for word in "$@"; do
 
 		CURL_OUTPUT="$(curl_command "$word")"
-		extract_class "$CURL_OUTPUT" "$SINTAXIS_CLASS_KEYWORD"
+		extract_class
 
 	done
 

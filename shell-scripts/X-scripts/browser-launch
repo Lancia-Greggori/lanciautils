@@ -1,0 +1,12 @@
+#!/bin/sh -eu
+
+COMMAND="$1"
+URL="$2"
+INPUT=''
+case "$3" in
+	web-search)
+		INPUT="$(dmenu -p "$COMMAND $URL | Enter search term: " </dev/null)"
+		exec $COMMAND "${URL}${INPUT}"
+	;;
+	*) exit 1;;
+esac

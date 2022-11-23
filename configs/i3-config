@@ -86,8 +86,8 @@ bindsym $msh+KP_Enter exec chromium
 bindsym $msh+KP_Page_Down exec chromium --proxy-server="socks5://$(tpsel)"
 bindsym $msh+KP_Down exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary
 bindsym $msh+KP_Delete exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary --proxy-server="socks5://$(tpsel)"
-bindsym $msh+KP_End exec st lynx -vikeys https://duckduckgo.com/lite/?q="$(dmenu -p 'duckduckgo | Enter search term: ' </dev/null || exit 0)"
-bindsym $msh+KP_Right exec st tsf lynx -vikeys https://duckduckgo.com/lite/?q="$(dmenu -p 'tor duckduckgo | Enter search term: ' </dev/null || exit 0)"
+bindsym $msh+KP_End exec browser-launch 'st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
+bindsym $msh+KP_Right exec browser-launch 'tsf st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
 bindsym $msh+KP_Left exec tor-unclean
 bindsym $msh+KP_Begin exec tor-clean
 
