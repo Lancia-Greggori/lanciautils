@@ -19,6 +19,6 @@ for word in "$@"; do
 	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
 	echo "- $word"
 
-	printf '%s meaning: %s\n' '--' "$(echo "$CURL_OUTPUT" | extract_class 3 'trans dtrans')"
+	printf '%s meaning: %s\n' '--' "$(extract_class 3 'trans dtrans' <<< "$CURL_OUTPUT")"
 
 done
