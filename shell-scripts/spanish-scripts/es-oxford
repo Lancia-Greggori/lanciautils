@@ -3,13 +3,9 @@
 [ "$#" -eq 0 ] && exit 1
 
 . /usr/local/subr/download.subr
+. /usr/local/subr/html.subr
 
 CURL_OUTPUT=''
-
-extract_class()
-{
-	grep -m"$1" -Eo "class=\"$2\"[^<]+" | sed -e 's/class=[^>]\+>//' -e '/^[ ,]*$/d'
-}
 
 for word in "$@"; do
 
@@ -19,8 +15,8 @@ for word in "$@"; do
 	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
 	echo "- $word"
 
-	printf '%s meaning: \n%s\n' '--' "$(extract_class 3 'trans dtrans' <<< "$CURL_OUTPUT" | uniq | sed 's/^/@ /')"
+	printf '%s meaning: \n%s\n' '--' "$(extract_class 'trans dtrans' -m3 <<< "$CURL_OUTPUT" | uniq | sed 's/^/@ /')"
 
-	printf '%s syntaxis: \n%s\n' '--' "$(extract_class 2 '(pos dpos|gc dgc)' <<< "$CURL_OUTPUT" | sed 's/^/@ /')"
+	printf '%s syntaxis: \n%s\n' '--' "$(extract_class '(pos dpos|gc dgc)' '' <<< "$CURL_OUTPUT" | sort | uniq | sed 's/^/@ /')"
 
 done
