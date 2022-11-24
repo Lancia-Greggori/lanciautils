@@ -10,7 +10,7 @@ for word in "$@"; do
 	word="${word/./}"
 
 	curl_command "https://www.spanishconjugation.net/present-tense/${word}/" \
-		| extract_class '(verb-entry verb-normal|verb-pronoun)' '' \
+		| extract_class '(verb-pronoun|verb-entry verb-(normal|irregular))' '' \
 		| awk 'BEGIN { i=0 } { if(i==1){ printf("%s\n",$0); i=0; } else { printf("%s ",$0); i++; } }'
 
 done
