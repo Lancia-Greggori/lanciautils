@@ -1,4 +1,4 @@
 curl_command()
 {
-	curl --retry 50 --connect-timeout 1 --silent --user-agent "$USER_AGENT" --location "$1"
+	curl --retry 50 --retry-delay 1 --connect-timeout 1 --silent --user-agent "$USER_AGENT" --location "$1"
 }
