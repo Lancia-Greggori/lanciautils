@@ -11,15 +11,15 @@ alias j=jmp
 
 jmp-add()
 {
-	local NAME PATTERN
+	local PATTERN
 	[ "$#" -gt 2 ] && return 1
-	NAME="$(basename "$1")"
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
 	if [ "$#" -eq 1 ]; then
 		[ ! -e "$1" ] && return 2
+		local NAME="$(basename "$1")"
 		echo "$NAME:$(readlink -f "$1"| sed "$PATTERN")" >> '/home/lancia/.jmp_dirs'
 	else
 		[ ! -e "$2" ] && return 2
-		echo "$2:$(readlink -f "$1"| sed "$PATTERN")" >> '/home/lancia/.jmp_dirs'
+		echo "$1:$(readlink -f "$2"| sed "$PATTERN")" >> '/home/lancia/.jmp_dirs'
 	fi
 }
