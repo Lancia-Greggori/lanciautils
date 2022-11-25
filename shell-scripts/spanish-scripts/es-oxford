@@ -15,11 +15,12 @@ print()
 for word in "$@"; do
 
 	word="${word/./}"
+
 	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
-	if ! [[ "$CURL_OUTPUT" =~ "$word" ]]; then
+	[[ "$CURL_OUTPUT" =~ "$word" ]] || {
 		echo "- $word: [ERROR]"
 		continue
-	fi
+	}
 
 	echo "- $word"
 	print 'meaning' 'trans dtrans' -m3
