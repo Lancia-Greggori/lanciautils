@@ -7,16 +7,23 @@
 
 CURL_OUTPUT=''
 
+print()
+{
+	printf '%s %s: \n%s\n' '--' "$1" "$(extract_class "$2" "$3" <<< "$CURL_OUTPUT" | sort | uniq | sed 's/^/@ /')"
+}
+
 for word in "$@"; do
 
 	word="${word/./}"
-
 	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
-	[ -z "$CURL_OUTPUT" ] && echo "- $word: [ERROR]" && continue
+	if ! [[ "$CURL_OUTPUT" =~ "$word" ]]; then
+		echo "- $word: [ERROR]"
+		continue
+	fi
+
 	echo "- $word"
-
-	printf '%s meaning: \n%s\n' '--' "$(extract_class 'trans dtrans' -m3 <<< "$CURL_OUTPUT" | uniq | sed 's/^/@ /')"
-
-	printf '%s syntaxis: \n%s\n' '--' "$(extract_class '(pos dpos|gc dgc)' '' <<< "$CURL_OUTPUT" | sort | uniq | sed 's/^/@ /')"
+	print 'meaning' 'trans dtrans' -m3
+	print 'syntaxis' '(pos dpos|gc dgc)' ''
+	print 'antonym' 'x-h dx-h' -m1
 
 done
