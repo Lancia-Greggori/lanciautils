@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-#[ "$(id -u)" -ne 0 ] && exit 1
+[ "$(id -u)" -ne 0 ] && exit 1
 [ "$#" -ne 2 ] && exit 2
 
 for daemon in /etc/init.d/$1; do
