@@ -102,7 +102,7 @@ bindsym $msh+KP_Subtract exec telegram-desktop
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
 bindsym $mod+Super_L exec --no-startup-id setxkbmap ir
-bindsym Scroll_Lock exec setxkbmap us && slock
-bindsym $mod+Scroll_Lock exec xset force dpms off
+bindsym Scroll_Lock exec --no-startup-id setxkbmap us && slock
+bindsym --release $mod+Scroll_Lock exec --no-startup-id xset dpms force off
 bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%

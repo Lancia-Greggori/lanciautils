@@ -21,7 +21,7 @@ run_hook(){
 
 	fi
 
-	sleep "$((SEC-1))"
+	sleep 1s
 
 	hdparm --security-freeze "$DEV"
 
