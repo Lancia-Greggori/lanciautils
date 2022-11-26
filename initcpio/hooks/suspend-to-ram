@@ -4,18 +4,16 @@ run_hook(){
 
 	FILE='/sys/class/rtc/rtc0/wakealarm'
 	EPOCH_TIME="$(date '+%s')"
-	SEC=3
-	DEV='/dev/disk/by-id/ata-Samsung_SSD_860_EVO_250GB_S59WNMFN802543N'
 
 	if ! echo 0 > "$FILE"; then
 		reboot -f
-	elif ! echo "$((EPOCH_TIME + SEC))" > "$FILE"; then
+	elif ! echo "$((EPOCH_TIME + 2))" > "$FILE"; then
 		reboot -f
 	elif ! echo mem > /sys/power/state; then
 		reboot -f
 	fi
 
 	sleep 1s
-	hdparm --security-freeze "$DEV"
+	hdparm --security-freeze '/dev/disk/by-id/ata-Samsung_SSD_860_EVO_250GB_S59WNMFN802543N'
 
 }
