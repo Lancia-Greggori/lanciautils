@@ -1,4 +1,10 @@
-curl_command()
+fast_curl()
 {
-	curl --retry 50 --retry-delay 1 --connect-timeout 1 --silent --user-agent "$USER_AGENT" --location "$1"
+	local i=0 e=0
+	while true; do
+		curl --retry 0 --connect-timeout 0.5 --silent --user-agent "$USER_AGENT" --location "$1" && break
+		e=$?
+		[ $i -eq 20 ] && return $e
+		i=$((i+1))
+	done
 }
