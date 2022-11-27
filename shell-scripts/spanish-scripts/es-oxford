@@ -16,7 +16,7 @@ for word in "$@"; do
 
 	word="${word/./}"
 
-	CURL_OUTPUT="$(curl_command "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
+	CURL_OUTPUT="$(fast_curl "https://dictionary.cambridge.org/dictionary/spanish-english/${word}")"
 	[[ "$CURL_OUTPUT" =~ "$word" ]] || {
 		echo "- $word: [ERROR]"
 		continue

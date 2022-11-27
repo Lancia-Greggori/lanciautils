@@ -23,7 +23,7 @@ for word in "$@"; do
 	word="${word/./}"
 	[[ "$word" =~ ^[a-z-]+/ ]] || word="present-tense/$word"
 
-	OUTPUT="$(curl_command "https://www.spanishconjugation.net/${word}/")"
+	OUTPUT="$(fast_curl "https://www.spanishconjugation.net/${word}/")"
 	[[ "$OUTPUT" =~ 'Nothing Found' ]] && {
 		echo '[ERROR]'
 	}
