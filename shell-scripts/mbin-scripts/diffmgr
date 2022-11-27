@@ -22,7 +22,7 @@ diff_files()
 			[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
 		}
 	else
-		diff -q "$1" "$2"
+		diff -q "$1" "$2" 1>/dev/null || echo "$1" -- "$2"
 	fi
 }
 
