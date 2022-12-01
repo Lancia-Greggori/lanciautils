@@ -1,17 +1,11 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 
 [ "$#" -ne 1 ] && exit 1
 
-. /usr/local/subr/io.subr
-
 BLKID_OUTPUT="$(blkid)"
-if echo "$BLKID_OUTPUT" | grep -F "$1" 1>/dev/null; then
 
-	echo "$BLKID_OUTPUT" | grep -F "$1" | cut -d':' -f1
-
+if [[ "$BLKID_OUTPUT" =~ "UUID=\"$1\"" ]]; then
+	awk -F':' "/$1/ { print \$1 }" <<< "$BLKID_OUTPUT"
 else
-
-	print_error "UUID \"$1\" not found"
-	exit 3
-
+	exit 2
 fi
