@@ -3,7 +3,7 @@
 [ "$#" -eq 0 ] && exit 1
 
 for arg in "$@"; do
-	busybox "$arg" || exit "$?"
+	busybox "$arg" < /dev/null || exit "$?"
 done
 
 for arg in "$@"; do
