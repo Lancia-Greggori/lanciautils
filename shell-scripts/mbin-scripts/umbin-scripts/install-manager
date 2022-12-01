@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
@@ -28,9 +28,9 @@ else
 
 	for file in "$@"; do
 		if OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
-			TARGET="$(echo "$OUTPUT" | cut -d':' -f2)"
-			PERM="$(echo "$OUTPUT" | cut -d':' -f3)"
-			file="$(echo "$OUTPUT" | cut -d':' -f1)"
+			TARGET="$(cut -d':' -f2 <<< "$OUTPUT")"
+			PERM="$(cut -d':' -f3 <<< "$OUTPUT")"
+			file="$(cut -d':' -f1 <<< "$OUTPUT")"
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$PERM" "$file" "$TARGET"
 		else
