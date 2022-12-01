@@ -1,17 +1,21 @@
-#!/bin/sh -eu
+#!/bin/sh -e
 
 LAPTOP_RESOLUTION='1366 768'
 DESKTOP_RESOLUTION='1920 1080'
 
-set_resolution() { exec fbset -xres "${1## *}" -yres "${1##* }" ; }
+set_resolution() { exec fbset -xres $1 -yres $2 ; }
+set_physical_setup_mode() { echo $1 > /letc/physical-setup-mode ; }
 
 if tty | grep -Eq '^/dev/(tty|console)'; then
 
 	setfont /usr/share/kbd/consolefonts/LatGrkCyr-12x22.psfu.gz
-	if [ "$#" -eq 1 ] && [ "$1" = '--laptop-resolution' ]; then
-		set_resolution "$LAPTOP_RESOLUTION"
+
+	if [ "$1" = '--reset' ] || fbset | grep -qF "geometry $LAPTOP_RESOLUTION $LAPTOP_RESOLUTION"; then
+		set_resolution $LAPTOP_RESOLUTION
+		set_physical_setup_mode laptop
 	elif fbset | grep -qF "geometry $LAPTOP_RESOLUTION $DESKTOP_RESOLUTION"; then
-		set_resolution "$DESKTOP_RESOLUTION"
+		set_resolution $DESKTOP_RESOLUTION
+		set_physical_setup_mode desktop
 	fi
 
 fi
