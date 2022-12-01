@@ -29,8 +29,8 @@ else
 	for file in "$@"; do
 		if OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
 			TARGET="$(cut -d':' -f2 <<< "$OUTPUT")"
-			PERM="$(cut -d':' -f3 <<< "$OUTPUT")"
-			file="$(cut -d':' -f1 <<< "$OUTPUT")"
+			PERM="${OUTPUT##*:}"
+			file="${file%%:*}"
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$PERM" "$file" "$TARGET"
 		else
