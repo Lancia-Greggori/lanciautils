@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 [ "$#" -eq 0 ] && exit 1
 
 . /usr/local/subr/io.subr

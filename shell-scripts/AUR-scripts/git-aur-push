@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 . /usr/local/subr/io.subr
 
 [ ! -e PKGBUILD ] && {

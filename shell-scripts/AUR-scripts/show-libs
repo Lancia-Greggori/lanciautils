@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 [ "$#" -ne 1 ] && exit 1
 
 ldd "$1" | cut -d' ' -f1 | sed 's/^[	 ]\+//; s/\.so.[0-9]\+$//' | grep -Ev '/lib64/ld-linux-x86-64|linux-vdso'
