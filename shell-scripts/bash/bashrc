@@ -1,0 +1,34 @@
+[[ ! "$-" =~ i ]] && return
+
+HISTCONTROL='ignoredups'
+HISTFILE="$HOME/.bash_history"
+HISTFILESIZE=999999
+HISTSIZE=9999
+PS1='------- $ $PWD $?: '
+EDITOR=vim
+
+set -o vi
+
+bind "\C-l":clear-screen
+bind "\C-f":reverse-search-history
+bind -r "\C-s"
+bind -r "\C-p"
+bind "\C-s":vi-movement-mode
+bind "\C-x":vi-movement-mode
+bind "\C-a":beginning-of-line
+bind "\C-e":end-of-line
+bind '"\C-r":". $HOME/.bashrc\n"'
+bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
+
+shopt -s autocd
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s histappend
+
+. /etc/aliasrc
+alias vt="vim $HOME/.tasks"
+alias vct="vim $HOME/.current_tasks"
+
+[ -e "$HOME"/.bash_functions ] && . "$HOME"/.bash_functions
+
+stty stop ''
