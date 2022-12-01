@@ -10,10 +10,10 @@ if tty | grep -Eq '^/dev/(tty|console)'; then
 	setfont /usr/share/kbd/consolefonts/LatGrkCyr-12x22.psfu.gz
 
 	if [ "$1" = '--reset' ] || fbset | grep -qF "geometry $LAPTOP_RESOLUTION $LAPTOP_RESOLUTION"; then
-		echo laptop > /letc/physical-setup-mode
+		echo 0 > /letc/phy-setup
 		set_resolution $LAPTOP_RESOLUTION
 	elif fbset | grep -qF "geometry $LAPTOP_RESOLUTION $DESKTOP_RESOLUTION"; then
-		echo desktop > /letc/physical-setup-mode
+		echo 1 > /letc/phy-setup
 		set_resolution $DESKTOP_RESOLUTION
 	fi
 
