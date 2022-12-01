@@ -1,0 +1,23 @@
+#!/bin/sh -eu
+
+cd "$HOME" || exit 1
+
+if ! pgrep pulseaudio 1>/dev/null; then
+	pulseaudio --start --log-target=file:"$LOG_DIR/pulseaudio.log"
+fi
+
+# see if an HDMI connected screen is connected. if it is, turn off laptop screen
+if xrandr | grep -qF 'HDMI1 connected'; then
+	xrandr --output eDP1 --off
+	xset s "$((20 * 60))" "$((20 * 60))"
+	xautolock -time 20 -locker lock-screen 
+else
+	xset s "$((10 * 60))" "$((10 * 60))"
+	xautolock -time 10 -locker lock-screen 
+fi &
+
+numlockx &
+dunst &
+unclutter --timeout 2 --jitter 100 &
+
+exec i3
