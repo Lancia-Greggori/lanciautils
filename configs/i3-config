@@ -1,27 +1,27 @@
-set $mod Mod1
-set $msh Mod1+Shift
+set $alt Mod1
+set $ash Mod1+Shift
 default_border pixel 1
 default_floating_border pixel 1
 default_orientation vertical
 font pango:monospace 11
-floating_modifier $mod
-bindsym $msh+c kill
-bindsym $mod+n focus down
-bindsym $mod+m focus up
-bindsym $mod+period focus right
-bindsym $mod+comma focus left
-bindsym $msh+n move down
-bindsym $msh+m move up
-bindsym $msh+period move right
-bindsym $msh+comma move left
-bindsym $mod+h split v
-bindsym $mod+v split h
-bindsym $mod+f fullscreen toggle
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-bindsym $mod+space focus mode_toggle
-bindsym $mod+a focus parent
+floating_modifier $alt
+bindsym $ash+c kill
+bindsym $alt+n focus down
+bindsym $alt+m focus up
+bindsym $alt+period focus right
+bindsym $alt+comma focus left
+bindsym $ash+n move down
+bindsym $ash+m move up
+bindsym $ash+period move right
+bindsym $ash+comma move left
+bindsym $alt+h split v
+bindsym $alt+v split h
+bindsym $alt+f fullscreen toggle
+bindsym $alt+s layout stacking
+bindsym $alt+w layout tabbed
+bindsym $alt+e layout toggle split
+bindsym $alt+space focus mode_toggle
+bindsym $alt+a focus parent
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -34,32 +34,32 @@ set $ws9 "9"
 set $ws10 "10"
 set $ws11 "11"
 set $ws12 "12"
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
-bindsym $mod+minus workspace number $ws11
-bindsym $mod+plus workspace number $ws12
-bindsym $msh+1 move container to workspace number $ws1
-bindsym $msh+2 move container to workspace number $ws2
-bindsym $msh+3 move container to workspace number $ws3
-bindsym $msh+4 move container to workspace number $ws4
-bindsym $msh+5 move container to workspace number $ws5
-bindsym $msh+6 move container to workspace number $ws6
-bindsym $msh+7 move container to workspace number $ws7
-bindsym $msh+8 move container to workspace number $ws8
-bindsym $msh+9 move container to workspace number $ws9
-bindsym $msh+0 move container to workspace number $ws10
-bindsym $msh+minus move container to workspace number $ws11
-bindsym $msh+plus move container to workspace number $ws12
-bindsym $msh+r reload
-bindsym $msh+q exit
+bindsym $alt+1 workspace number $ws1
+bindsym $alt+2 workspace number $ws2
+bindsym $alt+3 workspace number $ws3
+bindsym $alt+4 workspace number $ws4
+bindsym $alt+5 workspace number $ws5
+bindsym $alt+6 workspace number $ws6
+bindsym $alt+7 workspace number $ws7
+bindsym $alt+8 workspace number $ws8
+bindsym $alt+9 workspace number $ws9
+bindsym $alt+0 workspace number $ws10
+bindsym $alt+minus workspace number $ws11
+bindsym $alt+plus workspace number $ws12
+bindsym $ash+1 move container to workspace number $ws1
+bindsym $ash+2 move container to workspace number $ws2
+bindsym $ash+3 move container to workspace number $ws3
+bindsym $ash+4 move container to workspace number $ws4
+bindsym $ash+5 move container to workspace number $ws5
+bindsym $ash+6 move container to workspace number $ws6
+bindsym $ash+7 move container to workspace number $ws7
+bindsym $ash+8 move container to workspace number $ws8
+bindsym $ash+9 move container to workspace number $ws9
+bindsym $ash+0 move container to workspace number $ws10
+bindsym $ash+minus move container to workspace number $ws11
+bindsym $ash+plus move container to workspace number $ws12
+bindsym $ash+r reload
+bindsym $ash+q exit
 
 mode "resize" {
         bindsym comma resize shrink width 5 px or 5 ppt
@@ -69,40 +69,40 @@ mode "resize" {
         bindsym r mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $alt+r mode "resize"
 
 bar {
         status_command i3status
 }
 
 bindsym --border button3 nop
-bindsym --whole-window $mod+button3 nop
+bindsym --whole-window $alt+button3 nop
 
-bindsym $msh+Return exec st
+bindsym $ash+Return exec st
 bindsym ctrl+Shift+p exec dmenu-exec-command
-bindsym $msh+p exec dmenu-exec-command -s
+bindsym $ash+p exec dmenu-exec-command -s
 
-bindsym $msh+KP_Enter exec chromium
-bindsym $msh+KP_Page_Down exec chromium --proxy-server="socks5://$(tpsel)"
-bindsym $msh+KP_Down exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary
-bindsym $msh+KP_Delete exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary --proxy-server="socks5://$(tpsel)"
-bindsym $msh+KP_End exec browser-launch 'st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
-bindsym $msh+KP_Right exec browser-launch 'tsf st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
-bindsym $msh+KP_Insert exec browser-launch 'st lynx -vikeys' 'https://en.wikipedia.org/wiki/' web-search
-bindsym $msh+KP_Left exec tor-unclean
-bindsym $msh+KP_Begin exec tor-clean
+bindsym $ash+KP_Enter exec chromium
+bindsym $ash+KP_Page_Down exec chromium --proxy-server="socks5://$(tpsel)"
+bindsym $ash+KP_Down exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary
+bindsym $ash+KP_Delete exec chromium --user-data-dir=/home/lancia/.config/chromium.secondary --proxy-server="socks5://$(tpsel)"
+bindsym $ash+KP_End exec browser-launch 'st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
+bindsym $ash+KP_Right exec browser-launch 'tsf st lynx -vikeys' 'https://duckduckgo.com/lite/?q=' web-search
+bindsym $ash+KP_Insert exec browser-launch 'st lynx -vikeys' 'https://en.wikipedia.org/wiki/' web-search
+bindsym $ash+KP_Left exec tor-unclean
+bindsym $ash+KP_Begin exec tor-clean
 
 bindsym --release Print exec  screenshot region
-bindsym --release $mod+Print exec  screenshot full
-bindsym $mod+Menu exec  dictionary
-bindsym $msh+KP_Divide exec thunar
-bindsym $msh+KP_Multiply exec libreoffice
-bindsym $msh+KP_Add exec pavucontrol
-bindsym $msh+KP_Subtract exec telegram-desktop
+bindsym --release $alt+Print exec  screenshot full
+bindsym $alt+Menu exec  dictionary
+bindsym $ash+KP_Divide exec thunar
+bindsym $ash+KP_Multiply exec libreoffice
+bindsym $ash+KP_Add exec pavucontrol
+bindsym $ash+KP_Subtract exec telegram-desktop
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
-bindsym $mod+Super_L exec --no-startup-id setxkbmap ir
+bindsym $alt+Super_L exec --no-startup-id setxkbmap ir
 bindsym Scroll_Lock exec --no-startup-id setxkbmap us && slock
-bindsym --release $mod+Scroll_Lock exec xset dpms force off
-bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --release $alt+Scroll_Lock exec xset dpms force off
+bindsym $alt+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $alt+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
