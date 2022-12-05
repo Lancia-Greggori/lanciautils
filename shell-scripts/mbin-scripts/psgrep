@@ -1,8 +1,3 @@
 #!/bin/sh -eu
-
 [ "$#" -ne 1 ] && exit 1
-
-PS_OUTPUT="$(ps -A -o pid,user,group,tty,cmd)"
-
-echo "$PS_OUTPUT" | head -n1
-echo "$PS_OUTPUT" | grep -E "$1" | grep -Fv "${0##*/} $1"
+ps -A -o pid,user,group,tty,cmd | awk "BEGIN{ getline; print \$0 } /$1/ && !/${0##*/} $1/"
