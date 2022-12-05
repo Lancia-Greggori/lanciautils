@@ -98,7 +98,7 @@ bindsym $alt+Menu exec  dictionary
 bindsym $ash+KP_Divide exec thunar
 bindsym $ash+KP_Multiply exec libreoffice
 bindsym $ash+KP_Add exec pavucontrol
-bindsym $ash+KP_Subtract exec telegram-desktop
+bindsym $ash+KP_Subtract exec XDG_CURRENT_DESKTOP=XFCE telegram-desktop
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
 bindsym $alt+Super_L exec --no-startup-id setxkbmap ir
