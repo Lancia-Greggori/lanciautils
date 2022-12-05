@@ -1,4 +1,4 @@
-#!/bin/bash -eu
+#!/bin/sh -eu
 
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
@@ -28,7 +28,7 @@ else
 
 	for file in "$@"; do
 		if OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
-			TARGET="$(cut -d':' -f2 <<< "$OUTPUT")"
+			TARGET="$(echo "$OUTPUT" | cut -d':' -f2)"
 			PERM="${OUTPUT##*:}"
 			file="${file%%:*}"
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
