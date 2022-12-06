@@ -157,7 +157,7 @@ show_info()
 	if pgrep -f wpa_supplicant 1>/dev/null; then
 		[ ! -e "$WPA_SUPPLICANT_LOGFILE" ] && print_error "logfile for wpa_supplicant at $WPA_SUPPLICANT_LOGFILE does not exist" && exit 1
 		echo "command: $(ps -A -o cmd | grep '^wpa_supplicant')"
-		IP="$(ip address show dev wlan0 | grep -o 'inet [0-9.]\+' | sed 's/inet //g')"
+		IP="$(ip address show dev "$DEV" | grep -o 'inet [0-9.]\+' | sed 's/inet //g')"
 		SSID="$(grep -o "SSID='.\+'" "$WPA_SUPPLICANT_LOGFILE" | sed "s/SSID='//; s/'$//" | uniq)"
 		printf 'SSID: %s\nIP: %s\n' "$SSID" "$IP"
 		echo 'Summary of CTRL events:'
