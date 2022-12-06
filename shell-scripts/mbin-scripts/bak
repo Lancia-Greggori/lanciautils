@@ -1,6 +1,5 @@
 #!/bin/sh -eu
 
-
 BACKUP_DIR="$HOME/.backup/tars"
 DATE_PATTERN="$(date '+%Y-%m-%d_%H-%M-%S')"
 
