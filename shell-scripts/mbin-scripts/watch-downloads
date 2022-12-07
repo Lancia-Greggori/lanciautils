@@ -31,6 +31,6 @@ while true; do
 	move_files '.apk' 'apps'
 	move_files '.txt' 'txt'
 	move_files '.iso' 'iso'
-	move_files '.diff' 'diff'
+	move_files '.diff' 'diffs'
 	move_files '.docx' 'docx'
 done
