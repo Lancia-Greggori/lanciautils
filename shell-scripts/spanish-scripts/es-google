@@ -10,7 +10,7 @@ OUTPUT=''
 for word in "$@"; do
 
 	word="${word/./}"
-	OUTPUT="$(fast_curl "https://google.com/search?q=${word}+significado" | extract_class 'YrbPuc' '' | head -n1)"
+	OUTPUT="$(fast_curl "https://google.com/search?q=${word}+significado" | extract_class 'YrbPuc' '' | sed -n -e 's/&#183;/./; 1p')"
 	[ -z "$OUTPUT" ] && OUTPUT='[ERROR]'
 	printf '%s: %s\n' "$word" "$OUTPUT"
 
