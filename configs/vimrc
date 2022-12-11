@@ -1,9 +1,9 @@
-
 runtime! archlinux.vim
 
 set ttymouse=""
 set mouse=""
 set shortmess=aI
+set formatoptions=crql
 
 map <F1> <NOP>
 map <C-n> <NOP>
