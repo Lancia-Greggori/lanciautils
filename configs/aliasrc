@@ -6,7 +6,6 @@ alias ll='ls -l'
 alias cp='cp -i'
 alias mv='mv -i'
 alias p=less
-alias gr=grep
 
 alias service='rc-service'
 alias tcat='tar tvf'
