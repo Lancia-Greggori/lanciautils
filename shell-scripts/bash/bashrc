@@ -28,6 +28,7 @@ shopt -s histappend
 . /etc/aliasrc
 alias vt="vim $HOME/.tasks"
 alias vct="vim $HOME/.current_tasks"
+alias vtmp='vim "$(mktemp)"'
 
 [ -e "$HOME"/.bash_functions ] && . "$HOME"/.bash_functions
 
