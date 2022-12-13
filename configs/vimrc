@@ -16,7 +16,7 @@ map <C-x> <NOP>
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
-nnoremap <C-c> :.w !xclip -selection clipboard<nl>
+nnoremap <C-c> :.w !xclip -selection clipboard<nl><nl>
 nnoremap <C-n> :bn<nl>
 nnoremap <C-m> :bp<nl>
 nnoremap <F1> :%w !clipboard<nl><nl>
