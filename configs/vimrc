@@ -6,6 +6,7 @@ set shortmess=aI
 set formatoptions=crql
 
 map <F1> <NOP>
+map <Return> <NOP>
 map <C-n> <NOP>
 map <C-z> <NOP>
 map <C-n> <NOP>
@@ -18,6 +19,7 @@ nnoremap <C-z> <undo>
 nnoremap <C-c> :.w !xclip -selection clipboard<nl>
 nnoremap <C-n> :bn<nl>
 nnoremap <C-m> :bp<nl>
+nnoremap <F1> :%w !clipboard<nl>
 
 inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
