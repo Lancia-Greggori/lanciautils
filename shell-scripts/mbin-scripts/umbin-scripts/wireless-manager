@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-. /usr/local/subr/io.subr
+. /usr/local/subr/output.subr
 
 DEV='wlan0'
 CONFIG_DIRECTORY='/etc/wpa_supplicant'
