@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
 			}
 
 			fp = fopen(argv[i], "r");
-			if (fp == 0) {
-				fprintf(stderr, "cat: [ERROR]: %s: fp is zero, skipping reading\n", argv[i]);
+			if (fp == NULL) {
+				fprintf(stderr, "cat: [ERROR]: %s: fp is NULL, skipping reading\n", argv[i]);
 				continue;
 			}
 			read_file(fp);
