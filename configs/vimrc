@@ -1,5 +1,6 @@
 runtime! archlinux.vim
 
+set nocompatible
 set ttymouse=""
 set mouse=""
 set shortmess=aI
