@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-. /usr/local/subr/X.output.subr
+. /usr/local/subr/X.out.subr
 
 INPUT="$(dmenu -p 'Enter your word:' < /dev/null)" || exit $?
 SPELL_OUTPUT="$(hunspell <<< "$INPUT" | sed -e '/^$/d' -e '/^Hunspell/d')"

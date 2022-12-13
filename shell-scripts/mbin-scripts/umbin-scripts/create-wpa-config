@@ -2,7 +2,7 @@
 
 [ "$(id -u)" -ne 0 ] && exit 1
 
-. /usr/local/subr/output.subr
+. /usr/local/subr/out.subr
 
 CONF_DIR='/etc/wpa_supplicant'
 SSID=''

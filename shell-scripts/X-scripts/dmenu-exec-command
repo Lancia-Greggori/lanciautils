@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-. /usr/local/subr/X.output.subr
+. /usr/local/subr/X.out.subr
 
 COMMAND="$(dmenu < /dev/null)"
 [ -z "$COMMAND" ] && exit 0

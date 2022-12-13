@@ -2,7 +2,7 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/local/subr/output.subr
+. /usr/local/subr/out.subr
 
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
 EXIT_CODE=0
