@@ -19,7 +19,7 @@ nnoremap <C-z> <undo>
 nnoremap <C-c> :.w !xclip -selection clipboard<nl>
 nnoremap <C-n> :bn<nl>
 nnoremap <C-m> :bp<nl>
-nnoremap <F1> :%w !clipboard<nl>
+nnoremap <F1> :%w !clipboard<nl><nl>
 
 inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
