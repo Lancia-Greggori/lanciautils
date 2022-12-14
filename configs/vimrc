@@ -21,7 +21,7 @@ nnoremap <C-c> :.w !xclip -selection clipboard<nl><nl>
 nnoremap <C-n> :bn<nl>
 nnoremap <C-m> :bp<nl>
 nnoremap <F1> :%w !clipboard<nl><nl>
-nnoremap <F2> :!ccw %
+nnoremap <F2> :!ccw %<nl><nl>
 
 inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
