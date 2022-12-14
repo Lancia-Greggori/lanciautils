@@ -8,10 +8,15 @@ DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /
 EXIT_CODE=0
 OUTPUT=''
 VERBOSE=0
-for arg in "$@"; do
-	[ "$arg" = '-v' ] && VERBOSE=1
-	break
-done
+
+if [ "$#" -eq 1 ]; then
+	VERBOSE=1
+else
+	for arg in "$@"; do
+		[ "$arg" = '-v' ] && VERBOSE=1
+		break
+	done
+fi
 
 diff_files()
 {
@@ -25,7 +30,6 @@ diff_files()
 		diff -q "$1" "$2" 1>/dev/null || echo "$1" -- "$2"
 	fi
 }
-
 
 for file in "$@"; do
 
