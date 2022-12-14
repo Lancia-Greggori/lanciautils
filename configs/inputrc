@@ -1,0 +1,8 @@
+set editing-mode vi
+
+"\C-l":clear-screen
+"\C-f":reverse-search-history
+"\C-s":vi-movement-mode
+"\C-x":vi-movement-mode
+"\C-a":beginning-of-line
+"\C-e":end-of-line
