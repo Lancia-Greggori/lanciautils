@@ -3,3 +3,4 @@ echo
 priv
 run-daemon
 simpsh
+test*
