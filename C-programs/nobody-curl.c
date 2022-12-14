@@ -10,8 +10,8 @@ int main(int argc, char *argv[]) {
 		if (i != argc-1) size++;
 	}
 
-	char *command = calloc(argc-1, size);
-	command = "curl \0";
+	char command[size];
+	strcpy(command, "curl ");
 	for (int i = 1; i < argc; i++) {
 		strcat(command, argv[i]);
 		if (i != argc-1) strcat(command, " ");
