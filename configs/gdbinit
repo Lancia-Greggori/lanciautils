@@ -1,3 +1,2 @@
 set debuginfod enabled off
 set confirm off
-set startup-quietly on
