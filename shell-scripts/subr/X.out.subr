@@ -1,6 +1,5 @@
 PROG_NAME="${0##*/}"
-
 print(){ notify-send "$1" ; }
-print_msg(){ notify-send "$PROG_NAME: [MSG]: $1" ; }
+pmsg(){ notify-send "$PROG_NAME: [MSG]: $1" ; }
 perr(){ notify-send "$PROG_NAME: [ERROR]: $1" ; }
 pwarn(){ notify-send "$PROG_NAME: [WARNING]: $1" ; }

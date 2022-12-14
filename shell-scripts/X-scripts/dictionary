@@ -9,7 +9,7 @@ if [[ "$SPELL_OUTPUT" =~ ^# ]]; then
 	perr "Word \"$INPUT\" not found in dictionary"
 	exit 1
 elif [[ "$SPELL_OUTPUT" =~ ^\*$ ]]; then
-	print_msg 'Word correct'
+	pmsg 'Word correct'
 	echo "$INPUT" | tr -d '\n' | xclip -selection clipboard
 elif [[ "$SPELL_OUTPUT" =~ \+\ [[:alnum:]]+ ]]; then
 	SINGULAR_WORD="${SPELL_OUTPUT#+ }"
