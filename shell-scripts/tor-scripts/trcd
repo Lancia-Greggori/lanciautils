@@ -7,7 +7,7 @@
 	exit 1
 }
 
-LFILE="/var/log/tor/$PROGRAM_NAME.log"
+LFILE="/var/log/tor/$PROG_NAME.log"
 URL='https://html.duckduckgo.com'
 CURL_OPTIONS='--silent -L'
 SOCKS5_ADDRESS=''
