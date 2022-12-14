@@ -1,5 +1,4 @@
-jmp()
-{
+jmp() {
 	local DIR
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e '/home/lancia/.jmp_dirs' ] && return 2
@@ -9,8 +8,7 @@ jmp()
 }
 alias j=jmp
 
-jmp-add()
-{
+jmp-add() {
 	[ "$#" -gt 2 ] && return 1
 	local PATTERN
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
