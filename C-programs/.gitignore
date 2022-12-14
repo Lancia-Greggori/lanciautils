@@ -4,3 +4,4 @@ priv
 run-daemon
 simpsh
 test*
+nobody-curl
