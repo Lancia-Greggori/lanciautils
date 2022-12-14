@@ -3,8 +3,8 @@
 HISTCONTROL='ignoredups'
 HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=999999
-HISTSIZE=9999
-PS1='------- $ $PWD $?: '
+HISTSIZE=99999
+PS1='$ $?: '
 EDITOR=vim
 
 set -o vi
