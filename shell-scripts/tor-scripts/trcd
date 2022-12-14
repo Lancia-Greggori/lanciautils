@@ -3,7 +3,7 @@
 . /usr/local/subr/out.subr
 
 [ "$(id -u)" -ne 0 ] && {
-	print_error 'you must be root'
+	perr 'you must be root'
 	exit 1
 }
 

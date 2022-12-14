@@ -12,7 +12,7 @@ read -r -p 'SSID: ' SSID
 CONF_FILE="$CONF_DIR/$SSID.conf"
 
 [ -e "$CONF_FILE" ] && {
-	print_error "there is already a file named $SSID.conf in $CONF_DIR"
+	perr "there is already a file named $SSID.conf in $CONF_DIR"
 	exit 2
 }
 

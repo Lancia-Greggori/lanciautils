@@ -15,7 +15,7 @@ for pkgbuild in "$@"; do
 
 	MAKEDEPENDS_ARRAY="$(grep '^makedepends=' "$pkgbuild" | tr '\n' ' ' | sed -e 's/makedepends=//' -e "s/[()'\"]//g" -e "$SED_REMOVE_ENDING_SPACE_PATTERN")"
 	[ -z "$MAKEDEPENDS_ARRAY" ] && {
-		print_error "makedepends array not found in file \"$pkgbuild\""
+		perr "makedepends array not found in file \"$pkgbuild\""
 		continue
 	}
 

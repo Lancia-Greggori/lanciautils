@@ -6,7 +6,7 @@
 
 for file in "$@"; do
 	[ ! -f "$file" ] && {
-		print_error "\"$file\" is not a file"
+		perr "\"$file\" is not a file"
 		exit 2
 	}
 done

@@ -3,13 +3,13 @@
 . /usr/local/subr/out.subr
 
 [ ! -e PKGBUILD ] && {
-	print_error "PKGBUILD file not found"
+	perr "PKGBUILD file not found"
 	exit 1
 }
 
 [ "$#" -ne 1 ] && exit 1
 
-[ ! -e .gitignore ] && print_warning ".gitignore file not found"
+[ ! -e .gitignore ] && pwarn ".gitignore file not found"
 
 FILES='PKGBUILD .SRCINFO'
 

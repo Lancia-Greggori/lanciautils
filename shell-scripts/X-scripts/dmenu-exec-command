@@ -7,14 +7,14 @@ COMMAND="$(dmenu < /dev/null)"
 
 EXE="${COMMAND%% *}"
 command -v "$EXE" 1>/dev/null 2>&1 || {
-	print_error "executable \"$EXE\" not found"
+	perr "executable \"$EXE\" not found"
 	exit 1
 }
 
 [ "$1" = '-s' ] && eval exec "$COMMAND"
 
 OUTPUT="$(eval "$COMMAND" 2>&1)" || {
-	print_error "$(printf 'command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
+	perr "$(printf 'command "%s" exited with exit code "%i", output:\n%s' "$COMMAND" "$?" "$OUTPUT")"
 	exit 2
 }
 print "$OUTPUT"

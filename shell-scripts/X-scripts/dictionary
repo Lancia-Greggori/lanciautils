@@ -6,7 +6,7 @@ INPUT="$(dmenu -p 'Enter your word:' < /dev/null)" || exit $?
 SPELL_OUTPUT="$(hunspell <<< "$INPUT" | sed -e '/^$/d' -e '/^Hunspell/d')"
 
 if [[ "$SPELL_OUTPUT" =~ ^# ]]; then
-	print_error "Word \"$INPUT\" not found in dictionary"
+	perr "Word \"$INPUT\" not found in dictionary"
 	exit 1
 elif [[ "$SPELL_OUTPUT" =~ ^\*$ ]]; then
 	print_msg 'Word correct'
