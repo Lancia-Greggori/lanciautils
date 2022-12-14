@@ -2,7 +2,7 @@
 
 . /usr/local/subr/out.subr
 
-DEPENDENT_PROGRAM='keep-tor-connections-alive'
+DEPENDENT_PROGRAM='trcd'
 LOG_FILE="/var/log/tor/$DEPENDENT_PROGRAM.log"
 PID=''
 GREP_OUTPUT=''
