@@ -2,64 +2,54 @@
 
 . /usr/local/subr/out.subr
 
+LOGF="/var/log/tor/$PROG_NAME.log"
+URL='https://html.duckduckgo.com'
+CURL_OPTIONS='--silent -L'
+SOCKS5_ADDR=''
+PID=''
+TMP=''
+TOR_DAEMONS=''
+
+log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOGF" ; }
+
 [ "$(id -u)" -ne 0 ] && {
 	perr 'you must be root'
 	exit 1
 }
 
-LFILE="/var/log/tor/$PROG_NAME.log"
-URL='https://html.duckduckgo.com'
-CURL_OPTIONS='--silent -L'
-SOCKS5_ADDRESS=''
-PID=''
-TMP_FILE=''
-TOR_DAEMONS=''
-
-wlog() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LFILE" ; }
-
-cd /tmp
-
-TMP_FILE="${LFILE##*/}"
-[ ! -e "$TMP_FILE" ] && mkdir -p "$TMP_FILE"
-printf '' > "$LFILE"
+TMP="${LOGF##*/}"
+[ ! -e "$TMP" ] && mkdir -p "$TMP"
+printf '' > "$LOGF"
+cd /
 
 while true; do
-
 	sleep 30s
-
 	TOR_DAEMONS="$(ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g')"
 
 	[ -z "$TOR_DAEMONS" ] && {
-		wlog '[WARNING]: could not find any tor daemon'
+		log '[WARNING]: could not find any tor daemon'
 		continue
 	}
 
 	echo "$TOR_DAEMONS" | while read -r tor_info_line; do
-		SOCKS5_ADDRESS="$(echo "$tor_info_line" | cut -d' ' -f5)"
+		SOCKS5_ADDR="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
-
-		if ! pgrep -f "nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL" 1>/dev/null; then
-
-			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 1>/dev/null 2>&1"; then
-				wlog "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
+		if ! pgrep -f "nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDR $URL" 1>/dev/null; then
+			if nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDR $URL 0<&- 1>/dev/null 2>&1; then
+				log "[CURL SUCCESS]: $SOCKS5_ADDR,$PID"
 			else
-				wlog "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
+				log "[CURL FAIL]: $SOCKS5_ADDR,$PID"
 			fi
-
 		fi &
 	done
 
-	if [ "$(wc -l "$LFILE" | cut -d' ' -f1)" -ge 100 ]; then
-
+	if [ "$(wc -l "$LOGF" | cut -d' ' -f1)" -ge 100 ]; then
 		while pgrep -f "nobody-curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
 			sleep 1s
 		done
-
-		TMP_FILE="$(mktemp)"
-		grep -F '[CURL SUCCESS]' "$LFILE" | tail -n20 > "$TMP_FILE"
-		cat "$TMP_FILE" > "$LFILE"
-		rm "$TMP_FILE"
-
+		TMP="$(mktemp)"
+		grep -F '[CURL SUCCESS]' "$LOGF" | tail -n20 > "$TMP"
+		cat "$TMP" > "$LOGF"
+		rm "$TMP"
 	fi
-
 done
