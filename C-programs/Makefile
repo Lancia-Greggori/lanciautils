@@ -20,7 +20,7 @@ nobody-curl: nobody-curl.c
 	$(CC) nobody-curl.c -o nobody-curl
 install-nobody-curl: nobody-curl
 	strip nobody-curl
-	install -v -m 4755 -o nobody -g nobody nobody-curl $(UMBIN)
+	install -v -m 6755 -o nobody -g nobody nobody-curl $(UMBIN)
 
 priv: priv.c
 	$(CC) priv.c -o priv

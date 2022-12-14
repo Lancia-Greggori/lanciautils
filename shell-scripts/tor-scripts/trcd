@@ -38,9 +38,9 @@ while true; do
 		SOCKS5_ADDRESS="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
 
-		if ! pgrep -f "curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL" 1>/dev/null; then
+		if ! pgrep -f "nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL" 1>/dev/null; then
 
-			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 1>/dev/null 2>&1"; then
+			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 1>/dev/null 2>&1"; then
 				write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
 			else
 				write_log "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
@@ -51,7 +51,7 @@ while true; do
 
 	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 100 ]; then
 
-		while pgrep -f "curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
+		while pgrep -f "nobody-curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
 			sleep 1s
 		done
 
