@@ -10,12 +10,13 @@ int main(int argc, char *argv[]) {
 		if (i != argc-1) size++; // account for spaces between arguments
 	}
 
-	char command[size+6]; // account for the string "curl " + NULL terminator
-	strcpy(command, "curl ");
+	char command[size+15]; // account for the string "/usr/bin/curl " + NULL terminator
+	strcpy(command, "/usr/bin/curl ");
 	for (int i = 1; i < argc; i++) {
 		strcat(command, argv[i]);
 		if (i != argc-1) strcat(command, " ");
 	}
 
+	clearenv();
 	return WEXITSTATUS( system(command) );
 }
