@@ -11,8 +11,8 @@ alias j=jmp
 
 jmp-add()
 {
-	local PATTERN
 	[ "$#" -gt 2 ] && return 1
+	local PATTERN
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
 	if [ "$#" -eq 1 ]; then
 		[ ! -e "$1" ] && return 2
