@@ -7,7 +7,7 @@
 	exit 1
 }
 
-LOG_FILE="/var/log/tor/$PROGRAM_NAME.log"
+LFILE="/var/log/tor/$PROGRAM_NAME.log"
 URL='https://html.duckduckgo.com'
 CURL_OPTIONS='--silent -L'
 SOCKS5_ADDRESS=''
@@ -15,13 +15,13 @@ PID=''
 TMP_FILE=''
 TOR_DAEMONS=''
 
-write_log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOG_FILE" ; }
+wlog() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LFILE" ; }
 
 cd /tmp
 
-TMP_FILE="${LOG_FILE##*/}"
+TMP_FILE="${LFILE##*/}"
 [ ! -e "$TMP_FILE" ] && mkdir -p "$TMP_FILE"
-printf '' > "$LOG_FILE"
+printf '' > "$LFILE"
 
 while true; do
 
@@ -30,7 +30,7 @@ while true; do
 	TOR_DAEMONS="$(ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g')"
 
 	[ -z "$TOR_DAEMONS" ] && {
-		write_log '[WARNING]: could not find any tor daemon'
+		wlog '[WARNING]: could not find any tor daemon'
 		continue
 	}
 
@@ -41,23 +41,23 @@ while true; do
 		if ! pgrep -f "nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL" 1>/dev/null; then
 
 			if env -i PATH='/bin:/sbin' su - nobody -s /bin/sh -c "exec nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDRESS $URL 0<&- 1>/dev/null 2>&1"; then
-				write_log "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
+				wlog "[CURL SUCCESS]: $SOCKS5_ADDRESS,$PID"
 			else
-				write_log "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
+				wlog "[CURL FAIL]: $SOCKS5_ADDRESS,$PID"
 			fi
 
 		fi &
 	done
 
-	if [ "$(wc -l "$LOG_FILE" | cut -d' ' -f1)" -ge 100 ]; then
+	if [ "$(wc -l "$LFILE" | cut -d' ' -f1)" -ge 100 ]; then
 
 		while pgrep -f "nobody-curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
 			sleep 1s
 		done
 
 		TMP_FILE="$(mktemp)"
-		grep -F '[CURL SUCCESS]' "$LOG_FILE" | tail -n20 > "$TMP_FILE"
-		cat "$TMP_FILE" > "$LOG_FILE"
+		grep -F '[CURL SUCCESS]' "$LFILE" | tail -n20 > "$TMP_FILE"
+		cat "$TMP_FILE" > "$LFILE"
 		rm "$TMP_FILE"
 
 	fi
