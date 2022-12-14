@@ -29,6 +29,7 @@ shopt -s histappend
 alias vt="vim $HOME/.tasks"
 alias vct="vim $HOME/.current_tasks"
 alias vtmp='vim "$(mktemp)"'
+alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 
 [ -e "$HOME"/.bash_functions ] && . "$HOME"/.bash_functions
 
