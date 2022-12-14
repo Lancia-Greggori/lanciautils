@@ -1,7 +1,7 @@
 #!/usr/bin/openrc-run
 
 supervisor='supervise-daemon'
-command='/usr/local/umbin/keep-tor-connections-alive'
+command='/usr/local/umbin/trcd'
 
 depend()
 {
