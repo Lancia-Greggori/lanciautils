@@ -6,6 +6,8 @@ set mouse=""
 set shortmess=aI
 set formatoptions=crql
 
+map <C-q> :q!<nl>
+
 nnoremap <F1> :%w !clipboard<nl><nl>
 nnoremap <F2> :!ccw %<nl><nl>
 nnoremap <C-s> :w<nl>
