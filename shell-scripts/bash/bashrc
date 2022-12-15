@@ -30,7 +30,7 @@ alias vt="vim $HOME/.tasks"
 alias vct="vim $HOME/.current_tasks"
 alias vtmp='vim "$(mktemp)"'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
-
+alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
 [ -e "$HOME"/.bash_functions ] && . "$HOME"/.bash_functions
 
 stty stop ''
