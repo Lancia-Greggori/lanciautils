@@ -7,9 +7,6 @@ set shortmess=aI
 set formatoptions=crql
 
 map <F1> <NOP>
-map <Return> <NOP>
-map <C-z> <NOP>
-map <C-x> <NOP>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
