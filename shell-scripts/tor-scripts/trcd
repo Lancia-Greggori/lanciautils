@@ -16,6 +16,10 @@ log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOGF" ; }
 	perr 'you must be root'
 	exit 1
 }
+command -v nobody-curl 1>/dev/null || {
+	perr 'nobody-curl: command does not exist'
+	exit 2
+}
 
 TMP="${LOGF##*/}"
 [ ! -e "$TMP" ] && mkdir -p "$TMP"
