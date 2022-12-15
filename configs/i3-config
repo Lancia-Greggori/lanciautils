@@ -63,10 +63,10 @@ bindsym $ash+q exit
 
 mode "resize" {
         bindsym comma resize shrink width 5 px or 5 ppt
-        bindsym m resize grow height 5 px or 5 ppt
-        bindsym n resize shrink height 5 px or 5 ppt
-        bindsym period resize grow width 5 px or 5 ppt
-        bindsym r mode "default"
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym j resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+        bindsym h mode "default"
         bindsym Escape mode "default"
 }
 bindsym $alt+r mode "resize"
