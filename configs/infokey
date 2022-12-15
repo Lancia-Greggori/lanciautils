@@ -1,0 +1,3 @@
+l 	select-reference-this-line
+g	goto-node
+C-x	quit
