@@ -22,7 +22,7 @@ inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>0i
 
 vnoremap <C-c> y<nl>:call system('xclip -selection clipboard', @0)<nl>
-vnoremap <C-x> <Esc>
+vnoremap <C-s> <Esc>
 
 autocmd BufNewFile,BufRead *.subr set syntax=sh
 autocmd BufNewFile,BufRead *i3* set syntax=i3config
