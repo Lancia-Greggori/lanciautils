@@ -10,8 +10,6 @@ map <F1> <NOP>
 map <Return> <NOP>
 map <C-n> <NOP>
 map <C-z> <NOP>
-map <C-n> <NOP>
-map <C-m> <NOP>
 map <C-x> <NOP>
 
 nnoremap <C-s> :w<nl>
@@ -23,7 +21,6 @@ nnoremap <C-m> :bp<nl>
 nnoremap <F1> :%w !clipboard<nl><nl>
 nnoremap <F2> :!ccw %<nl><nl>
 
-inoremap <C-x> <Esc>
 inoremap <C-s> <Esc>
 inoremap <C-z> <Esc><undo><insert>
 inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
