@@ -1,4 +1,4 @@
-jmp() {
+j() {
 	local DIR
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e '/home/lancia/.jmp_dirs' ] && return 2
@@ -6,7 +6,6 @@ jmp() {
 	[ -z "$DIR" ] && return 3
 	cd "$DIR" || return 4
 }
-alias j=jmp
 
 jmp-add() {
 	[ "$#" -gt 2 ] && return 1
