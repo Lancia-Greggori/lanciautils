@@ -1,13 +1,13 @@
 [[ ! "$-" =~ i ]] && return
 
+set -o vi
+
 HISTCONTROL='ignoredups'
 HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=999999
 HISTSIZE=99999
 PS1='$ $?: '
 EDITOR=vim
-
-set -o vi
 
 bind "\C-l":clear-screen
 bind "\C-f":reverse-search-history
@@ -25,12 +25,14 @@ shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s histappend
 
+stty stop ''
+
+. /usr/local/subr/download.subr
 . /etc/aliasrc
+. "$HOME"/.bash_functions
+
 alias vt="vim $HOME/.tasks"
 alias vct="vim $HOME/.current_tasks"
 alias vtmp='vim "$(mktemp)"'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
-[ -e "$HOME"/.bash_functions ] && . "$HOME"/.bash_functions
-
-stty stop ''
