@@ -21,7 +21,7 @@ command -v nobody-curl 1>/dev/null || {
 	exit 2
 }
 
-TMP="${LOGF##*/}"
+TMP="${LOGF%/*}"
 [ ! -e "$TMP" ] && mkdir -p "$TMP"
 printf '' > "$LOGF"
 cd /
