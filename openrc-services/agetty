@@ -1,0 +1,12 @@
+#!/usr/bin/openrc-run
+
+supervisor='supervise-daemon'
+respawn_period="${respawn_period:-60}"
+command='/sbin/agetty'
+command_args_foreground="${RC_SVCNAME#*.} 38400 linux"
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+	after local
+	provide getty
+}
