@@ -33,6 +33,6 @@ stty stop ''
 
 alias vt="vim $HOME/.tasks"
 alias vct="vim $HOME/.current_tasks"
-alias vtmp='vim "$(mktemp)"'
+alias vtmp='vim "$(mktemp /tmp/vim-tmp.XXX)"'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
