@@ -1,0 +1,2 @@
+#!/bin/sh
+exec env PATH='/bin:/sbin' "$0" "$@"
