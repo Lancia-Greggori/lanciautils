@@ -3,8 +3,7 @@
 . /usr/local/subr/out.subr
 
 LOGF="/var/log/tor/$PROG_NAME.log"
-URL='https://html.duckduckgo.com'
-CURL_OPTIONS='--silent -L'
+CURL_ARGS='--silent -L https://html.duckduckgo.com'
 SOCKS5_ADDR=''
 PID=''
 TMP=''
@@ -38,8 +37,8 @@ while true; do
 	echo "$TOR_DAEMONS" | while read -r tor_info_line; do
 		SOCKS5_ADDR="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
-		if ! pgrep -f "nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDR $URL" 1>/dev/null; then
-			if nobody-curl $CURL_OPTIONS --socks5 $SOCKS5_ADDR $URL 0<&- 1>/dev/null 2>&1; then
+		if ! pgrep -f "nobody-curl --socks5 $SOCKS5_ADDR $CURL_ARGS" 1>/dev/null; then
+			if nobody-curl --socks5 $SOCKS5_ADDR $CURL_ARGS 0<&- 1>/dev/null 2>&1; then
 				log "[CURL SUCCESS]: $SOCKS5_ADDR,$PID"
 			else
 				log "[CURL FAIL]: $SOCKS5_ADDR,$PID"
@@ -48,7 +47,7 @@ while true; do
 	done
 
 	if [ "$(wc -l "$LOGF" | cut -d' ' -f1)" -ge 100 ]; then
-		while pgrep -f "nobody-curl $CURL_OPTIONS --socks5 [0-9.]\+:[0-9]\+ $URL" 1>/dev/null; do
+		while pgrep -f "nobody-curl --socks5 [0-9.]\+:[0-9]\+ $CURL_ARGS" 1>/dev/null; do
 			sleep 1s
 		done
 		TMP="$(mktemp)"
