@@ -8,5 +8,4 @@ pidfile="/run/${RC_SVCNAME}.pid"
 
 depend() {
 	after local
-	provide getty
 }
