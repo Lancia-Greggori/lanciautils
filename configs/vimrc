@@ -9,6 +9,6 @@ set formatoptions=crql
 autocmd BufNewFile,BufRead *.subr set syntax=sh
 autocmd BufNewFile,BufRead *i3* set syntax=i3config
 autocmd BufNewFile,BufRead *bash* set syntax=bash
-autocmd BufNewFile,BufRead *vim* set syntax=vim
+autocmd BufNewFile,BufRead *vimrc* set syntax=vim
 
 source /etc/vimrc.map
