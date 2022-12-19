@@ -19,6 +19,7 @@ retry="${GRACEFUL_TIMEOUT:-60}"
 stopsig='INT'
 log_file="/var/log/tor/tor-${id}.log"
 data_dir="/var/lib/tor/tor-${id}"
+rc_ulimit='-n 30000'
 extra_commands='checkconfig'
 
 depend()
