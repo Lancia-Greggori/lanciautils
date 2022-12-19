@@ -1,7 +1,5 @@
 [[ ! "$-" =~ i ]] && return
 
-set -o vi
-
 HISTCONTROL='ignoredups'
 HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=999999
@@ -24,8 +22,9 @@ shopt -s autocd
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s histappend
-
 stty stop ''
+set -o vi
+ulimit -c 1000000
 
 . /usr/local/subr/download.subr
 . /etc/aliasrc
