@@ -31,3 +31,5 @@ autocmd BufNewFile,BufRead *.subr set syntax=sh
 autocmd BufNewFile,BufRead *i3* set syntax=i3config
 autocmd BufNewFile,BufRead *bash* set syntax=bash
 autocmd FileType c nnoremap <buffer> <F2> :!ccw %<nl><nl>
+autocmd FileType sh nnoremap <buffer> <F2> :!shellcheck --shell=sh %<nl>
+autocmd FileType bash nnoremap <buffer> <F2> :!shellcheck --shell=bash %<nl>
