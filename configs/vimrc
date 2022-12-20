@@ -23,6 +23,7 @@ nnoremap <C-m> :bp<nl>
 nnoremap <C-d> :ex .<nl>
 
 inoremap <C-s> <Esc>
+inoremap <C-p> <Esc>p<insert>
 inoremap <C-z> <Esc><undo><insert>
 inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
 inoremap <C-e> <Esc>A
