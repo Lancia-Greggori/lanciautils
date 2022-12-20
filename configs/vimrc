@@ -6,14 +6,6 @@ set mouse=""
 set shortmess=aI
 set formatoptions=crql
 
-function SetMapping(syntax)
-	if (a:syntax == 'c')
-		nnoremap <F2> :!ccw %<nl><nl>
-	elseif (a:syntax == 'sh' || a:syntax == 'bash')
-		nnoremap <F2> :!shellcheck %<nl>
-	endif
-endfunction
-
 map <C-q> :q!<nl>
 
 nnoremap <F1> :%w !clipboard<nl><nl>
@@ -38,4 +30,4 @@ vnoremap <C-s> <Esc>
 autocmd BufNewFile,BufRead *.subr set syntax=sh
 autocmd BufNewFile,BufRead *i3* set syntax=i3config
 autocmd BufNewFile,BufRead *bash* set syntax=bash
-autocmd BufNewFile,BufRead *.c call SetMapping('c')
+autocmd FileType c nnoremap <buffer> <F2> :!ccw %<nl><nl>
