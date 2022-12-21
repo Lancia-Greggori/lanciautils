@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 
-void read_file(FILE *fp) {
+void readf(FILE *fp) {
 	char character;
 	character = fgetc (fp);
 	while (character != EOF) {
@@ -12,12 +12,12 @@ void read_file(FILE *fp) {
 }
 
 int main(int argc, char *argv[]) {
-	if (argc < 2) read_file(stdin);
+	if (argc < 2) readf(stdin);
 	else {
 		FILE *fp;
 		for (int i = 1; i < argc; i++) {
 			if (strcmp(argv[i], "-") == 0) {
-				read_file(stdin);
+				readf(stdin);
 				continue;
 			} else if (access(argv[i], F_OK) != 0) {
 				fprintf(stderr, "cat: [ERROR]: %s: no such file or directory\n", argv[i]);
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 				fprintf(stderr, "cat: [ERROR]: %s: fp is NULL, skipping reading\n", argv[i]);
 				continue;
 			}
-			read_file(fp);
+			readf(fp);
 		}
 	}
 	return 0;

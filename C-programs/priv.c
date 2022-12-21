@@ -10,6 +10,7 @@
 #define MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE MAX_ALLOWED_CMDLINE_ARG_SIZE
 
 int main(int argc, char *argv[]) {
+
 	int cmdline_arg_size = 0;
 	for (int i = 1; i < argc; i++) cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
 	if (cmdline_arg_size > MAX_ALLOWED_CMDLINE_ARG_SIZE) {
