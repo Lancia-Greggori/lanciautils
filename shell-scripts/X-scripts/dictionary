@@ -3,7 +3,7 @@
 . /usr/local/subr/X.out.subr
 
 INPUT="$(dmenu -p 'Enter word:' < /dev/null)" || exit $?
-SPELL_OUTPUT="$(hunspell <<< "$INPUT" | sed -e '/^$/d' -e '/^Hunspell/d')"
+SPELL_OUTPUT="$(hunspell <<< "$INPUT" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 
 if [[ "$SPELL_OUTPUT" =~ ^# ]]; then
 	perr "Word \"$INPUT\" not found in dictionary"
