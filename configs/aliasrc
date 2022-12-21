@@ -6,13 +6,11 @@ alias ll='ls -l'
 alias cp='cp -i'
 alias mv='mv -i'
 alias p=less
-alias r=rm
-alias v="v -c ':map <Return> <NOP>'"
 
-alias service='rc-service'
+alias es-spell='hunspell -d es'
 alias tcat='tar tvf'
 alias info='info --vi-keys'
-alias clip='xclip -selection clipboard'
 alias lynx='lynx -vikeys'
 alias show-keysym='xev 2>&1 | grep -F keysym'
 alias gdb='gdb -q'
+alias v="v -c ':map <Return> <NOP>'"
