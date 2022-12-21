@@ -2,7 +2,7 @@
 
 . /usr/local/subr/X.out.subr
 
-INPUT="$(dmenu -p 'Enter your word:' < /dev/null)" || exit $?
+INPUT="$(dmenu -p 'Enter word:' < /dev/null)" || exit $?
 SPELL_OUTPUT="$(hunspell <<< "$INPUT" | sed -e '/^$/d' -e '/^Hunspell/d')"
 
 if [[ "$SPELL_OUTPUT" =~ ^# ]]; then
