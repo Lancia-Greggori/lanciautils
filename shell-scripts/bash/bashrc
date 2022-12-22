@@ -5,7 +5,7 @@ HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=999999
 HISTSIZE=99999
 PS1='$ $?: '
-EDITOR=vim
+EDITOR=v
 
 bind "\C-l":clear-screen
 bind "\C-f":reverse-search-history
@@ -30,8 +30,8 @@ ulimit -c 1000000
 . /etc/aliasrc
 . "$HOME"/.bash_functions
 
-alias vt="vim $HOME/.tasks"
-alias vct="vim $HOME/.current_tasks"
-alias vtmp='vim /tmp/vim-tmp'
+alias vt="v $HOME/.tasks"
+alias vct="v $HOME/.current_tasks"
+alias vtmp='v /tmp/v-tmp'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
