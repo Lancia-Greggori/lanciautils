@@ -5,3 +5,4 @@ run-daemon
 simpsh
 test*
 nobody-curl
+a.out
