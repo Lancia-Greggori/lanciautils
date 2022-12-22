@@ -23,6 +23,11 @@ inoremap <C-a> <Esc>0i
 
 vnoremap <C-s> <Esc>
 
+nnoremap <F1> :%w !xclip -selection clipboard<nl><nl>
+nnoremap <C-c> :.w !xclip -selection clipboard<nl><nl>
+vnoremap <C-c> y<nl>:call system('xclip -selection clipboard', @0)<nl>
+inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
+
 if ($USER == 'lancia')
 	source /home/lancia/.vimconf
 endif

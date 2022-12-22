@@ -1,8 +1,3 @@
-nnoremap <F1> :%w !clipboard<nl><nl>
-nnoremap <C-c> :.w !xclip -selection clipboard<nl><nl>
-vnoremap <C-c> y<nl>:call system('xclip -selection clipboard', @0)<nl>
-inoremap <C-c> <Esc>:.w !xclip -selection clipboard<nl><insert>
-
 autocmd BufNewFile,BufRead *.subr,*lancia-utils/configs/profile set syntax=sh
 autocmd BufNewFile,BufRead *i3* set syntax=i3config
 autocmd BufNewFile,BufRead *bash* set syntax=bash
