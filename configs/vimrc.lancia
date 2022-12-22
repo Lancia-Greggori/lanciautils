@@ -8,7 +8,7 @@ autocmd BufNewFile,BufRead */Documents/artix/forums/* {
 }
 autocmd FileType c {
 	nnoremap <buffer> <F2> :call ExecCmd('ccw '.expand('%'))<nl>
-	nnoremap <buffer> <F3> :!%
+	nnoremap <buffer> <F3> :!%<nl>
 }
 autocmd FileType sh nnoremap <buffer> <F2> :call ExecCmd('shellcheck -x --shell=sh '.expand('%'))<nl>
 autocmd FileType bash nnoremap <buffer> <F2> :call ExecCmd('shellcheck -x --shell=bash '.expand('%'))<nl>
