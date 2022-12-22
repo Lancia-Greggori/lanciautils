@@ -6,6 +6,6 @@ autocmd BufNewFile,BufRead */Documents/artix/forums/* {
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
 	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
 }
-autocmd FileType c nnoremap <buffer> <F2> :call ExecCmd('gcc -Wall -g '.expand('%'))<nl>:!a.out<nl>
+autocmd FileType c nnoremap <buffer> <F2> :call ExecCmd('gcc -Wall -g '.expand('%'))<nl>
 autocmd FileType sh nnoremap <buffer> <F2> :call ExecCmd('shellcheck -x --shell=sh '.expand('%'))<nl>
 autocmd FileType bash nnoremap <buffer> <F2> :call ExecCmd('shellcheck -x --shell=bash '.expand('%'))<nl>
