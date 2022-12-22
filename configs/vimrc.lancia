@@ -11,7 +11,7 @@ autocmd FileType c {
 	nnoremap <buffer> <F3> :call ExecCmd('gcc -Wall -g '.expand('%:p'))<nl>
 }
 autocmd FileType bash,sh {
-	nnoremap <buffer> <F2> :!%:p
+	nnoremap <buffer> <F2> :!%:p<nl>
 	nnoremap <buffer> <F3> :sh -n %:p<nl>
 		\ :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
