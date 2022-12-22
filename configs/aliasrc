@@ -13,4 +13,3 @@ alias info='info --vi-keys'
 alias lynx='lynx -vikeys'
 alias show-keysym='xev 2>&1 | grep -F keysym'
 alias gdb='gdb -q'
-alias v="v -c ':map <Return> <NOP>'"

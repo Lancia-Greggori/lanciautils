@@ -37,4 +37,5 @@ autocmd FileType bash nnoremap <buffer> <F2> :!shellcheck -x --shell=bash %<nl>
 autocmd FileType artix-forums {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
+	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
 }
