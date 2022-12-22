@@ -15,3 +15,5 @@ autocmd FileType bash,sh {
 	nnoremap <buffer> <F3> :call ExecCmd(&filetype.' -n '.expand('%:p'))<nl>
 	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
+
+nnoremap <F12> :!i %
