@@ -13,5 +13,5 @@ autocmd FileType c {
 autocmd FileType bash,sh {
 	nnoremap <buffer> <F2> :!%:p<nl>
 	nnoremap <buffer> <F3> :sh -n %:p<nl>
-		\ :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
+	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
