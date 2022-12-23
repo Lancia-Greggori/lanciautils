@@ -1,6 +1,6 @@
-autocmd BufNewFile,BufRead *.subr,*lancia-utils/configs/profile set syntax=sh
-autocmd BufNewFile,BufRead *i3* set syntax=i3config
-autocmd BufNewFile,BufRead *bash* set syntax=bash
+autocmd BufNewFile,BufRead *i3* set filetype=i3config
+autocmd BufNewFile,BufRead *bash* set filetype=bash
+autocmd BufNewFile,BufRead /etc/init.d/*,*.subr,*lancia-utils/configs/profile,*lancia-utils/openrc-services/* set filetype=sh
 autocmd BufNewFile,BufRead */Documents/artix/forums/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
