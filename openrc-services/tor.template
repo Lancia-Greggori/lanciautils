@@ -28,10 +28,10 @@ checkconfig()
 	if [ ! -e "$conf" ]; then
 		eerror "$conf: conf does not exist"
 		return 3
-	elif ! grep "^DataDirectory ${datad}$" "$conf"; then
+	elif ! grep -q "^DataDirectory ${datad}$" "$conf"; then
 		eerror "\"DataDirectory\": bad option in $conf"
 		return 4
-	elif ! grep "^Log.*${logf}$" "$conf"; then
+	elif ! grep -q "^Log.*${logf}$" "$conf"; then
 		eerror "\"Log\": bad option in $conf"
 		return 5
 	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "$conf")" /etc/tor | grep -qFv "${conf}:"; then
