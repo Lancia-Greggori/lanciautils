@@ -1,24 +1,19 @@
 #!/bin/sh -eu
 
 . /usr/local/subr/out.subr
-
 LOGF="/var/log/tor/$PROG_NAME.log"
 CURL_ARGS='--silent -L https://html.duckduckgo.com'
 SOCKS5_ADDR=''
 PID=''
 TMP=''
 TOR_DAEMONS=''
-
 log() { echo "$1" >> "$LOGF" ; }
 
-[ "$(id -u)" -ne 0 ] && {
-	perr 'you must be root'
+if [ "$(id -u)" -ne 0 ];
 	exit 1
-}
-command -v nobody-curl 1>/dev/null || {
-	perr 'nobody-curl: command does not exist'
+elif ! command -v nobody-curl 1>/dev/null; then
 	exit 2
-}
+fi
 
 TMP="${LOGF%/*}"
 [ ! -e "$TMP" ] && mkdir -p "$TMP"
