@@ -16,8 +16,8 @@ logf="/var/log/tor/${RC_SVCNAME}.log"
 datad="/var/lib/tor/${RC_SVCNAME}"
 
 id="${RC_SVCNAME#tor-}"
-configf="/etc/tor/torrc-${id}"
-command_args="-f $configf --hush"
+conf="/etc/tor/torrc-${id}"
+command_args="-f $conf --hush"
 
 depend()
 {
@@ -26,20 +26,20 @@ depend()
 
 checkconfig()
 {
-	if [ ! -e "$configf" ]; then
-		eerror "$configf: configf does not exist"
+	if [ ! -e "$conf" ]; then
+		eerror "$conf: conf does not exist"
 		return 3
-	elif ! grep "^DataDirectory ${datad}$" "$configf"; then
-		eerror "\"DataDirectory\": bad option in $configf"
+	elif ! grep "^DataDirectory ${datad}$" "$conf"; then
+		eerror "\"DataDirectory\": bad option in $conf"
 		return 4
-	elif ! grep '^Log.*${logf}$' "$configf"; then
-		eerror "\"Log\": bad option in $configf"
+	elif ! grep '^Log.*${logf}$' "$conf"; then
+		eerror "\"Log\": bad option in $conf"
 		return 5
-	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "$configf")" /etc/tor | grep -qFv "${configf}:"; then
-		eerror "$configf: SOCKSPort already used somewhere else in /etc/tor"
+	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "$conf")" /etc/tor | grep -qFv "${conf}:"; then
+		eerror "$conf: SOCKSPort already used somewhere else in /etc/tor"
 		return 6
-	elif ! "$command" -f "$configf" --verify-config --hush 1>/dev/null 2>&1; then
-		eerror "$configf: bad configf"
+	elif ! "$command" -f "$conf" --verify-config --hush 1>/dev/null 2>&1; then
+		eerror "$conf: bad conf"
 		return 7
 	fi
 }
