@@ -15,8 +15,7 @@ extra_commands='checkconfig'
 logf="/var/log/tor/${RC_SVCNAME}.log"
 datad="/var/lib/tor/${RC_SVCNAME}"
 
-id="${RC_SVCNAME#tor-}"
-conf="/etc/tor/torrc-${id}"
+conf="/etc/tor/torrc-${RC_SVCNAME#tor-}"
 command_args="-f $conf --hush"
 
 depend()
