@@ -1,10 +1,10 @@
 #!/usr/bin/openrc-run
 
 if [ ! -L "$RC_SERVICE" ]; then
-	eerror 'This service file is a template, use links to this template file with names in the form of tor-XXX'
+	eerror 'this service file is a template, use links to this template file with names in the form of tor-XXX'
 	return 1
 elif ! echo "$RC_SVCNAME" | grep -q '^tor-'; then
-	eerror 'Link name must be in the form of tor-XXX'
+	eerror 'link name must be in the form of tor-XXX'
 	return 1
 fi
 
@@ -58,6 +58,4 @@ start_pre()
 	checkpath -d -m 0700 -o tor:tor "$data_dir"
 
 	checkpath -d -m 0755 -o tor:tor "${pid_file%/*}"
-
-	ebegin "using $config_file for $RC_SVCNAME"
 }
