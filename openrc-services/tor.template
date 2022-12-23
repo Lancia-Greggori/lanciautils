@@ -27,13 +27,13 @@ depend()
 checkconfig()
 {
 	if [ ! -e "$configf" ]; then
-		eerror "tor configuration $configf does not exist."
+		eerror "$configf: configf does not exist."
 		return 3
-	elif ! grep '^DataDirectory' "$configf" | grep -q "${id}$"; then
-		eerror "bad \"DataDirectory\" option in $configf"
+	elif ! grep "^DataDirectory ${datad}$" "$configf"; then
+		eerror "\"DataDirectory\": bad option in $configf"
 		return 4
-	elif ! grep '^Log' "$configf" | grep -q "${id}.log$"; then
-		eerror "bad Log option in $configf"
+	elif ! grep '^Log.*${logf}$' "$configf"; then
+		eerror "\"Log\": bad option in $configf"
 		return 5
 	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "$configf")" /etc/tor | grep -qFv "${configf}:"; then
 		eerror "the socks port used in $configf is already used somewhere else in other config files"
