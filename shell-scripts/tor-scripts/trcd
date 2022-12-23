@@ -9,7 +9,7 @@ PID=''
 TMP=''
 TOR_DAEMONS=''
 
-log() { echo "$(date '+%Y-%m(%b)-%d %H:%M'): $1" >> "$LOGF" ; }
+log() { echo "$1" >> "$LOGF" ; }
 
 [ "$(id -u)" -ne 0 ] && {
 	perr 'you must be root'
