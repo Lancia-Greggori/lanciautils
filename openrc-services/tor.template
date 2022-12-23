@@ -5,22 +5,23 @@ if [ ! -L "$RC_SERVICE" ]; then
 	return 1
 elif ! echo "$RC_SVCNAME" | grep -q '^tor-'; then
 	eerror 'link name must be in the form of tor-XXX'
-	return 1
+	return 2
 fi
 
-supervisor='supervise-daemon'
-id="${RC_SVCNAME#tor-}"
 command='/usr/bin/tor'
+supervisor='supervise-daemon'
+retry="${GRACEFUL_TIMEOUT:-60}"
+stopsig='INT'
+rc_ulimit='-n 30000'
+extra_commands='checkconfig'
+
+id="${RC_SVCNAME#tor-}"
 config_file="/etc/tor/torrc-${id}"
 pid_file="/run/tor/supervise-tor-${id}.pid"
 command_args="-f $config_file --hush"
 command_args_background="--runasdaemon 1 --pidfile $pid_file"
-retry="${GRACEFUL_TIMEOUT:-60}"
-stopsig='INT'
 log_file="/var/log/tor/tor-${id}.log"
 data_dir="/var/lib/tor/tor-${id}"
-rc_ulimit='-n 30000'
-extra_commands='checkconfig'
 
 depend()
 {
