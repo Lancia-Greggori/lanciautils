@@ -8,8 +8,8 @@ elif ! echo "$RC_SVCNAME" | grep -q '^tor-'; then
 	return 1
 fi
 
-id="${RC_SVCNAME#tor-}"
 supervisor='supervise-daemon'
+id="${RC_SVCNAME#tor-}"
 command='/usr/bin/tor'
 config_file="/etc/tor/torrc-${id}"
 pid_file="/run/tor/supervise-tor-${id}.pid"
