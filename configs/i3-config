@@ -92,11 +92,13 @@ bindsym $ash+KP_Delete exec chromium --user-data-dir=/home/lancia/.config/chromi
 bindsym $ash+KP_Left exec tor-unclean
 bindsym $ash+KP_Begin exec tor-clean
 
+bindsym $ash+KP_Multiply exec libreoffice
+bindsym $ash+KP_Page_Up exec libreoffice /home/lancia/Documents/cost-keeping/costs.ods
+
 bindsym --release Print exec  screenshot region
 bindsym --release $alt+Print exec  screenshot full
 bindsym $alt+Menu exec  dictionary
 bindsym $ash+KP_Divide exec thunar
-bindsym $ash+KP_Multiply exec libreoffice
 bindsym $ash+KP_Add exec pavucontrol
 bindsym $ash+KP_Subtract exec XDG_CURRENT_DESKTOP=XFCE telegram-desktop
 bindsym Super_L exec --no-startup-id setxkbmap us
