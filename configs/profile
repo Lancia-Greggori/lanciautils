@@ -27,6 +27,6 @@ unset -f append_path
 unset TERMCAP
 unset MANPATH
 
-[ -e /etc/env-vars ] && . /etc/env-vars
+[ -e /etc/env ] && . /etc/env
 
 tty | grep -qFv '/dev/tty1' && tty-setup
