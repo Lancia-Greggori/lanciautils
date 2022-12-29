@@ -1,12 +1,10 @@
 #!/usr/bin/openrc-run
 
-depend()
-{
+depend() {
 	after net.lo
 	keyword -shutdown
 }
 
-start()
-{
+start() {
 	wm start priority-scan
 }
