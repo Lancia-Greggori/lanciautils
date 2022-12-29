@@ -8,16 +8,17 @@ PID=''
 OUT=''
 
 if ! pgrep -f "$DEP_PROG" 1>/dev/null; then
-	pwarn "this program depends on the program $DEP_PROG, however, it is not running, this might cause some problems"
-elif [ ! -e "$LOGF" ]; then
-	perr "$LOGF does not exist"
+	pwarn "program \"$DEP_PROG\", problems might occur"
+fi
+
+if [ ! -e "$LOGF" ]; then
 	exit 2
 elif [ ! -s "$LOGF" ]; then
-	perr "$LOGF is empty"
-	exit 1
+	perr "$LOGF empty"
+	exit 3
 elif ! OUT="$(grep -F '[CURL SUCCESS]' "$LOGF")"; then
-	perr "no suitable tor address that has a successful connection to the tor network was found in logfile $LOGF"
-	exit 1
+	perr "no suitable tor address that has a successful connection to the tor network was found in $LOGF"
+	exit 4
 fi
 
 NUML="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
