@@ -1,14 +1,12 @@
 #!/usr/bin/openrc-run
 
-depend()
-{
+depend() {
 	after local
 	before getty
 	keyword -shutdown
 }
 
-start()
-{
+start() {
 	if [ ! -e /mnt/storage/encrypted ]; then
 		echo "encrypted storage at /mnt/storage/encrypted does not exist, skipping unlocking..."
 		exit 0

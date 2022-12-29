@@ -3,8 +3,7 @@
 supervisor='supervise-daemon'
 command='/usr/local/umbin/trcd'
 
-depend()
-{
+depend() {
 	before local
 	after tor
 }

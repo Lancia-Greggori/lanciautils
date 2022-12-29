@@ -4,8 +4,7 @@ supervisor='supervise-daemon'
 command='/usr/bin/dnsmasq'
 command_args='--local-service -k'
 
-depend()
-{
+depend() {
 	provide dns
 	need localmount net
 	after bootmisc

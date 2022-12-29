@@ -18,13 +18,11 @@ datad="/var/lib/tor/${RC_SVCNAME}"
 conf="/etc/tor/torrc-${RC_SVCNAME#tor-}"
 command_args="-f $conf --hush"
 
-depend()
-{
+depend() {
 	provide tor
 }
 
-checkconfig()
-{
+checkconfig() {
 	if [ ! -e "$conf" ]; then
 		eerror "$conf: conf does not exist"
 		return 3
@@ -46,8 +44,7 @@ checkconfig()
 	fi
 }
 
-start_pre()
-{
+start_pre() {
 	checkconfig || return 1
 
 	checkpath -d -m 0755 -o tor:tor "${logf%/*}"

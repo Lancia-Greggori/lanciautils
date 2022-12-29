@@ -1,13 +1,11 @@
 #!/usr/bin/openrc-run
 
-depend()
-{
+depend() {
 	after localmount
 	keyword -shutdown
 }
 
-start()
-{
+start() {
 	UUID='201b8180-2bd9-4676-90bd-903e3352422c'
 	{
 		blkid | grep -q "UUID=\"$UUID\"" || exit 0

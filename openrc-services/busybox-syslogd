@@ -4,16 +4,14 @@ command='/usr/local/busybox/syslogd'
 command_args='-n -s 2000 -b 5 -t -D'
 supervisor='supervise-daemon'
 
-depend()
-{
+depend() {
 	need localmount
 	use clock hostname
 	after bootmisc
 	provide logger
 }
 
-start_pre()
-{
+start_pre() {
 	checkpath -d -m 0755 /usr/local/busybox
 	if [ ! -e "$command" ]; then
 		ln -s ../../bin/busybox "$command"
