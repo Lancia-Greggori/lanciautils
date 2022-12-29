@@ -12,7 +12,8 @@ elif [[ "$OUT" =~ ^\*$ ]]; then
 	pmsg 'Word correct'
 	echo "$INPUT" | tr -d '\n' | xclip -selection clipboard
 elif [[ "$OUT" =~ \+\ [[:alnum:]]+ ]]; then
-	printf '%s\n%s' "${OUT#+ }" "$INPUT" | dmenu -p "\"$INPUT\": plural form of \"$SINGULAR_WORD\"" | tr -d '\n' | xclip -selection clipboard
+	OUT="${OUT#+ }"
+	printf '%s\n%s' "$OUT" "$INPUT" | dmenu -p "\"$INPUT\": plural form of \"$OUT\"" | tr -d '\n' | xclip -selection clipboard
 else
 	cut -d':' -f2 <<< "$OUT" | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | xclip -selection clipboard
 fi
