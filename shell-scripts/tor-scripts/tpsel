@@ -2,27 +2,27 @@
 
 . /usr/local/subr/out.subr
 
-DEPENDENT_PROGRAM='trcd'
-LOG_FILE="/var/log/tor/$DEPENDENT_PROGRAM.log"
+readonly DEP_PROG='trcd'
+readonly LOGF="/var/log/tor/$DEP_PROG.log"
 PID=''
-GREP_OUTPUT=''
+OUT=''
 NUM_OF_LINES=0
 
-if ! pgrep -f "$DEPENDENT_PROGRAM" 1>/dev/null; then
-	pwarn "this program depends on the program $DEPENDENT_PROGRAM, however, it is not running, this might cause some problems"
+if ! pgrep -f "$DEP_PROG" 1>/dev/null; then
+	pwarn "this program depends on the program $DEP_PROG, however, it is not running, this might cause some problems"
 fi
 
-[ ! -e "$LOG_FILE" ] && perr "$LOG_FILE does not exist" && exit 1
-[ ! -s "$LOG_FILE" ] && perr "$LOG_FILE is empty" && exit 1
+[ ! -e "$LOGF" ] && perr "$LOGF does not exist" && exit 1
+[ ! -s "$LOGF" ] && perr "$LOGF is empty" && exit 1
 
-GREP_OUTPUT="$(grep -F '[CURL SUCCESS]' "$LOG_FILE")" || {
-	perr "no suitable tor address that has a successful connection to the tor network was found in logfile $LOG_FILE"
+OUT="$(grep -F '[CURL SUCCESS]' "$LOGF")" || {
+	perr "no suitable tor address that has a successful connection to the tor network was found in logfile $LOGF"
 	exit 1
 }
 
-NUM_OF_LINES="$(echo "$GREP_OUTPUT" | wc -l | cut -d' ' -f1)"
+NUM_OF_LINES="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
 i=1
-echo "$GREP_OUTPUT" | tac | while read -r line; do
+echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
 	if ! ps -p "$PID" 1>/dev/null; then
 		[ "$i" -eq "$NUM_OF_LINES" ] && {
