@@ -82,8 +82,8 @@ bindsym --border button3 nop
 bindsym --whole-window $alt+button3 nop
 
 bindsym $ash+Return exec st
-bindsym ctrl+Shift+p exec dmenu-exec-command
-bindsym $ash+p exec dmenu-exec-command -s
+bindsym ctrl+Shift+p exec dmenu-exec
+bindsym $ash+p exec dmenu-exec -s
 
 bindsym $ash+KP_Enter exec chromium
 bindsym $ash+KP_Page_Down exec chromium --proxy-server="socks5://$(tpsel)"
@@ -97,7 +97,7 @@ bindsym $ash+KP_Page_Up exec libreoffice /home/lancia/Documents/cost-keeping/cos
 
 bindsym --release Print exec  screenshot region
 bindsym --release $alt+Print exec  screenshot full
-bindsym $alt+Menu exec  dictionary
+bindsym $alt+Menu exec  dict
 bindsym $ash+KP_Divide exec thunar
 bindsym $ash+KP_Add exec pavucontrol
 bindsym $ash+KP_Subtract exec XDG_CURRENT_DESKTOP=XFCE telegram-desktop
