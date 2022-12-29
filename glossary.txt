@@ -1,0 +1,4 @@
+PRF: priority file
+CONFF: config file
+CONFD: config directory
+wm: wireless manager
