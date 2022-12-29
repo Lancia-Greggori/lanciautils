@@ -6,7 +6,7 @@ readonly DEV='wlan0'
 readonly CONFD='/etc/wpa_supplicant'
 readonly LOGF='/var/log/wpa.log'
 readonly PRF='/etc/wm.pr'
-readonly TMPF="$(mktemp /tmp/wireless-manager-tmp-XXX)"
+readonly TMPF="$(mktemp)"
 
 ALLOWED_FIRST_ARG_FUNCTION_NAMES='start|stop|restart'
 ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS='list-ssids|info'
@@ -33,7 +33,7 @@ check_for_empty_arg()
 need_root()
 {
 	if [ "$(id -u)" != 0 ]; then
-		perr 'this action has to be executed as root'
+		perr 'need root'
 		exit 1
 	fi
 }
