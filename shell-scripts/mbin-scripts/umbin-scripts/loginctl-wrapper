@@ -8,10 +8,10 @@ if [ "$PROG_NAME" != 'poweroff' ] && [ "$PROG_NAME" != 'reboot' ]; then
 	exit 2
 fi
 
-WHO_OUTPUT="$(who)"
-echo "$WHO_OUTPUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
+WHO_OUT="$(who)"
+echo "$WHO_OUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	perr "somebody else is logged in, cannot poweroff:"
-	echo "$WHO_OUTPUT"
+	echo "$WHO_OUT"
 	exit 3
 }
 

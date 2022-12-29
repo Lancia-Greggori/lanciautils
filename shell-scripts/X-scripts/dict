@@ -1,0 +1,18 @@
+#!/bin/bash -eu
+
+. /usr/local/subr/X.out.subr
+
+INPUT="$(dmenu -p 'Enter word:' < /dev/null)" || exit $?
+OUT="$(hunspell <<< "$INPUT" | sed -r '/^$|^Hunspell [0-9.]+/d')"
+
+if [[ "$OUT" =~ ^# ]]; then
+	perr "Word \"$INPUT\" not found in dictionary"
+	exit 1
+elif [[ "$OUT" =~ ^\*$ ]]; then
+	pmsg 'Word correct'
+	echo "$INPUT" | tr -d '\n' | xclip -selection clipboard
+elif [[ "$OUT" =~ \+\ [[:alnum:]]+ ]]; then
+	printf '%s\n%s' "${OUT#+ }" "$INPUT" | dmenu -p "\"$INPUT\": plural form of \"$SINGULAR_WORD\"" | tr -d '\n' | xclip -selection clipboard
+else
+	cut -d':' -f2 <<< "$OUT" | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | xclip -selection clipboard
+fi

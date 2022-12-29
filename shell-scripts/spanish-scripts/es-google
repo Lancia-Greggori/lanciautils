@@ -5,13 +5,13 @@
 . /usr/local/subr/download.subr
 . /usr/local/subr/html.subr
 
-OUTPUT=''
+OUT=''
 
 for word in "$@"; do
 
 	word="${word/[).]/}"
-	OUTPUT="$(fast_curl "https://google.com/search?q=${word}+significado" | extract_class 'YrbPuc' '' | sed -n -e 's/&#183;/./; 1p')"
-	[ -z "$OUTPUT" ] && OUTPUT='[ERROR]'
-	printf '%s: %s\n' "$word" "$OUTPUT"
+	OUT="$(fast_curl "https://google.com/search?q=${word}+significado" | extract_class 'YrbPuc' '' | sed -n -e 's/&#183;/./; 1p')"
+	[ -z "$OUT" ] && OUT='[ERROR]'
+	printf '%s: %s\n' "$word" "$OUT"
 
 done

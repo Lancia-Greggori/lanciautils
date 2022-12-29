@@ -6,7 +6,7 @@
 
 DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
 EXIT_CODE=0
-OUTPUT=''
+OUT=''
 VERBOSE=0
 
 if [ "$#" -eq 1 ]; then
@@ -22,8 +22,8 @@ diff_files()
 {
 	if [ "$VERBOSE" -eq 1 ]; then
 		echo "($1 -- $2)" | sed 's|/mnt/storage/encrypted|/home|g'
-		OUTPUT="$(diff "$1" "$2")" || {
-			echo "$OUTPUT"
+		OUT="$(diff "$1" "$2")" || {
+			echo "$OUT"
 			[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
 		}
 	else
@@ -35,8 +35,8 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)" && {
-		diff_files "$(echo "$OUTPUT" | cut -d':' -f1)" "$(echo "$OUTPUT" | cut -d':' -f2)"
+	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)" && {
+		diff_files "$(echo "$OUT" | cut -d':' -f1)" "$(echo "$OUT" | cut -d':' -f2)"
 		continue
 	}
 

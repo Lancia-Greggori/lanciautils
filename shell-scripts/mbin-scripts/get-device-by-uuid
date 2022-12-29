@@ -2,10 +2,10 @@
 
 [ "$#" -ne 1 ] && exit 1
 
-BLKID_OUTPUT="$(blkid)"
+BLKID_OUT="$(blkid)"
 
-if [[ "$BLKID_OUTPUT" =~ "UUID=\"$1\"" ]]; then
-	awk -F':' "/$1/ { print \$1 }" <<< "$BLKID_OUTPUT"
+if [[ "$BLKID_OUT" =~ "UUID=\"$1\"" ]]; then
+	awk -F':' "/$1/ { print \$1 }" <<< "$BLKID_OUT"
 else
 	exit 2
 fi

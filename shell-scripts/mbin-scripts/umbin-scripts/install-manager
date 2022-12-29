@@ -6,7 +6,7 @@ done
 
 . /usr/local/subr/out.subr
 
-OUTPUT=''
+OUT=''
 TARGET=''
 PERM=''
 
@@ -27,9 +27,9 @@ if [ -n "$TARGET" ]; then
 else
 
 	for file in "$@"; do
-		if OUTPUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
-			TARGET="$(echo "$OUTPUT" | cut -d':' -f2)"
-			PERM="${OUTPUT##*:}"
+		if OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
+			TARGET="$(echo "$OUT" | cut -d':' -f2)"
+			PERM="${OUT##*:}"
 			file="${file%%:*}"
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$PERM" "$file" "$TARGET"

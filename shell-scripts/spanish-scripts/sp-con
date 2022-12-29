@@ -5,7 +5,7 @@
 . /usr/local/subr/download.subr
 . /usr/local/subr/html.subr
 
-OUTPUT=''
+OUT=''
 CLASS_PATTERN='(verb-(translation|pronoun|entry verb-(normal|irregular|orto)))'
 NO_PRONOUNS=0
 
@@ -23,18 +23,18 @@ for word in "$@"; do
 	word="${word/./}"
 	[[ "$word" =~ ^[a-z-]+/ ]] || word="present-tense/$word"
 
-	OUTPUT="$(fast_curl "https://www.spanishconjugation.net/${word}/")"
-	[[ "$OUTPUT" =~ 'Nothing Found' ]] && {
+	OUT="$(fast_curl "https://www.spanishconjugation.net/${word}/")"
+	[[ "$OUT" =~ 'Nothing Found' ]] && {
 		echo '[ERROR]'
 	}
 
-	OUTPUT="$(extract_class "$CLASS_PATTERN" '' <<< "$OUTPUT")"
+	OUT="$(extract_class "$CLASS_PATTERN" '' <<< "$OUT")"
 	echo -n "@${word##*/}: "
 	[ $NO_PRONOUNS -eq 1 ] && {
-		echo "$OUTPUT"
+		echo "$OUT"
 		continue
 	}
 	awk 'BEGIN { i=1 }\
-		{ if(i==1){ printf("%s\n",$0); i=0; } else { printf("%s ",$0); i++; } }' <<< "$OUTPUT"
+		{ if(i==1){ printf("%s\n",$0); i=0; } else { printf("%s ",$0); i++; } }' <<< "$OUT"
 
 done
