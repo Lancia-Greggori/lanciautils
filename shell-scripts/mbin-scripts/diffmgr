@@ -4,8 +4,8 @@
 
 . /usr/local/subr/out.subr
 
-DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
-EXIT_CODE=0
+readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
+EXIT=0
 OUT=''
 VERBOSE=0
 
@@ -24,7 +24,7 @@ diff_files()
 		echo "($1 -- $2)" | sed 's|/mnt/storage/encrypted|/home|g'
 		OUT="$(diff "$1" "$2")" || {
 			echo "$OUT"
-			[ "$EXIT_CODE" -ne 1 ] && EXIT_CODE=1
+			[ "$EXIT" -ne 1 ] && EXIT=1
 		}
 	else
 		diff -q "$1" "$2" 1>/dev/null || echo "$1" -- "$2"
@@ -42,12 +42,12 @@ for file in "$@"; do
 
 	for dir in $DIRS; do
 
-		TARGET_FILE="$dir/${file##*/}"
-		[ ! -e "$TARGET_FILE" ] && continue
-		diff_files "$file" "$TARGET_FILE"
+		TARGETF="$dir/${file##*/}"
+		[ ! -e "$TARGETF" ] && continue
+		diff_files "$file" "$TARGETF"
 
 	done
 
 done
 
-exit "$EXIT_CODE"
+exit "$EXIT"
