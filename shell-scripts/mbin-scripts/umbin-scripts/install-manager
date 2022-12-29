@@ -34,7 +34,7 @@ else
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$PERM" "$file" "$TARGET"
 		else
-			perr "file \"$file\" not found in /letc/global-filelist"
+			perr "$file: file not found in /letc/global-filelist"
 			exit 2
 		fi
 	done

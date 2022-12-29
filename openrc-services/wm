@@ -8,5 +8,5 @@ depend()
 
 start()
 {
-	wireless-manager start priority-scan
+	wm start priority-scan
 }
