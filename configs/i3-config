@@ -78,9 +78,6 @@ bar {
         status_command i3status
 }
 
-bindsym --border button3 nop
-bindsym --whole-window $alt+button3 nop
-
 bindsym $ash+Return exec st
 bindsym ctrl+Shift+p exec dmenu-exec
 bindsym $ash+p exec dmenu-exec -s
@@ -95,16 +92,18 @@ bindsym $ash+KP_Begin exec tor-clean
 bindsym $ash+KP_Multiply exec libreoffice
 bindsym $ash+KP_Page_Up exec libreoffice /home/lancia/Documents/cost-keeping/costs.ods
 
-bindsym --release Print exec  screenshot region
-bindsym --release $alt+Print exec  screenshot full
 bindsym $alt+Menu exec  dict
 bindsym $ash+KP_Divide exec thunar
 bindsym $ash+KP_Add exec pavucontrol
 bindsym $ash+KP_Subtract exec XDG_CURRENT_DESKTOP=XFCE telegram-desktop
+bindsym $alt+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $alt+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+bindsym --release Print exec  screenshot region
+bindsym --release $alt+Print exec  screenshot full
+bindsym --release $alt+Scroll_Lock exec xset dpms force off
+
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
 bindsym $alt+Super_L exec --no-startup-id setxkbmap ir
 bindsym Scroll_Lock exec --no-startup-id setxkbmap us && slock
-bindsym --release $alt+Scroll_Lock exec xset dpms force off
-bindsym $alt+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $alt+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
