@@ -95,6 +95,7 @@ bindsym $ash+KP_Page_Up exec libreoffice /home/lancia/Documents/cost-keeping/cos
 bindsym $alt+Menu exec  dict
 bindsym $ash+KP_Divide exec thunar
 bindsym $ash+KP_Add exec pavucontrol
+bindsym $ash+KP_Right exec st cmus
 bindsym $ash+KP_Subtract exec XDG_CURRENT_DESKTOP=XFCE telegram-desktop
 bindsym $alt+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym $alt+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
