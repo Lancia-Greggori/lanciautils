@@ -35,6 +35,10 @@ function ExecCmd(cmd)
 	endif
 endfunction
 
+function DelEmptyLines()
+	%g/^[\s\t]*$/d
+endfunction
+
 if ($USER == 'lancia')
 	source /home/lancia/.vimconf
 endif

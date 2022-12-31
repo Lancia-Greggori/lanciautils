@@ -30,3 +30,5 @@ unset MANPATH
 [ -e /etc/env ] && . /etc/env
 
 tty | grep -qFv '/dev/tty1' && tty-setup
+
+[ "$(readlink -f "$SHELL")" = '/usr/bin/dash' ] && export ENV="$HOME/.shrc"
