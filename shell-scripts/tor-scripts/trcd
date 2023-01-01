@@ -35,7 +35,7 @@ while true; do
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
 		if ! pgrep -f "nobody-curl --socks5 $SOCKS5_ADDR $CURL_ARGS" 1>/dev/null; then
 			if nobody-curl --socks5 "$SOCKS5_ADDR" $CURL_ARGS 0<&- 1>/dev/null 2>&1; then
-				log "[CURL SUCCESS]: $SOCKS5_ADDR,$PID"
+				log "[CURL SUCC]: $SOCKS5_ADDR,$PID"
 			else
 				log "[CURL FAIL]: $SOCKS5_ADDR,$PID"
 			fi
@@ -47,7 +47,7 @@ while true; do
 			sleep 1s
 		done
 		TMP="$(mktemp)"
-		grep -F '[CURL SUCCESS]' "$LOGF" | tail -n20 > "$TMP"
+		grep -F '[CURL SUCC]' "$LOGF" | tail -n20 > "$TMP"
 		cat "$TMP" > "$LOGF"
 		rm "$TMP"
 	fi

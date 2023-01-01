@@ -1,20 +1,18 @@
 #!/bin/sh -eu
 
 . /usr/local/subr/out.subr
-
-readonly DEP_PROG='trcd'
-readonly LOGF="/var/log/tor/$DEP_PROG.log"
+readonly DEP='trcd'
+readonly LOGF="/var/log/tor/$DEP.log"
 PID=''
 OUT=''
 
-pgrep -f "$DEP_PROG" 1>/dev/null || pwarn "program \"$DEP_PROG\" not running, problems might occur"
-
+pgrep -f "$DEP" 1>/dev/null || pwarn "program \"$DEP\" not running, problems might occur"
 if [ ! -e "$LOGF" ]; then
 	exit 2
 elif [ ! -s "$LOGF" ]; then
 	perr "$LOGF empty"
 	exit 3
-elif ! OUT="$(grep -F '[CURL SUCCESS]' "$LOGF")"; then
+elif ! OUT="$(grep -F '[CURL SUCC]' "$LOGF")"; then
 	perr "no tor address with a successful connection to the tor network was found in $LOGF"
 	exit 4
 fi
@@ -23,7 +21,7 @@ NUML="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
 i=1
 echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
-	if ! ps -A -o pid,cmd | grep -q "^ $PID.*tor"; then
+	if ! ps -A -o pid,cmd | grep -q "^ $PID /usr/bin/tor"; then
 		[ "$i" -eq "$NUML" ] && {
 			perr "no suitable tor address associated with a running process was found"
 			exit 1
@@ -31,7 +29,6 @@ echo "$OUT" | tac | while read -r line; do
 		i="$((i+1))"
 		continue
 	fi
-
 	echo "$line" | grep -oE '([0-9]{1,3}.){3}[0-9]{1,3}:[0-9]+'
 	break
 done
