@@ -2,5 +2,5 @@
 for file in /var/log/tor/tor*.log; do
 	LOGF="$(basename "$file" '.log')"
 	PID="$(pgrep -f "$LOGF")" || PID='?'
-	printf '%s pid=%s:\t%s\n' "$LOGF" "$PID" "$(grep -o '[0-9]\+%' "$file" | tail -n1)"
+	printf '%s pid=%i:\t%s\n' "$LOGF" "$PID" "$(grep -o '[0-9]\+%' "$file" | tail -n1)"
 done
