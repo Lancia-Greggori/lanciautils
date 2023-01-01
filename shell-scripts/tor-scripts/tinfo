@@ -1,4 +1,4 @@
 #!/bin/sh -e
-for file in /var/log/tor/tor*; do
+for file in /var/log/tor/tor*.log; do
 	printf '%s: %s\n' "${file##*/}" "$(grep -o '[0-9]\+%' "$file" | tail -n1)"
 done
