@@ -5,3 +5,4 @@ wm: wireless manager
 OUT: output
 dict: dictionary
 PROGN: program name
+NUML: number of lines
