@@ -23,7 +23,7 @@ NUML="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
 i=1
 echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
-	if ! ps -A -o pid,cmd | grep -q "^ $PID"; then
+	if ! ps -A -o pid,cmd | grep -q "^ $PID.*tor"; then
 		[ "$i" -eq "$NUML" ] && {
 			perr "no suitable tor address associated with a running process was found"
 			exit 1
