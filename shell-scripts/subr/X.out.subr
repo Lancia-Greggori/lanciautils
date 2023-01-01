@@ -1,4 +1,4 @@
-PROGN="${0##*/}"
+readonly PROGN="${0##*/}"
 print(){ notify-send "$1" ; }
 pmsg(){ notify-send "$PROGN: [MSG]: $1" ; }
 perr(){ notify-send "$PROGN: [ERROR]: $1" ; }
