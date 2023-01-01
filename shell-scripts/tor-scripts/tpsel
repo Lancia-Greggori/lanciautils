@@ -7,9 +7,7 @@ readonly LOGF="/var/log/tor/$DEP_PROG.log"
 PID=''
 OUT=''
 
-if ! pgrep -f "$DEP_PROG" 1>/dev/null; then
-	pwarn "program \"$DEP_PROG\", problems might occur"
-fi
+pgrep -f "$DEP_PROG" 1>/dev/null || pwarn "program \"$DEP_PROG\" not running, problems might occur"
 
 if [ ! -e "$LOGF" ]; then
 	exit 2
@@ -17,7 +15,7 @@ elif [ ! -s "$LOGF" ]; then
 	perr "$LOGF empty"
 	exit 3
 elif ! OUT="$(grep -F '[CURL SUCCESS]' "$LOGF")"; then
-	perr "no suitable tor address that has a successful connection to the tor network was found in $LOGF"
+	perr "no tor address with a successful connection to the tor network was found in $LOGF"
 	exit 4
 fi
 
@@ -25,7 +23,7 @@ NUML="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
 i=1
 echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
-	if ! ps -p "$PID" 1>/dev/null; then
+	if ! ps -A -o pid,cmd | grep -q "^ $PID"; then
 		[ "$i" -eq "$NUML" ] && {
 			perr "no suitable tor address associated with a running process was found"
 			exit 1
