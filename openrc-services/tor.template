@@ -45,7 +45,7 @@ checkconfig() {
 }
 
 start_pre() {
-	checkconfig
+	checkconfig || return $?
 
 	checkpath -d -m 0755 -o tor:tor "${logf%/*}"
 	checkpath -f -F -m 0644 -o tor:tor "$logf"
