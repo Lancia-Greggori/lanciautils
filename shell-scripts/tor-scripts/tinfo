@@ -1,4 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 for file in /var/log/tor/tor*.log; do
-	printf '%s: %s\n' "${file##*/}" "$(grep -o '[0-9]\+%' "$file" | tail -n1)"
+	LOGF="$(basename "$file" '.log')"
+	PID="$(pgrep -f "$LOGF")" || PID='?'
+	printf '%s pid=%s:\t%s\n' "$LOGF" "$PID" "$(grep -o '[0-9]\+%' "$file" | tail -n1)"
 done
