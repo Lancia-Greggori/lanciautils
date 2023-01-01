@@ -4,3 +4,4 @@ CONFD: config directory
 wm: wireless manager
 OUT: output
 dict: dictionary
+PROGN: program name

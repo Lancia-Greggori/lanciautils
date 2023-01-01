@@ -1,7 +1,8 @@
 #!/bin/sh -eu
 
 . /usr/local/subr/out.subr
-readonly LOGF="/var/log/tor/$PROG_NAME.log"
+
+readonly LOGF="/var/log/tor/$PROGN.log"
 readonly CURL_ARGS='--silent -L https://html.duckduckgo.com'
 SOCKS5_ADDR=''
 PID=''

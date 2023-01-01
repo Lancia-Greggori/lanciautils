@@ -205,7 +205,7 @@ case "$1" in
 	start)
 		check_for_empty_arg "$2"
 		if pgrep -f wpa_supplicant 1>/dev/null; then
-			perr "there is already a wpa_supplicant process already running, use \"$PROG_NAME stop\" to kill it and try again"
+			perr "there is already a wpa_supplicant process already running, use \"$PROGN stop\" to kill it and try again"
 			exit 1
 		fi
 		start_desired_scan "$2" "$3"

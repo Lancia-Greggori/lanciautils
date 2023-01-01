@@ -10,7 +10,7 @@ OUT=''
 TARGET=''
 PERM=''
 
-case "$PROG_NAME" in
+case "$PROGN" in
 	li) TARGET='/home/lancia/.lsr/lmbin'; PERM=0755 ;;
 	ui) TARGET='/usr/local/umbin'; PERM=0755 ;;
 	si) TARGET='/usr/local/subr'; PERM=0644 ;;

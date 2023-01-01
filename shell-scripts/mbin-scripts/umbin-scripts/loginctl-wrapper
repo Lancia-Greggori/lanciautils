@@ -4,7 +4,7 @@
 
 . /usr/local/subr/out.subr
 
-if [ "$PROG_NAME" != 'poweroff' ] && [ "$PROG_NAME" != 'reboot' ]; then
+if [ "$PROGN" != 'poweroff' ] && [ "$PROGN" != 'reboot' ]; then
 	exit 2
 fi
 
@@ -16,13 +16,13 @@ echo "$WHO_OUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 }
 
 [ "$#" -eq 1 ] && case "$1" in
-	-f|--force) exec loginctl "$PROG_NAME";;
+	-f|--force) exec loginctl "$PROGN";;
 	*) exit 4 ;;
 esac
 
 pgrep Xorg 1>/dev/null && {
-	perr "an Xorg session is already running, cannot $PROG_NAME"
+	perr "an Xorg session is already running, cannot $PROGN"
 	exit 5
 }
 
-loginctl "$PROG_NAME"
+loginctl "$PROGN"

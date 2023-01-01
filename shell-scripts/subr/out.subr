@@ -1,3 +1,3 @@
-readonly PROG_NAME="${0##*/}"
-perr(){ echo "$PROG_NAME: [ERROR]: $1" 1>&2 ; }
-pwarn(){ echo "$PROG_NAME: [WARNING]: $1" 1>&2 ; }
+readonly PROGN="${0##*/}"
+perr(){ echo "$PROGN: [ERROR]: $1" 1>&2 ; }
+pwarn(){ echo "$PROGN: [WARNING]: $1" 1>&2 ; }

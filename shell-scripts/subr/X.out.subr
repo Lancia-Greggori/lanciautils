@@ -1,5 +1,5 @@
-PROG_NAME="${0##*/}"
+PROGN="${0##*/}"
 print(){ notify-send "$1" ; }
-pmsg(){ notify-send "$PROG_NAME: [MSG]: $1" ; }
-perr(){ notify-send "$PROG_NAME: [ERROR]: $1" ; }
-pwarn(){ notify-send "$PROG_NAME: [WARNING]: $1" ; }
+pmsg(){ notify-send "$PROGN: [MSG]: $1" ; }
+perr(){ notify-send "$PROGN: [ERROR]: $1" ; }
+pwarn(){ notify-send "$PROGN: [WARNING]: $1" ; }

@@ -2,7 +2,7 @@
 
 . /usr/local/subr/X.out.subr
 
-INPUT="$(dmenu -p "$PROG_NAME:" < /dev/null)" || exit $?
+INPUT="$(dmenu -p "$PROGN:" < /dev/null)" || exit $?
 OUT="$(hunspell <<< "$INPUT" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 
 if [[ "$OUT" =~ ^# ]]; then
