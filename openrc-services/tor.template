@@ -11,10 +11,8 @@ supervisor='supervise-daemon'
 stopsig='INT'
 rc_ulimit='-n 3000'
 extra_commands='checkconfig'
-
 logf="/var/log/tor/${RC_SVCNAME}.log"
 datad="/var/lib/tor/${RC_SVCNAME}"
-
 conf="/etc/tor/torrc-${RC_SVCNAME#tor-}"
 command_args="-f $conf --hush"
 
@@ -49,7 +47,6 @@ start_pre() {
 
 	checkpath -d -m 0755 -o tor:tor "${logf%/*}"
 	checkpath -f -F -m 0644 -o tor:tor "$logf"
-
 	checkpath -d -m 0700 -o tor:tor "${datad%/*}"
 	checkpath -d -m 0700 -o tor:tor "$datad"
 }
