@@ -1,6 +1,6 @@
 #!/bin/sh -e
-for file in /var/log/tor/tor*.log; do
-	LOGF="$(basename "$file" '.log')"
-	pgrep -f "$LOGF" 1>/dev/null || WARN='(pid not found)'
-	printf '%s: %s %s\n' "$LOGF" "$(grep -o '[0-9]\+%' "$file" | tail -n1)" "$WARN"
+for f in /var/log/tor/tor*.log; do
+	L="$(basename "$f" '.log')"
+	pgrep -f "$L" 1>/dev/null || W='(pid not found)'
+	printf '%s: %s %s\n' "$L" "$(grep -o '[0-9]\+%' "$f" | tail -n1)" "$W"
 done
