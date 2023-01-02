@@ -1,3 +1,7 @@
 readonly PROGN="${0##*/}"
 perr(){ echo "$PROGN: [ERROR]: $1" 1>&2 ; }
+perrexit(){
+	echo "$PROGN: [ERROR]: $1" 1>&2
+	exit $2
+}
 pwarn(){ echo "$PROGN: [WARNING]: $1" 1>&2 ; }

@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+for f in "$@"; do
+	sed "s/$1=/$2=/g; s/\$$1/\$$2/g s/\${$1/\${$2/g" "$f"
+done

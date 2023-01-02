@@ -1,3 +1,2 @@
 #!/bin/sh
-
-setxkbmap us && slock
+setxkbmap us && xset dpms force off && slock
