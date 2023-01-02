@@ -1,2 +1,2 @@
 #!/bin/sh -e
-FULL_ADDR="$(tpsel)" && exec torsocks -a "${FULL_ADDR%%:*}" -P "${FULL_ADDR##*:}" "$@"
+A="$(tpsel)" && exec torsocks -a "${A%%:*}" -P "${A##*:}" "$@"
