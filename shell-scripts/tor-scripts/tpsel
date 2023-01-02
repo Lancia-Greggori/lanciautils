@@ -17,12 +17,12 @@ elif ! OUT="$(grep -F '[CURL SUCC]' "$LOGF")"; then
 	exit 4
 fi
 
-NUML="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
+NOL="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
 i=1
 echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
 	if ! pgrep -f /usr/bin/tor | grep -q $PID; then
-		[ "$i" -eq "$NUML" ] && {
+		[ "$i" -eq "$NOL" ] && {
 			perr "no suitable tor address associated with a running process was found"
 			exit 5
 		}
