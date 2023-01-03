@@ -11,23 +11,17 @@
 
 int main(int argc, char *argv[]) {
 
+	if(argc < 2) return 1;
+
+	int uid;
 	int cmdline_arg_size = 0;
 	for (int i = 1; i < argc; i++) cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
 	if (cmdline_arg_size > MAX_ALLOWED_CMDLINE_ARG_SIZE) {
-		fprintf(stderr, "priv: [ERROR]: size of passed command line argument(s) is longer than the max allowed %i characters\n", MAX_ALLOWED_CMDLINE_ARG_SIZE);
-		return 1;
-	}
-
-	int uid;
-	if (argc < 2) {
-		fprintf(stderr, "priv: [ERROR]: priv needs at least one argument\n");
-		return 1;
+		return 2;
 	} else if ( access(DEFAULT_ALLOWED_COMMANDS_FILE, R_OK) != 0 ) {
-		fprintf(stderr, "priv: [ERROR]: %s is either not readable or does not exist\n", DEFAULT_ALLOWED_COMMANDS_FILE);
-		return 1;
+		return 3;
 	} else if ( ( uid = getuid() ) != AUTHORISED_UID ) {
-		fprintf(stderr, "priv: [ERROR]: the user executing this program with uid %i does not match the allowed uid %i, permission denied\n", uid, AUTHORISED_UID);
-		return 1;
+		return 4;
 	}
 
 	char command[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
@@ -43,18 +37,16 @@ int main(int argc, char *argv[]) {
 
 	FILE *fp;
 	fp = fopen(DEFAULT_ALLOWED_COMMANDS_FILE, "r");
-	char temp_array[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
+	char tmp[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
 	int character = 0;
 	for (int i = 0; character != EOF; i++) {
 		if (i > MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE) {
-			fprintf(stderr, "priv: [ERROR]: one of the lines in config file %s is higher than the allowed %i character limit (excluding the newline)\n", \
-					DEFAULT_ALLOWED_COMMANDS_FILE, MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE);
-			return 1;
+			return 5;
 		}
 		character = getc(fp);
 		if (character == '\n') {
-			temp_array[i] = '\0';
-			if (strcmp(command, temp_array) == 0) {
+			tmp[i] = '\0';
+			if (strcmp(command, tmp) == 0) {
 				setuid(0);
 				clearenv();
 				setenv("PATH", AUTHORISED_PATH, 1);
@@ -63,9 +55,7 @@ int main(int argc, char *argv[]) {
 			} else {
 				i = -1;
 			}
-		} else temp_array[i] = character;
+		} else tmp[i] = character;
 	}
-	fprintf(stderr, "priv: [ERROR]: the command you entered was not found in %s\n", DEFAULT_ALLOWED_COMMANDS_FILE);
-
-	return 1;
+	return 6;
 }
