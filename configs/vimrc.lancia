@@ -1,12 +1,3 @@
-autocmd BufNewFile,BufRead *i3* set filetype=i3config
-autocmd BufNewFile,BufRead *bash* set filetype=bash
-autocmd BufNewFile,BufRead /etc/init.d/*,*.subr,*lancia-utils/configs/profile,*lancia-utils/openrc-services/* set filetype=sh
-autocmd BufNewFile,BufRead */Spanish/* set filetype=spanish
-autocmd BufNewFile,BufRead */Documents/artix/forum/* {
-	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
-	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
-	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
-}
 autocmd FileType c {
 	nnoremap <buffer> <F2> :!./a.out<nl>
 	nnoremap <buffer> <F3> :call ExecCmd('gcc -Wall -g '.expand('%:p'))<nl>
@@ -20,4 +11,14 @@ autocmd FileType bash,sh {
 autocmd FileType spanish {
 	nnoremap <buffer> <F2> :!hunspell -d es %:p
 	nnoremap <buffer> <F3> :!hunspell -d en_US,es %:p
+}
+
+autocmd BufNewFile,BufRead *i3* set filetype=i3config
+autocmd BufNewFile,BufRead *bash* set filetype=bash
+autocmd BufNewFile,BufRead /etc/init.d/*,*.subr,*lancia-utils/configs/profile,*lancia-utils/openrc-services/* set filetype=sh
+autocmd BufNewFile,BufRead */Spanish/* set filetype=spanish
+autocmd BufNewFile,BufRead */Documents/artix/forum/* {
+	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
+	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
+	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
 }
