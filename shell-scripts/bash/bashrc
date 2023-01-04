@@ -32,5 +32,6 @@ ulimit -c 1000
 alias vt="v $HOME/.tasks"
 alias vct="v $HOME/.current_tasks"
 alias vtmp='v /tmp/vtmp'
+alias vtmpes='v /tmp/vtmpes'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
