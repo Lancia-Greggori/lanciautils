@@ -8,7 +8,7 @@ autocmd FileType bash,sh {
 	nnoremap <buffer> <F3> :call ExecCmd(&filetype.' -n '.expand('%:p'))<nl>
 	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
-autocmd FileType spanish {
+autocmd FileType es {
 	nnoremap <buffer> <F2> :!spell -d es %:p
 	nnoremap <buffer> <F3> :!spell -d en_US,es %:p
 }
@@ -16,7 +16,7 @@ autocmd FileType spanish {
 autocmd BufNewFile,BufRead *i3* set filetype=i3config
 autocmd BufNewFile,BufRead *bash* set filetype=bash
 autocmd BufNewFile,BufRead /etc/init.d/*,*.subr,*lancia-utils/configs/profile,*lancia-utils/openrc-services/* set filetype=sh
-autocmd BufNewFile,BufRead */Spanish/* set filetype=spanish
+autocmd BufNewFile,BufRead /tmp/vtmpes,*/Spanish/* set filetype=es
 autocmd BufNewFile,BufRead */Documents/artix/forum/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
