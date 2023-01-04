@@ -4,7 +4,7 @@ floating_modifier $alt
 
 default_border pixel 1
 default_floating_border pixel 1
-default_orientation vertical
+default_orientation horizontal
 font pango:monospace 11
 
 bindsym $ash+c kill
