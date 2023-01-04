@@ -23,7 +23,7 @@ shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s histappend
 stty stop ''
-ulimit -c 1000000
+ulimit -c 1000
 
 . /usr/local/subr/download.subr
 . /etc/aliasrc
