@@ -4,6 +4,7 @@
 #define DEFAULT_BUFF_SIZE 100
 
 int main(int argc, char* argv[]) {
+	if(argc < 2) return 1;
 	int size = DEFAULT_BUFF_SIZE;
 	char* buff = calloc(size, 1);
 	char c;
