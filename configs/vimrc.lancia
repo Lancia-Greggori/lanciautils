@@ -9,8 +9,8 @@ autocmd FileType bash,sh {
 	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
 autocmd FileType spanish {
-	nnoremap <buffer> <F2> :!hunspell -d es %:p
-	nnoremap <buffer> <F3> :!hunspell -d en_US,es %:p
+	nnoremap <buffer> <F2> :!spell -d es %:p
+	nnoremap <buffer> <F3> :!spell -d en_US,es %:p
 }
 
 autocmd BufNewFile,BufRead *i3* set filetype=i3config

@@ -5,7 +5,6 @@ HISTFILE="$HOME/.bash_history"
 HISTFILESIZE=999999
 HISTSIZE=99999
 PS1='$ $?: '
-EDITOR=v
 
 bind "\C-l":clear-screen
 bind "\C-f":reverse-search-history
@@ -18,12 +17,12 @@ bind "\C-e":end-of-line
 bind '"\C-r":". $HOME/.bashrc\n"'
 bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
 
+set -o vi
 shopt -s autocd
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s histappend
 stty stop ''
-set -o vi
 ulimit -c 1000000
 
 . /usr/local/subr/download.subr
@@ -32,6 +31,6 @@ ulimit -c 1000000
 
 alias vt="v $HOME/.tasks"
 alias vct="v $HOME/.current_tasks"
-alias vtmp='v /tmp/v-tmp'
+alias vtmp='v /tmp/vtmp'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
