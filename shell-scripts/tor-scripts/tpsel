@@ -10,11 +10,9 @@ pgrep -f "$DEP" 1>/dev/null || pwarn "program \"$DEP\" not running, problems mig
 if [ ! -e "$LOGF" ]; then
 	exit 2
 elif [ ! -s "$LOGF" ]; then
-	perr "$LOGF empty"
-	exit 3
+	perrexit "$LOGF empty" 3
 elif ! OUT="$(grep -F '[CURL SUCC]' "$LOGF")"; then
-	perr "no tor address with a successful connection to the tor network was found in $LOGF"
-	exit 4
+	perrexit "no tor address with a successful connection to the tor network was found in $LOGF" 4
 fi
 
 NOL="$(echo "$OUT" | wc -l | cut -d' ' -f1)"
@@ -22,10 +20,8 @@ i=1
 echo "$OUT" | tac | while read -r line; do
 	PID="$(echo "$line" | grep -o 'pid=[0-9]\+' | cut -d'=' -f2)"
 	if ! pgrep -f /usr/bin/tor | grep -q $PID; then
-		[ "$i" -eq "$NOL" ] && {
-			perr "no suitable tor address associated with a running process was found"
-			exit 5
-		}
+		[ "$i" -eq "$NOL" ] \
+			&& perrexit "no suitable tor address associated with a running process was found" 5
 		i="$((i+1))"
 		continue
 	fi
