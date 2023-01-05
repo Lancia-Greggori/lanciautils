@@ -102,7 +102,7 @@ bindsym $alt+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SIN
 
 bindsym --release Print exec  screenshot region
 bindsym --release $alt+Print exec  screenshot full
-bindsym --release $alt+Scroll_Lock exec xset dpms force off
+bindsym --release $alt+Scroll_Lock exec xlock
 
 bindsym Super_L exec --no-startup-id setxkbmap us
 bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
