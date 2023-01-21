@@ -25,7 +25,7 @@ shopt -s histappend
 stty stop ''
 ulimit -c 1000
 
-. /usr/subr/download
+. /usr/subr/dl
 . /etc/aliasrc
 . "$HOME"/.bash_functions
 
