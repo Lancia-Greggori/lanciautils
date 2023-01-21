@@ -1,8 +1,0 @@
-#!/bin/sh -eu
-
-[ "$#" -ne 1 ] && exit 1
-
-FILTER_PATTERN='^"(contextE|textE)(n|s)"|^"translation"|"(feminine|masculine|masculine or feminine) noun"'
-
-curl --silent -L --user-agent "$USER_AGENT" "https://www.spanishdict.com/translate/$1" | grep -o '"[^"]\+":"[^"]\+"' | \
-	grep -E "$FILTER_PATTERN" | sed -e 's/"//g' -e 's/:/: /'
