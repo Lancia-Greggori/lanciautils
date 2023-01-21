@@ -35,7 +35,7 @@ for file in "$@"; do
 
 	[ ! -f "$file" ] && continue
 
-	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)" && {
+	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)" && {
 		diff_files "$(echo "$OUT" | cut -d':' -f1)" "$(echo "$OUT" | cut -d':' -f2)"
 		continue
 	}

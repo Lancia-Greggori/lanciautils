@@ -6,4 +6,4 @@
 }
 [ "$(id -u)" -ne 0 ] && exit 2
 
-exec echo "$(readlink -f "$1"):$(readlink -f "$2"):$3" >> /letc/global-filelist
+exec echo "$(readlink -f "$1"):$(readlink -f "$2"):$3" >> /letc/swfl
