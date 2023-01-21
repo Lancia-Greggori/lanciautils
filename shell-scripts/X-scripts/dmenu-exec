@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-. /usr/subr/X.out.subr
+. /usr/subr/Xout
 
 CMDLINE="$(dmenu < /dev/null)"
 [ -z "$CMDLINE" ] && exit 0

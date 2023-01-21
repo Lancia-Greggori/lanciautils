@@ -2,7 +2,7 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/subr/out.subr
+. /usr/subr/out
 
 SED_REMOVE_ENDING_SPACE_PATTERN='s/ \+$//'
 BASE_DEVEL_PKGS="$(pacman -Sg base-devel | cut -d' ' -f2 | tr '\n' ' ' | sed "$SED_REMOVE_ENDING_SPACE_PATTERN")"
