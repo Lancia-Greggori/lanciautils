@@ -4,7 +4,7 @@ for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
 done
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
 OUT=''
 TARGET=''
@@ -13,7 +13,7 @@ PERM=''
 case "$PROGN" in
 	li) TARGET='/home/lancia/.lsr/lmbin'; PERM=0755 ;;
 	ui) TARGET='/usr/local/umbin'; PERM=0755 ;;
-	si) TARGET='/usr/local/subr'; PERM=0644 ;;
+	si) TARGET='/usr/subr'; PERM=0644 ;;
 	eii) TARGET='/etc/init.d'; PERM=0755 ;;
 esac
 
@@ -27,14 +27,14 @@ if [ -n "$TARGET" ]; then
 else
 
 	for file in "$@"; do
-		if OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/global-filelist)"; then
+		if OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)"; then
 			TARGET="$(echo "$OUT" | cut -d':' -f2)"
 			PERM="${OUT##*:}"
 			file="${file%%:*}"
 			echo "$file --> $TARGET" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$PERM" "$file" "$TARGET"
 		else
-			perr "$file: file not found in /letc/global-filelist"
+			perr "$file: file not found in /letc/swfl"
 			exit 2
 		fi
 	done

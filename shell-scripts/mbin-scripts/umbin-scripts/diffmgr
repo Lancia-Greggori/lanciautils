@@ -2,9 +2,9 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
-readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/local/subr'
+readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/subr'
 EXIT=0
 OUT=''
 VERBOSE=0

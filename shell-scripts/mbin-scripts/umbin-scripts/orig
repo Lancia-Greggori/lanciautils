@@ -2,7 +2,7 @@
 
 [ "$#" -eq 0 ] && exit 1
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
 for file in "$@"; do
 	[ ! -f "$file" ] && {

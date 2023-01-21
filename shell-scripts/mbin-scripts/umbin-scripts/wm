@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
 readonly DEV='wlan0'
 readonly CONFD='/etc/wpa_supplicant'

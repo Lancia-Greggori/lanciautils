@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
 [ ! -e PKGBUILD ] && {
 	perr "PKGBUILD file not found"

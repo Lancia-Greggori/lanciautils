@@ -2,7 +2,7 @@
 
 [ "$#" -gt 1 ] && exit 1
 
-. /usr/local/subr/out.subr
+. /usr/subr/out.subr
 
 if [ "$PROGN" != 'poweroff' ] && [ "$PROGN" != 'reboot' ]; then
 	exit 2

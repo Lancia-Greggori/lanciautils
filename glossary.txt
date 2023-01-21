@@ -7,3 +7,4 @@ dict: dictionary
 PROGN: program name
 NUML: number of lines
 NOL: number of lines
+swfl: system wide file list
