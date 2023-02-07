@@ -13,7 +13,9 @@ append_path '/usr/local/sbin'
 append_path '/usr/local/bin'
 
 PATH="/usr/local/busybox:/usr/local/umbin:$PATH"
-export PATH
+EDITOR=vim
+PAGER=less
+export PATH EDITOR PAGER
 
 if test -d /etc/profile.d/; then
     for profile in /etc/profile.d/*.sh; do
@@ -23,12 +25,7 @@ if test -d /etc/profile.d/; then
 fi
 
 unset -f append_path
-
 unset TERMCAP
 unset MANPATH
 
-[ -e /etc/env ] && . /etc/env
-
-tty | grep -qFv '/dev/tty1' && tty-setup
-
-[ "$(readlink -f "$SHELL")" = '/usr/bin/dash' ] && export ENV="$HOME/.shrc"
+setfont /usr/share/kbd/consolefonts/solar24x32.psfu.gz
