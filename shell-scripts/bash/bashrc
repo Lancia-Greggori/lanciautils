@@ -1,20 +1,18 @@
 [[ ! "$-" =~ i ]] && return
 
 HISTCONTROL='ignoredups'
-HISTFILE="$HOME/.bash_history"
+HISTFILE="$HOME/.bashhst"
 HISTFILESIZE=999999
 HISTSIZE=99999
 PS1='$ $?: '
 
 bind "\C-l":clear-screen
-bind "\C-f":reverse-search-history
 bind -r "\C-s"
 bind -r "\C-p"
 bind "\C-s":vi-movement-mode
 bind "\C-x":vi-movement-mode
 bind "\C-a":beginning-of-line
 bind "\C-e":end-of-line
-bind '"\C-r":". $HOME/.bashrc\n"'
 bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
 
 set -o vi
@@ -27,7 +25,7 @@ ulimit -c 1000
 
 . /usr/subr/dl
 . /etc/aliasrc
-. "$HOME"/.bash_functions
+. "$HOME"/.bashfuncs
 
 alias vt="v $HOME/.tasks"
 alias vct="v $HOME/.current_tasks"
