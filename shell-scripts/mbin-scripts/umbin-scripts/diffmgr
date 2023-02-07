@@ -21,7 +21,7 @@ fi
 diff_files()
 {
 	if [ "$VERBOSE" -eq 1 ]; then
-		echo "($1 -- $2)" | sed 's|/mnt/storage/encrypted|/home|g'
+		echo "$1 > $2" | sed 's|/mnt/storage/encrypted|/home|g'
 		OUT="$(diff "$1" "$2")" || {
 			echo "$OUT"
 			[ "$EXIT" -ne 1 ] && EXIT=1
