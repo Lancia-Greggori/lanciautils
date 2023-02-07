@@ -7,13 +7,14 @@ depend() {
 }
 
 start() {
-	if [ ! -e /mnt/storage/encrypted ]; then
-		echo "encrypted storage at /mnt/storage/encrypted does not exist, skipping unlocking..."
+	DIR='/mnt/strg/ectd'
+	if [ ! -e "$DIR" ]; then
+		echo "encrypted storage at $DIR does not exist, skipping unlocking..."
 		exit 0
 	fi
 	read -r -p 'Do you want to unlock the encrypted storage? ' ANSWER
 	if [ "$ANSWER" = 'y' ]; then
-		fscrypt unlock /mnt/storage/encrypted
+		fscrypt unlock "$DIR"
 	else
 		exit 0
 	fi
