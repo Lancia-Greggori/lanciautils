@@ -1,9 +1,13 @@
-#!/bin/sh -eu
-
-[ "$#" -ne 3 ] && {
-	echo "USAGE: ${0##*/} [source file] [target] [perm]" 1>&2
+#!/bin/sh -e
+if [ "$#" -lt 2 ]; then
+	echo "USAGE: ${0##*/} [src file] [trgt] [perm]"
 	exit 1
-}
-[ "$(id -u)" -ne 0 ] && exit 2
-
-exec echo "$(readlink -f "$1"):$(readlink -f "$2"):$3" >> /letc/swfl
+elif [ "$(id -u)" -ne 0 ]; then
+	exit 2
+fi
+if [ -z "$3" ]; then
+	PERM=0644
+else
+	PERM="$3"
+fi
+exec echo "$(readlink -f "$1"):$(readlink -f "$2"):$PERM" >> /letc/swfl

@@ -27,7 +27,7 @@ diff_files()
 			[ "$EXIT" -ne 1 ] && EXIT=1
 		}
 	else
-		diff -q "$1" "$2" 1>/dev/null || echo "$1" -- "$2"
+		diff -q "$1" "$2" 1>/dev/null || echo "$1 != $2"
 	fi
 }
 
