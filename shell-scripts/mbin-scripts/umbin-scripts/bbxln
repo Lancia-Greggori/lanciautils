@@ -10,7 +10,7 @@ for arg in "$@"; do
 	if [ -e "$DIR/$arg" ]; then
 		perr "$arg already exists in $DIR"
 		exit 1
-	elif ! busybox "$arg" < /dev/null; then
+	elif ! busybox "$arg" < /dev/null 2>&1 1>/dev/null; then
 		perr "$arg is not a valid bbx command"
 		exit 2
 	fi
