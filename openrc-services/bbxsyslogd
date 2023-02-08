@@ -1,7 +1,7 @@
 #!/usr/bin/openrc-run
 
 command='/usr/bbx/syslogd'
-command_args='-n -s 2000 -b 5 -t -D'
+command_args='-n -s 2000 -b 5 -t -D -O /var/log/mssgs'
 supervisor='supervise-daemon'
 
 depend() {
