@@ -8,5 +8,5 @@ for arg in "$@"; do
 	busybox "$arg" < /dev/null || exit "$?"
 done
 for arg in "$@"; do
-	ln -vs ../bin/busybox /usr/bbx/"$arg"
+	ln -s ../bin/busybox /usr/bbx/"$arg"
 done
