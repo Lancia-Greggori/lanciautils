@@ -12,7 +12,7 @@ depend() {
 }
 
 start_pre() {
-	if ! [ -e "$command" ]; then
+	if [ ! -e "$command" ]; then
 		eerror "$command does not exist"
 		return 1
 	fi
