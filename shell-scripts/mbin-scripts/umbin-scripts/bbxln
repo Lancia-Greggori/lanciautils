@@ -1,0 +1,12 @@
+#!/bin/sh -e
+[ "$#" -eq 0 ] && exit 1
+[ ! -e /usr/bbx ] || {
+	echo '[WRN]: /usr/bbx no exist, creating it'
+	mkdir /usr/bbx
+}
+for arg in "$@"; do
+	busybox "$arg" < /dev/null || exit "$?"
+done
+for arg in "$@"; do
+	ln -vs ../bin/bbx /usr/bbx/"$arg"
+done
