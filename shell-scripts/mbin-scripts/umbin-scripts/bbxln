@@ -1,6 +1,6 @@
 #!/bin/sh -e
 [ "$#" -eq 0 ] && exit 1
-[ ! -e /usr/bbx ] || {
+[ -e /usr/bbx ] && {
 	echo '[WRN]: /usr/bbx no exist, creating it'
 	mkdir /usr/bbx
 }
