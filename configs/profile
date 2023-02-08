@@ -11,8 +11,8 @@ append_path () {
 
 append_path '/usr/local/sbin'
 append_path '/usr/local/bin'
+PATH="/usr/bbx:/usr/local/umbin:$PATH"
 
-PATH="/usr/local/busybox:/usr/local/umbin:$PATH"
 EDITOR=vim
 PAGER=less
 export PATH EDITOR PAGER
