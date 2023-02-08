@@ -1,12 +1,17 @@
 #!/bin/sh -e
+. /usr/subr/out
 [ "$#" -eq 0 ] && exit 1
-[ -e /usr/bbx ] || {
-	echo '[WRN]: /usr/bbx no exist, creating it'
-	mkdir /usr/bbx
+DIR='/usr/bbx'
+[ -e $DIR ] || {
+	pwarn "$DIR no exist, creating it"
+	mkdir $DIR
 }
 for arg in "$@"; do
-	busybox "$arg" < /dev/null || exit "$?"
+	busybox "$arg" < /dev/null || {
+		perr "$arg is not a valid bbx command"
+		exit "$?"
+	}
 done
 for arg in "$@"; do
-	ln -s ../bin/busybox /usr/bbx/"$arg"
+	ln -s ../bin/busybox $DIR/"$arg"
 done

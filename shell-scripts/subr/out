@@ -1,7 +1,7 @@
 readonly PROGN="${0##*/}"
-perr(){ echo "$PROGN: [ERROR]: $1" 1>&2 ; }
+perr(){ echo "$PROGN: [ERR]: $1" 1>&2 ; }
 perrexit(){
-	echo "$PROGN: [ERROR]: $1" 1>&2
+	echo "$PROGN: [ERR]: $1" 1>&2
 	exit $2
 }
-pwarn(){ echo "$PROGN: [WARNING]: $1" 1>&2 ; }
+pwarn(){ echo "$PROGN: [WRN]: $1" 1>&2 ; }
