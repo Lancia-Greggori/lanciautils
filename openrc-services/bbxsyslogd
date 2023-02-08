@@ -1,6 +1,6 @@
 #!/usr/bin/openrc-run
 
-command='/usr/local/busybox/syslogd'
+command='/usr/bbx/syslogd'
 command_args='-n -s 2000 -b 5 -t -D'
 supervisor='supervise-daemon'
 
@@ -12,8 +12,8 @@ depend() {
 }
 
 start_pre() {
-	checkpath -d -m 0755 /usr/local/busybox
-	if [ ! -e "$command" ]; then
-		ln -s ../../bin/busybox "$command"
+	if ! [ -e "$command" ]; then
+		eerror "$command does not exist"
+		return 1
 	fi
 }
