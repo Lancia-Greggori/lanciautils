@@ -1,12 +1,12 @@
 #!/bin/sh -e
 . /usr/subr/out
-trap 'echo "INTERRUPTED"; rm "$TMP"; exit 130' INT
-TMP="$(mktemp /tmp/"$PROGN".XXX)"
+trap 'rm "$T"; exit 130' INT
+T="$(mktemp /tmp/"$PROGN".XXX)"
 NR=0
-alias warn='pwarn "please check $TMP" && NR=1'
-runcom() {
+alias warn='pwarn "please check $T" && NR=1'
+r() {
 	printf "$1: "
-	if $1 1>/dev/null 2>"$TMP"; then
+	if $1 1>/dev/null 2>"$T"; then
 		echo SUCC
 	else
 		echo FAIL
@@ -15,18 +15,19 @@ runcom() {
 
 
 if [ "$1" = '--reinstall-grub' ]; then
-	runcom reinstall-grub
+	r reinstall-grub
 fi
 
-runcom 'mkinitcpio -P'
-grep -Fqv '==> WARNING: Possibly missing firmware for module:' "$TMP" && warn
+r 'mkinitcpio -P'
+grep -Fqv '==> WARNING: Possibly missing firmware for module:' "$T" && warn
 
-runcom 'grub-mkconfig -o /boot/grub/grub.cfg'
+r 'grub-mkconfig -o /boot/grub/grub.cfg'
 grep -Ev -e '^Warning: os-prober will not be executed to detect other bootable partitions\.$' \
 	-e '^Systems on them will not be added to the GRUB boot configuration\.$' \
 	-e '^Check GRUB_DISABLE_OS_PROBER documentation entry\.$' \
-	-e '^Found (linux|initrd|fallback) image' \
+	-e '^Found (linux|initrd|fallback) (image|initrd image)' \
 	-e '^Generating grub configuration file \.\.\.$' \
-	-e '^done$' "$TMP" && warn
+	-e '^Adding boot menu entry for UEFI Firmware Settings \.\.\.' \
+	-e '^done$' "$T" && warn
 
-[ $NR -eq 0 ] && rm "$TMP"
+[ $NR -eq 0 ] && rm "$T"
