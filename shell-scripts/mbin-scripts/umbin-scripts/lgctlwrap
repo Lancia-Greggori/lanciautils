@@ -1,28 +1,21 @@
 #!/bin/sh -eu
-
 [ "$#" -gt 1 ] && exit 1
-
 . /usr/subr/out
-
 if [ "$PROGN" != 'poweroff' ] && [ "$PROGN" != 'reboot' ]; then
 	exit 2
 fi
-
-WHO_OUT="$(who)"
-echo "$WHO_OUT" | cut -d' ' -f1 | grep -Fvq "$USER" && {
+WHO="$(who)"
+echo "$WHO" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	perr "somebody else is logged in, cannot poweroff:"
-	echo "$WHO_OUT"
+	echo "$WHO"
 	exit 3
 }
-
 [ "$#" -eq 1 ] && case "$1" in
 	-f|--force) exec loginctl "$PROGN";;
 	*) exit 4 ;;
 esac
-
 pgrep Xorg 1>/dev/null && {
 	perr "an Xorg session is already running, cannot $PROGN"
 	exit 5
 }
-
 loginctl "$PROGN"
