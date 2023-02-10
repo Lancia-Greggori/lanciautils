@@ -1,0 +1,8 @@
+LSR="$HOME/.lsr"
+PATH="$LSR/lmbin:$LSR/bin:$LSR/sbin:$PATH"
+LOGD="$HOME/.logs"
+export LSR LOGD PATH
+
+. "$HOME/.bashrc"
+
+pgrep -f transmission-daemon 1>/dev/null || transmission-daemon &
