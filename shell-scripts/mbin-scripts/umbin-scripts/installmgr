@@ -20,7 +20,7 @@ esac
 if [ -n "$TARGET" ]; then
 
 	for file in "$@"; do
-		echo "$file --> $TARGET"
+		echo "$file -> $TARGET"
 		install -m "$PERM" "$file" "$TARGET"
 	done
 

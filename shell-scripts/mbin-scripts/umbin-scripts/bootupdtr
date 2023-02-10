@@ -4,5 +4,5 @@ if [ "$1" = '--reinstall-grub' ]; then
 	reinstall-grub
 fi
 printf 'mkinitcpio -P: '
-mkinitcpio -P && echo SUCC
+mkinitcpio -P 1>/dev/null && echo SUCC
 grub-mkconfig -o /boot/grub/grub.cfg
