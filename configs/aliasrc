@@ -5,7 +5,6 @@ alias la='ls -a'
 alias ll='ls -l'
 alias cp='cp -i'
 alias mv='mv -i'
-alias p=less
 
 alias es-spell='hunspell -d es'
 alias tcat='tar tvf'
