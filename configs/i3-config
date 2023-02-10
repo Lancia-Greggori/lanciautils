@@ -81,6 +81,7 @@ bar {
 bindsym $alt+Return exec st
 bindsym ctrl+Shift+p exec dexec
 bindsym $ash+p exec dexec -s
+bindsym $ash+Delete exec chromium
 
 bindsym --release Print exec  screenshot region
 bindsym --release $alt+Print exec  screenshot full
