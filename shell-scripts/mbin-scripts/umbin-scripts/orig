@@ -1,22 +1,21 @@
 #!/bin/sh -eu
-
 [ "$#" -eq 0 ] && exit 1
-
 . /usr/subr/out
-
 for file in "$@"; do
 	[ ! -f "$file" ] && {
 		perr "\"$file\" is not a file"
 		exit 2
 	}
 done
-
 for file in "$@"; do
-	NUM=1
+	N=1
 	while true; do
-		[ $NUM -eq 1000 ] && exit 3
-		[ -e "${file}.original.${NUM}" ] && NUM=$((NUM+1)) && continue
+		[ $N -ge 1000 ] && {
+			perr "out of numbers"
+			exit 3
+		}
+		[ -e "${file}.orig.${N}" ] && N=$((N+1)) && continue
 		break
 	done
-	cp -v "$file" "${file}.original.${NUM}"
+	cp "$file" "${file}.orig.${N}"
 done
