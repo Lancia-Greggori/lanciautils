@@ -1,12 +1,30 @@
 #!/bin/sh -e
 . /usr/subr/out
-trap 'echo "INTERRUPTED"; exit 130' INT
+trap 'echo "INTERRUPTED"; rm "$TMP"; exit 130' INT
 if [ "$1" = '--reinstall-grub' ]; then
 	reinstall-grub
 fi
+TMP="$(mktemp)"
+E=0
+NR=0
+alias warn='pwarn "please check $TMP" && NR=1'
+
 printf 'mkinitcpio -P: '
-mkinitcpio -P 1>/dev/null && echo SUCC
-grub-mkconfig -o /boot/grub/grub.cfg 2>&1 | grep -Fv \
-	-e 'Warning: os-prober will not be executed to detect other bootable partitions.' \
+if mkinitcpio -P 1>/dev/null 2>"$TMP"; then
+	echo SUCC
+else
+	echo FAIL
+fi
+grep -Fv '==> WARNING: Possibly missing firmware for module:' "$TMP" && warn
+
+printf 'grub-mkconfig: '
+if grub-mkconfig -o /boot/grub/grub.cfg 1>/dev/null 2>"$TMP"; then
+	echo SUCC
+else
+	echo FAIL
+fi
+grep -Fv -e 'Warning: os-prober will not be executed to detect other bootable partitions.' \
 	-e 'Systems on them will not be added to the GRUB boot configuration.' \
-	-e 'Check GRUB_DISABLE_OS_PROBER documentation entry.'
+	-e 'Check GRUB_DISABLE_OS_PROBER documentation entry.' "$TMP" && warn
+
+[ $NR -eq 0 ] && rm "$TMP"
