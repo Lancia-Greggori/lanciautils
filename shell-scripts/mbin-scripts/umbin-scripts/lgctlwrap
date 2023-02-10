@@ -4,10 +4,10 @@
 if [ "$PROGN" != 'poweroff' ] && [ "$PROGN" != 'reboot' ]; then
 	exit 2
 fi
-WHO="$(who)"
-echo "$WHO" | cut -d' ' -f1 | grep -Fvq "$USER" && {
+O="$(who)"
+echo "$O" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	perr "somebody else is logged in, cannot poweroff:"
-	echo "$WHO"
+	echo "$O"
 	exit 3
 }
 [ "$#" -eq 1 ] && case "$1" in
