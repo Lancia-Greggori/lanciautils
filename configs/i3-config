@@ -1,5 +1,6 @@
 set $alt Mod1
 set $ash Mod1+Shift
+set $win Mod4
 floating_modifier $alt
 
 default_border pixel 1
@@ -8,6 +9,8 @@ default_orientation horizontal
 font pango:monospace 11
 
 bindsym $ash+c kill
+bindsym $ash+r reload
+bindsym $ash+q exit
 bindsym $alt+n focus down
 bindsym $alt+m focus up
 bindsym $alt+period focus right
@@ -37,32 +40,30 @@ set $ws9 "9"
 set $ws10 "10"
 set $ws11 "11"
 set $ws12 "12"
-bindsym $alt+1 workspace number $ws1
-bindsym $alt+2 workspace number $ws2
-bindsym $alt+3 workspace number $ws3
-bindsym $alt+4 workspace number $ws4
-bindsym $alt+5 workspace number $ws5
-bindsym $alt+6 workspace number $ws6
-bindsym $alt+7 workspace number $ws7
-bindsym $alt+8 workspace number $ws8
-bindsym $alt+9 workspace number $ws9
-bindsym $alt+0 workspace number $ws10
-bindsym $alt+minus workspace number $ws11
-bindsym $alt+plus workspace number $ws12
-bindsym $ash+1 move container to workspace number $ws1
-bindsym $ash+2 move container to workspace number $ws2
-bindsym $ash+3 move container to workspace number $ws3
-bindsym $ash+4 move container to workspace number $ws4
-bindsym $ash+5 move container to workspace number $ws5
-bindsym $ash+6 move container to workspace number $ws6
-bindsym $ash+7 move container to workspace number $ws7
-bindsym $ash+8 move container to workspace number $ws8
-bindsym $ash+9 move container to workspace number $ws9
-bindsym $ash+0 move container to workspace number $ws10
-bindsym $ash+minus move container to workspace number $ws11
-bindsym $ash+plus move container to workspace number $ws12
-bindsym $ash+r reload
-bindsym $ash+q exit
+bindsym $win+1 workspace number $ws1
+bindsym $win+2 workspace number $ws2
+bindsym $win+3 workspace number $ws3
+bindsym $win+4 workspace number $ws4
+bindsym $win+5 workspace number $ws5
+bindsym $win+6 workspace number $ws6
+bindsym $win+7 workspace number $ws7
+bindsym $win+8 workspace number $ws8
+bindsym $win+9 workspace number $ws9
+bindsym $win+0 workspace number $ws10
+bindsym $win+minus workspace number $ws11
+bindsym $win+plus workspace number $ws12
+bindsym $win+Shift+1 move container to workspace number $ws1
+bindsym $win+Shift+2 move container to workspace number $ws2
+bindsym $win+Shift+3 move container to workspace number $ws3
+bindsym $win+Shift+4 move container to workspace number $ws4
+bindsym $win+Shift+5 move container to workspace number $ws5
+bindsym $win+Shift+6 move container to workspace number $ws6
+bindsym $win+Shift+7 move container to workspace number $ws7
+bindsym $win+Shift+8 move container to workspace number $ws8
+bindsym $win+Shift+9 move container to workspace number $ws9
+bindsym $win+Shift+0 move container to workspace number $ws10
+bindsym $win+Shift+minus move container to workspace number $ws11
+bindsym $win+Shift+plus move container to workspace number $ws12
 
 mode "resize" {
         bindsym comma resize shrink width 5 px or 5 ppt
@@ -86,8 +87,3 @@ bindsym $ash+Delete exec chromium
 bindsym --release Print exec  screenshot region
 bindsym --release $alt+Print exec  screenshot full
 bindsym --release $alt+Scroll_Lock exec xlock
-
-bindsym Super_L exec --no-startup-id setxkbmap us
-bindsym ctrl+Super_L exec --no-startup-id setxkbmap es
-bindsym $alt+Super_L exec --no-startup-id setxkbmap ir
-bindsym Scroll_Lock exec --no-startup-id setxkbmap us && slock
