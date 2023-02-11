@@ -1,4 +1,5 @@
 #!/bin/sh -e
+
 . /usr/subr/out
 trap 'rm "$T"; exit 130' INT
 T="$(mktemp /tmp/"$PROGN".XXX)"
@@ -12,7 +13,6 @@ r() {
 		echo FAIL
 	fi
 }
-
 
 if [ "$1" = '--reinstall-grub' ]; then
 	r reinstall-grub

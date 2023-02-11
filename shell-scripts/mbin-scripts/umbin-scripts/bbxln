@@ -1,14 +1,11 @@
 #!/bin/sh -e
-
 . /usr/subr/out
 [ "$#" -eq 0 ] && exit 1
-
 DIR='/usr/bbx'
 [ -e $DIR ] || {
 	pwarn "$DIR no exist, creating it"
 	mkdir $DIR
 }
-
 ALLCOMMS="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d | sed 's/[ 	]//g' | tr ',' '\n' | sed '/^$/d')"
 for arg in "$@"; do
 	if [ -e "$DIR/$arg" ]; then
@@ -19,7 +16,6 @@ for arg in "$@"; do
 		exit 2
 	fi
 done
-
 for arg in "$@"; do
 	ln -s ../bin/busybox $DIR/"$arg"
 done
