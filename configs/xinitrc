@@ -23,5 +23,6 @@ fi
 export PHYSETUP
 
 dunst &
+unclutter --timeout 1
 
 exec i3
