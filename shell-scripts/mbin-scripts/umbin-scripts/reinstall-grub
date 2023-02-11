@@ -2,8 +2,11 @@
 if ! mount | grep -q '^/dev/[^ ]\+ on /boot/efi'; then
 	exit 1
 fi
-TMP="$(mktemp -d)"
-mv /boot/efi/* "$TMP"
-grub-install --target=x86_64-efi --efi-directory=/boot/efi \
-	--bootloader-id=ARTIX
-rm -r "$TMP"
+T="$(mktemp -d)"
+mv /boot/efi/* "$T"
+if ! grub-install --target=x86_64-efi --efi-directory=/boot/efi \
+	--bootloader-id=ARTIX; then
+	printf '\n\n\tFATAL ERR: REINSTALLING GRUB FAILED\n\n\n'
+	exit 2
+fi
+rm -r "$T"
