@@ -11,4 +11,8 @@ if ! grub-install --target=x86_64-efi --efi-directory=/boot/efi \
 	printf '\n\n\tFATAL ERR: REINSTALLING GRUB FAILED\n\n\n'
 	exit 2
 fi
+if ! efibootmgr | grep -q '^Boot[0-9]\+\* ARTIX'; then
+	pwarn 'no boot entry with lablel "ARTIX" found in efibootmgr'
+	exit 3
+fi
 rm -r "$T"
