@@ -14,10 +14,10 @@ j() {
 }
 
 jmp-add() {
-	[ "$#" -gt 2 ] && {
+	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
 		echo 'USAGE: jmp-add "dir" OR jmp-add "name" "dir"'
 		return 1
-	}
+	fi
 	local PATTERN
 	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
 	if [ "$#" -eq 1 ]; then
