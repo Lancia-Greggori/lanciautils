@@ -8,7 +8,7 @@ default_floating_border pixel 1
 default_orientation horizontal
 font pango:monospace 11
 
-bindsym $win+Shift+c kill
+bindsym $win+c kill
 bindsym $win+Shift+r reload
 bindsym $win+Shift+q exit
 bindsym $win+n focus down
