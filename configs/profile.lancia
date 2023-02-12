@@ -1,7 +1,8 @@
 LSR="$HOME/.lsr"
 PATH="$LSR/lmbin:$LSR/bin:$LSR/sbin:$PATH"
 LOGD="$HOME/.logs"
-export LSR LOGD PATH
+TERMINAL=st
+export LSR LOGD PATH TERMINAL
 
 . "$HOME/.bashrc"
 
