@@ -11,7 +11,7 @@ for p in "$@"; do
 			perr "$p: pkg not found"
 			exit 3
 		fi
-	p="$(find "$C" -name "$p*" | tail -n1)"
+	p="$(find "$C" -name "$p-[0-9]*.pkg.tar.zst" | sort | tail -n1)"
 	fi
 	tar -O -xf "$p" .PKGINFO | grep ^optdepend | \
 		sed 's/^optdepend = //' | while read -r od; do
