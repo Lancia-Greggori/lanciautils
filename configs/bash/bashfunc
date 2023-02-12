@@ -18,14 +18,18 @@ jmp-add() {
 		echo 'USAGE: jmp-add "dir" OR jmp-add "name" "dir"'
 		return 1
 	fi
-	local PATTERN
-	PATTERN='s|/mnt/storage/encrypted/lancia|/home/lancia|'
 	if [ "$#" -eq 1 ]; then
-		[ ! -e "$1" ] && return 2
+		[ -e "$1" ] || {
+			echo "$1: no exist"
+			return 2
+		}
 		local NAME="$(basename "$1")"
-		echo "$NAME:$(readlink -f "$1"| sed "$PATTERN")" >> '/home/lancia/.jmpdirs'
+		echo "$NAME:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
 	else
-		[ ! -e "$2" ] && return 2
-		echo "$1:$(readlink -f "$2"| sed "$PATTERN")" >> '/home/lancia/.jmpdirs'
+		[ -e "$2" ] || {
+			echo "$2: no exist"
+			return 2
+		}
+		echo "$2:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
 	fi
 }
