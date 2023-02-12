@@ -1,32 +1,30 @@
 set $alt Mod1
 set $ash Mod1+Shift
 set $win Mod4
-floating_modifier $alt
+floating_modifier $win
 
 default_border pixel 1
 default_floating_border pixel 1
 default_orientation horizontal
 font pango:monospace 11
 
-bindsym $ash+c kill
-bindsym $ash+r reload
-bindsym $ash+q exit
-bindsym $alt+n focus down
-bindsym $alt+m focus up
-bindsym $alt+period focus right
-bindsym $alt+comma focus left
-bindsym $ash+n move down
-bindsym $ash+m move up
-bindsym $ash+period move right
-bindsym $ash+comma move left
-bindsym $alt+h split v
-bindsym $alt+v split h
-bindsym $alt+f fullscreen toggle
-bindsym $alt+s layout stacking
-bindsym $alt+w layout tabbed
-bindsym $alt+e layout toggle split
-bindsym $alt+space focus mode_toggle
-bindsym $alt+a focus parent
+bindsym $win+Shift+c kill
+bindsym $win+Shift+r reload
+bindsym $win+Shift+q exit
+bindsym $win+n focus down
+bindsym $win+m focus up
+bindsym $win+period focus right
+bindsym $win+comma focus left
+bindsym $win+Shift+n move down
+bindsym $win+Shift+m move up
+bindsym $win+Shift+period move right
+bindsym $win+Shift+comma move left
+bindsym $win+h split v
+bindsym $win+v split h
+bindsym $win+f fullscreen toggle
+bindsym $win+s layout stacking
+bindsym $win+w layout tabbed
+bindsym $win+e layout toggle split
 
 set $ws1 "1"
 set $ws2 "2"
@@ -73,17 +71,17 @@ mode "resize" {
         bindsym h mode "default"
         bindsym Escape mode "default"
 }
-bindsym $alt+r mode "resize"
+bindsym $win+r mode "resize"
 
 bar {
         status_command i3status
 }
 
-bindsym $alt+Return exec st
+bindsym $win+Return exec st
 bindsym ctrl+Shift+p exec dexec
-bindsym $ash+p exec dexec -s
-bindsym $ash+Delete exec chromium
+bindsym $win+Shift+p exec dexec -s
+bindsym $win+Shift+Delete exec chromium
 
 bindsym --release Print exec  screenshot region
-bindsym --release $alt+Print exec  screenshot full
-bindsym --release $alt+Scroll_Lock exec xlock
+bindsym --release $win+Print exec  screenshot full
+bindsym --release $win+Scroll_Lock exec xlock
