@@ -1,13 +1,17 @@
 #!/bin/sh -e
 . /usr/subr/out
+[ "$#" -eq 0 ] && exit 1
 O="$(pacman -Qq)"
+CACHE="$(grep -o '^CacheDir.*$' /etc/pacman.conf | grep -o '/.*$')" || {
+	CACHE=/var/cache/pacman/pkg/
+}
 for pkg in "$@"; do
 	if [ ! -e "$pkg" ]; then
 		if ! echo "$O" | grep -q "^$pkg$"; then
 			perr "$pkg: pkg not found"
-			exit 1
+			exit 3
 		fi
-	pkg="$(find /mnt/strg/cache/pacman/pkg/ -name "$pkg*" | tail -n1)"
+	pkg="$(find "$CACHE" -name "$pkg*" | tail -n1)"
 	fi
 	tar -O -xf "$pkg" .PKGINFO | grep ^optdepend | \
 		sed 's/^optdepend = //' | while read -r optdep; do
