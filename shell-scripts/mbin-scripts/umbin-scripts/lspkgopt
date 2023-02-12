@@ -1,2 +1,9 @@
 #!/bin/sh -e
-tar -O -xf "$1" .PKGINFO | grep ^optdepend | sed 's/^optdepend = //'
+O="$(pacman -Qq)"
+tar -O -xf "$1" .PKGINFO | grep ^optdepend | sed 's/^optdepend = //' | while read -r pkg; do
+	if echo "$O" | grep -q "$pkg"; then
+		printf "%s [I]\n" "$pkg"
+	else
+		echo "$pkg"
+	fi
+done
