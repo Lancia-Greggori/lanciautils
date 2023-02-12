@@ -1,0 +1,2 @@
+#!/bin/sh -e
+tar -O -xf "$1" .PKGINFO | grep ^optdepend | sed 's/^optdepend = //'
