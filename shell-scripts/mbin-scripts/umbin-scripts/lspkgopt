@@ -1,9 +1,20 @@
 #!/bin/sh -e
+. /usr/subr/out
 O="$(pacman -Qq)"
-tar -O -xf "$1" .PKGINFO | grep ^optdepend | sed 's/^optdepend = //' | while read -r pkg; do
-	if echo "$O" | grep -q "$pkg"; then
-		printf "%s [I]\n" "$pkg"
-	else
-		echo "$pkg"
+for pkg in "$@"; do
+	if [ ! -e "$pkg" ]; then
+		if ! echo "$O" | grep -q "^$pkg$"; then
+			perr "$pkg: pkg not found"
+			exit 1
+		fi
+	pkg="$(find /mnt/strg/cache/pacman/pkg/ -name "$pkg*" | tail -n1)"
 	fi
+	tar -O -xf "$pkg" .PKGINFO | grep ^optdepend | \
+		sed 's/^optdepend = //' | while read -r optdep; do
+			if echo "$O" | grep -q "^$(echo "$optdep" | cut -d':' -f1)$"; then
+				printf "%s [I]\n" "$optdep"
+			else
+				echo "$optdep"
+			fi
+	done
 done
