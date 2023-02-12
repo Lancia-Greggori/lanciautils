@@ -1,19 +1,18 @@
 #!/bin/bash -eu
-
 . /usr/subr/Xout
-
-INPUT="$(dmenu -p "$PROGN:" < /dev/null)" || exit $?
-OUT="$(hunspell <<< "$INPUT" | sed -r '/^$|^Hunspell [0-9.]+/d')"
-
-if [[ "$OUT" =~ ^# ]]; then
-	perr "Word \"$INPUT\" not found in dictionary"
+I="$(dmenu -p "$PROGN:" < /dev/null)" || exit $?
+O="$(hunspell <<< "$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
+if [[ "$O" =~ ^# ]]; then
+	perr "Word \"$I\" not found in dictionary"
 	exit 1
-elif [[ "$OUT" =~ ^\*$ ]]; then
+elif [[ "$O" =~ ^\*$ ]]; then
 	pmsg 'Word correct'
-	echo "$INPUT" | tr -d '\n' | xclip -selection clipboard
-elif [[ "$OUT" =~ \+\ [[:alnum:]]+ ]]; then
-	OUT="${OUT#+ }"
-	printf '%s\n%s' "$OUT" "$INPUT" | dmenu -p "\"$INPUT\": plural form of \"$OUT\"" | tr -d '\n' | xclip -selection clipboard
+	echo "$I" | tr -d '\n' | xclip -selection clipboard
+elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
+	O="${O#+ }"
+	printf '%s\n%s' "$O" "$I" | dmenu -p "\"$I\": plural form of \"$O\"" \
+	       	| tr -d '\n' | xclip -selection clipboard
 else
-	cut -d':' -f2 <<< "$OUT" | tr -d ' ' | tr ',' '\n' | dmenu | tr -d '\n' | xclip -selection clipboard
+	cut -d':' -f2 <<< "$O" | tr -d ' ' | tr ',' '\n' | \
+		dmenu | tr -d '\n' | xclip -selection clipboard
 fi
