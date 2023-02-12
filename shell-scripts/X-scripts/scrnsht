@@ -1,0 +1,19 @@
+#!/bin/sh -eu
+[ "$#" -ne 1 ] && exit 1
+DIR="$HOME/Screenshot"
+D="$(show-date)"
+[ ! -e "$DIR/$D" ] && mkdir -p "$DIR/$D"
+N=0
+for i in $(seq 1 1000); do
+	[ -e "$DIR/$D/$i.png" ] && continue
+	N="$i"
+	break
+done
+F="$DIR/$D/$N.png"
+case "$1" in
+	full) import -window root "$F" ;;
+	window) import -window "$(xwininfo | grep -F 'wininfo: Window id:' | cut -d' ' -f4)" "$F" ;;
+	region) import "$F" ;;
+	*) exit 2 ;;
+esac
+xclip -selection clipboard -t image/png -i "$F"
