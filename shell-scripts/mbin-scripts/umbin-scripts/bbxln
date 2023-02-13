@@ -1,21 +1,22 @@
 #!/bin/sh -e
 . /usr/subr/out
 [ "$#" -eq 0 ] && exit 1
-DIR='/usr/bbx'
-[ -e $DIR ] || {
-	pwarn "$DIR no exist, creating it"
-	mkdir $DIR
+D='/usr/bbx'
+[ -e $D ] || {
+	pwarn "$D no exist, creating it"
+	mkdir $D
 }
-ALLCOMMS="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d | sed 's/[ 	]//g' | tr ',' '\n' | sed '/^$/d')"
+A="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d \
+	| sed 's/[ 	]//g' | tr ',' '\n' | sed '/^$/d')"
 for arg in "$@"; do
-	if [ -e "$DIR/$arg" ]; then
-		perr "$arg already exists in $DIR"
+	if [ -e "$D/$arg" ]; then
+		perr "$arg already exists in $D"
 		exit 1
-	elif ! echo "$ALLCOMMS" | grep -q "^$arg\$"; then
+	elif ! echo "$A" | grep -q "^$arg\$"; then
 		perr "$arg is not a valid bbx command"
 		exit 2
 	fi
 done
 for arg in "$@"; do
-	ln -s ../bin/busybox $DIR/"$arg"
+	ln -s ../bin/busybox $D/"$arg"
 done

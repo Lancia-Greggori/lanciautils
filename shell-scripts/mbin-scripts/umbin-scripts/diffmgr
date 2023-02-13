@@ -1,53 +1,39 @@
 #!/bin/sh -eu
-
 [ "$#" -eq 0 ] && exit 1
-
 . /usr/subr/out
-
-readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/subr'
-EXIT=0
-OUT=''
-VERBOSE=0
-
+readonly D='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/subr'
+E=0
+O=''
+V=0
 if [ "$#" -eq 1 ]; then
-	VERBOSE=1
+	V=1
 else
 	for arg in "$@"; do
-		[ "$arg" = '-v' ] && VERBOSE=1
+		[ "$arg" = '-v' ] && V=1
 		break
 	done
 fi
-
-diff_files()
-{
-	if [ "$VERBOSE" -eq 1 ]; then
+diff_files() {
+	if [ "$V" -eq 1 ]; then
 		echo "$1 > $2" | sed 's|/mnt/storage/encrypted|/home|g'
-		OUT="$(diff "$1" "$2")" || {
-			echo "$OUT"
-			[ "$EXIT" -ne 1 ] && EXIT=1
+		O="$(diff "$1" "$2")" || {
+			echo "$O"
+			[ "$E" -ne 1 ] && E=1
 		}
 	else
 		diff -q "$1" "$2" 1>/dev/null || echo "$1 != $2"
 	fi
 }
-
 for file in "$@"; do
-
 	[ ! -f "$file" ] && continue
-
-	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)" && {
-		diff_files "$(echo "$OUT" | cut -d':' -f1)" "$(echo "$OUT" | cut -d':' -f2)"
+	O="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)" && {
+		diff_files "$(echo "$O" | cut -d':' -f1)" "$(echo "$O" | cut -d':' -f2)"
 		continue
 	}
-
-	for dir in $DIRS; do
-
+	for dir in $D; do
 		TARGETF="$dir/${file##*/}"
 		[ ! -e "$TARGETF" ] && continue
 		diff_files "$file" "$TARGETF"
-
 	done
-
 done
-
-exit "$EXIT"
+exit "$E"

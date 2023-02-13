@@ -1,21 +1,21 @@
 j() {
-	local DIR
+	local D
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e '/home/lancia/.jmpdirs' ] && {
 		echo 'jmp file no exist'
 		return 2
 	}
-	DIR="$(grep -m1 "^$1" '/home/lancia/.jmpdirs' | cut -d':' -f2)"
-	[ -z "$DIR" ] && {
+	D="$(grep -m1 "^$1" '/home/lancia/.jmpdirs' | cut -d':' -f2)"
+	[ -z "$D" ] && {
 		echo 'dir not found'
 		return 3
 	}
-	cd "$DIR" || return 4
+	cd "$D" || return 4
 }
 
 jmp-add() {
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
-		echo 'USAGE: jmp-add "dir" OR jmp-add "name" "dir"'
+		echo 'USAGE: jmp-add "dir" OR jmp-add "alias" "dir"'
 		return 1
 	fi
 	if [ "$#" -eq 1 ]; then
@@ -26,7 +26,7 @@ jmp-add() {
 		local NAME="$(basename "$1")"
 		echo "$NAME:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
 	else
-		[ -e "$2" ] || {
+		[ -e "$1" ] || {
 			echo "$2: no exist"
 			return 2
 		}
