@@ -1,11 +1,9 @@
 #!/bin/sh -eu
-
 # $1: filename ending pattern, $2: the directory in $HOME/Downloads to move the files into
 move_files()
 {
 	DESTINATION_DIR="$HOME/Downloads/$2"
 	[ ! -e "$DESTINATION_DIR" ] && mkdir -p "$DESTINATION_DIR"
-
 	for pattern in $1; do
 		find "$HOME/Downloads" -maxdepth 1 -mindepth 1 -type f -iname "*$pattern" | while read -r file; do
 			FILENAME="${FILENAME##*/}"
@@ -19,7 +17,6 @@ move_files()
 		done
 	done
 }
-
 while true; do
 	sleep 10s
 	# check if nobody has anything open in $HOME/Downloads, then proceed

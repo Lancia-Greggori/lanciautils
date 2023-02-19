@@ -1,17 +1,13 @@
 #!/bin/sh -eu
-
 . /usr/subr/out
-
 readonly DEV='wlan0'
 readonly CONFD='/etc/wpa_supplicant'
 readonly LOGF='/var/log/wpa.log'
 readonly PRF='/etc/wm.pr'
 readonly TMPF="$(mktemp)"
-
 ALLOWED_FIRST_ARG_FUNCTION_NAMES='start|stop|restart'
 ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS='list-ssids|info'
 ALLOWED_SECOND_ARG_FUNCTION_ARGUMENTS='auto-scan|priority-scan|manual-ssid-scan'
-
 phelp()
 {
 	cat <<EOF
@@ -21,7 +17,6 @@ Allowed options:
 	[$ALLOWED_FIRST_ARG_FUNCTIONS_TAKE_NO_ARGS]
 EOF
 }
-
 check_for_empty_arg()
 {
 	if [ -z "$1" ]; then
@@ -29,7 +24,6 @@ check_for_empty_arg()
 		exit 1
 	fi
 }
-
 need_root()
 {
 	if [ "$(id -u)" != 0 ]; then
@@ -37,30 +31,22 @@ need_root()
 		exit 1
 	fi
 }
-
 bring_interface_up()
 {
 	if ! ifconfig | grep -q -F "$DEV"; then
 		ifconfig "$DEV" up
 	fi
 }
-
 kill_wpa_supplicant()
 {
 	need_root
-
 	if pgrep -f wpa_supplicant 1>/dev/null; then
-
 		if ! pkill wpa_supplicant; then
-
 			perr 'could not kill wpa_supplicant, aborting program'
 			exit 1
-
 		fi
-
 	fi
 }
-
 check_for_too_many_results()
 {
 	if [ "$(echo "$1" | wc -l | cut -d' ' -f1)" -gt 1 ]; then
@@ -68,17 +54,14 @@ check_for_too_many_results()
 		exit 1
 	fi
 }
-
 output_ssid_names()
 {
 	iw "$DEV" scan | grep -F SSID | sed 's/	SSID: //g'
 }
-
 start_auto_scan()
 {
 	need_root
 	bring_interface_up
-
 	{
 		output_ssid_names | while read -r ssid; do
 			CONFIG_FILE="$(grep -Flr "ssid=\"$ssid\"" "$CONFD")" || continue
@@ -92,7 +75,6 @@ start_auto_scan()
 		fi
 	} &
 }
-
 start_priority_scan()
 {
 	need_root
@@ -135,13 +117,11 @@ start_priority_scan()
 		done <"$PRF"
 	} &
 }
-
 start_manual_ssid_scan()
 {
 	need_root
 	bring_interface_up
 	kill_wpa_supplicant
-
 	if CONFIG_FILE="$(grep -lr "ssid=\"$1\"" "$CONFD")"; then
 		check_for_too_many_results "$CONFIG_FILE" "$1"
 		wpa_supplicant -c "$CONFIG_FILE" -i "$DEV" >"$LOGF" 2>&1 &
@@ -151,7 +131,6 @@ start_manual_ssid_scan()
 		exit 1
 	fi
 }
-
 show_info()
 {
 	if pgrep -f wpa_supplicant 1>/dev/null; then
@@ -167,7 +146,6 @@ show_info()
 		exit 1
 	fi
 }
-
 # arg1: scan type
 # arg2: SSID name in case manual-ssid-scan was chosen
 start_desired_scan()
@@ -184,9 +162,7 @@ start_desired_scan()
 			fi ;;
 	esac
 }
-
 set +u
-
 if [ "$#" -eq 0 ] || [ "$#" -gt 3 ]; then
 	phelp
 	exit 1
@@ -197,7 +173,6 @@ elif [ -n "$2" ] && ! echo "$2" | grep -q -E "^($ALLOWED_SECOND_ARG_FUNCTION_ARG
 	phelp
 	exit 1
 fi
-
 case "$1" in
 	info) show_info ;;
 	list-ssids) need_root && iw "$DEV" scan | grep -F SSID ;;

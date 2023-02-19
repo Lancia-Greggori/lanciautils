@@ -1,9 +1,6 @@
 #!/bin/sh -eu
-
 [ "$#" -eq 0 ] && exit 1
-
 OPTIONS=''; URL=''
-
 for arg in "$@"; do
 	case "$arg" in
 		*youtube.com*) URL="$arg" ;;
@@ -11,5 +8,4 @@ for arg in "$@"; do
 		*) exit 2 ;;
 	esac
 done
-
 eval exec youtube-dl "$OPTIONS" "$URL"

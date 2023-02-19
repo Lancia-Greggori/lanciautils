@@ -1,5 +1,4 @@
 #!/bin/sh -eu
-
 . /usr/subr/out
 readonly LOGF="/var/log/tor/$PROGN.log"
 readonly CURL_ARGS='--silent -L https://html.duckduckgo.com'
@@ -8,27 +7,22 @@ PID=''
 TMP=''
 TOR_DAEMONS=''
 log() { echo "$1" >> "$LOGF" ; }
-
 if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 elif ! command -v nobody-curl 1>/dev/null; then
 	exit 2
 fi
-
 TMP="${LOGF%/*}"
 [ ! -e "$TMP" ] && mkdir -p "$TMP"
 printf '' > "$LOGF"
 cd /
-
 while true; do
 	sleep 30s
-
 	TOR_DAEMONS="$(ss -alpn | grep -F '"tor"' | sed 's/ \+/ /g')"
 	[ -z "$TOR_DAEMONS" ] && {
 		log '[WARNING]: could not find any tor daemons'
 		continue
 	}
-
 	echo "$TOR_DAEMONS" | while read -r tor_info_line; do
 		SOCKS5_ADDR="$(echo "$tor_info_line" | cut -d' ' -f5)"
 		PID="$(echo "$tor_info_line" | grep -o 'pid=[0-9]\+')"
@@ -40,7 +34,6 @@ while true; do
 			fi
 		fi &
 	done
-
 	if [ "$(wc -l "$LOGF" | cut -d' ' -f1)" -ge 100 ]; then
 		while pgrep -f "nobody-curl --socks5 [0-9.]\+:[0-9]\+ $CURL_ARGS" 1>/dev/null; do
 			sleep 1s

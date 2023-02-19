@@ -1,23 +1,16 @@
 #!/bin/sh -eu
-
 BACKUP_DIR="$HOME/.backup/tars"
 DATE_PATTERN="$(date '+%Y-%m-%d_%H-%M-%S')"
-
 [ ! -e "$BACKUP_DIR" ] && mkdir -p "$BACKUP_DIR"
 [ "$#" -eq 0 ] && exit 1
-
 for arg in "$@"; do
 	[ ! -d "$arg" ] && exit 1
 done
-
 for dir in "$@"; do
-
 	FULL_PATH="$(readlink -f "$dir")"
 	FILENAME="$(echo "$FULL_PATH" | sed -e 's/\//_/g' -e 's/\./_DOT_/g')"
 	DIR_NAME="${FULL_PATH##*/}"
 	PARENT_DIR="${FULL_PATH%/*}"
-
 	echo "Backing up $FULL_PATH"
 	tar czvf "${BACKUP_DIR}/${FILENAME}_${DATE_PATTERN}.tar.gz" -C "$PARENT_DIR" "$DIR_NAME"
-
 done

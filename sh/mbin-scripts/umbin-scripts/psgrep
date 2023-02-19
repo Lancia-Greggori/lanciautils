@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+[ "$#" -ne 1 ] && exit 1
+ps -A -o pid,user,group,tty,cmd \
+	| awk "BEGIN{ getline; print \$0 } /$1/ && !/${0##*/} $1/"

@@ -1,0 +1,33 @@
+#!/bin/sh -eu
+for file in "$@"; do
+	[ ! -f "$file" ] && exit 1
+done
+. /usr/subr/out
+O=''
+T=''
+P=''
+case "$PROGN" in
+	li) T='/home/lancia/.lsr/lmbin'; P=0755 ;;
+	ui) T='/usr/local/umbin'; P=0755 ;;
+	si) T='/usr/subr'; P=0644 ;;
+	eii) T='/etc/init.d'; P=0755 ;;
+esac
+if [ -n "$T" ]; then
+	for file in "$@"; do
+		echo "$file -> $T"
+		install -m "$P" "$file" "$T"
+	done
+else
+	for file in "$@"; do
+		if O="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)"; then
+			T="$(echo "$O" | cut -d':' -f2)"
+			P="${O##*:}"
+			file="${file%%:*}"
+			echo "$file --> $T" | sed 's|/mnt/storage/encrypted|/home|g'
+			install -m "$P" "$file" "$T"
+		else
+			perr "$file: file not found in /letc/swfl"
+			exit 2
+		fi
+	done
+fi

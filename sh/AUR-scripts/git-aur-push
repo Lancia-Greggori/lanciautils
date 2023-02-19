@@ -1,20 +1,13 @@
 #!/bin/sh -eu
-
 . /usr/subr/out
-
 [ ! -e PKGBUILD ] && {
 	perr "PKGBUILD file not found"
 	exit 1
 }
-
 [ "$#" -ne 1 ] && exit 1
-
 [ ! -e .gitignore ] && pwarn ".gitignore file not found"
-
 FILES='PKGBUILD .SRCINFO'
-
 for optional_file in .gitignore .install; do
 	[ -e "$optional_file" ] && FILES="$FILES $optional_file"
 done
-
 makepkg --printsrcinfo > .SRCINFO && git add $FILES && git commit -m "$1" && git push
