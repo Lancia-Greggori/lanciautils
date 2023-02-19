@@ -28,4 +28,5 @@ unset -f append_path
 unset TERMCAP
 unset MANPATH
 
-setfont /usr/share/kbd/consolefonts/solar24x32.psfu.gz
+tty | grep -q '^/dev/tty' && \
+	setfont /usr/share/kbd/consolefonts/solar24x32.psfu.gz

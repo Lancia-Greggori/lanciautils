@@ -2,10 +2,6 @@
 
 cd "$HOME" || exit 1
 
-if ! pgrep pulseaudio 1>/dev/null; then
-	pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
-fi
-
 # see if an HDMI connected screen is connected. if it is, turn off laptop screen
 # PHYSETUP: 0=laptop 1=desktop
 if xrandr | grep -qF 'HDMI1 connected'; then
@@ -23,6 +19,9 @@ else
 fi
 export PHYSETUP
 
+if ! pgrep pulseaudio 1>/dev/null; then
+	pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
+fi
 dunst &
 unclutter --timeout 1 &
 
