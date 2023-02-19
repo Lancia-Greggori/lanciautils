@@ -1,8 +1,7 @@
 #!/bin/sh -e
 . /usr/subr/out
 if ! mount | grep -q '^/dev/[^ ]\+ on /boot/efi'; then
-	perr '/boot/efi not mounted'
-	exit 1
+	perrexit '/boot/efi not mounted' 1
 fi
 T="$(mktemp -d)"
 mv /boot/efi/* "$T"

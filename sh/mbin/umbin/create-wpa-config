@@ -2,23 +2,25 @@
 [ "$(id -u)" -ne 0 ] && exit 1
 
 . /usr/subr/out
-CONFD='/etc/wpa_supplicant'
-SSID=''
-PASSWORD=''
+
+readonly CONFD='/encetc/wpa_supplicant'
 read -r -p 'SSID: ' SSID
-CONF="$CONFD/$SSID.conf"
+readonly CONF="$CONFD/$SSID.conf"
+PASS=''
+
 [ -e "$CONF" ] && {
-	perr "there is already a file named $SSID.conf in $CONFD"
-	exit 2
+	perrexit "there is already a file named $SSID.conf in $CONFD" 2
 }
+
 stty -echo
-read -r -p 'Password: ' PASSWORD
+read -r -p 'Password: ' PASS
 echo
 stty echo
+
 cat <<EOF >"$CONF"
 network={
         ssid="$SSID"
         key_mgmt=WPA-PSK
-        psk="$PASSWORD"
+        psk="$PASS"
 }
 EOF

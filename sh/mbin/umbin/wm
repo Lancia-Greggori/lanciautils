@@ -1,7 +1,4 @@
 #!/bin/bash -eu
+[ "$(id -u)" -ne 0 ] && exit 1
 
 . /usr/subr/out
-readonly DEV='wlan0'
-readonly CONFD='/etc/wpa_supplicant'
-readonly LOGF='/var/log/wpa.log'
-readonly PRF='/etc/wm.prf'

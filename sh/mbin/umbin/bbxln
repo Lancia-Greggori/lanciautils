@@ -10,11 +10,9 @@ A="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d \
 	| sed 's/[ 	]//g' | tr ',' '\n' | sed '/^$/d')"
 for arg in "$@"; do
 	if [ -e "$D/$arg" ]; then
-		perr "$arg already exists in $D"
-		exit 1
+		perrexit "$arg already exists in $D" 1
 	elif ! echo "$A" | grep -q "^$arg\$"; then
-		perr "$arg is not a valid bbx command"
-		exit 2
+		perrexit "$arg is not a valid bbx command" 2
 	fi
 done
 for arg in "$@"; do

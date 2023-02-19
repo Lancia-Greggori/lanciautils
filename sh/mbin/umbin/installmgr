@@ -26,8 +26,7 @@ else
 			echo "$file --> $T" | sed 's|/mnt/storage/encrypted|/home|g'
 			install -m "$P" "$file" "$T"
 		else
-			perr "$file: file not found in /letc/swfl"
-			exit 2
+			perrexit "$file: file not found in /letc/swfl" 2
 		fi
 	done
 fi
