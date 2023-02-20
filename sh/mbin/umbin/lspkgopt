@@ -8,8 +8,7 @@ C="$(grep -o '^CacheDir.*$' /etc/pacman.conf | grep -o '/.*$')" || {
 for p in "$@"; do
 	if [ ! -e "$p" ]; then
 		if ! echo "$O" | grep -q "^$p$"; then
-			perr "$p: pkg not found"
-			exit 3
+			perrexit "$p: pkg not found" 3
 		fi
 	p="$(find "$C" -name "$p-[0-9]*.pkg.tar.zst" | sort | tail -n1)"
 	fi

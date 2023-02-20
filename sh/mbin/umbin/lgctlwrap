@@ -15,7 +15,6 @@ echo "$O" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	*) exit 4 ;;
 esac
 pgrep Xorg 1>/dev/null && {
-	perr "an Xorg session is already running, cannot $PROGN"
-	exit 5
+	perrexit "an Xorg session is already running, cannot $PROGN" 5
 }
 loginctl "$PROGN"
