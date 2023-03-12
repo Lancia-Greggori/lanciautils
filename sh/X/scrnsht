@@ -1,15 +1,15 @@
 #!/bin/sh -eu
 [ "$#" -ne 1 ] && exit 1
 DIR="$HOME/Screenshot"
-D="$(date +%D-%T | sed 's|/|_|g')"
-[ ! -e "$DIR/$D" ] && mkdir -p "$DIR/$D"
+DATE="$(date +%D-%T | sed 's|/|_|g')"
+[ ! -e "$DIR/$DATE" ] && mkdir -p "$DIR/$DATE"
 N=0
 for i in $(seq 1 1000); do
-	[ -e "$DIR/$D/$i.png" ] && continue
+	[ -e "$DIR/$DATE/$i.png" ] && continue
 	N="$i"
 	break
 done
-F="$DIR/$D/$N.png"
+F="$DIR/$DATE/$N.png"
 case "$1" in
 	full) import -window root "$F" ;;
 	window) import -window "$(xwininfo | grep -F 'wininfo: Window id:' | cut -d' ' -f4)" "$F" ;;
