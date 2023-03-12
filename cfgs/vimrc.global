@@ -40,5 +40,5 @@ function DelEmptyLines()
 endfunction
 
 if ($USER == 'lancia')
-	source /home/lancia/.vimconf
+	source /home/lancia/.vimcfg
 endif
