@@ -78,8 +78,7 @@ bar {
 }
 
 bindsym $win+Return exec st
-bindsym ctrl+Shift+p exec dexec
-bindsym $win+Shift+p exec dexec -s
+bindsym $win+Shift+Return exec dexec -s
 bindsym $win+Shift+Delete exec chromium
 
 bindsym --release Print exec  screenshot region
