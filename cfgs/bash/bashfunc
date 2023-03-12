@@ -33,3 +33,6 @@ jmp-add() {
 		echo "$2:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
 	fi
 }
+mkdircd(){
+	mkdir $1 && cd $1
+}
