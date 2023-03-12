@@ -31,5 +31,6 @@ alias vt="v $HOME/.tasks"
 alias vct="v $HOME/.ctasks"
 alias vtmp='v /tmp/vtmp'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
-alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
 alias d='diffmgr *'
+alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
+alias pacman ='s pacman'
