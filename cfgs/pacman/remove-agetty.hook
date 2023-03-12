@@ -1,0 +1,8 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = openrc
+
+[Action]
+When = PostTransaction
+Exec = find /etc/init.d/ /etc/runlevels/ -name 'agetty*' -delete
