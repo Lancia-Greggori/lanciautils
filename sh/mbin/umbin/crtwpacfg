@@ -3,14 +3,14 @@
 
 . /usr/subr/out
 
-readonly CONFD='/encetc/wpa_supplicant'
+readonly CONFD='/encetc/wap'
 read -r -p 'SSID: ' SSID
-readonly CONF="$CONFD/$SSID.conf"
+readonly CONF="$CONFD/$SSID"
 PASS=''
 
 [ -e "$CONF" ] && \
 	perrexit "there is already a file named \
-	$SSID.conf in $CONFD" 2
+	$SSID in $CONFD" 2
 
 stty -echo
 read -r -p 'PASS: ' PASS
