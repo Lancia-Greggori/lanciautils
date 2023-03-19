@@ -13,7 +13,9 @@ bind "\C-s":vi-movement-mode
 bind "\C-x":vi-movement-mode
 bind "\C-a":beginning-of-line
 bind "\C-e":end-of-line
+bind "\C-f":reverse-search-history
 bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
+bind '"\C-r":". ~/.bashrc\n"'
 
 set -o vi
 shopt -s autocd
@@ -33,5 +35,5 @@ alias vtmp='v /tmp/vtmp'
 alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias d='diffmgr *'
 alias ytdl-mp3-proxy='youtube-dl --proxy "socks5://$(tpsel)" --extract-audio --audio-format mp3 --audio-quality 0'
-alias pinstll='s pacman'
+alias pinstll='s pacman -S'
 alias psrch='pacman -Ss'

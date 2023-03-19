@@ -4,6 +4,6 @@ LOGD="$HOME/.logs"
 TERMINAL=st
 export LSR LOGD PATH TERMINAL
 
-. "$HOME/.bashrc"
+. ~/.bashrc
 
-pgrep -f transmission-daemon 1>/dev/null || transmission-daemon &
+~/.launchprog
