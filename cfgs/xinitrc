@@ -10,14 +10,16 @@ if xrandr | grep -qF 'HDMI1 connected'; then
 	xautolock -time 20 -locker lock-screen &
 	unclutter --timeout 2 --jitter 50 &
 	PHYSETUP=1
+	XORGCONFIG=xorg.conf.desktop
 else
 	xrandr --output eDP1 --mode '1280x720'
 	xset s "$((10 * 60))" "$((10 * 60))"
 	xautolock -time 10 -locker lock-screen &
 	unclutter --timeout 2 --jitter 100 &
 	PHYSETUP=0
+	XORGCONFIG=xorg.conf.laptop
 fi
-export PHYSETUP
+export PHYSETUP XORGCONFIG
 
 if ! pgrep pulseaudio 1>/dev/null; then
 	pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
