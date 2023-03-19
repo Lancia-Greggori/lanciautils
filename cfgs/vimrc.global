@@ -24,10 +24,10 @@ inoremap <C-a> <Esc>0i
 
 vnoremap <C-s> <Esc>
 
-nnoremap <F1> :%w !xclip -sel clip<nl><nl>
-nnoremap <C-c> :.w !xclip -sel clip<nl><nl>
-vnoremap <C-c> y<nl>:call system('xclip -sel clip', @0)<nl>
-inoremap <C-c> <Esc>:.w !xclip -sel clip<nl><insert>
+nnoremap <F1> :%w !clipb<nl><nl>
+nnoremap <C-c> :.w !clipb<nl><nl>
+vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+inoremap <C-c> <Esc>:.w !clipb<nl><insert>
 
 function ExecCmd(cmd)
 	let outp = system(a:cmd)
