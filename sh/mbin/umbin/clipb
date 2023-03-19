@@ -1,0 +1,2 @@
+#!/bin/sh -e
+cat | tr -d '\n' | xclip -sel clip
