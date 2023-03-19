@@ -84,3 +84,6 @@ bindsym $win+Shift+Delete exec chromium
 bindsym --release Print exec  screenshot region
 bindsym --release $win+Print exec  screenshot full
 bindsym --release $win+Scroll_Lock exec xlock
+
+bindsym $win+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym $win+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
