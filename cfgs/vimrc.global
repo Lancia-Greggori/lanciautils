@@ -5,6 +5,7 @@ set ttymouse=""
 set mouse=""
 set shortmess=aI
 set formatoptions=crql
+set cmdheight=2
 
 map <C-q> :q!<nl>
 
