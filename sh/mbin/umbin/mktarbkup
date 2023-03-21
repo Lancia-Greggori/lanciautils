@@ -1,2 +1,0 @@
-#!/bin/sh -e
-tar czf /mnt/strg/bkup/"$(echo "$1" | sed 's|/|,|g')_$(date +%Y-%m-%d_%T).tar.gz" -C "$1" .
