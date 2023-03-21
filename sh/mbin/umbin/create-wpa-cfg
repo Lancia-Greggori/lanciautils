@@ -12,3 +12,4 @@ network={
 	psk="$PASS"
 }
 EOF
+echo
