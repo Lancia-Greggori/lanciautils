@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/sh -e
 iw wlan0 scan | grep 'SSID: .' | sed 's/^[ \t]\+SSID: //'
