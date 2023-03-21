@@ -80,6 +80,7 @@ bar {
 bindsym $win+Return exec st
 bindsym $win+Shift+Return exec dexec -s
 bindsym $win+Shift+Delete exec chromium
+bindsym $win+Menu exec dict
 
 bindsym --release Print exec  screenshot region
 bindsym --release $win+Print exec  screenshot full

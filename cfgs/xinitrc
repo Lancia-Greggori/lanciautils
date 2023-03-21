@@ -8,6 +8,7 @@ if xrandr | grep -qF 'HDMI1 connected'; then
 	xrandr --output eDP1 --off
 	xset s "$((20 * 60))" "$((20 * 60))"
 	xautolock -time 20 -locker lock-screen &
+	xbacklight -set 50
 	unclutter --timeout 2 --jitter 50 &
 	PHYSETUP=1
 	XORGCONFIG=xorg.conf.desktop
