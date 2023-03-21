@@ -1,4 +1,4 @@
-j() {
+j(){
 	local D
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e '/home/lancia/.jmpdirs' ] && {
@@ -13,7 +13,7 @@ j() {
 	cd "$D" || return 4
 }
 
-jmp-add() {
+jmp-add(){
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
 		echo 'USAGE: jmp-add "dir" OR jmp-add "alias" "dir"'
 		return 1
@@ -33,6 +33,11 @@ jmp-add() {
 		echo "$2:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
 	fi
 }
+
 mkdircd(){
 	mkdir $1 && cd $1
+}
+
+cheat(){
+	curl https://cheat.sh/$1
 }
