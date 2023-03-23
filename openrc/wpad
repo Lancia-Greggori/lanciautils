@@ -1,0 +1,7 @@
+#!/usr/bin/openrc-run
+supervisor='supervise-daemon'
+command=/usr/local/umbin/wpad
+depend() {
+	after net.lo
+	provide net
+}
