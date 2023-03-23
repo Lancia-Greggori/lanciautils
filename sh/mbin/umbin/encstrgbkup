@@ -1,0 +1,8 @@
+#!/bin/sh -e
+. /usr/subr/out
+for dir in "$@"; do
+	[ -d "$dir" ] || perrexit "$dir: not a dir" 1
+done
+for dir in "$@"; do
+	tar czf /mnt/strg/ectd/bkup/"$(echo "$dir" | sed 's|/|_|g')--$(date +%Y-%m-%d_%T).tar.gz" "$dir"
+done
