@@ -1,0 +1,21 @@
+#!/bin/sh -eu
+[ "$(id -u)" -ne 0 ] && exit 1
+while true; do
+	lsssids | while read -r ssid; do
+		if [ -e /encetc/wpa/"$ssid" ];then
+			connssid "$ssid" 1>/var/log/wpa 2>&1 &
+			i=0
+			sleep 5s
+			while [ $i -lt 10 ]; do
+				if lsssids | grep -q "^${ssid}$"; then
+					i=0
+				else
+					i=$((i+1))
+				fi
+				sleep 10s
+			done
+			killall wpa_supplicant
+			break
+		fi
+	done
+done
