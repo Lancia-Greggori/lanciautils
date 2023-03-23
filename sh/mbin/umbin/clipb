@@ -1,2 +1,7 @@
 #!/bin/sh -e
-cat | tr -d '\n' | xclip -sel clip
+D="$(cat)"
+if [ "$(echo "$D" | wc -l)" -eq 1 ]; then
+	echo "$D" | tr -d '\n' | xclip -sel clip
+else
+	echo "$D" | xclip -sel clip
+fi

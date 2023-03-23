@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+. /usr/subr/out
+[ -e /encetc/wpa/"$1" ] || perrexit "/encetc/wpa/$1 no exist" 1
+wpa_supplicant -c /encetc/wpa/"$1" -i wlan0
