@@ -82,8 +82,8 @@ bindsym $win+Shift+Return exec dexec -s
 bindsym $win+Shift+Delete exec chromium
 bindsym $win+Menu exec dict
 
-bindsym --release Print exec  screenshot region
-bindsym --release $win+Print exec  screenshot full
+bindsym --release Print exec scrnsht region
+bindsym --release $win+Print exec scrnsht full
 bindsym --release $win+Scroll_Lock exec xlock
 
 bindsym $win+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
