@@ -1,0 +1,33 @@
+#!/bin/sh -eu
+# $1: filename ending pattern, $2: the directory in $HOME/Downloads to move the files into
+movf()
+{
+	DEST="$HOME/Downloads/$2"
+	[ ! -e "$DEST" ] && mkdir -p "$DEST"
+	for pattern in $1; do
+		find "$HOME/Downloads" -maxdepth 1 -mindepth 1 -type f -iname "*$pattern" | while read -r file; do
+			FILN="${FILN##*/}"
+			if [ -e "$DEST/$FILN" ]; then
+				for i in $(seq 1 1000); do
+					[ -e "$DEST/${FILN}.${i}" ] && continue
+					FILN="${FILN}.${i}" && break
+				done
+			fi
+			mv "$file" "$DEST/$FILN"
+		done
+	done
+}
+while true; do
+	sleep 10s
+	# check if nobody has anything open in $HOME/Downloads, then proceed
+	lsof -u "$USER" | grep -qF "$(readlink -f "$HOME/Downloads")" && continue
+	movf '.jpeg .jpg .png' 'pics'
+	movf '.gz .zip .rar .xz' 'compressed'
+	movf '.pdf' 'PDFs'
+	movf '.torrent' 'torrent-files'
+	movf '.apk' 'apps'
+	movf '.txt' 'txt'
+	movf '.iso' 'iso'
+	movf '.diff' 'diffs'
+	movf '.docx' 'docx'
+done
