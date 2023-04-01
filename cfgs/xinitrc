@@ -7,7 +7,7 @@ cd "$HOME" || exit 1
 if xrandr | grep -qF 'HDMI1 connected'; then
 	xrandr --output eDP1 --off
 	xset s "$((20 * 60))" "$((20 * 60))"
-	xautolock -time 20 -locker lock-screen &
+	xautolock -time 20 -locker xlock &
 	xbacklight -set 50
 	unclutter --timeout 2 --jitter 50 &
 	PHYSETUP=1
@@ -15,7 +15,7 @@ if xrandr | grep -qF 'HDMI1 connected'; then
 else
 	xrandr --output eDP1 --mode '1280x720'
 	xset s "$((10 * 60))" "$((10 * 60))"
-	xautolock -time 10 -locker lock-screen &
+	xautolock -time 10 -locker xlock &
 	unclutter --timeout 2 --jitter 100 &
 	PHYSETUP=0
 	XORGCONFIG=xorg.conf.laptop
