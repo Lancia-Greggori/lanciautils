@@ -4,7 +4,7 @@ autocmd FileType c {
 	nnoremap <buffer> <F4> :!gdb -q ./a.out<nl>
 }
 autocmd FileType bash,sh {
-	nnoremap <buffer> <F2> :!%:p 
+	nnoremap <buffer> <F2> :!%:p
 	nnoremap <buffer> <F3> :call ExecCmd(&filetype.' -n '.expand('%:p'))<nl>
 	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
 }
