@@ -2,30 +2,30 @@
 
 cd "$HOME" || exit 1
 
+sp(){
+	if ! pgrep -f "${1%% *}" 1>/dev/null; then
+		$1 &
+	fi
+}
+
 # see if an HDMI connected screen is connected. if it is, turn off laptop screen
 # PHYSETUP: 0=laptop 1=desktop
 if xrandr | grep -qF 'HDMI1 connected'; then
 	xrandr --output eDP1 --off
 	xset s "$((20 * 60))" "$((20 * 60))"
-	xautolock -time 20 -locker xlock &
-	xbacklight -set 50
-	unclutter --timeout 2 --jitter 50 &
+	sp xautolock -time 20 -locker xlock
+	sp unclutter --timeout 2 --jitter 50
 	PHYSETUP=1
-	XORGCONFIG=xorg.conf.desktop
 else
 	xrandr --output eDP1 --mode '1280x720'
 	xset s "$((10 * 60))" "$((10 * 60))"
-	xautolock -time 10 -locker xlock &
-	unclutter --timeout 2 --jitter 100 &
+	sp xautolock -time 10 -locker xlock
+	sp unclutter --timeout 2 --jitter 100
 	PHYSETUP=0
-	XORGCONFIG=xorg.conf.laptop
 fi
-export PHYSETUP XORGCONFIG
+sp pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
+sp dunst 
 
-if ! pgrep pulseaudio 1>/dev/null; then
-	pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
-fi
-dunst &
-unclutter --timeout 1 &
+export PHYSETUP
 
 exec i3
