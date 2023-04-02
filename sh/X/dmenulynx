@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 if [ "$#" -eq 0 ]; then
-	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki' | dmenu -p lynx)"
+	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki\nurl' | dmenu -p lynx)"
 else
 	F="$1"
 fi
@@ -9,6 +9,7 @@ case "$F" in
 	archwiki) U='https://wiki.archlinux.org/index.php?search=' ;;
 	wikipedia) U='https://en.wikipedia.org/wiki/' ;;
 	google) U='https://google.com/search?q=' ;;
+	url) U='' ;;
 	*) exit 1;;
 esac
 I="$(dmenu -p "lynx|$F" </dev/null)"
