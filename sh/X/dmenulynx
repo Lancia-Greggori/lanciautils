@@ -1,12 +1,15 @@
 #!/bin/sh -eu
 if [ "$#" -eq 0 ]; then
-	F="$(printf 'ddg\narchwiki' | dmenu)"
+	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki' | dmenu)"
 else
 	F="$1"
 fi
 case "$F" in
 	ddg) U='https://lite.duckduckgo.com/lite/?q=' ;;
 	archwiki) U='https://wiki.archlinux.org/index.php?search=' ;;
+	wikipedia) U='https://en.wikipedia.org/wiki/' ;;
+	google) U='https://google.com/search?q=' ;;
+	*) exit 1;;
 esac
 I="$(dmenu -p "lynx|$F" </dev/null)"
 exec lynx -trace -nocolor -vikeys "$U$I"
