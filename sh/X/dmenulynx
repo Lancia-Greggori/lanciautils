@@ -1,0 +1,7 @@
+#!/bin/sh -eu
+case "$1" in
+	ddg) U='https://lite.duckduckgo.com/lite/?q=' ;;
+	archwiki) U='https://wiki.archlinux.org/index.php?search=' ;;
+esac
+I="$(dmenu -p "lynx|$1" </dev/null)"
+exec lynx -trace -nocolor -vikeys "$U$I"

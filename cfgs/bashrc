@@ -32,7 +32,7 @@ ulimit -c 1000
 alias vt="v $HOME/.tasks"
 alias vct="v $HOME/.ctasks"
 alias vtmp='v ~/Sandbox/vtmp'
-alias do-diffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
+alias glbldiffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias d='diffmgr *'
 alias pinstll='s pacman -S'
 alias psrch='pacman -Ss'
