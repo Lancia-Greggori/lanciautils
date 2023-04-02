@@ -1,7 +1,12 @@
 #!/bin/sh -eu
-case "$1" in
+if [ "$#" -eq 0 ]; then
+	F="$(printf 'ddg\narchwiki' | dmenu)"
+else
+	F="$1"
+fi
+case "$F" in
 	ddg) U='https://lite.duckduckgo.com/lite/?q=' ;;
 	archwiki) U='https://wiki.archlinux.org/index.php?search=' ;;
 esac
-I="$(dmenu -p "lynx|$1" </dev/null)"
+I="$(dmenu -p "lynx|$F" </dev/null)"
 exec lynx -trace -nocolor -vikeys "$U$I"
