@@ -80,8 +80,8 @@ bar {
 bindsym $win+Return exec st
 bindsym $win+Shift+Return exec dexec -s
 bindsym $win+Shift+Delete exec chromium
-bindsym $win+Shift+End exec dmenulynx
-bindsym $win+Shift+Next exec surf
+bindsym $win+Shift+End exec dmenubrwsr lynx
+bindsym $win+Shift+Next exec dmenubrwsr surf
 bindsym $win+Menu exec dict
 
 bindsym --release Print exec scrnsht region
