@@ -1,0 +1,26 @@
+#!/bin/bash -eu
+readonly FCOMM="$1"
+readonly BRWSR="${1%%* }"
+if [ "$#" -lt 2 ]; then
+	SITE="$(printf 'ddg\ngoogle\nwikipedia\narchwiki\nurl' | dmenu -p "$BRWSR")"
+else
+	SITE="$2"
+fi
+case "$SITE" in
+	ddg) URL='https://lite.duckduckgo.com/lite/?q=' ;;
+	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
+	wikipedia) URL='https://en.wikipedia.org/wiki/' ;;
+	google) URL='https://google.com/search?q=' ;;
+	url) URL='' ;;
+	*) exit 1;;
+esac
+SRCH="$(dmenu -p "$BRWSR|$SITE" </dev/null)"
+if [ "$BRWSR" = lynx ]; then
+	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
+		exec lynx -nocolor -vikeys "$U$I"
+	else
+		exec st lynx -nocolor -vikeys "$U$I"
+	fi
+else
+	exec $FCOMM "$URL$SRCH"
+fi
