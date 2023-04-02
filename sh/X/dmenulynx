@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 if [ "$#" -eq 0 ]; then
 	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki' | dmenu -p lynx)"
 else
@@ -12,4 +12,8 @@ case "$F" in
 	*) exit 1;;
 esac
 I="$(dmenu -p "lynx|$F" </dev/null)"
-exec lynx -nocolor -vikeys "$U$I"
+if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
+	exec lynx -nocolor -vikeys "$U$I"
+else
+	exec st lynx -nocolor -vikeys "$U$I"
+fi
