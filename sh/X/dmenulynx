@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 if [ "$#" -eq 0 ]; then
-	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki' | dmenu)"
+	F="$(printf 'ddg\ngoogle\nwikipedia\narchwiki' | dmenu -p lynx)"
 else
 	F="$1"
 fi
