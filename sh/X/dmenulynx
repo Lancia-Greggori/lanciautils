@@ -12,4 +12,4 @@ case "$F" in
 	*) exit 1;;
 esac
 I="$(dmenu -p "lynx|$F" </dev/null)"
-exec lynx -trace -nocolor -vikeys "$U$I"
+exec lynx -nocolor -vikeys "$U$I"
