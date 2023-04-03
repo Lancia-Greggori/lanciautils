@@ -3,11 +3,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define DEFAULT_ALLOWED_COMMANDS_FILE "/letc/priv.commands"
-#define AUTHORISED_UID 1000
-#define AUTHORISED_PATH "/bin:/sbin:/usr/local/umbin"
-#define MAX_ALLOWED_CMDLINE_ARG_SIZE 100
-#define MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE MAX_ALLOWED_CMDLINE_ARG_SIZE
+#define COMMFILE "/letc/priv"
+#define AUTHUID 1000
+#define AUTHPATH "/bin:/sbin:/usr/local/umbin"
+#define MAX_CMDLINE_ARG_SIZE 100
+#define MAX_COMMFILE_LINE_SIZE MAX_CMDLINE_ARG_SIZE
+#define PERR(S) fprintf(stderr, S"\n")
 
 int main(int argc, char *argv[]) {
 
@@ -16,16 +17,16 @@ int main(int argc, char *argv[]) {
 	int uid;
 	int cmdline_arg_size = 0;
 	for (int i = 1; i < argc; i++) cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
-	if (cmdline_arg_size > MAX_ALLOWED_CMDLINE_ARG_SIZE) {
+	if (cmdline_arg_size > MAX_CMDLINE_ARG_SIZE) {
 		return 2;
-	} else if ( access(DEFAULT_ALLOWED_COMMANDS_FILE, R_OK) != 0 ) {
+	} else if ( access(COMMFILE, R_OK) != 0 ) {
 		return 3;
-	} else if ( ( uid = getuid() ) != AUTHORISED_UID ) {
+	} else if ( ( uid = getuid() ) != AUTHUID ) {
 		return 4;
 	}
 
-	char command[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
-	memset(command, 0, MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE);
+	char command[MAX_COMMFILE_LINE_SIZE];
+	memset(command, 0, MAX_COMMFILE_LINE_SIZE);
 	if (argc == 2) {
 		strcpy(command, argv[1]);
 	} else {
@@ -36,11 +37,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	FILE *fp;
-	fp = fopen(DEFAULT_ALLOWED_COMMANDS_FILE, "r");
-	char tmp[MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE];
+	fp = fopen(COMMFILE, "r");
+	char tmp[MAX_COMMFILE_LINE_SIZE];
 	int character = 0;
 	for (int i = 0; character != EOF; i++) {
-		if (i > MAX_ALLOWED_COMMANDS_FILE_LINE_SIZE) {
+		if (i > MAX_COMMFILE_LINE_SIZE) {
 			return 5;
 		}
 		character = getc(fp);
@@ -49,7 +50,7 @@ int main(int argc, char *argv[]) {
 			if (strcmp(command, tmp) == 0) {
 				setuid(0);
 				clearenv();
-				setenv("PATH", AUTHORISED_PATH, 1);
+				setenv("PATH", AUTHPATH, 1);
 				system(command);
 				return 0;
 			} else {
@@ -57,5 +58,6 @@ int main(int argc, char *argv[]) {
 			}
 		} else tmp[i] = character;
 	}
+	PERR("comm not found in COMMFILE");
 	return 6;
 }
