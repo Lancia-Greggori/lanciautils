@@ -10,7 +10,7 @@ set cmdheight=2
 map <C-q> :q!<nl>
 map <C-e> :
 map <C-k> :!
-map <C-o> :e
+map <C-o> :e 
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
