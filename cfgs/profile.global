@@ -1,5 +1,4 @@
 umask 022
-
 append_path () {
     case ":$PATH:" in
         *:"$1":*)
@@ -8,25 +7,20 @@ append_path () {
             PATH="${PATH:+$PATH:}$1"
     esac
 }
-
 append_path '/usr/local/sbin'
 append_path '/usr/local/bin'
 PATH="/usr/bbx:/usr/local/umbin:$PATH"
-
 EDITOR=vim
 PAGER=less
 export PATH EDITOR PAGER
-
 if test -d /etc/profile.d/; then
     for profile in /etc/profile.d/*.sh; do
         test -r "$profile" && . "$profile"
     done
     unset profile
 fi
-
 unset -f append_path
 unset TERMCAP
 unset MANPATH
-
 tty | grep -q '^/dev/tty' && \
 	setfont /usr/share/kbd/consolefonts/solar24x32.psfu.gz
