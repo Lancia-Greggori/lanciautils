@@ -34,6 +34,4 @@ alias vct="v $HOME/.ctasks"
 alias vtmp='v ~/Sandbox/vtmp'
 alias glbldiffmgr='find ~/Software/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias d='diffmgr *'
-alias pinstll='s pacman -S'
-alias psrch='pacman -Ss'
-alias scurl='curl -s'
+alias trrm=transmission-remote
