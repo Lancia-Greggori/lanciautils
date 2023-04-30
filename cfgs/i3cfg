@@ -4,9 +4,10 @@ set $win Mod4
 floating_modifier $win
 
 default_border pixel 1
+font pango:monospace 11
 default_floating_border pixel 1
 default_orientation horizontal
-font pango:monospace 11
+workspace_layout tabbed
 
 bindsym $win+c kill
 bindsym $win+Shift+r reload

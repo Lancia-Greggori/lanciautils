@@ -15,7 +15,7 @@ j(){
 
 jmp-add(){
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
-		echo 'USAGE: jmp-add "dir" OR jmp-add "alias" "dir"'
+		echo 'USAGE: jmp-add "dir" OR jmp-add "dir" "alias"'
 		return 1
 	fi
 	if [ "$#" -eq 1 ]; then
