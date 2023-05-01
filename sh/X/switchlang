@@ -1,0 +1,3 @@
+#!/bin/sh
+A="$(printf 'en_US\nes\nir' | dmenu -p 'lang switch')"
+setxkbmap $A
