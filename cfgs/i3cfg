@@ -84,6 +84,7 @@ bindsym $win+Shift+Delete exec chromium
 bindsym $win+Shift+End exec dmenubrwsr surf
 bindsym $win+Shift+Next exec dmenubrwsr surf url
 bindsym $win+Menu exec dict
+bindsym $win+Shift+Menu exec switchlang
 
 bindsym --release Print exec scrnsht region
 bindsym --release $win+Print exec scrnsht full
