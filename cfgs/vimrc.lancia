@@ -11,6 +11,7 @@ autocmd FileType bash,sh {
 autocmd FileType es {
 	nnoremap <buffer> <F2> :!spell -d es %:p
 	nnoremap <buffer> <F3> :!spell -d en_US,es %:p
+	nnoremap <buffer> <F4> :!wc -w %:p
 }
 
 autocmd BufNewFile,BufRead *i3* set filetype=i3config
