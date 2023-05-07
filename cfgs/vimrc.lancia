@@ -16,7 +16,7 @@ autocmd FileType es {
 autocmd BufNewFile,BufRead *i3* set filetype=i3config
 autocmd BufNewFile,BufRead *bash* set filetype=bash
 autocmd BufNewFile,BufRead /etc/init.d/*,/usr/subr/*,*lancia-utils/configs/profile,*lancia-utils/openrc/* set filetype=sh
-autocmd BufNewFile,BufRead /tmp/vtmpes,*/Spanish/* set filetype=es
+autocmd BufNewFile,BufRead */[Ss]panish/* set filetype=es
 autocmd BufNewFile,BufRead xorg.conf.* set filetype=xf86conf
 autocmd BufNewFile,BufRead */Documents/artix/forum/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
