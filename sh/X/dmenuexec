@@ -1,0 +1,10 @@
+#!/bin/sh -e
+. /usr/subr/Xout
+A="$(dmenu < /dev/null)"
+[ -z "$A" ] && exit 0
+A="${A%% *}"
+command -v "$A" 1>/dev/null 2>&1 || {
+	perr "command \"$A\" not found"
+	exit 1
+}
+eval exec "$A"
