@@ -23,5 +23,5 @@ fi
 sp pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
 sp dunst 
 export PHYSETUP
-i3
+dwm
 killall pulseaudio
