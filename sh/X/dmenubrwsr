@@ -1,8 +1,7 @@
 #!/bin/bash -eu
-readonly FCOMM="$1"
 readonly BRWSR="${1%%* }"
 if [ "$#" -lt 2 ]; then
-	SITE="$(printf 'ddg\ngoogle\nwikipedia\narchwiki\nurl\bbkmrk' | dmenu -p "$BRWSR")"
+	SITE="$(printf 'ddg\ngoogle\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)"
 else
 	SITE="$2"
 fi
@@ -15,12 +14,12 @@ case "$SITE" in
 	*) exit 1;;
 esac
 SRCH="$(dmenu -p "$BRWSR|$SITE" </dev/null)"
-if [ "$BRWSR" = lynx ]; then
+if [ $BRWSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
 		exec lynx -nocolor -vikeys "$URL$SRCH"
 	else
 		exec st lynx -nocolor -vikeys "$URL$SRCH"
 	fi
 else
-	exec $FCOMM "$URL$SRCH"
+	exec $1 "$URL$SRCH"
 fi

@@ -4,18 +4,17 @@
 readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/subr'
 EXIT=0
 OUT=''
-VERB=0
+VERBOS=0
 if [ "$#" -eq 1 ]; then
-	VERB=1
+	VERBOS=1
 else
 	for arg in "$@"; do
-		[ "$arg" = '-v' ] && VERB=1
+		[ "$arg" = '-v' ] && VERBOS=1
 		break
 	done
 fi
-diff_files() {
-	if [ "$VERB" -eq 1 ]; then
-		echo "$1 > $2" | sed 's|/mnt/storage/encrypted|/home|g'
+fildiff() {
+	if [ "$VERBOS" -eq 1 ]; then
 		OUT="$(diff "$1" "$2")" || {
 			echo "$OUT"
 			[ "$EXIT" -ne 1 ] && EXIT=1
@@ -27,13 +26,13 @@ diff_files() {
 for file in "$@"; do
 	[ ! -f "$file" ] && continue
 	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)" && {
-		diff_files "$(echo "$OUT" | cut -d':' -f1)" "$(echo "$OUT" | cut -d':' -f2)"
+		fildiff "${OUT%%:*}" "$(echo "$OUT" | cut -d: -f2)"
 		continue
 	}
 	for dir in $DIRS; do
-		TARGETF="$dir/${file##*/}"
-		[ ! -e "$TARGETF" ] && continue
-		diff_files "$file" "$TARGETF"
+		TARGETFIL="$dir/${file##*/}"
+		[ ! -e "$TARGETFIL" ] && continue
+		fildiff "$file" "$TARGETFIL"
 	done
 done
 exit "$EXIT"
