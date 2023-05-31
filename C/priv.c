@@ -18,10 +18,13 @@ int main(int argc, char *argv[]) {
 	int cmdline_arg_size = 0;
 	for (int i = 1; i < argc; i++) cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
 	if (cmdline_arg_size > MAX_CMDLINE_ARG_SIZE) {
+		PERR("cmdline arg size bigger than max");
 		return 2;
 	} else if ( access(COMMFILE, R_OK) != 0 ) {
+		PERR("COMMFILE naccessible");
 		return 3;
 	} else if ( ( uid = getuid() ) != AUTHUID ) {
+		PERR("UID nauthorised");
 		return 4;
 	}
 
@@ -58,6 +61,6 @@ int main(int argc, char *argv[]) {
 			}
 		} else tmp[i] = character;
 	}
-	PERR("comm not found in COMMFILE");
+	PERR("command not found in COMMFILE");
 	return 6;
 }
