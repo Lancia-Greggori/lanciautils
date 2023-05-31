@@ -19,7 +19,7 @@ autocmd BufNewFile,BufRead *bash* set filetype=bash
 autocmd BufNewFile,BufRead /etc/init.d/*,/usr/subr/*,*lancia-utils/configs/profile,*lancia-utils/openrc/* set filetype=sh
 autocmd BufNewFile,BufRead */es/*,*/[Ss]panish/* set filetype=es
 autocmd BufNewFile,BufRead xorg.conf.* set filetype=xf86conf
-autocmd BufNewFile,BufRead */Documents/artix/forum/* {
+autocmd BufNewFile,BufRead */doc/artix/forum/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
 	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
