@@ -1,2 +1,2 @@
 #!/bin/sh
-exec xclip -selection clipboard "$@"
+exec xclip -sel clip "$@"
