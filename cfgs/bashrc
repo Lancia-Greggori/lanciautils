@@ -16,7 +16,7 @@ bind "\C-e":end-of-line
 bind "\C-f":reverse-search-history
 bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
 bind '"\C-r":". ~/.bashrc\n"'
-bind '"\C-p":"| "'
+bind '"\C-p":" | "'
 bind '"\e[1;3P":"| grep -F "'
 
 set -o vi

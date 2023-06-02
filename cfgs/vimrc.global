@@ -8,9 +8,6 @@ set formatoptions=crql
 set cmdheight=2
 
 map <C-q> :q!<nl>
-map <C-e> :
-map <C-k> :!
-map <C-o> :e 
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
@@ -29,8 +26,8 @@ vnoremap <C-s> <Esc>
 
 nnoremap <F1> :%w !clipb<nl><nl>
 nnoremap <C-c> :.w !clipb<nl><nl>
-vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 inoremap <C-c> <Esc>:.w !clipb<nl><insert>
+vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 
 function ExecCmd(cmd)
 	let outp = system(a:cmd)
