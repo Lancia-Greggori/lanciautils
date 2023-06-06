@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 BRWSR="${1%%* }"
-case "$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)" in
+SITE="$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)"
+case "$SITE" in
 	ddg) URL='https://lite.duckduckgo.com/lite/?q=' ;;
 	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
 	wikipedia) URL='https://en.wikipedia.org/wiki/' ;;
