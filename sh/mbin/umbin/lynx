@@ -1,2 +1,2 @@
 #!/bin/sh
-exec lynx -nocolor -vikeys "$@"
+exec /usr/bin/lynx -nocolor -vikeys "$@"
