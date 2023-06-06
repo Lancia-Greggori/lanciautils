@@ -16,9 +16,9 @@ esac
 SRCH="$(dmenu -p "$BRWSR|$SITE" </dev/null)"
 if [ $BRWSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
-		exec lynx -nocolor -vikeys "$URL$SRCH"
+		exec lynx "$URL$SRCH"
 	else
-		exec st lynx -nocolor -vikeys "$URL$SRCH"
+		exec st lynx "$URL$SRCH"
 	fi
 else
 	exec $1 "$URL$SRCH"
