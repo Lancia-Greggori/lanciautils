@@ -7,7 +7,7 @@ set shortmess=aI
 set formatoptions=crql
 set cmdheight=2
 
-map <C-q> :q!<nl>
+map <C-q> :qa!<nl>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>

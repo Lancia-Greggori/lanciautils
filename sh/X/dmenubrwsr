@@ -1,8 +1,6 @@
 #!/bin/bash -eu
 readonly BRWSR="${1%%* }"
 if [ "$#" -lt 2 ]; then
-	SITE="$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)"
-else
 	SITE="$2"
 fi
 case "$SITE" in

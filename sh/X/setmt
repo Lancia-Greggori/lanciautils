@@ -1,0 +1,2 @@
+#!/bin/sh
+exec xprop -root -set WM_NAME "$1"
