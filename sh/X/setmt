@@ -1,2 +1,2 @@
 #!/bin/sh
-exec xprop -root -set WM_NAME "$1"
+exec xprop -root -set WM_NAME "MT: $1"
