@@ -10,7 +10,7 @@ append_path () {
 append_path '/usr/local/sbin'
 append_path '/usr/local/bin'
 PATH="/usr/bbx:/usr/local/umbin:$PATH"
-EDITOR=vim
+EDITOR=vi
 PAGER=less
 export PATH EDITOR PAGER
 if test -d /etc/profile.d/; then
