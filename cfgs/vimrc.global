@@ -30,9 +30,9 @@ inoremap <C-c> <Esc>:.w !clipb<nl><insert>
 vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 
 function ExecCmd(cmd)
-	let out = system(a:cmd)
+	let o = system(a:cmd)
 	if (shell_error != 0)
-		echo out
+		echo o
 	endif
 endfunction
 

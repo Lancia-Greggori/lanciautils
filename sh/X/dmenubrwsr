@@ -1,9 +1,6 @@
 #!/bin/bash -eu
-readonly BRWSR="${1%%* }"
-if [ "$#" -lt 2 ]; then
-	SITE="$2"
-fi
-case "$SITE" in
+BRWSR="${1%%* }"
+case "$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)" in
 	ddg) URL='https://lite.duckduckgo.com/lite/?q=' ;;
 	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
 	wikipedia) URL='https://en.wikipedia.org/wiki/' ;;
