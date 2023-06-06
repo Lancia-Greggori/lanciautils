@@ -13,7 +13,11 @@ j(){
 	cd "$D" || return 4
 }
 
-jmp-add(){
+jmpcmd(){
+	(j "$1" && $2)
+}
+
+jmpadd(){
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
 		echo 'USAGE: jmp-add "dir" OR jmp-add "dir" "alias"'
 		return 1
