@@ -31,8 +31,8 @@ ulimit -c 1000
 . /etc/aliasrc
 . "$HOME"/.bashfunc
 
-alias vt="v $HOME/.tasks"
-alias vct="v $HOME/.ctasks"
+alias vt='v ~/.tasks'
+alias vct='v ~/.ctasks'
 alias vtmp='v ~/sb/vtmp'
 alias globaldiffmgr='find ~/sftwr/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias d='diffmgr *'

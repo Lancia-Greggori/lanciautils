@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 readonly BRWSR="${1%%* }"
 if [ "$#" -lt 2 ]; then
-	SITE="$(printf 'ddg\ngoogle\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)"
+	SITE="$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)"
 else
 	SITE="$2"
 fi
@@ -10,6 +10,7 @@ case "$SITE" in
 	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
 	wikipedia) URL='https://en.wikipedia.org/wiki/' ;;
 	google) URL='https://google.com/search?hl=en&q=' ;;
+	stackoverflow) URL='https://stackoverflow.com/search?q=' ;;
 	url) URL='' ;;
 	*) exit 1;;
 esac
