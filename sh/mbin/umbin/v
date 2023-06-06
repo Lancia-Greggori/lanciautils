@@ -1,0 +1,2 @@
+#!/bin/sh
+exec vim -c 'syntax off | nnoremap <Enter> <NOP>' "$@"
