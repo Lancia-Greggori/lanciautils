@@ -2,6 +2,7 @@ LSR="$HOME/.lsr"
 PATH="$LSR/lmbin:$LSR/bin:$LSR/sbin:$PATH"
 LOGD="$HOME/.logs"
 TERMINAL=st
-export LSR LOGD PATH TERMINAL
+EDITOR=v
+export LSR LOGD PATH TERMINAL EDITOR
 . ~/.bashrc
 ~/.launchprog
