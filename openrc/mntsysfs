@@ -5,5 +5,5 @@ depend(){
 }
 
 start(){
-	mount -t sysfs -o nodev,noexec,nosuid sysfs /sys
+	mount -n -t sysfs -o nodev,noexec,nosuid sysfs /sys
 }
