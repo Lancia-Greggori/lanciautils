@@ -12,7 +12,8 @@ map <C-q> :qa!<nl>
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
-nnoremap <C-n> :bn<nl>
+nnoremap <C-k> :bn<nl>
+nnoremap <C-j> :bp<nl>
 nnoremap <C-d> :b#<nl>
 
 inoremap <C-s> <Esc>
