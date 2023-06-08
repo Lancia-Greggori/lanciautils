@@ -1,5 +1,9 @@
 #!/usr/bin/openrc-run
 
+depend(){
+	provide sysfs
+}
+
 start(){
-	mount -t sysfs -o nodev,noexec,nosuid
+	mount -t sysfs -o nodev,noexec,nosuid sysfs /sys
 }
