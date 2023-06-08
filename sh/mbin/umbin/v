@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/bin/vim -c 'syntax off | nnoremap <Enter> <NOP>' "$@"
+exec /usr/bin/vim -c 'syntax off | nnoremap <C-m> :bp<nl> | nnoremap <Enter> <NOP>' "$@"

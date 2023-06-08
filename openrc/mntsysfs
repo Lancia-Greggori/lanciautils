@@ -1,0 +1,5 @@
+#!/usr/bin/openrc-run
+
+start(){
+	mount -t sysfs -o nodev,noexec,nosuid
+}

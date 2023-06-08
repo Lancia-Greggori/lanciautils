@@ -13,7 +13,6 @@ nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
 nnoremap <C-n> :bn<nl>
-nnoremap <C-m> :bp<nl>
 nnoremap <C-d> :b#<nl>
 
 inoremap <C-s> <Esc>
