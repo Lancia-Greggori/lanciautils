@@ -20,4 +20,5 @@ int main(int argc, char *argv[]) {
 
 	clearenv();
 	return WEXITSTATUS( system(command) );
+
 }
