@@ -1,7 +1,11 @@
 #!/bin/bash -eu
 BRWSR=${1%%* }
-SITE=$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)
 DIR=~/dl/brwsr/$BRWSR; [ ! -e $DIR ] && mkdir $DIR
+if [ "$#" -eq 2 ]; then
+	SITE=$2
+else
+	SITE=$(printf 'ddg\ngoogle\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)
+fi
 case $SITE in
 	ddg) URL='https://lite.duckduckgo.com/lite/?q=' ;;
 	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
