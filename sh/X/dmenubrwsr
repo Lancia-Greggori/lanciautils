@@ -7,22 +7,22 @@ else
 	SITE=$(printf 'ddg\nggl\nstackoverflow\nwikipedia\narchwiki\nurl' | dmenu -p $BRWSR)
 fi
 case $SITE in
-	ddg) URL='https://lite.duckduckgo.com/lite/?q=' ;;
-	archwiki) URL='https://wiki.archlinux.org/index.php?search=' ;;
-	wikipedia) URL='https://en.wikipedia.org/wiki/' ;;
-	ggl) URL='https://google.com/search?hl=en&q=' ;;
-	stackoverflow) URL='https://stackoverflow.com/search?q=' ;;
-	url) URL='' ;;
+	ddg) FPL='https://lite.duckduckgo.com/lite/?q=' ;;
+	archwiki) FPL='https://wiki.archlinux.org/index.php?search=' ;;
+	wikipedia) FPL='https://en.wikipedia.org/wiki/' ;;
+	ggl) FPL='https://google.com/search?hl=en&q=' ;;
+	stackoverflow) FPL='https://stackoverflow.com/search?q=' ;;
+	url) FPL='' ;;
 	*) exit 1;;
 esac
-SRCH="$(dmenu -p "$BRWSR|$SITE" </dev/null)"
+URL="$FPL$(dmenu -p "$BRWSR|$SITE" </dev/null | tr \  +)"
 cd $DIR
 if [ $BRWSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
-		exec lynx "$URL$SRCH"
+		exec lynx "$URL"
 	else
-		exec st lynx "$URL$SRCH"
+		exec st lynx "$URL"
 	fi
 else
-	exec $1 "$URL$SRCH"
+	exec $1 "$URL"
 fi
