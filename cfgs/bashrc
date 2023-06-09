@@ -36,3 +36,4 @@ alias vat='v ~/.tsks/all'
 alias globaldiffmgr='find ~/sftwr/mgit/lancia-utils/* -type f | xargs diffmgr'
 alias d='diffmgr *'
 alias trrm=transmission-remote
+alias mci='make clean install'
