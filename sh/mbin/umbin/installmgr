@@ -11,7 +11,7 @@ for file in "$@"; do
 	PERM="${FULLPATH##*:}"
 	file="${file%%:*}"
 	echo "$file --> $DEST"
-	if [ "$(stat -c '%u' "$file")" = 0 ]; then
+	if [ "$(stat -c '%u' "$DEST")" = 0 ]; then
 		s install -m "$PERM" "$file" "$DEST"
 	else
 		install -m "$PERM" "$file" "$DEST"

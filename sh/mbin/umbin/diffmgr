@@ -1,38 +1,8 @@
 #!/bin/sh -eu
 [ "$#" -eq 0 ] && exit 1
 . /usr/subr/out
-readonly DIRS='/etc /usr/local/umbin /home/lancia/.lsr/lmbin /etc/init.d /usr/local/etc /usr/subr'
-EXIT=0
-OUT=''
-VERBOS=0
-if [ "$#" -eq 1 ]; then
-	VERBOS=1
-else
-	for arg in "$@"; do
-		[ "$arg" = '-v' ] && VERBOS=1
-		break
-	done
-fi
-fildiff() {
-	if [ "$VERBOS" -eq 1 ]; then
-		OUT="$(diff "$1" "$2")" || {
-			echo "$OUT"
-			[ "$EXIT" -ne 1 ] && EXIT=1
-		}
-	else
-		diff -q "$1" "$2" 1>/dev/null || echo "$1 != $2"
-	fi
-}
 for file in "$@"; do
-	[ ! -f "$file" ] && continue
-	OUT="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)" && {
-		fildiff "${OUT%%:*}" "$(echo "$OUT" | cut -d: -f2)"
-		continue
-	}
-	for dir in $DIRS; do
-		TARGETFIL="$dir/${file##*/}"
-		[ ! -e "$TARGETFIL" ] && continue
-		fildiff "$file" "$TARGETFIL"
-	done
+	LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"
+	[ -z "$LINE" ] && continue
+	diff "${LINE%%:*}" "$(echo "$LINE" | cut -d: -f2)" || continue
 done
-exit "$EXIT"
