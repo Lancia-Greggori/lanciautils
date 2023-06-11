@@ -1,4 +1,4 @@
 #!/bin/sh
 . /usr/subr/out
-[ -e /eetc/wpa/"$1" ] || perrexit "/eetc/wpa/$1 no exist" 1
+[ -e /eetc/wpa/"$1" ] || perrexit "/eetc/wpa/$1 nexist" 1
 exec wpa_supplicant -c /eetc/wpa/"$1" -i wlan0

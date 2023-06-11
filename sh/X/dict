@@ -3,16 +3,16 @@
 I="$(dmenu -p "$PROGN:" < /dev/null)" || exit $?
 O="$(hunspell <<< "$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 if [[ "$O" =~ ^# ]]; then
-	perr "Word \"$I\" not found in dictionary"
+	perr "\"$I\" nfound in dict"
 	exit 1
 elif [[ "$O" =~ ^\*$ ]]; then
 	pmsg 'Word correct'
-	echo "$I" | tr -d '\n' | xclip -selection clipboard
+	echo "$I" | tr -d '\n' | xclip -sel clip
 elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
 	O="${O#+ }"
-	printf '%s\n%s' "$O" "$I" | dmenu -p "\"$I\": plural form of \"$O\"" \
-	       	| tr -d '\n' | xclip -selection clipboard
+	printf '%s\n%s' "$O" "$I" | dmenu -p "$I: plural of \"$O\"" \
+	       	| tr -d '\n' | xclip -sel clip
 else
 	cut -d':' -f2 <<< "$O" | tr -d ' ' | tr ',' '\n' | \
-		dmenu | tr -d '\n' | xclip -selection clipboard
+		dmenu | tr -d '\n' | xclip -sel clip
 fi

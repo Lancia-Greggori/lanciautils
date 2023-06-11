@@ -15,7 +15,9 @@ case $SITE in
 	url) FPL='' ;;
 	*) exit 1;;
 esac
-URL="$FPL$(dmenu -p "$BRWSR|$SITE" </dev/null | tr \  +)"
+IS="$(dmenu -p "$BRWSR|$SITE" </dev/null | tr \  +)"
+[ -z "$IS" ] && exit 0
+URL="$FPL"
 cd $DIR
 if [ $BRWSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
