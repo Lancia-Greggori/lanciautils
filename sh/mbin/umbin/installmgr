@@ -1,15 +1,19 @@
 #!/bin/sh -eu
 . /usr/subr/out
-for f in "$@"; do
-	[ ! -f "$f" ] && exit 1
-	grep -q -m1 "^$(readlink -f "$f"):" /letc/swfl || perrexit "$f: nfound in /letc/swfl" 2
+for file in "$@"; do
+	[ ! -f "$file" ] && exit 1
+	grep -q -m1 "^$(readlink -f "$file"):" /letc/swfl || \
+	       	perrexit "$file: nfound in /letc/swfl" 2
 done
-for f in "$@"; do
-	FULLPATH="$(grep -m1 "^$(readlink -f "$f"):" /letc/swfl)"
-	DEST="$(echo "$O" | cut -d':' -f2)"
-	PERM="${O##*:}"
-	f="${f%%:*}"
-	echo "$f --> $DEST"
-	if 
-	install -m "$PERM" "$f" "$DEST"
+for file in "$@"; do
+	FULLPATH="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)"
+	DEST="$(echo "$FULLPATH" | cut -d':' -f2)"
+	PERM="${FULLPATH##*:}"
+	file="${file%%:*}"
+	echo "$file --> $DEST"
+	if [ "$(stat -c '%u' "$file")" = 0 ]; then
+		s install -m "$PERM" "$file" "$DEST"
+	else
+		install -m "$PERM" "$file" "$DEST"
+	fi
 done
