@@ -3,7 +3,7 @@
 trap 'rm "$T"; exit 130' INT
 T="$(mktemp /tmp/"$PROGN".XXX)"
 NR=0
-alias wrn='pwrn "please check $T" && NR=1'
+alias wrn='pwrn "please check $T file for more info" && NR=1'
 r() {
 	printf "$1: "
 	if $1 1>/dev/null 2>"$T"; then
@@ -12,13 +12,16 @@ r() {
 		echo FAIL
 	fi
 }
-if [ "$1" = '--reinstall-grub' ]; then
-	r reinstall-grub
+
+if [ "$1" = '--rinstgrub' ]; then
+	r rinstgrub
 fi
 grep -Fv -e 'Installing for x86_64-efi platform.'\
 	-e 'Installation finished. No error reported.' "$T" && wrn
+
 r 'mkinitcpio -P'
 grep -Fqv '==> WARNING: Possibly missing firmware for module:' "$T" && wrn
+
 r 'grub-mkconfig -o /boot/grub/grub.cfg'
 grep -Ev -e '^Warning: os-prober will not be executed to detect other bootable partitions\.$'\
 	-e '^Systems on them will not be added to the GRUB boot configuration\.$'\
@@ -27,4 +30,5 @@ grep -Ev -e '^Warning: os-prober will not be executed to detect other bootable p
 	-e '^Generating grub configuration file \.\.\.$'\
 	-e '^Adding boot menu entry for UEFI Firmware Settings \.\.\.'\
 	-e '^done$' "$T" && wrn
+
 [ $NR -eq 0 ] && rm "$T"

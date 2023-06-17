@@ -13,3 +13,5 @@ swfl: system wide file list
 ncurl: nobody curl ( as user )
 IS: input string
 FPL: first part link
+dmgr: swfl diff manager
+sim: swfl install manager

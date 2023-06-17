@@ -1,17 +1,15 @@
 #!/bin/sh -e
+[ "$(id -u)" -ne 0 ] && exit 1
 . /usr/subr/out
 if ! mount | grep -q '^/dev/[^ ]\+ on /boot/efi'; then
-	perrexit '/boot/efi not mounted' 1
+	perrexit '/boot/efi not mounted' 2
 fi
 T="$(mktemp -d)"
 mv /boot/efi/* "$T"
 if ! grub-install --target=x86_64-efi --efi-directory=/boot/efi \
 	--bootloader-id=ARTIX; then
-	printf '\n\n\tFATAL ERR: REINSTALLING GRUB FAILED\n\n\n'
-	exit 2
-fi
-if ! efibootmgr | grep -q '^Boot[0-9]\+\* ARTIX'; then
-	pwarn 'no boot entry with lablel "ARTIX" found in efibootmgr'
-	exit 3
+	perrexit 'REINSTALLING GRUB FAILED' 3
+elif ! efibootmgr | grep -q '^Boot[0-9]\+\* ARTIX'; then
+	perrexit 'no boot entry with lablel "ARTIX" found in efibootmgr' 4
 fi
 rm -r "$T"

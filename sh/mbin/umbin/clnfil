@@ -1,6 +1,0 @@
-#!/bin/sh -eu
-[ "$#" -eq 0 ] && exit 1
-for f in "$@"; do
-	[ -L "$f" ] && continue
-	sed -i -e 's/[ 	]\+$//' -e 's/^[ 	]\+$//' "$f"
-done

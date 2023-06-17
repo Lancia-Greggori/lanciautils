@@ -17,7 +17,7 @@ case $SITE in
 esac
 IS="$(dmenu -p "$BRWSR|$SITE" </dev/null | tr \  +)"
 [ -z "$IS" ] && exit 0
-URL="$FPL"
+URL="$FPL$IS"
 cd $DIR
 if [ $BRWSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
