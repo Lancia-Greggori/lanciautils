@@ -4,5 +4,11 @@
 for file in "$@"; do
 	LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"
 	[ -z "$LINE" ] && continue
-	diff "${LINE%%:*}" "$(echo "$LINE" | cut -d: -f2)" || continue
+	TRGT="$(echo "$LINE" | cut -d: -f2)"
+	[ ! -e "$TRGT" ] && continue
+	SRC="${LINE%%:*}"
+	if ! O="$(diff "$SRC" "$TRGT")"; then
+		printf "$SRC\t$TRGT\n"
+		echo "$O"
+	fi
 done
