@@ -4,4 +4,4 @@ perrexit(){
 	echo "$PROGN: [ERR]: $1" 1>&2
 	exit $2
 }
-pwarn(){ echo "$PROGN: [WRN]: $1" 1>&2 ; }
+pwrn(){ echo "$PROGN: [WRN]: $1" 1>&2 ; }

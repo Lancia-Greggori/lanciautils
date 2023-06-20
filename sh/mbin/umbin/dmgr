@@ -9,7 +9,7 @@ VERB=0
 for file in "$@"; do
 	if ! LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"; then
 		[ "$VERB" = 1 ] && \
-			pwarn "$file nfound in /letc/swfl"
+			pwrn "$file nfound in /letc/swfl"
 		continue
 	fi
 	TRGT="$(echo "$LINE" | cut -d: -f2)"

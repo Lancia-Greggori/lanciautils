@@ -3,7 +3,7 @@
 [ "$#" -eq 0 ] && exit 1
 D='/usr/bbx'
 [ -e $D ] || {
-	pwarn "$D no exist, creating it"
+	pwrn "$D no exist, creating it"
 	mkdir $D
 }
 A="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d \

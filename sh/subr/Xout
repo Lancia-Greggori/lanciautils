@@ -2,4 +2,4 @@ readonly PROGN="${0##*/}"
 print(){ notify-send "$1" ; }
 pmsg(){ notify-send "$PROGN: [MSG]: $1" ; }
 perr(){ notify-send "$PROGN: [ERR]: $1" ; }
-pwarn(){ notify-send "$PROGN: [WRN]: $1" ; }
+pwrn(){ notify-send "$PROGN: [WRN]: $1" ; }

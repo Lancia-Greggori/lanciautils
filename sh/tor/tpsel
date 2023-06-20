@@ -4,7 +4,7 @@ readonly DEP='trcd'
 readonly LOGF="/var/log/tor/$DEP.log"
 PID=''
 OUT=''
-pgrep -f "$DEP" 1>/dev/null || pwarn "program \"$DEP\" not running, problems might occur"
+pgrep -f "$DEP" 1>/dev/null || pwrn "program \"$DEP\" not running, problems might occur"
 if [ ! -e "$LOGF" ]; then
 	exit 2
 elif [ ! -s "$LOGF" ]; then
