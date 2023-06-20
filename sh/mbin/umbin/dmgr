@@ -1,9 +1,17 @@
 #!/bin/sh -eu
 [ "$#" -eq 0 ] && exit 1
+VERB=0
+[ "$1" = -v ] && {
+	VERB=1
+	shift 1
+}
 . /usr/subr/out
 for file in "$@"; do
-	LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"
-	[ -z "$LINE" ] && continue
+	if ! LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"; then
+		[ "$VERB" = 1 ] && \
+			pwarn "$file nfound in /letc/swfl"
+		continue
+	fi
 	TRGT="$(echo "$LINE" | cut -d: -f2)"
 	[ ! -e "$TRGT" ] && continue
 	SRC="${LINE%%:*}"

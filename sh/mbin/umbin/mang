@@ -1,0 +1,2 @@
+#!/bin/sh -e
+man "$1" | grep "$2"
