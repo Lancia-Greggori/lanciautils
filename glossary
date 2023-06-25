@@ -15,3 +15,5 @@ IS: input string
 FPL: first part link
 dmgr: swfl diff manager
 sim: swfl install manager
+FCMD: full command
+CMD: command
