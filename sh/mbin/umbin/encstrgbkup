@@ -1,9 +1,10 @@
 #!/bin/sh -e
+[ "$(id -u)" -ne 0 ] && exit 1
+[ "$#" -eq 0 ] && exit 2
 . /usr/subr/out
-[ "$#" -eq 0 ] && exit 1
 for dir in "$@"; do
-	[ -d "$dir" ] || perrexit "$dir: not a dir" 2
+	[ -d "$dir" ] || perrexit "$dir: not a dir" 3
 done
 for dir in "$@"; do
-	tar czf /mnt/strg/ectd/bkup/"$(echo "$dir" | sed 's|/|_|g')--$(date +%Y-%m-%d_%T).tar.gz" "$dir" >/dev/null
+	tar czf /mnt/strg/enc/bkup/"$(echo "$(readlink -f "$dir")" | sed 's|/|_|g')--$(date +%Y-%m-%d_%T).tar.gz" "$dir" >/dev/null
 done

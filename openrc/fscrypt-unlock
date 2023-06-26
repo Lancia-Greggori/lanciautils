@@ -1,19 +1,17 @@
 #!/usr/bin/openrc-run
-
 depend() {
 	after local
 	before getty
 	keyword -shutdown
 }
-
 start() {
-	DIR='/mnt/strg/ectd'
+	DIR='/mnt/strg/enc'
 	if [ ! -e "$DIR" ]; then
 		echo "encrypted storage at $DIR does not exist, skipping unlocking..."
 		exit 0
 	fi
-	read -r -p 'Do you want to unlock the encrypted storage? ' ANSWER
-	if [ "$ANSWER" = 'y' ]; then
+	read -r -p 'unlock encrypted storage? ' ANSW
+	if [ "$ANSW" = 'y' ]; then
 		fscrypt unlock "$DIR"
 	else
 		exit 0
