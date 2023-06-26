@@ -1,0 +1,4 @@
+#!/bin/sh -eu
+CMD="$(which $1)"
+shift 1
+exec sh -x "$CMD" "$@"

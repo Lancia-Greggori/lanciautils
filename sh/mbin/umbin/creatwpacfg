@@ -3,8 +3,8 @@ SSID=''
 PASS=''
 read -p 'SSID: ' SSID
 read -s -p 'PASS: ' PASS
-install -m 0600 -o root -g root /dev/null /eetc/wpa/"$SSID"
-cat << EOF > /eetc/wpa/"$SSID"
+install -m 0600 -o root -g root /dev/null /encetc/wpa/"$SSID"
+cat << EOF > /encetc/wpa/"$SSID"
 network={
 	ssid="$SSID"
 	scan_ssid=1
