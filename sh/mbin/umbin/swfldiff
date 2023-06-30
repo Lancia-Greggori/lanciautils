@@ -8,15 +8,15 @@ VERB=0
 . /usr/subr/out
 for file in "$@"; do
 	if ! LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"; then
-		[ "$VERB" = 1 ] && \
-			pwrn "$file nfound in /letc/swfl"
+		[ "$VERB" -eq 1 ] && pwrn "$file nfound in /letc/swfl"
 		continue
 	fi
 	TRGT="$(echo "$LINE" | cut -d: -f2)"
 	[ ! -e "$TRGT" ] && continue
 	SRC="${LINE%%:*}"
+	[ "$VERB" -eq 1 ] && printf "@$SRC\t$TRGT\n"
 	if ! O="$(diff "$SRC" "$TRGT")"; then
-		printf "@$SRC\t$TRGT\n"
+		[ "$VERB" -ne 1 ] && printf "@$SRC\t$TRGT\n"
 		echo "$O"
 	fi
 done
