@@ -32,8 +32,7 @@ ulimit -c 1000
 . "$HOME"/.bashfunc
 
 alias vct='v ~/.tsks/ct'
-alias vat='v ~/.tsks/all'
-alias globaldiffmgr='find ~/sftwr/mgit/lancia-utils/* -type f | xargs dmgr'
+alias glblsdm='find ~/sftwr/mgit/lancia-utils/* -type f | xargs dmgr'
 alias d='diffmgr *'
 alias trrm=transmission-remote
 alias mci='make clean install'

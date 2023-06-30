@@ -16,7 +16,7 @@ for file in "$@"; do
 	[ ! -e "$TRGT" ] && continue
 	SRC="${LINE%%:*}"
 	if ! O="$(diff "$SRC" "$TRGT")"; then
-		printf "$SRC\t$TRGT\n"
+		printf "@$SRC\t$TRGT\n"
 		echo "$O"
 	fi
 done
