@@ -1,12 +1,12 @@
 #!/bin/sh -eu
 [ "$#" -gt 1 ] && exit 1
 . /usr/subr/out
-if [ "$PROGN" != 'poweroff' ] && [ "$PROGN" != 'reboot' ]; then
+if [ "$PROGN" != 'pwroff' ] && [ "$PROGN" != 'rbt' ]; then
 	exit 2
 fi
 O="$(who)"
 echo "$O" | cut -d' ' -f1 | grep -Fvq "$USER" && {
-	perr "somebody else is logged in, cannot poweroff:"
+	perr "somebody else is logged in, cannot pwroff:"
 	echo "$O"
 	exit 3
 }
