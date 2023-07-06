@@ -5,4 +5,4 @@ Target = openrc
 
 [Action]
 When = PostTransaction
-Exec = /usr/bin/find /etc/init.d/ /etc/runlevels/ ( -name 'agetty*' -or -name netmount -or sysfs ) -delete
+Exec = /usr/bin/find /etc/init.d/ /etc/runlevels/ ( -name 'agetty*' -or -name netmount -or -name sysfs ) -delete
