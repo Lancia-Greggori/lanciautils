@@ -4,6 +4,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias cp='cp -i'
 alias mv='mv -i'
+alias cpr='cp -i'
 
 alias tcat='tar tvf'
 alias info='info --vi-keys'
