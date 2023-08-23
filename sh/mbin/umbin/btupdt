@@ -5,7 +5,7 @@ T="$(mktemp /tmp/"$PROGN".XXX)"
 NR=0
 alias wrn='pwrn "please check $T file for more info" && NR=1'
 r() {
-	printf "$1: "
+	printf "$1 --> "
 	if $1 1>/dev/null 2>"$T"; then
 		echo SUCC
 	else
