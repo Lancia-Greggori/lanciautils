@@ -5,4 +5,4 @@ Target = grub
 
 [Action]
 When = PostTransaction
-Exec = /usr/local/umbin/rinstgrub
+Exec = /usr/local/umbin/reinstall-grub

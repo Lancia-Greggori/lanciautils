@@ -13,8 +13,8 @@ r() {
 	fi
 }
 
-if [ "$1" = '--rinstgrub' ]; then
-	r rinstgrub
+if [ "$1" = '--reinstall-grub' ]; then
+	r reinstall-grub
 fi
 grep -Fv -e 'Installing for x86_64-efi platform.'\
 	-e 'Installation finished. No error reported.' "$T" && wrn

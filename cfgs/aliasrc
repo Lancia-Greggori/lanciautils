@@ -13,3 +13,4 @@ alias gdb='gdb -q'
 alias lsuserps='ps -u $USER -o user,cmd'
 alias scurl='curl -s'
 alias frgrep='grep -Fr'
+alias cl=clear
