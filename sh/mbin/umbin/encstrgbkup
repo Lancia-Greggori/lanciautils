@@ -9,6 +9,6 @@ for d in "$@"; do
 done
 for dir in "$@"; do
 	tar czf \
-		$D/"$(readlink -f "$dir" | sed 's|/|_|g')@$(date +%Y-%m-%d_%T).tar.gz" \
+		$D/"$(readlink -f "$dir" | sed 's|/|_|g')@$(date +%Y-%m-%d@%T).tar.gz" \
 		"$dir" >/dev/null
 done
