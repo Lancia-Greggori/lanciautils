@@ -5,12 +5,14 @@ alias ll='ls -l'
 alias cp='cp -i'
 alias mv='mv -i'
 alias cpr='cp -i'
-
 alias tcat='tar tvf'
 alias info='info --vi-keys'
 alias showkeysym='xev 2>&1 | grep -F keysym'
 alias gdb='gdb -q'
 alias lsuserps='ps -u $USER -o user,cmd'
 alias scurl='curl -s'
-alias frgrep='grep -Fr'
 alias cl=clear
+alias rgr='grep -r'
+alias frgr='grep -rF'
+alias pac=pacman
+alias gr=grep

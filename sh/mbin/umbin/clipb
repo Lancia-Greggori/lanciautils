@@ -1,7 +1,8 @@
-#!/bin/sh -e
-D="$(cat)"
-if [ "$(echo "$D" | wc -l)" -eq 1 ]; then
-	echo "$D" | tr -d '\n' | xclip -sel clip
+#!/bin/bash -e
+[ "$1" = -o ] && exec xclip -sel clipb -o
+I="$(cat)"
+if [ "$(wc -l <<<"$I")" -eq 1 ]; then
+	tr -d '\n' <<<"$I" | xclip -sel clip
 else
-	echo "$D" | xclip -sel clip
+	xclip -sel clip <<<"$I"
 fi
