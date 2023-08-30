@@ -1,0 +1,8 @@
+#!/bin/bash -e
+[ "$1" = -o ] && exec xclip -sel clipb -o
+I="$(cat)"
+if [ "$(wc -l <<<"$I")" -eq 1 ]; then
+	tr -d '\n' <<<"$I" | xclip -sel clip
+else
+	xclip -sel clip <<<"$I"
+fi
