@@ -19,7 +19,7 @@ jmpcmd(){
 
 jmpadd(){
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
-		echo 'USAGE: jmp-add "dir" OR jmp-add "dir" "alias"'
+		echo 'USAGE: jmpadd "dir" OR jmpadd "dir" "alias"'
 		return 1
 	fi
 	if [ "$#" -eq 1 ]; then
