@@ -1,0 +1,11 @@
+#!/usr/bin/openrc-run
+depend(){
+	need termencoding
+	after devfs
+	keyword -docker -lxc -openvz -prefix -systemd-nspawn -uml -vserver -xenu
+	provide keymaps
+}
+start(){
+	kbd_mode -a
+	loadkeys --default
+}
