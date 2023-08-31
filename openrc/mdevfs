@@ -1,0 +1,14 @@
+#!/usr/bin/openrc-run
+depend(){
+	provide devfs dev-mount
+	before dev
+	keyword -docker -prefix -systemd-nspawn -vserver
+}
+start(){
+	mount -n -t devtmpfs \
+		-o noexec,nosuid,mode=0755,size=10M \
+		dev /dev
+	mount -n -t devpts \
+		-o nosuid,noexec,gid=5,mode=0620
+		devpts /dev/pts
+}

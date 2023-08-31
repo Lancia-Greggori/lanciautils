@@ -5,4 +5,4 @@ Target = openrc
 
 [Action]
 When = PostTransaction
-Exec = /usr/bin/find /etc/init.d/ /etc/runlevels/ ( -name 'agetty*' -or -name netmount -or -name sysfs -or -name binfmt -or -name procfs -or -name keymaps -or -name save-keymaps ) -delete
+Exec = /usr/bin/find /etc/init.d/ /etc/runlevels/ ( -name 'agetty*' -or -name netmount -or -name sysfs -or -name binfmt -or -name procfs -or -name keymaps -or -name save-keymaps -or -name save-termencoding -or -name termencoding ) -delete
