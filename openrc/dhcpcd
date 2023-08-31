@@ -1,7 +1,9 @@
 #!/usr/bin/openrc-run
+
 command=/usr/bin/dhcpcd
 supervisor='supervise-daemon'
 command_args='-4 -B -q'
+
 depend() {
 	provide net
 	need localmount
