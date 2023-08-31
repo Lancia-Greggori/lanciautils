@@ -22,7 +22,7 @@ elif [ $1 = -a ]; then
 elif [ $1 = -v ]; then
 	VERB=1
 	shift 1
-else	
+else
 	VERB=0
 fi
 
