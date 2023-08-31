@@ -5,14 +5,16 @@ depend() {
 	keyword -shutdown
 }
 start() {
-	DIR='/mnt/strg/enc'
-	if [ ! -e "$DIR" ]; then
-		echo "encrypted storage at $DIR does not exist, skipping unlocking..."
+	D='/mnt/strg/enc'
+
+	if [ ! -e "$D" ]; then
+		echo "encrypted storage at $D does not exist, skipping unlocking..."
 		exit 0
 	fi
-	read -r -p 'unlock encrypted storage? ' ANSW
-	if [ "$ANSW" = 'y' ]; then
-		fscrypt unlock "$DIR"
+
+	read -r -p 'unlock encrypted storage? ' A
+	if [ "$A" = 'y' ]; then
+		fscrypt unlock "$D"
 	else
 		exit 0
 	fi
