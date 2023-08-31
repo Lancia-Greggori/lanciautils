@@ -7,8 +7,15 @@ depend(){
 start(){
 	mount -n -t devtmpfs \
 		-o noexec,nosuid,mode=0755,size=10M \
-		dev /dev
+		dev /dev 
+
+	mkdir /dev/pts
 	mount -n -t devpts \
-		-o nosuid,noexec,gid=5,mode=0620
+		-o nosuid,noexec,gid=5,mode=0620 \
 		devpts /dev/pts
+
+	mkdir /dev/shm
+	mount -n -t tmpfs \
+		-o nosuid,nodev,noexec,size=500M
+		shm /dev/shm
 }
