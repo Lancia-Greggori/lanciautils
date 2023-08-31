@@ -1,7 +1,9 @@
 #!/usr/bin/openrc-run
+
 supervisor='supervise-daemon'
 command=/usr/local/umbin/wpad
 extra_stopped_commands='killall wpa_supplicant'
+
 depend() {
 	after net.lo
 	provide net
