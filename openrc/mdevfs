@@ -16,6 +16,6 @@ start(){
 
 	mkdir /dev/shm
 	mount -n -t tmpfs \
-		-o nosuid,nodev,noexec,size=500M
+		-o nosuid,nodev,noexec,size=500M \
 		shm /dev/shm
 }

@@ -6,7 +6,7 @@ depend(){
 start(){
 	for x in $(find /etc/runlevels -name '*.tty[0-9]'); do
 		setfont \
-			/usr/share/kbd/consolefonts/solar24x32.psfu.g
+			/usr/share/kbd/consolefonts/solar24x32.psfu.gz \
 			-C /dev/${x##*.}
 	done
 }
