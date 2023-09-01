@@ -7,7 +7,7 @@ HISTSIZE=99999
 PS1='$ $?: '
 
 bind "\C-l":clear-screen
-bind -r "\C-s"
+for i in 1 2 3 4 5; do bind -r "\C-s"; done
 bind -r "\C-p"
 bind "\C-s":vi-movement-mode
 bind "\C-x":vi-movement-mode
