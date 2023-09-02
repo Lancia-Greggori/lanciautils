@@ -6,6 +6,14 @@ HISTFILESIZE=999999
 HISTSIZE=99999
 PS1='$ $?: '
 
+set -o vi
+shopt -s autocd
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s histappend
+stty stop ''
+ulimit -c 1000
+
 bind "\C-l":clear-screen
 bind -r "\C-s"
 bind -r "\C-p"
@@ -18,14 +26,7 @@ bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
 bind '"\C-r":". ~/.bashrc\n"'
 bind '"\C-p":"| "'
 bind '"\e[1;3P":"| grep -F "'
-
-set -o vi
-shopt -s autocd
-shopt -s checkwinsize
-shopt -s cmdhist
-shopt -s histappend
-stty stop ''
-ulimit -c 1000
+bind '"\ew":" | gr"'
 
 . /usr/subr/dl
 . /etc/aliasrc

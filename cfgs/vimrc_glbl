@@ -1,0 +1,62 @@
+runtime! archlinux.vim
+
+set nocompatible
+set ttymouse=""
+set mouse=""
+set shortmess=aI
+set formatoptions=crql
+set cmdheight=2
+
+map <C-q> :qa!<nl>
+
+nnoremap <C-s> :w<nl>
+nnoremap <C-x> :q<nl>
+nnoremap <C-z> <undo>
+nnoremap <C-k> :bn<nl>
+nnoremap <C-j> :bp<nl>
+nnoremap <C-d> :b#<nl>
+
+inoremap <C-s> <Esc>
+inoremap <C-p> <Esc>p<insert>
+inoremap <C-z> <Esc><undo><insert>
+inoremap <C-e> <Esc>A
+inoremap <C-a> <Esc>0i
+
+vnoremap <C-s> <Esc>
+
+nnoremap <F1> :%w !clipb<nl><nl>
+nnoremap <C-c> :.w !clipb<nl><nl>
+inoremap <C-c> <Esc>:.w !clipb<nl><insert>
+vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+
+function ExecCmd(cmd)
+	let o = system(a:cmd)
+	if (shell_error != 0)
+		echo o
+	endif
+endfunction
+
+function DelEmptyLines()
+	%g/^[\s\t]*$/d
+endfunction
+
+autocmd FileType c {
+	nnoremap <buffer> <F2> :!./a.out<nl>
+	nnoremap <buffer> <F3> :call ExecCmd('gcc -Wall -g '.expand('%:p'))<nl>
+	nnoremap <buffer> <F4> :!gdb -q ./a.out<nl>
+}
+autocmd FileType bash,sh {
+	nnoremap <buffer> <F2> :!%:p
+	nnoremap <buffer> <F3> :call ExecCmd(&filetype.' -n '.expand('%:p'))<nl>
+	nnoremap <buffer> <F4> :call ExecCmd('shellcheck -x '.expand('%:p'))<nl>
+}
+autocmd FileType es {
+	nnoremap <buffer> <F2> :!hunspell -d es %:p<nl>
+	nnoremap <buffer> <F3> :!hunspell -d en_US,es %:p<nl>
+	nnoremap <buffer> <F4> :!wc -w %:p<nl>
+}
+autocmd BufNewFile,BufRead */artix/forum/* {
+	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
+	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
+	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
+}
