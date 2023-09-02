@@ -1,11 +1,13 @@
+JMPFILE="$HOME/.jmpdirs"
+
 j(){
 	local D
 	[ "$#" -ne 1 ] && return 1
-	[ ! -e '/home/lancia/.jmpdirs' ] && {
-		echo 'jmp file no exist'
+	[ ! -e "$JMPFILE" ] && {
+		echo 'jmp file nexist'
 		return 2
 	}
-	D="$(grep -m1 "^$1" '/home/lancia/.jmpdirs' | cut -d':' -f2)"
+	D="$(awk -F: "/^$1:/ { print \$2 }" ~/.jmpdirs )"
 	[ -z "$D" ] && {
 		echo 'dir not found'
 		return 3
@@ -19,22 +21,22 @@ jmpcmd(){
 
 jmpadd(){
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
-		echo 'USAGE: jmpadd "dir" OR jmpadd "dir" "alias"'
+		echo 'USAGE: jmpadd @dir OR jmpadd @dir @alias'
 		return 1
 	fi
 	if [ "$#" -eq 1 ]; then
 		[ -e "$1" ] || {
-			echo "$1: no exist"
+			echo "$1: nexist"
 			return 2
 		}
 		local NAME="$(basename "$1")"
-		echo "$NAME:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
+		echo "$NAME:$(readlink -f "$1")" >> "$JMPFILE"
 	else
 		[ -e "$1" ] || {
-			echo "$2: no exist"
+			echo "$2: nexist"
 			return 2
 		}
-		echo "$2:$(readlink -f "$1")" >> '/home/lancia/.jmpdirs'
+		echo "$2:$(readlink -f "$1")" >> "$JMPFILE"
 	fi
 }
 
