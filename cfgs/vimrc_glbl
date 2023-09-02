@@ -21,6 +21,7 @@ inoremap <C-p> <Esc>p<insert>
 inoremap <C-z> <Esc><undo><insert>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>0i
+inoremap <C-b> <Esc>bi
 
 vnoremap <C-s> <Esc>
 
