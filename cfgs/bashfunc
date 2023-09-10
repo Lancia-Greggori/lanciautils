@@ -7,7 +7,7 @@ j(){
 		echo 'jmp file nexist'
 		return 2
 	}
-	D="$(awk -F: "/^$1:/ { print \$2 }" ~/.jmpdirs )"
+	D="$(awk -F: "/^$1/ { print \$2; exit }" ~/.jmpdirs )"
 	[ -z "$D" ] && {
 		echo 'dir not found'
 		return 3

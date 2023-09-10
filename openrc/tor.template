@@ -22,7 +22,7 @@ depend() {
 
 checkconfig() {
 	if [ ! -e "$conf" ]; then
-		eerror "$conf: no exist"
+		eerror "$conf: nexist"
 		return 3
 	elif ! grep -q "^DataDirectory ${datad}$" "$conf"; then
 		eerror "$conf: \"DataDirectory\": bad option"

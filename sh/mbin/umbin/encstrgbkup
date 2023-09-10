@@ -3,7 +3,7 @@
 [ "$#" -eq 0 ] && exit 2
 . /usr/subr/out
 D=/mnt/strg/enc/bkup
-[ ! -e $D ] && perrexit "$D: no exist" 3
+[ ! -e $D ] && perrexit "$D: nexist" 3
 for d in "$@"; do
 	[ -d "$d" ] || perrexit "$d: not a dir" 4
 done

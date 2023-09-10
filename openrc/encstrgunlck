@@ -8,7 +8,7 @@ start() {
 	D='/mnt/strg/enc'
 
 	if [ ! -e "$D" ]; then
-		echo "encrypted storage at $D does not exist, skipping unlocking..."
+		echo "encrypted storage at $D does nexist, skipping unlocking..."
 		exit 0
 	fi
 
