@@ -2,41 +2,16 @@
 
 . /usr/subr/out
 
-if [ "$#" -eq 0 ]; then
-	exit 1
-elif [ $1 = -a ]; then
-	sed 's/:[0-9]\+$//; s/:/ /g' /letc/swfl | \
-		while read -r line; do
-			SRC="${line%% *}"
-			TGT="${line##* }"
-			if [ ! -e "$SRC" ]; then
-				pwrn "$SRC: nexist"
-				continue
-			elif [ ! -e "$TGT" ]; then
-				pwrn "$TGT: nexist"
-				continue
-			fi
-			diff $line || echo "@ $line"
-		done
-	exit 0
-elif [ $1 = -v ]; then
-	VERB=1
-	shift 1
-else
-	VERB=0
-fi
-
-for file in "$@"; do
-	if ! LINE="$(grep "^$(readlink -f "$file"):" /letc/swfl)"; then
-		[ "$VERB" -eq 1 ] && pwrn "$file nfound in /letc/swfl"
-		continue
-	fi
-	TGT="$(echo "$LINE" | cut -d: -f2)"
-	[ ! -e "$TGT" ] && continue
-	SRC="${LINE%%:*}"
-	[ "$VERB" -eq 1 ] && printf "@$SRC\t$TGT\n"
-	if ! O="$(diff "$SRC" "$TGT")"; then
-		[ "$VERB" -ne 1 ] && printf "@$SRC\t$TGT\n"
-		echo "$O"
-	fi
-done
+sed 's/:[0-9]\+$//; s/:/ /g' /letc/swfl | \
+	while read -r line; do
+		SRC="${line%% *}"
+		TGT="${line##* }"
+		if [ ! -e "$SRC" ]; then
+			pwrn "$SRC: nexist"
+			continue
+		elif [ ! -e "$TGT" ]; then
+			pwrn "$TGT: nexist"
+			continue
+		fi
+		diff $line || echo "@ $line"
+	done
