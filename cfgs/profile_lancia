@@ -1,8 +1,9 @@
 LSR="$HOME/.lsr"
 PATH="$LSR/lmbin:$LSR/bin:$LSR/sbin:$PATH"
+MANPATH="$LSR/man:$LSR/share/man:$MANPATH"
 LOGD="$HOME/.logs"
 TERMINAL=st
 EDITOR=v
 export LSR LOGD PATH TERMINAL EDITOR
-. ~/.bashrc
+[ "${SHELL##*/}" = bash ] && . ~/.bashrc
 ~/.launchprog

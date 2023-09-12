@@ -16,7 +16,7 @@ elif [ $1 = -a ]; then
 				pwrn "$TGT: nexist"
 				continue
 			fi
-			diff $line || echo "@$line"
+			diff $line || echo "@ $line"
 		done
 	exit 0
 elif [ $1 = -v ]; then

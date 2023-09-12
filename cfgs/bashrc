@@ -22,11 +22,13 @@ bind "\C-x":vi-movement-mode
 bind "\C-a":beginning-of-line
 bind "\C-e":end-of-line
 bind "\C-f":reverse-search-history
+bind "\C-t":unix-word-rubout
 bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
 bind '"\C-r":". ~/.bashrc\n"'
 bind '"\C-p":"| "'
-bind '"\e[1;3P":"| grep -F "'
-bind '"\ew":" | gr"'
+bind '"\eg":" | gr "'
+bind '"\C-g":" | gr "'
+bind '"\ef":" | fgr "'
 
 . /usr/subr/dl
 . /etc/aliasrc

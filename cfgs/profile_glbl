@@ -1,6 +1,6 @@
 umask 022
 
-append_path () {
+append_path(){
     case ":$PATH:" in
         *:"$1":*)
             ;;
@@ -8,14 +8,14 @@ append_path () {
             PATH="${PATH:+$PATH:}$1"
     esac
 }
-
 append_path '/usr/local/sbin'
 append_path '/usr/local/bin'
 
 PATH="/usr/local/umbin:/usr/bbx:$PATH"
 EDITOR=vi
 PAGER=less
-export PATH EDITOR PAGER
+MANPATH="/usr/local/man:/usr/local/share/man:/usr/share/man"
+export PATH EDITOR PAGER MANPATH
 
 if test -d /etc/profile.d/; then
     for profile in /etc/profile.d/*.sh; do
@@ -25,4 +25,3 @@ if test -d /etc/profile.d/; then
 fi
 unset -f append_path
 unset TERMCAP
-unset MANPATH
