@@ -16,3 +16,5 @@ alias rgr='grep -r'
 alias frgr='grep -rF'
 alias pac=pacman
 alias gr=grep
+alias mk=make
+alias m=man
