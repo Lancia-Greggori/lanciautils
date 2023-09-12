@@ -42,8 +42,8 @@ function DelEmptyLines()
 endfunction
 
 autocmd FileType c {
-	nnoremap <buffer> <F2> :!./a.out<nl>
-	nnoremap <buffer> <F3> :call ExecCmd('gcc -Wall -g '.expand('%:p'))<nl>
+	nnoremap <buffer> <F2> :call ExecCmd('gcc -Wall -g '.expand('%:p'))<nl>
+	nnoremap <buffer> <F3> :!./a.out<nl>
 	nnoremap <buffer> <F4> :!gdb -q ./a.out<nl>
 }
 autocmd FileType bash,sh {
