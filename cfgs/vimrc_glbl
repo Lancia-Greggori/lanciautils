@@ -8,13 +8,14 @@ set formatoptions=crql
 set cmdheight=2
 
 map <C-q> :qa!<nl>
+map <C-k> <C-w>w<nl>
+map <C-d> :execute '!'.cmd<nl>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-z> <undo>
-nnoremap <C-k> :bn<nl>
-nnoremap <C-j> :bp<nl>
-nnoremap <C-d> :b#<nl>
+nnoremap <C-l> :bn<nl>
+nnoremap <C-h> :bp<nl>
 
 inoremap <C-s> <Esc>
 inoremap <C-p> <Esc>p<insert>
