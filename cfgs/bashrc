@@ -34,7 +34,7 @@ bind '"\ef":" | fgr "'
 . /etc/aliasrc
 . "$HOME"/.bashfunc
 
-alias vct='v ~/.tsks/ct'
+alias vct='v ~/ctsks'
 alias d='diffmgr *'
 alias trrm=transmission-remote
 alias mci='make clean install'
