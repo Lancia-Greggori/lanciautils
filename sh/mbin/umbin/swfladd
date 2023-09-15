@@ -1,14 +1,14 @@
 #!/bin/sh -e
 . /usr/subr/out
 if [ "$#" -lt 2 ]; then
-	echo "USAGE: ${0##*/} @src @trgt #perm"
+	echo "USAGE: ${0##*/} @src @tgt #perm"
 	exit 1
 elif [ "$(id -u)" -ne 0 ]; then
 	exit 2
 elif [ ! -f "$1" ]; then
 	perrexit 'src must be a file' 3
 elif [ -d "$2" ]; then
-	perrexit 'dest cannot be a directory' 4
+	perrexit 'tgt cannot be a directory' 4
 fi
 if [ -z "$3" ]; then
 	if [ ! -e "$2" ];then

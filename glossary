@@ -16,3 +16,6 @@ FPL: first part link
 dmgr: swfl diff manager
 FCMD: full command
 CMD: command
+@option: mandatory option
+#option: optional option
+FULP: full path
