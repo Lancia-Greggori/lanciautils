@@ -1,10 +1,9 @@
 #!/bin/sh -eu
 . /usr/subr/Xout
-FCMD="$(dmenu < /dev/null)"
+FCMD="$(dmenu </dev/null)"
 [ -z "$FCMD" ] && exit 0
 CMD="${FCMD%% *}"
 command -v "$CMD" 1>/dev/null 2>&1 || {
-	perr "cmd \"$CMD\" nfound"
-	exit 1
+	perrex "cmd \"$CMD\" nfound" 1
 }
 eval exec "$FCMD"

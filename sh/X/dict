@@ -3,15 +3,15 @@
 I="$(dmenu -p "$PROGN:" </dev/null)" || exit $?
 O="$(hunspell <<<"$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 if [[ "$O" =~ ^# ]]; then
-	perr "\"$I\" nfound in dict"
-	exit 1
+	perrex "\"$I\" nfound in dict" 1
 elif [[ "$O" =~ ^\*$ ]]; then
 	pmsg 'Word correct'
 	clipb <<<"$I"
 elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
 	O="${O#+ }"
-	printf '%s\n%s' "$O" "$I" | dmenu -p "$I: plural of \"$O\"" \
-	       	| clipb <<<"$I"
+	printf '%s\n%s' "$O" "$I" | \
+		dmenu -p "$I: plural of \"$O\"" | \
+		clipb <<<"$I"
 else
 	echo "${O##*: }" | tr ',' '\n' | \
 		dmenu | clipb

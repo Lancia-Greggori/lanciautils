@@ -6,9 +6,9 @@ if [ "$#" -lt 2 ]; then
 elif [ "$(id -u)" -ne 0 ]; then
 	exit 2
 elif [ ! -f "$1" ]; then
-	perrexit 'src must be a file' 3
+	perrex 'src must be a file' 3
 elif [ -d "$2" ]; then
-	perrexit 'tgt cannot be a directory' 4
+	perrex 'tgt cannot be a directory' 4
 fi
 if [ -z "$3" ]; then
 	if [ ! -e "$2" ];then
@@ -20,6 +20,6 @@ else
 	PERM="$3"
 fi
 L="$(readlink -f "$1"):$(readlink -f "$2"):$PERM"
-grep -q "^$L\$" /letc/swfl && perrexit "$1: line already added" 5
-grep -q "^${L%%:*}:" /letc/swfl && perrexit "$1: src file already added" 6
+grep -q "^$L\$" /letc/swfl && perrex "$1: line already added" 5
+grep -q "^${L%%:*}:" /letc/swfl && perrex "$1: src file already added" 6
 exec echo "$L" >> /letc/swfl

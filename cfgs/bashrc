@@ -30,7 +30,6 @@ bind '"\eg":" | gr "'
 bind '"\C-g":" | gr "'
 bind '"\ef":" | fgr "'
 
-. /usr/subr/dl
 . /etc/aliasrc
 . "$HOME"/.bashfunc
 

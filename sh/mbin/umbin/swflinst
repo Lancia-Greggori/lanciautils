@@ -3,7 +3,7 @@
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
 	grep -q -m1 "^$(readlink -f "$file"):" /letc/swfl || \
-	       	perrexit "$file: nfound in /letc/swfl" 2
+	       	perrex "$file: nfound in /letc/swfl" 2
 done
 for file in "$@"; do
 	FULP="$(grep -m1 "^$(readlink -f "$file"):" /letc/swfl)"

@@ -3,9 +3,9 @@
 [ "$#" -eq 0 ] && exit 2
 . /usr/subr/out
 D=/mnt/strg/enc/bkup
-[ ! -e $D ] && perrexit "$D: nexist" 3
+[ ! -e $D ] && perrex "$D: nexist" 3
 for d in "$@"; do
-	[ -d "$d" ] || perrexit "$d: not a dir" 4
+	[ -d "$d" ] || perrex "$d: ndir" 4
 done
 for dir in "$@"; do
 	tar czf \

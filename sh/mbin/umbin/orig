@@ -3,14 +3,14 @@
 . /usr/subr/out
 for file in "$@"; do
 	[ ! -f "$file" ] && {
-		perrexit "\"$file\" is not a file" 2
+		perrex "\"$file\" is not a file" 2
 	}
 done
 for file in "$@"; do
 	N=1
 	while true; do
 		[ $N -ge 1000 ] && {
-			perrexit "out of numbers" 3
+			perrex "out of numbers" 3
 		}
 		[ -e "${file}.orig.${N}" ] && N=$((N+1)) && continue
 		break

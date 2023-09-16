@@ -15,7 +15,7 @@ echo "$O" | cut -d' ' -f1 | grep -Fvq "$USER" && {
 	*) exit 4 ;;
 esac
 pgrep Xorg 1>/dev/null && {
-	perrexit "an Xorg session is already running, cannot $PROGN" 5
+	perrex "an Xorg session is already running, cannot $PROGN" 5
 }
 case "$PROGN" in
 	rbt) loginctl reboot ;;
