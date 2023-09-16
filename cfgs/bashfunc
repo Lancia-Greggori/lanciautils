@@ -1,6 +1,6 @@
 JMPFILE="$HOME/.jmpdirs"
 
-j(){
+j() {
 	local D
 	[ "$#" -ne 1 ] && return 1
 	[ ! -e "$JMPFILE" ] && {
@@ -15,11 +15,11 @@ j(){
 	cd "$D" || return 4
 }
 
-jmpcmd(){
+jmpcmd() {
 	(j "$1" && $2)
 }
 
-jmpadd(){
+jmpadd() {
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
 		echo 'USAGE: jmpadd @dir OR jmpadd @dir @alias'
 		return 1
@@ -40,10 +40,14 @@ jmpadd(){
 	fi
 }
 
-mkdircd(){
+mkdircd() {
 	mkdir $1 && cd $1
 }
 
-cheat(){
+cheat() {
 	curl https://cheat.sh/$1
+}
+
+dlcmd() {
+	(j $1 && shift 1 && wget "$@")
 }

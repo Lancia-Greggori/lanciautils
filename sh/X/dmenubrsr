@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-[ "$#" -ne 2 ] && exit 1
+[ "$#" -ne 1 ] && exit 1
 BRSR=${1%%* }
 D=~/dl/brwsr/$BRSR; [ ! -e $D ] && mkdir $D
 if [ "$#" -eq 2 ]; then
