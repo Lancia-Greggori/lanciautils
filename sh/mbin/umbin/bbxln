@@ -6,12 +6,12 @@ D='/usr/bbx'
 	pwrn "$D nexist, creating it"
 	mkdir $D
 }
-A="$(busybox | awk '/Currently defined functions/,/EOF/' | \
-	tr ',' '\n' | sed '/^$/d; s/[ 	]\+//g')"
+O="$(busybox | awk '/Currently defined functions/,/EOF/' | \
+	tr ',' '\n' | sed '1d;/^$/d; s/[ 	]\+//g')"
 for arg in "$@"; do
 	if [ -e "$D/$arg" ]; then
 		perrex "$arg already exists in $D" 1
-	elif ! echo "$A" | grep -q "^$arg\$"; then
+	elif ! echo "$O" | grep -q "^$arg\$"; then
 		perrex "$arg is not a valid bbx command" 2
 	fi
 done

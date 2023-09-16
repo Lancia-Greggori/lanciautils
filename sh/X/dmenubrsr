@@ -1,13 +1,13 @@
 #!/bin/bash -eu
 [ "$#" -ne 2 ] && exit 1
-BRWSR=${1%%* }
-D=~/dl/brwsr/$BRWSR; [ ! -e $D ] && mkdir $D
+BRSR=${1%%* }
+D=~/dl/brwsr/$BRSR; [ ! -e $D ] && mkdir $D
 if [ "$#" -eq 2 ]; then
 	SITE=$2
 else
 	SITE=$(printf \
 		'ddg\nggl\nstackoverflow\nwikipedia\narchwiki\nurl' | \
-		dmenu -p $BRWSR)
+		dmenu -p $BRSR)
 fi
 case $SITE in
 	ddg) FPL='https://lite.duckduckgo.com/lite/?q=' ;;
@@ -18,11 +18,11 @@ case $SITE in
 	url) FPL='' ;;
 	*) exit 1;;
 esac
-IS="$(dmenu -p "$BRWSR|$SITE" </dev/null | tr \  +)"
+IS="$(dmenu -p "$BRSR|$SITE" </dev/null | tr \  +)"
 [ -z "$IS" ] && exit 0
 URL="$FPL$IS"
 cd $D
-if [ $BRWSR = lynx ]; then
+if [ $BRSR = lynx ]; then
 	if [[ "$(cat /proc/$PPID/comm)" =~ ^bash$|^sh$ ]]; then
 		exec lynx "$URL"
 	else

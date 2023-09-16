@@ -1,4 +1,9 @@
 #!/bin/sh -eu
 CMD="$(which $1)"
+if head -n1 "$CMD" | grep -q bash; then
+	SH=bash
+else
+	SH=sh
+fi
 shift 1
-exec sh -x "$CMD" "$@"
+exec $SH -x "$CMD" "$@"
