@@ -19,3 +19,10 @@ CMD: command
 @option: mandatory option
 #option: optional option
 FULP: full path
+F: file
+D: directory
+DT: date
+L: line
+I: input
+N: number
+O: output

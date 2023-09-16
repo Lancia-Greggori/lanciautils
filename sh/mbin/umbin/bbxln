@@ -6,8 +6,8 @@ D='/usr/bbx'
 	pwrn "$D nexist, creating it"
 	mkdir $D
 }
-A="$(busybox | awk '/Currently defined functions/,/EOF/' | sed 1d \
-	| sed 's/[ 	]//g' | tr ',' '\n' | sed '/^$/d')"
+A="$(busybox | awk '/Currently defined functions/,/EOF/' | \
+	tr ',' '\n' | sed '/^$/d; s/[ 	]\+//g')"
 for arg in "$@"; do
 	if [ -e "$D/$arg" ]; then
 		perrexit "$arg already exists in $D" 1

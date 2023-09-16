@@ -1,18 +1,18 @@
 #!/bin/bash -eu
 . /usr/subr/Xout
-I="$(dmenu -p "$PROGN:" < /dev/null)" || exit $?
-O="$(hunspell <<< "$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
+I="$(dmenu -p "$PROGN:" </dev/null)" || exit $?
+O="$(hunspell <<<"$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 if [[ "$O" =~ ^# ]]; then
 	perr "\"$I\" nfound in dict"
 	exit 1
 elif [[ "$O" =~ ^\*$ ]]; then
 	pmsg 'Word correct'
-	echo "$I" | tr -d '\n' | xclip -sel clip
+	clipb <<<"$I"
 elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
 	O="${O#+ }"
 	printf '%s\n%s' "$O" "$I" | dmenu -p "$I: plural of \"$O\"" \
-	       	| tr -d '\n' | xclip -sel clip
+	       	| clipb <<<"$I"
 else
-	cut -d':' -f2 <<< "$O" | tr -d ' ' | tr ',' '\n' | \
-		dmenu | tr -d '\n' | xclip -sel clip
+	echo "${O##*: }" | tr ',' '\n' | \
+		dmenu | clipb
 fi

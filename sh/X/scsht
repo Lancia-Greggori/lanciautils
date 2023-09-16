@@ -1,19 +1,19 @@
 #!/bin/sh -eu
 [ "$#" -ne 1 ] && exit 1
-DIR="$HOME/scrnsht"
-DATE="$(date +%Y-%m-%d)"
-[ ! -e "$DIR/$DATE" ] && mkdir -p "$DIR/$DATE"
+D="$HOME/scsht"
+DT="$(date +%Y-%m-%d)"
+[ ! -e "$D/$DT" ] && mkdir -p "$D/$DT"
 N=0
 for i in $(seq 1 1000); do
-	[ -e "$DIR/$DATE/$i.png" ] && continue
+	[ -e "$D/$DT/$i.png" ] && continue
 	N="$i"
 	break
 done
-F="$DIR/$DATE/$N.png"
+F="$D/$DT/$N.png"
 case "$1" in
 	full) import -window root "$F" ;;
 	window) import -window "$(xwininfo | grep -F 'wininfo: Window id:' | cut -d' ' -f4)" "$F" ;;
 	region) import "$F" ;;
 	*) exit 2 ;;
 esac
-xclip -selection clipboard -t image/png -i "$F"
+xclip -sel clip -t image/png -i "$F"
