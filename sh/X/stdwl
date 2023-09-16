@@ -1,4 +1,5 @@
 #!/bin/sh -eu
+cd "$HOME"
 dwl &
 sleep 3s
 wlr-randr --output eDP-1 --off
