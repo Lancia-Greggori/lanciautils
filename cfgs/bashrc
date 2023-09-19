@@ -35,6 +35,5 @@ bind '"\ef":" | fgr "'
 
 alias vt='v ~/.tsks'
 alias vat='v ~/.atsks'
-alias d='diffmgr *'
 alias trrm=transmission-remote
 alias mci='make clean install'
