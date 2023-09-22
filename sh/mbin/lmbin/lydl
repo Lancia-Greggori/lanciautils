@@ -1,0 +1,9 @@
+#!/bin/bash -e
+cd ~/dl/brsr/lynx
+for l in "$@"; do
+	l="$(sed 's/#:~:.*$//' <<<"$l")"
+	n="$(sed \
+		's/https\?:\/\///; s/\//_/g' \
+		<<<"$l")"
+	lynx -dump "$l" > "$n"
+done

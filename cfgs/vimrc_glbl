@@ -9,7 +9,7 @@ set cmdheight=2
 
 map <C-q> :qa!<nl>
 map <C-k> <C-w>w<nl>
-map <C-d> :execute '!'.cmd<nl>
+map <C-d> :!clear; ~/.vim/cmd %<nl>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
