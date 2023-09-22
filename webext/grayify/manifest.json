@@ -1,0 +1,14 @@
+{
+	"manifest_version": 3,
+	"name": "grayify",
+	"version": "1.0",
+	"content_scripts": [ {
+	    "js": ["script.js"],
+	    "world": "MAIN",	
+	    "run_at": "document_start",
+	    "run_at": "document_idle",
+	    "run_at": "document_end",
+	    "matches": ["<all_urls>"]
+	  }
+	]
+}
