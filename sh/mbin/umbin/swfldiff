@@ -1,7 +1,5 @@
 #!/bin/sh -eu
-
 . /usr/subr/out
-
 sed 's/:[0-9]\+$//; s/:/ /g' /letc/swfl | \
 	while read -r line; do
 		SRC="${line%% *}"

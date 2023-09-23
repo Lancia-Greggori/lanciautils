@@ -2,7 +2,8 @@
 . /usr/subr/out
 [ "$#" -eq 0 ] && exit 1
 O="$(pacman -Qq)"
-C="$(sed -n '/^CacheDir/s/^[^/]\+//p' /etc/pacman.conf)" || exit 2
+C="$(sed -n '/^CacheDir/s/^[^/]\+//p' \
+		/etc/pacman.conf)" || exit 2
 for pkg in "$@"; do
 	if [ ! -e "$pkg" ]; then
 		if ! echo "$O" | grep -q "^$pkg$"; then

@@ -1,2 +1,0 @@
-#!/bin/sh -eu
-curl -sL time.ir | grep -Eo '14[0-9][0-9]/[0-9]{2}/[0-9]{2}'
