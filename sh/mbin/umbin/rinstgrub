@@ -6,9 +6,10 @@ if ! mount | grep -q '^/dev/[^ ]\+ on /boot/efi'; then
 fi
 T="$(mktemp -d)"
 mv /boot/efi/* "$T"
-if ! grub-install --target=x86_64-efi --efi-directory=/boot/efi \
-	--bootloader-id=ARTIX; then
-	perrex 'REINSTALLING GRUB FAILED' 3
+if ! grub-install --target=x86_64-efi \
+--efi-directory=/boot/efi
+--bootloader-id=ARTIX; then
+		perrex 'REINSTALLING GRUB FAILED' 3
 elif ! efibootmgr | grep -q '^Boot[0-9]\+\* ARTIX'; then
 	perrex 'no boot entry with lablel "ARTIX" found in efibootmgr' 4
 fi

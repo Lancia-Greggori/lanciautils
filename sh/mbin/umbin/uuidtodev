@@ -1,8 +1,0 @@
-#!/bin/bash -e
-[ "$#" -ne 1 ] && exit 1
-O="$(blkid)"
-if [[ "$O" =~ "UUID=\"$1\"" ]]; then
-	awk -F':' "/$1/ { print \$1 }" <<< "$O"
-else
-	exit 2
-fi
