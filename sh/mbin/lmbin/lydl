@@ -5,5 +5,5 @@ for l in "$@"; do
 	n="$(sed \
 		's/https\?:\/\///; s/\/$//;
 		s/\//_/g' <<<"$l")"
-	lynx -dump "$l" > "$n"
+	lynx -dump "$l" >"$n"
 done
