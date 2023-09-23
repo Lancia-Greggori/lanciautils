@@ -22,4 +22,4 @@ fi
 L="$(readlink -f "$1"):$(readlink -f "$2"):$PERM"
 grep -q "^$L\$" /letc/swfl && perrex "$1: line already added" 5
 grep -q "^${L%%:*}:" /letc/swfl && perrex "$1: src file already added" 6
-exec echo "$L" >> /letc/swfl
+exec echo "$L" >>/letc/swfl
