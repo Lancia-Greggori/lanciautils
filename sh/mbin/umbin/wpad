@@ -4,7 +4,7 @@ cat /dev/null >/var/log/wpa
 pgrep -f wpa_supplicant && killall wpa_supplicant
 while true; do
 	lsssids | while read -r ssid; do
-		if [ -e /encetc/wpa/"$ssid" ];then
+		if [ -e /encetc/wpa/"$ssid" ]; then
 			connssid "$ssid" 1>/var/log/wpa 2>&1 &
 			i=0
 			sleep 5s

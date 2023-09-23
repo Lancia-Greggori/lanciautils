@@ -5,7 +5,8 @@ while true; do
 	if [ $E -ge 4 ]; then
 		echo "$O"
 		break
-	elif echo "$O" | grep -qFi 'command failed: device or resource busy'; then
+	elif echo "$O" | grep -qFi \
+	'command failed: device or resource busy'; then
 		E=$((E+1))
 		sleep 2s
 	else
