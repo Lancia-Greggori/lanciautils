@@ -13,6 +13,6 @@ elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
 		dmenu -p "$I: plural of \"$O\"" | \
 		clipb <<<"$I"
 else
-	echo "${O##*: }" | tr ',' '\n' | \
+	tr ',' '\n' <<<"${O##*: }" | \
 		dmenu | clipb
 fi
