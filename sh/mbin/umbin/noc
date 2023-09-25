@@ -1,2 +1,10 @@
 #!/bin/sh -e
-exec grep -Ev '^[ 	]*#|^$' "$@"
+if [ -n "$1" -a ! -f "$1" ]; then
+		C="$1"
+		shift 1
+else
+		C=#
+fi
+for f in "$@"; do
+		sed -n "/^\$/d; /^$C/!p" "$f"
+done
