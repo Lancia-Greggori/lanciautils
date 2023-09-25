@@ -1,15 +1,15 @@
 #!/bin/sh -eu
 . /usr/subr/out
 sed 's/:[0-9]\+$//; s/:/ /g' /letc/swfl | \
-	while read -r line; do
-		SRC="${line%% *}"
-		TGT="${line##* }"
-		if [ ! -e "$SRC" ]; then
-			pwrn "$SRC: nexist"
-			continue
-		elif [ ! -e "$TGT" ]; then
-			pwrn "$TGT: nexist"
-			continue
-		fi
-		diff $line || echo "@ $line"
-	done
+  while read -r line; do
+  	SRC="${line%% *}"
+  	TGT="${line##* }"
+  	if [ ! -e "$SRC" ]; then
+  		pwrn "$SRC: nexist"
+  		continue
+  	elif [ ! -e "$TGT" ]; then
+  		pwrn "$TGT: nexist"
+  		continue
+  	fi
+  	diff $line || echo "@ $line"
+  done
