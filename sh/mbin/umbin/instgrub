@@ -4,7 +4,7 @@
 ED=/boot/efi
 if ! mount | \
   grep -q '^/dev/[^ ]\+ on '$ED; then
-		perrex $ED' not mounted' 2
+		perrex $ED' nmounted' 2
 elif [ -n "$(ls -A /boot/efi)" ]; then
 	T="$(mktemp -d)"
 	mv $ED/* "$T"

@@ -1,13 +1,13 @@
 #!/bin/sh
-E=0
+e=0
 while true; do
 	O="$(iw wlan0 scan 2>&1)"
-	if [ $E -ge 4 ]; then
+	if [ $e -ge 4 ]; then
 		echo "$O"
 		break
 	elif echo "$O" | grep -qFi \
 	'command failed: device or resource busy'; then
-		E=$((E+1))
+		e=$((E+1))
 		sleep 2s
 	else
 		echo "$O" | sed -n '/SSID: ./s/^[ \t]\+SSID: //p'

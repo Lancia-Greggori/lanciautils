@@ -1,8 +1,6 @@
-#!/bin/bash -eu
-SSID=''
-PASS=''
+#!/bin/bash -e
 read -p 'SSID: ' SSID
-read -s -p 'PASS: ' PASS
+read -sp 'PASS: ' PASS
 install -m 0600 -o root -g root /dev/null /encetc/wpa/"$SSID"
 cat <<EOF >/encetc/wpa/"$SSID"
 network={

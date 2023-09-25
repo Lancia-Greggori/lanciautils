@@ -1,22 +1,13 @@
 #!/bin/sh -eu
-[ "$#" -gt 1 ] && exit 1
 . /usr/subr/out
-if [ "$PROGN" != 'pwroff' ] && [ "$PROGN" != 'rbt' ]; then
+if [ "$PROGN" != 'pwroff' -a "$PROGN" != 'rbt' ]; then
 	exit 2
-fi
-O="$(who)"
-echo "$O" | cut -d' ' -f1 | grep -Fvq "$USER" && {
-	perr "somebody else is logged in, cannot pwroff:"
-	echo "$O"
+elif who | cut -d' ' -f1 | grep -Fvq "$USER"; then
+	perr "somebody else is logged in, ck who"
 	exit 3
-}
-[ "$#" -eq 1 ] && case "$1" in
-	-f|--force) exec loginctl "$PROGN";;
-	*) exit 4 ;;
-esac
-pgrep Xorg 1>/dev/null && {
+elif pgrep Xorg 1>/dev/null; then
 	perrex "an Xorg session is already running, cannot $PROGN" 5
-}
+fi
 case "$PROGN" in
 	rbt) loginctl reboot ;;
 	pwroff) loginctl poweroff ;;
