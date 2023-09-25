@@ -10,7 +10,6 @@ depend() {
 	after bootmisc
 	provide logger
 }
-
 start_pre() {
 	if [ ! -e "$command" ]; then
 		eerror "$command does nexist"

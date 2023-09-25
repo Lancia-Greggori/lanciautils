@@ -25,10 +25,10 @@ checkconfig() {
 		eerror "$conf: nexist"
 		return 3
 	elif ! grep -q "^DataDirectory ${datad}$" "$conf"; then
-		eerror "$conf: \"DataDirectory\": bad option"
+		eerror "$conf: \"DataDirectory\": badopt"
 		return 4
 	elif ! grep -q "^Log.*${logf}$" "$conf"; then
-		eerror "$conf: \"Log\": bad option"
+		eerror "$conf: \"Log\": badopt"
 		return 5
 	elif grep -r "^$(grep '^SOCKSPort [0-9]\+' "$conf")" /etc/tor | grep -qFv "${conf}:"; then
 		eerror "$conf: \"SOCKSPort\": already used somewhere else in /etc/tor"

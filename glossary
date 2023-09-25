@@ -29,3 +29,4 @@ O: output
 A: all, answer
 brsr: browser
 LF: log file
+badopt: bad option

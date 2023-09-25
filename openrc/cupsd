@@ -9,7 +9,6 @@ command_args='-f -c /etc/cups/cupsd.conf -s /etc/cups/cups-files.conf'
 depend() {
 	after logger
 }
-
 start_pre() {
 	checkpath -q -d -m 0775 -o root:cups /var/cache/cups
 	checkpath -q -d -m 0775 -o root:cups /var/cache/cups/rss

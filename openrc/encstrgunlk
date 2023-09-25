@@ -6,12 +6,10 @@ depend() {
 }
 start() {
 	D='/mnt/strg/enc'
-
 	if [ ! -e "$D" ]; then
-		echo "encstrg at $D does nexist, skipping unlocking..."
+		echo "encstrg at $D nexist, skipping unlocking..."
 		exit 0
 	fi
-
 	read -r -p 'encstrgunlk ' A
 	if [ "$A" = 'y' ]; then
 		fscrypt unlock "$D"
