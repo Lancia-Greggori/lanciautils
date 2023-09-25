@@ -14,7 +14,7 @@ r() {
 }
 
 if [ "$1" = '--rinstgrub' ]; then
-	r rinstgrub
+	r instgrub
 fi
 grep -Fv -e 'Installing for x86_64-efi platform.'\
 	-e 'Installation finished. No error reported.' "$T" && wrn

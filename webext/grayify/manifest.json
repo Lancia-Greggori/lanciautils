@@ -8,8 +8,8 @@
 	    "run_at": "document_start",
 	    "run_at": "document_idle",
 	    "run_at": "document_end",
-	    "matches": ["*://*/*"],
-	    "exclude_globs": ["*youtube.com*"]
+	    "matches": ["*://*/*"]
+	    //"exclude_globs": ["*youtube.com*"]
 	  }
 	]
 }

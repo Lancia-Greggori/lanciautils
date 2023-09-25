@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 [ $# -ne 1 ] && exit 1
-curl -sL 
+curl -sL \
 	--user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/114.0' \
 	"https://google.com/search?hl=en&q=$(echo "$1" | tr \  +)" | \
 	grep -o 'https://[^\"<]\+' | \
