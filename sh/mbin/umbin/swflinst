@@ -1,5 +1,5 @@
 #!/bin/sh -eu
-. /usr/subr/out
+. /usr/subr/o
 F=/letc/swfl
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1

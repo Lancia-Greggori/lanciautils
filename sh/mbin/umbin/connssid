@@ -1,4 +1,4 @@
 #!/bin/sh
-. /usr/subr/out
+. /usr/subr/o
 [ -e /encetc/wpa/"$1" ] || perrex "/encetc/wpa/$1 nexist" 1
 exec wpa_supplicant -c /encetc/wpa/"$1" -i wlan0

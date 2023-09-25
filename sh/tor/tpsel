@@ -1,5 +1,5 @@
 #!/bin/sh -eu
-. /usr/subr/out
+. /usr/subr/o
 readonly DEP='trcd'
 readonly LOGF="/var/log/tor/$DEP.log"
 PID=''

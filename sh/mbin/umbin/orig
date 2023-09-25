@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 [ "$#" -eq 0 ] && exit 1
-. /usr/subr/out
+. /usr/subr/o
 for f in "$@"; do
 	[ ! -f "$f" ] && {
 		perrex "\"$f\" is nfile" 2

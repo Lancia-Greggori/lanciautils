@@ -1,5 +1,5 @@
 #!/bin/sh -e
-. /usr/subr/out
+. /usr/subr/o
 [ "$#" -eq 0 ] && exit 1
 O="$(pacman -Qq)"
 C="$(sed -n '/^CacheDir/s/^[^/]\+//p' \

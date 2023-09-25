@@ -1,7 +1,7 @@
 #!/bin/sh -e
-. /usr/subr/out
+. /usr/subr/o
 if [ "$#" -lt 2 ]; then
-	echo "USAGE: $PROGN @src @tgt #perm"
+	echo "USAGE: $PRGN @src @tgt #perm"
 	exit 1
 elif [ "$(id -u)" -ne 0 ]; then
 	exit 2

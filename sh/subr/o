@@ -1,0 +1,4 @@
+readonly PRGN="${0##*/}"
+perr(){ echo "$PRGN: [ERR]: $1" 1>&2; }
+perrex(){ echo "$PRGN: [ERR]: $1" 1>&2; exit $2; }
+pwrn(){ echo "$PRGN: [WRN]: $1" 1>&2; }

@@ -1,14 +1,14 @@
 #!/bin/sh -eu
-. /usr/subr/out
-if [ "$PROGN" != 'pwroff' -a "$PROGN" != 'rbt' ]; then
+. /usr/subr/o
+if [ "$PRGN" != 'pwroff' -a "$PRGN" != 'rbt' ]; then
 	exit 2
 elif who | cut -d' ' -f1 | grep -Fvq "$USER"; then
 	perr "somebody else is logged in, ck who"
 	exit 3
 elif pgrep Xorg 1>/dev/null; then
-	perrex "an Xorg session is already running, cannot $PROGN" 5
+	perrex "an Xorg session is already running, cannot $PRGN" 5
 fi
-case "$PROGN" in
+case "$PRGN" in
 	rbt) loginctl reboot ;;
 	pwroff) loginctl poweroff ;;
 esac

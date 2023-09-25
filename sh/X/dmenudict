@@ -1,6 +1,6 @@
 #!/bin/bash -eu
-. /usr/subr/Xout
-I="$(dmenu -p "$PROGN:" </dev/null)" || exit $?
+. /usr/subr/Xo
+I="$(dmenu -p "$PRGN:" </dev/null)" || exit $?
 O="$(hunspell <<<"$I" | sed -r '/^$|^Hunspell [0-9.]+/d')"
 if [[ "$O" =~ ^# ]]; then
 	perrex "\"$I\" nfound in dict" 1

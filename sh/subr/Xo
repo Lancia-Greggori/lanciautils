@@ -1,0 +1,5 @@
+readonly PRGN="${0##*/}"
+pmsg(){ notify-send "$PRGN: $1"; }
+pwrn(){ notify-send "$PRGN: [WRN]: $1"; }
+perr(){ notify-send "$PRGN: [ERR]: $1"; }
+perrex(){ notify-send "$PRGN: [ERR]: $1"; exit $2; }

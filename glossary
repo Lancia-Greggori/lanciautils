@@ -1,14 +1,11 @@
 PRF: priority file
-CONFF: config file
-CONFD: config directory
-CFGF: config file
-CFGD: config directory
+CONFF, CFGF: config file
+CONFD, CFGD: config directory
 wm: wireless manager
 OUT,O: output
 dict: dictionary
-PROGN: program name
-NUML: number of lines
-NOL: number of lines
+PRGN, PRGN: program name
+NUML, NOL: number of lines
 swfl: system wide file list
 ncurl: nobody curl ( as user )
 IS: input string
@@ -25,7 +22,6 @@ DT: date
 L: line
 I: input
 N: number
-O: output
 A: all, answer
 brsr: browser
 LF: log file

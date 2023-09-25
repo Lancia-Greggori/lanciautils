@@ -1,5 +1,0 @@
-readonly PROGN="${0##*/}"
-pmsg(){ notify-send "$PROGN: $1"; }
-pwrn(){ notify-send "$PROGN: [WRN]: $1"; }
-perr(){ notify-send "$PROGN: [ERR]: $1"; }
-perrex(){ notify-send "$PROGN: [ERR]: $1"; exit $2; }

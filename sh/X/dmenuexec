@@ -1,5 +1,5 @@
 #!/bin/sh -eu
-. /usr/subr/Xout
+. /usr/subr/Xo
 FCMD="$(dmenu </dev/null)"
 [ -z "$FCMD" ] && exit 0
 CMD="${FCMD%% *}"

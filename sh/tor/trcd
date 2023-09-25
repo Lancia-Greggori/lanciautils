@@ -1,6 +1,6 @@
 #!/bin/sh -eu
-. /usr/subr/out
-readonly LOGF="/var/log/tor/$PROGN.log"
+. /usr/subr/o
+readonly LOGF="/var/log/tor/$PRGN.log"
 readonly CURL_ARGS='--silent -L https://html.duckduckgo.com'
 SOCKS5_ADDR=''
 PID=''

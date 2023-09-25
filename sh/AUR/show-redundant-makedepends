@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 [ "$#" -eq 0 ] && exit 1
-. /usr/subr/out
+. /usr/subr/o
 SED_REMOVE_ENDING_SPACE_PATTERN='s/ \+$//'
 BASE_DEVEL_PKGS="$(pacman -Sg base-devel | cut -d' ' -f2 | tr '\n' ' ' | sed "$SED_REMOVE_ENDING_SPACE_PATTERN")"
 BASE_DEVEL_PKGS="$BASE_DEVEL_PKGS awk roff yacc"
