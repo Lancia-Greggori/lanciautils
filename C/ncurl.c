@@ -3,7 +3,6 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-
 	int size = 0;
 	if (argc <= 1) return 1;
 	for (int i = 1; i < argc; i++) {
@@ -19,6 +18,5 @@ int main(int argc, char *argv[]) {
 	}
 
 	clearenv();
-	return WEXITSTATUS( system(command) );
-
+	return WEXITSTATUS(system(command));
 }

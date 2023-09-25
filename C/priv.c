@@ -20,10 +20,10 @@ int main(int argc, char *argv[]) {
 	if (cmdline_arg_size > MAX_CMDLINE_ARG_SIZE) {
 		PERR("cmdline arg size bigger than max");
 		return 2;
-	} else if ( access(COMMFILE, R_OK) != 0 ) {
+	} else if (access(COMMFILE, R_OK) != 0) {
 		PERR("COMMFILE naccessible");
 		return 3;
-	} else if ( ( uid = getuid() ) != AUTHUID ) {
+	} else if ((uid = getuid()) != AUTHUID) {
 		PERR("UID nauthorised");
 		return 4;
 	}
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 	} else {
 		for (int i = 1; i < argc; i++) {
 			strcat(command, argv[i]);
-			if ( i != (argc - 1) ) strcat(command, " ");
+			if (i != (argc - 1)) strcat(command, " ");
 		}
 	}
 
