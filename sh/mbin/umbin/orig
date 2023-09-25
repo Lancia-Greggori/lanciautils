@@ -1,19 +1,21 @@
 #!/bin/sh -eu
 [ "$#" -eq 0 ] && exit 1
 . /usr/subr/out
-for file in "$@"; do
-	[ ! -f "$file" ] && {
-		perrex "\"$file\" is not a file" 2
+for f in "$@"; do
+	[ ! -f "$f" ] && {
+		perrex "\"$f\" is nfile" 2
 	}
 done
-for file in "$@"; do
-	N=1
+for f in "$@"; do
+	n=1
 	while true; do
-		[ $N -ge 1000 ] && {
+		if [ $n -ge 1000 ]; then
 			perrex "out of numbers" 3
-		}
-		[ -e "${file}.orig.${N}" ] && N=$((N+1)) && continue
+		elif [ -e "${f}.orig.${n}" ]; then
+				n=$((n+1))
+				continue
+		fi
 		break
 	done
-	cp "$file" "${file}.orig.${N}"
+	cp "$f" "${f}.orig.${n}"
 done
