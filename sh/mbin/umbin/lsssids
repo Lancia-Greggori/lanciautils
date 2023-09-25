@@ -6,9 +6,9 @@ while true; do
 		echo "$O"
 		break
 	elif echo "$O" | grep -qFi \
-	'command failed: device or resource busy'; then
-		e=$((E+1))
-		sleep 2s
+	  'command failed: device or resource busy'; then
+			e=$((E+1))
+			sleep 2s
 	else
 		echo "$O" | sed -n '/SSID: ./s/^[ \t]\+SSID: //p'
 		break

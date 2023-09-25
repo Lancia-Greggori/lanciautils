@@ -7,7 +7,7 @@ D='/usr/bbx'
 	mkdir $D
 }
 O="$(busybox | awk '/Currently defined functions/,/EOF/' | \
-  tr ',' '\n' | sed '1d;/^$/d; s/[ 	]\+//g')"
+	tr ',' '\n' | sed '1d;/^$/d; s/[ 	]\+//g')"
 for arg in "$@"; do
 	if [ -e "$D/$arg" ]; then
 		perrex "$arg already exists in $D" 1

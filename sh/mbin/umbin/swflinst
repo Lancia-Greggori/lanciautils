@@ -4,15 +4,15 @@ F=/letc/swfl
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
 	grep -q -m1 "^$(readlink -f "$file"):" $F || \
-	  perrex "$file: nfound in $F" 2
+		perrex "$file: nfound in $F" 2
 done
 for file in "$@"; do
 	FULP="$(grep -m1 "^$(readlink -f "$file"):" $F)"
 	DEST="$(echo "$FULP" | cut -d':' -f2)"
 	PERM="${FULP##*:}"
 	file="${file%%:*}"
-	if [ "$(stat -c '%u' "$DEST")" = 0 ] || \
-	   [ "$(stat -c '%u' "$(dirname "$DEST")")" = 0 ]; then
+	if [ "$(stat -c '%u' "$DEST")" = 0 -o \
+	     "$(stat -c '%u' "$(dirname "$DEST")")" = 0 ]; then
 			s install -m "$PERM" "$file" "$DEST"
 	else
 			install -m "$PERM" "$file" "$DEST"
