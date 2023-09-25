@@ -6,8 +6,8 @@ if [ "$#" -eq 2 ]; then
 	SITE=$2
 else
 	SITE=$(printf \
-		'ddg\nggl\nstackoverflow\nwikipedia\narchwiki\nurl' | \
-		dmenu -p $BRSR)
+	  'ddg\nggl\nstackoverflow\nwikipedia\narchwiki\nurl' | \
+	  dmenu -p $BRSR)
 fi
 case $SITE in
 	ddg) FPL='https://lite.duckduckgo.com/lite/?q=' ;;
