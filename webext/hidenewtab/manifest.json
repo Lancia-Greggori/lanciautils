@@ -1,28 +1,9 @@
 {
-	"name": "grayify",
+	"name": "hidenewtab",
 	"manifest_version": 3,
 	"version": "1.0",
-	"content_scripts": [ 
-		{
-			"js": ["hide.js"],
-			"world": "MAIN",	
-			"run_at": "document_start",
-			"matches": ["*://*/*"]
-		},
-		{
-			"js": ["grayify.js"],
-			"world": "MAIN",	
-			"run_at": "document_start",
-			"run_at": "document_idle",
-			"run_at": "document_end",
-			"matches": ["*://*/*"]
-			//"exclude_globs": ["*youtube.com*"]
-		},
-		{
-			"js": ["show.js"],
-			"world": "MAIN",	
-			"run_at": "document_end",
-			"matches": ["*://*/*"]
-		}
-	]
+	"chrome_url_overrides": {
+		"newtab": "blank.html"
+	},
+	"permissions": ["tabs"]
 }
