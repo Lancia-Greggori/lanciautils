@@ -16,7 +16,8 @@ int main(int argc, char *argv[]) {
 
 	int uid;
 	int cmdline_arg_size = 0;
-	for (int i = 1; i < argc; i++) cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
+	for (int i = 1; i < argc; i++)
+		cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
 	if (cmdline_arg_size > MAX_CMDLINE_ARG_SIZE) {
 		PERR("cmdline arg size bigger than max");
 		return 2;
