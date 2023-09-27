@@ -4,5 +4,5 @@ if (/google\.com/.test(window.location.href)) {
 	styleSheet.innerText = styles
 	document.head.appendChild(styleSheet)
 } else {
-	document.querySelector('html').style.filter = "grayscale(100%)";
+	document.querySelector('html').style.setProperty("filter", "grayscale(100%)", "important");
 }
