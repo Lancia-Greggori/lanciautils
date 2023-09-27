@@ -1,9 +1,9 @@
 {
-	"name": "hidenewtab",
+	"name": "bettnewtab",
 	"manifest_version": 3,
 	"version": "1.0",
 	"chrome_url_overrides": {
-		"newtab": "blank.html"
+		"newtab": "page.html"
 	},
 	"permissions": ["tabs"]
 }
