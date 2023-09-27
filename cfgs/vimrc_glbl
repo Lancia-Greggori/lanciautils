@@ -9,20 +9,17 @@ set cmdheight=2
 set tabstop=4
 
 map <C-q> :qa!<nl>
-map <C-k> <C-w>w<nl>
 map <C-d> :!clear; ~/.vim/cmd %<nl>
+map <C-z> <nop>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
-nnoremap <C-z> <undo>
 nnoremap <C-l> :bn<nl>
 nnoremap <C-h> :bp<nl>
 
 inoremap <C-s> <Esc>
-inoremap <C-z> <Esc><undo><insert>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>0i
-inoremap <C-b> <Esc>bi
 
 vnoremap <C-s> <Esc>
 
