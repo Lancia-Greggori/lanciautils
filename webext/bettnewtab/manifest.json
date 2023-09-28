@@ -5,5 +5,10 @@
 	"chrome_url_overrides": {
 		"newtab": "page.html"
 	},
-	"permissions": ["tabs"]
+	"background": [ 
+		{
+			"service_worker": ["script.js"]
+		}
+	],
+	"permissions": ["tabs", "bookmarks"]
 }

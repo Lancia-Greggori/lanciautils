@@ -7,10 +7,11 @@ set shortmess=aI
 set formatoptions=crql
 set cmdheight=2
 set tabstop=4
+set shiftwidth=4
 
 map <C-q> :qa!<nl>
 map <C-d> :!clear; ~/.vim/cmd %<nl>
-map <C-z> <nop>
+map <C-z> :u<nl>
 
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
