@@ -5,7 +5,7 @@
 	"chrome_url_overrides": {
 		"newtab": "page.html"
 	},
-	"background": [ 
+	"background": [
 		{
 			"service_worker": ["script.js"]
 		}
