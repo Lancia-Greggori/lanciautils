@@ -2,14 +2,14 @@
 	"name": "grayify",
 	"manifest_version": 3,
 	"version": "1.0",
+	"action": { "default_popup": "popup.html" },
 	"content_scripts": [
 		{
 			"js": ["hide.js"],
 			"world": "MAIN",	
 			"run_at": "document_start",
 			"matches": ["*://*/*"]
-		},
-		{
+		}, {
 			"js": ["grayify.js"],
 			"world": "MAIN",	
 			"run_at": "document_start",
@@ -17,8 +17,7 @@
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
 			//"exclude_globs": ["*youtube.com*"]
-		},
-		{
+		}, {
 			"js": ["show.js"],
 			"world": "MAIN",	
 			"run_at": "document_end",
