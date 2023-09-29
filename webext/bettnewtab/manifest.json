@@ -10,5 +10,5 @@
 			"service_worker": ["script.js"]
 		}
 	],
-	"permissions": ["tabs", "history"]
+	"permissions": ["tabs", "history", "bookmarks"]
 }
