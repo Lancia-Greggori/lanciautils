@@ -1,5 +1,6 @@
-chrome.history.search( { text: '' }, function (histit) {
-		let str = "<h1>Even if you don't hit the ideal all the time, don't give up</h1>";
+chrome.history.search( { text: '' }, 
+	function (histit) {
+		let str = '';
 		let title = '';
 		for (let i = 0, e = 0; i < histit.length && i < 40; i++) {
 			if (i > 0 &&
@@ -11,6 +12,6 @@ chrome.history.search( { text: '' }, function (histit) {
 				histit[i].url + '">' + title +
 				'</a><p style="display: inline">&emsp;|&emsp;</p>';
 		}
-		document.body.innerHTML = str;
+		document.getElementById('hist').innerHTML = str;
 	}
 );

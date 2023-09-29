@@ -7,7 +7,7 @@
 	},
 	"background": [
 		{
-			"service_worker": ["script.js"]
+			"service_worker": ["hist.js", "bkmrk.js"]
 		}
 	],
 	"permissions": ["tabs", "history", "bookmarks"]
