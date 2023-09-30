@@ -1,7 +1,7 @@
-chrome.bookmarks.getRecent(100, 
+chrome.bookmarks.getChildren("58",
 	function (bkmrkit) {
 		let title = '';
-		for (let i = bkmrkit.length - 1; i >= 0; i--) {
+		for (let i = 0; i < bkmrkit.length; i++) {
 			if (i > 0 &&
 				bkmrkit[i].title === bkmrkit[i-1].title) continue;
 			else if (!bkmrkit[i].title) title = bkmrkit[i].url;
