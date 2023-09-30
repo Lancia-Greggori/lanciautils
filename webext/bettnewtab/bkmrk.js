@@ -1,6 +1,6 @@
 chrome.bookmarks.getRecent(100, 
 	function (bkmrkit) {
-		let str = "<h1>Even if you don't hit the ideal all the time, don't give up</h1>";
+		let str = '';
 		let title = '';
 		for (let i = bkmrkit.length - 1; i >= 0; i--) {
 			if (i > 0 &&
