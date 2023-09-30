@@ -9,7 +9,7 @@ chrome.history.search( { text: '' },
 			document.getElementById('hist').innerHTML +=
 				'<a style="color: gray" href="' + 
 				histit[i].url + '">' + title +
-				'</a><p style="display: inline">&emsp;|&emsp;</p>';
+				'</a><p>&emsp;|&emsp;</p>';
 		}
 	}
 );
