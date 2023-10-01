@@ -5,12 +5,12 @@
 	"content_scripts": [
 		{
 			"js": ["hide.js"],
-			"world": "MAIN",	
+			"world": "MAIN",
 			"run_at": "document_start",
 			"matches": ["*://*/*"]
 		}, {
 			"js": ["grayify.js"],
-			"world": "MAIN",	
+			"world": "MAIN",
 			"run_at": "document_start",
 			"run_at": "document_idle",
 			"run_at": "document_end",
@@ -18,7 +18,7 @@
 			//"exclude_globs": ["*youtube.com*"]
 		}, {
 			"js": ["show.js"],
-			"world": "MAIN",	
+			"world": "MAIN",
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
 		}
