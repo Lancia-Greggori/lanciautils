@@ -1,4 +1,4 @@
-chrome.history.search( { text: '' }, 
+chrome.history.search( { text: '' },
 	function (histit) {
 		let title = '';
 		for (let i = 0; i < histit.length && i < 10; i++) {
@@ -7,7 +7,7 @@ chrome.history.search( { text: '' },
 			else if (!histit[i].title) title = histit[i].url;
 			else title = histit[i].title;
 			document.getElementById('hist').innerHTML +=
-				'<a style="color: gray" href="' + 
+				'<a style="color: gray" href="' +
 				histit[i].url + '">' + title +
 				'</a><br>';
 		}
