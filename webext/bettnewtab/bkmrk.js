@@ -9,7 +9,7 @@ chrome.bookmarks.getChildren("58",
 			document.getElementById('bkmrk').innerHTML += 
 				'<a style="color: gray" href="' + 
 				bkmrkit[i].url + '">' + title +
-				'</a><p>&emsp;|&emsp;</p>';
+				'</a><p style="display: inline">&emsp;|&emsp;</p>';
 		}
 	}
 );
