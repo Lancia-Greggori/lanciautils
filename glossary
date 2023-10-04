@@ -26,3 +26,4 @@ A: all, answer
 brsr: browser
 LF: log file
 badopt: bad option
+spr: standard path run
