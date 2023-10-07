@@ -1,7 +1,7 @@
 chrome.history.search( { text: '' },
 	function (histit) {
 		let title = '';
-		for (let i = 0, max = 10; 
+		for (let i = 0, max = 20; 
 			i < histit.length && i < max; i++) {
 				if (i > 0 &&
 					histit[i].title === histit[i-1].title) {

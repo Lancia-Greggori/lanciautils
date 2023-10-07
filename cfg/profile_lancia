@@ -4,6 +4,7 @@ MANPATH="$LSR/man:$LSR/share/man:$MANPATH"
 LOGD="$HOME/.logs"
 TERMINAL=st
 EDITOR=v
-export LSR LOGD PATH TERMINAL EDITOR
+QT_QPA_PLATFORMTHEME=qt5ct
+export LSR LOGD PATH TERMINAL EDITOR QT_QPA_PLATFORMTHEME
 [ "${SHELL##*/}" = bash ] && . ~/.bashrc
 ~/.launchprog
