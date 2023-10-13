@@ -34,3 +34,5 @@ autocmd BufNewFile,BufRead */artix/forum/* {
 	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
 	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
 }
+
+autocmd Filetype radiance set autoindent
