@@ -10,7 +10,7 @@ set tabstop=4
 set shiftwidth=4
 
 map <C-q> :qa!<nl>
-map <C-d> :!clear; ~/.vim/cmd %<nl><nl>
+map <C-d> :!clear; ~/.vim/cmd % 2>&1 \| p<nl><nl>
 map <C-z> :u<nl>
 
 nnoremap <C-s> :w<nl>
