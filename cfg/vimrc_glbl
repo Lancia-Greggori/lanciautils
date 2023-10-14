@@ -17,10 +17,9 @@ nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-l> :bn<nl>
 nnoremap <C-h> :bp<nl>
+nnoremap - :e ~/.vim/cmd<nl>
 
 inoremap <C-s> <Esc>
-inoremap <C-e> <Esc>A
-inoremap <C-a> <Esc>0i
 
 vnoremap <C-s> <Esc>
 
@@ -28,10 +27,6 @@ nnoremap <F1> :%w !clipb<nl><nl>
 nnoremap <C-c> :.w !clipb<nl><nl>
 inoremap <C-c> <Esc>:.w !clipb<nl><insert>
 vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
-
-function EdCmdFl()
-	e ~/.vim/cmd
-endfunction
 
 autocmd BufNewFile,BufRead */artix/forum/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
