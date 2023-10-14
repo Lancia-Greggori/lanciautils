@@ -1,29 +1,31 @@
-PRF: priority file
-CONFF, CFGF: config file
-CONFD, CFGD: config directory
-wm: wireless manager
-OUT,O: output
-dict: dictionary
-PRGN, PRGN: program name
-NUML, NOL: number of lines
-swfl: system wide file list
-ncurl: nobody curl ( as user )
-IS: input string
-FPL: first part link
-dmgr: swfl diff manager
-FCMD: full command
-CMD: command
-@option: mandatory option
-#option: optional option
-FULP: full path
 F: file
 D: directory
-DT: date
 L: line
 I: input
 N: number
 A: all, answer
-brsr: browser
+P: pattern
+IS: input string
+DT: date
 LF: log file
+PRF: priority file
+FPL: first part link
+OUT,O: output
+CMD: command
+FCMD: full command
+NUML, NOL: number of lines
+PRGN, PRGN: program name
+CONFF, CFGF: config file
+CONFD, CFGD: config directory
+FULP: full path
+wm: wireless manager
+dict: dictionary
+swfl: system wide file list
+ncurl: nobody curl ( as user )
+dmgr: swfl diff manager
+@option: mandatory option
+#option: optional option
+brsr: browser
 badopt: bad option
 spr: standard path run
+gres: grep espanol
