@@ -14,6 +14,7 @@ alias scurl='curl -s'
 alias cl=clear
 alias rgr='grep -r'
 alias frgr='grep -rF'
+alias fgr='grep -F'
 alias pac=pacman
 alias gr=grep
 alias mk=make

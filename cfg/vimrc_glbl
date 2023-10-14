@@ -10,7 +10,7 @@ set tabstop=4
 set shiftwidth=4
 
 map <C-q> :qa!<nl>
-map <C-d> :!clear; ~/.vim/cmd %<nl>
+map <C-d> :!clear; ~/.vim/cmd %<nl><nl>
 map <C-z> :u<nl>
 
 nnoremap <C-s> :w<nl>
@@ -30,6 +30,8 @@ vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 
 autocmd BufNewFile,BufRead ~/.vim/cmd {
 	nnoremap <buffer> <C-x> :bd<nl>
+	nnoremap <buffer> - :bd<nl>
+	map <buffer> <C-d> <NOP>
 }
 autocmd BufNewFile,BufRead */artix/forum/* {
 	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
