@@ -29,7 +29,7 @@ inoremap <C-c> <Esc>:.w !clipb<nl><insert>
 vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 
 autocmd BufNewFile,BufRead ~/.vim/cmd {
-	nnoremap <buffer> - :bd<nl>
+	nnoremap <buffer> - :w \| bd<nl>
 	map <buffer> <C-d> <NOP>
 }
 autocmd BufNewFile,BufRead */artix/forum/* {

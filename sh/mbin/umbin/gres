@@ -1,9 +1,15 @@
-#!/bin/sh -e
+#!/bin/bash -e
 [ -z "$1" ] && exit 1
-P="$(echo "$1" | sed \
+if [[ "$1" =~ ^-[a-zA-Z]+ ]]; then
+	CMD="grep $1"
+	shift 1
+else
+	CMD=grep
+fi
+P="$(sed \
 	-e 's/a/[aá]/g' -e 's/e/[eé]/g' \
 	-e 's/i/[ií]/g' -e 's/o/[oó]/g' \
-	-e 's/u/[uú]/g' \
+	-e 's/u/[uú]/g' <<<"$1"\
 )"
 shift 1
-grep "$P" "$@"
+$CMD "$P" "$@"
