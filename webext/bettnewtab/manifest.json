@@ -5,10 +5,8 @@
 	"chrome_url_overrides": {
 		"newtab": "page.html"
 	},
-	"background": [
-		{
-			"service_worker": ["hist.js", "bkmrk.js"]
-		}
-	],
+	"background": {
+		"scripts": ["hist.js", "bkmrk.js"]
+	},
 	"permissions": ["tabs", "history", "bookmarks"]
 }
