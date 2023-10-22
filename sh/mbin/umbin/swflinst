@@ -11,10 +11,5 @@ for file in "$@"; do
 	DEST="$(echo "$FULP" | cut -d':' -f2)"
 	PERM="${FULP##*:}"
 	file="${file%%:*}"
-	if [ "$(stat -c '%u' "$DEST")" = 0 -o \
-	     "$(stat -c '%u' "$(dirname "$DEST")")" = 0 ]; then
-			s install -m "$PERM" "$file" "$DEST"
-	else
-			install -m "$PERM" "$file" "$DEST"
-	fi
+	install -m "$PERM" "$file" "$DEST"
 done

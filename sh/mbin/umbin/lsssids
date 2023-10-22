@@ -1,7 +1,4 @@
 #!/bin/sh -e
-if ! ifconfig | grep -q 'wlan0:'; then
-	ifconfig wlan0 up
-fi
 e=0
 while true; do
 	O="$(iw wlan0 scan 2>&1)"
