@@ -29,3 +29,4 @@ brsr: browser
 badopt: bad option
 spr: standard path run
 gres: grep espanol
+genv: global environment
