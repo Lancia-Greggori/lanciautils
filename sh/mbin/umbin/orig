@@ -11,11 +11,11 @@ for f in "$@"; do
 	while true; do
 		if [ $n -ge 1000 ]; then
 			perrex "out of numbers" 3
-		elif [ -e "${f}.orig.${n}" ]; then
+		elif [ -e "${f}.orig${n}" ]; then
 				n=$((n+1))
 				continue
 		fi
 		break
 	done
-	cp "$f" "${f}.orig.${n}"
+	cp "$f" "${f}.orig${n}"
 done

@@ -1,9 +1,0 @@
-#!/usr/bin/openrc-run
-
-supervisor='supervise-daemon'
-command='/usr/local/umbin/trcd'
-
-depend() {
-	before local
-	after tor
-}

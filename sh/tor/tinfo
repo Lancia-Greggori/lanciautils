@@ -1,7 +1,0 @@
-#!/bin/sh -e
-for f in /var/log/tor/tor*.log; do
-	L="$(basename "$f" '.log')"
-	P="$(grep '^SOCKSPort [0-9]\+' "/etc/tor/torrc${L#tor}" | cut -d' ' -f2)"
-	pgrep -f "$L" 1>/dev/null || W='(pid not found)'
-	printf '%s,%i: %s %s\n' "$L" "$P" "$(grep -o '[0-9]\+%' "$f" | tail -n1)" "$W"
-done

@@ -1,2 +1,0 @@
-#!/bin/sh -e
-A="$(tpsel)" && exec torsocks -a "${A%%:*}" -P "${A##*:}" "$@"

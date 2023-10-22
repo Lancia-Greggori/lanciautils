@@ -1,2 +1,2 @@
 #!/bin/sh
-exec env PATH='/bin:/sbin' "${0##*/}" "$@"
+exec env PATH='/bin:/sbin:/usr/bin:/usr/sbin' "${0##*/}" "$@"

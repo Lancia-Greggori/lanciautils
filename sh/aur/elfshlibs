@@ -1,5 +1,0 @@
-#!/bin/sh -eu
-[ "$#" -ne 1 ] && exit 1
-ldd "$1" | 
-	sed '/linux-vdso/d; /ld-linux-/d; 
-	s/\.so\.[0-9.]\+ =>.*$//; s/^	//'

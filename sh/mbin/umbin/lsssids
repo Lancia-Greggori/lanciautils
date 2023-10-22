@@ -1,12 +1,16 @@
-#!/bin/sh
+#!/bin/sh -e
+if ! ifconfig | grep -q 'wlan0:'; then
+	ifconfig wlan0 up
+fi
 e=0
 while true; do
 	O="$(iw wlan0 scan 2>&1)"
-	if [ $e -ge 4 ]; then
+	if [ $e -eq 5 ]; then
 		echo "$O"
 		break
 	elif echo "$O" | grep -qFi \
-	  'command failed: device or resource busy'; then
+	  'command failed: device or resource busy' || \
+	  [ -z "$O" ]; then
 			e=$((E+1))
 			sleep 2s
 	else
