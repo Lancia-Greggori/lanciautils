@@ -6,4 +6,4 @@ elif pgrep -u "$USER" Xorg 1>/dev/null; then
 	echo 'ERR: an Xorg session is already running' 1>&2
 	exit 2
 fi
-exec /bin/startx "$@"
+exec /usr/bin/startx "$@"

@@ -1,0 +1,36 @@
+set nocompatible
+set mouse=""
+set shortmess=aI
+set formatoptions=crql
+set cmdheight=2
+set tabstop=4
+set shiftwidth=4
+let g:cmd='!'
+
+hi NonText ctermfg=gray
+hi Error ctermfg=darkred
+hi Search ctermfg=none ctermbg=none
+
+function ChCmd()
+	if g:cmd == '!'
+		let g:cmd='terminal'
+	else
+		let g:cmd='!'
+	endif
+endfunction
+
+map <C-q> :qa!<nl>
+map <C-d> :w \| execute cmd'~/.nvimcmd %<nl>'
+map <C-z> :u<nl>
+nnoremap <C-s> :w<nl>
+nnoremap <C-x> :q<nl>
+nnoremap <C-l> :bn<nl>
+nnoremap <C-h> :bp<nl>
+nnoremap <C-j> j5
+nnoremap <C-k> k5
+nnoremap - :e ~/.nvimcmd<nl>
+nnoremap = :call ChCmd()<nl>
+inoremap <C-s> <Esc>
+vnoremap <C-s> <Esc>
+
+autocmd BufNewFile,BufRead ~/.nvimcmd nnoremap <buffer> - :w \| bd<nl> | map <buffer> <C-d> <NOP>
