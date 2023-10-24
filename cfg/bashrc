@@ -1,10 +1,4 @@
-[[ ! "$-" =~ i ]] && return
-
-HISTCONTROL='ignoredups'
-HISTFILE="$HOME/.bashhst"
-HISTFILESIZE=999999
-HISTSIZE=99999
-PS1='$ $?: '
+[[ $- =~ i ]] || return
 
 set -o vi
 shopt -s autocd
@@ -14,26 +8,17 @@ shopt -s histappend
 stty stop ''
 ulimit -c 1000
 
-bind "\C-l":clear-screen
-bind -r "\C-s"
-bind -r "\C-p"
-bind "\C-s":vi-movement-mode
-bind "\C-x":vi-movement-mode
-bind "\C-a":beginning-of-line
-bind "\C-e":end-of-line
-bind "\C-f":reverse-search-history
-bind "\C-t":unix-word-rubout
-bind '"\C-n":"nohup st 1>/dev/null 2>&1 &\n"'
-bind '"\C-r":". ~/.bashrc\n"'
-bind '"\C-p":"| "'
-bind '"\eg":" | gr "'
-bind '"\C-g":" | gr "'
-bind '"\ef":" | fgr "'
+bind '"\C-l":clear-screen'
 
+HISTCONTROL='ignoredups'
+HISTFILE=~/.bashhist
+HISTSIZE=-1
+
+if [ "$(id -u)" -eq 0 ]; then
+	PS1='#$?: '
+else
+	PS1='\$$?: '
+fi
+
+. /etc/bashfc
 . /etc/aliasrc
-. "$HOME"/.bashfunc
-
-alias vt='v ~/.tsks'
-alias vat='v ~/.atsks'
-alias trrm=transmission-remote
-alias mci='make clean install'

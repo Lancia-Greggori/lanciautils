@@ -17,10 +17,11 @@ function ChCmd()
 	else
 		let g:cmd='!'
 	endif
+	echo 'cmd='.g:cmd
 endfunction
 
 map <C-q> :qa!<nl>
-map <C-d> :w \| execute cmd'~/.nvimcmd %<nl>'
+map <C-d> :w \| execute cmd'~/.nvimcmd %'<nl>
 map <C-z> :u<nl>
 nnoremap <C-s> :w<nl>
 nnoremap <C-x> :q<nl>

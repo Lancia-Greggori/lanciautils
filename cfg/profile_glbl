@@ -1,27 +1,10 @@
-umask 022
-
-append_path(){
-    case ":$PATH:" in
-        *:"$1":*)
-            ;;
-        *)
-            PATH="${PATH:+$PATH:}$1"
-    esac
-}
-append_path '/usr/local/sbin'
-append_path '/usr/local/bin'
-
-PATH="/usr/local/umbin:/usr/bbx:$PATH"
-EDITOR=vi
+. /etc/genv
+EDITOR=v
 PAGER=less
-MANPATH="/usr/local/man:/usr/local/share/man:/usr/share/man"
-export PATH EDITOR PAGER MANPATH
+export EDITOR PAGER
 
-if test -d /etc/profile.d/; then
-    for profile in /etc/profile.d/*.sh; do
-        test -r "$profile" && . "$profile"
-    done
-    unset profile
+if echo "$-" | grep -q i; then
+	if tty | grep -q '/dev/tty[0-9]'; then
+		setfont Lat38-Terminus32x16.psf.gz
+	fi
 fi
-unset -f append_path
-unset TERMCAP

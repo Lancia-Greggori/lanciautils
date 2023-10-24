@@ -1,15 +1,16 @@
-JMPFILE="$HOME/.jmpdirs"
+JF="$HOME/.jmpdirs"
 
 j() {
 	local D
-	[ "$#" -ne 1 ] && return 1
-	[ ! -e "$JMPFILE" ] && {
+	if [ ! -e "$JF" ]; then
 		echo 'jmp file nexist'
+		return 1
+	elif [ "$#" -ne 1 ]; then
 		return 2
-	}
+	fi
 	D="$(awk -F: "/^$1/ { print \$2; exit }" ~/.jmpdirs )"
 	[ -z "$D" ] && {
-		echo 'dir not found'
+		echo 'dir nfound'
 		return 3
 	}
 	cd "$D" || return 4
@@ -29,14 +30,14 @@ jmpadd() {
 			echo "$1: nexist"
 			return 2
 		}
-		local NAME="$(basename "$1")"
-		echo "$NAME:$(readlink -f "$1")" >> "$JMPFILE"
+		local N="$(basename "$1")"
+		echo "$N:$(readlink -f "$1")" >> "$JF"
 	else
 		[ -e "$1" ] || {
 			echo "$2: nexist"
 			return 2
 		}
-		echo "$2:$(readlink -f "$1")" >> "$JMPFILE"
+		echo "$2:$(readlink -f "$1")" >> "$JF"
 	fi
 }
 
