@@ -26,11 +26,12 @@
 			"world": "MAIN",
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
-		}, {
-			"js": ["verify.js"],
-			"world": "MAIN",
-			"run_at": "document_end",
-			"matches": ["*://*/*"]
 		}
+		//}, {
+		//	"js": ["verify.js"],
+		//	"world": "MAIN",
+		//	"run_at": "document_end",
+		//	"matches": ["*://*/*"]
+		//}
 	]
 }
