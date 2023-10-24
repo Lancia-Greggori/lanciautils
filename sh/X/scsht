@@ -14,7 +14,7 @@ case "$1" in
 	f) import -window root "$F" ;;
 	w) import -window "$(xwininfo |\
 		grep -F 'wininfo: Window id:' |\
-		cut -d' ' -f4)" "$F" 
+		cut -d' ' -f4)" "$F"
 	;;
 	r) import "$F" ;;
 	*) exit 2 ;;
