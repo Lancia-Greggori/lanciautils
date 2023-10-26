@@ -11,3 +11,4 @@ alias c=cat
 alias l=ls
 alias vt='v ~/tsks'
 alias g=git
+alias mci='make clean install'

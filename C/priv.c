@@ -3,11 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define COMMFILE "/letc/priv"
+#define CMDFL "/letc/priv"
 #define AUTHUID 1000
-#define AUTHPATH "/bin:/sbin:/usr/local/umbin"
-#define MAX_CMDLINE_ARG_SIZE 100
-#define MAX_COMMFILE_LINE_SIZE MAX_CMDLINE_ARG_SIZE
+#define AUTHPATH "/usr/local/mbin:/bin:/sbin:/usr/bin:/usr/sbin"
+#define MAXCMDLN_ARGSZ 100
+#define MAXCMDFL_LNSZ MAXCMDLN_ARGSZ
 #define PERR(S) fprintf(stderr, S"\n")
 
 int main(int argc, char *argv[]) {
@@ -15,53 +15,53 @@ int main(int argc, char *argv[]) {
 	if(argc < 2) return 1;
 
 	int uid;
-	int cmdline_arg_size = 0;
+	int cmdln_argsz = 0;
 	for (int i = 1; i < argc; i++)
-		cmdline_arg_size = cmdline_arg_size + strlen(argv[i]);
-	if (cmdline_arg_size > MAX_CMDLINE_ARG_SIZE) {
-		PERR("cmdline arg size bigger than max");
+		cmdln_argsz = cmdln_arg_size + strlen(argv[i]);
+	if (cmdln_argsz > MAXCMDLN_ARGSZ) {
+		PERR("cmdln arg size bigger than max");
 		return 2;
-	} else if (access(COMMFILE, R_OK) != 0) {
-		PERR("COMMFILE naccessible");
+	} else if (access(CMDFL, R_OK) != 0) {
+		PERR("CMDFL naccessible");
 		return 3;
 	} else if ((uid = getuid()) != AUTHUID) {
 		PERR("UID nauthorised");
 		return 4;
 	}
 
-	char command[MAX_COMMFILE_LINE_SIZE];
-	memset(command, 0, MAX_COMMFILE_LINE_SIZE);
+	char cmd[MAXCMDFL_LNSZ];
+	memset(cmd, 0, MAXCMDFL_LNSZ);
 	if (argc == 2) {
-		strcpy(command, argv[1]);
+		strcpy(cmd, argv[1]);
 	} else {
 		for (int i = 1; i < argc; i++) {
-			strcat(command, argv[i]);
-			if (i != (argc - 1)) strcat(command, " ");
+			strcat(cmd, argv[i]);
+			if (i != (argc - 1)) strcat(cmd, " ");
 		}
 	}
 
 	FILE *fp;
-	fp = fopen(COMMFILE, "r");
-	char tmp[MAX_COMMFILE_LINE_SIZE];
-	int character = 0;
-	for (int i = 0; character != EOF; i++) {
-		if (i > MAX_COMMFILE_LINE_SIZE) {
+	fp = fopen(CMDFL, "r");
+	char tmp[MAXCMDFL_LNSZ];
+	int char = 0;
+	for (int i = 0; char != EOF; i++) {
+		if (i > MAXCMDFL_LNSZ) {
 			return 5;
 		}
-		character = getc(fp);
-		if (character == '\n') {
+		char = getc(fp);
+		if (char == '\n') {
 			tmp[i] = '\0';
-			if (strcmp(command, tmp) == 0) {
+			if (strcmp(cmd, tmp) == 0) {
 				setuid(0);
 				clearenv();
 				setenv("PATH", AUTHPATH, 1);
-				system(command);
+				system(cmd);
 				return 0;
 			} else {
 				i = -1;
 			}
-		} else tmp[i] = character;
+		} else tmp[i] = char;
 	}
-	PERR("command not found in COMMFILE");
+	PERR("cmd not found in CMDFL");
 	return 6;
 }

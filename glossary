@@ -12,6 +12,9 @@ PRF: priority file
 FPL: first part link
 OUT,O: output
 CMD: command
+DMN: daemon
+SZ: size
+LN: line
 FCMD: full command
 NUML, NOL: number of lines
 PRGN, PRGN: program name

@@ -20,6 +20,10 @@ function ChCmd()
 	echo 'cmd='.g:cmd
 endfunction
 
+function ClFl()
+	%s/ \+$//g
+endfunction
+
 map <C-q> :qa!<nl>
 map <C-d> :w \| execute cmd'~/.nvimcmd %'<nl>
 map <C-z> :u<nl>
@@ -34,4 +38,6 @@ nnoremap = :call ChCmd()<nl>
 inoremap <C-s> <Esc>
 vnoremap <C-s> <Esc>
 
-autocmd BufNewFile,BufRead ~/.nvimcmd nnoremap <buffer> - :w \| bd<nl> | map <buffer> <C-d> <NOP>
+autocmd BufNewFile,BufRead ~/.nvimcmd
+	\ nnoremap <buffer> - :w \| bd<nl> |
+	\ map <buffer> <C-d> <NOP>

@@ -13,6 +13,12 @@ elif [ ! -f "$1" ]; then
 	perrex 'src must be a file' 4
 fi
 
+if [ -d "$2" ]; then
+	TGT="${2%/}/${1##*/}"
+else
+	TGT="$2"
+fi
+
 if [ "$#" -lt 3 ]; then
 	if [ -d "$2" ]; then
 		PERM=0644
@@ -23,7 +29,7 @@ else
 	PERM="$3"
 fi
 
-L="$(readlink -f "$1"):$2:$PERM"
+L="$(readlink -f "$1"):$TGT:$PERM"
 grep -q "^$L\$" /letc/swfl && \
 	perrex "$1: line already added" 5
 grep -q "^${L%%:*}:" /letc/swfl && \

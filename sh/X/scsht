@@ -11,12 +11,12 @@ for i in $(seq 1 1000); do
 done
 F="$D/$DT/$N.png"
 case "$1" in
-	f) import -window root "$F" ;;
-	w) import -window "$(xwininfo |\
+	--full) import -window root "$F" ;;
+	--window) import -window "$(xwininfo |\
 		grep -F 'wininfo: Window id:' |\
 		cut -d' ' -f4)" "$F"
 	;;
-	r) import "$F" ;;
+	--region) import "$F" ;;
 	*) exit 2 ;;
 esac
 xclip -sel clip -t image/png -i "$F"
