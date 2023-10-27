@@ -5,6 +5,7 @@ set formatoptions=crql
 set cmdheight=2
 set tabstop=4
 set shiftwidth=4
+set laststatus=0
 let g:cmd='!'
 
 hi NonText ctermfg=gray

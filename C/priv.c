@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 	int uid;
 	int cmdln_argsz = 0;
 	for (int i = 1; i < argc; i++)
-		cmdln_argsz = cmdln_arg_size + strlen(argv[i]);
+		cmdln_argsz = cmdln_argsz + strlen(argv[i]);
 	if (cmdln_argsz > MAXCMDLN_ARGSZ) {
 		PERR("cmdln arg size bigger than max");
 		return 2;
@@ -43,13 +43,13 @@ int main(int argc, char *argv[]) {
 	FILE *fp;
 	fp = fopen(CMDFL, "r");
 	char tmp[MAXCMDFL_LNSZ];
-	int char = 0;
-	for (int i = 0; char != EOF; i++) {
+	int chrctr = 0;
+	for (int i = 0; chrctr != EOF; i++) {
 		if (i > MAXCMDFL_LNSZ) {
 			return 5;
 		}
-		char = getc(fp);
-		if (char == '\n') {
+		chrctr = getc(fp);
+		if (chrctr == '\n') {
 			tmp[i] = '\0';
 			if (strcmp(cmd, tmp) == 0) {
 				setuid(0);
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 			} else {
 				i = -1;
 			}
-		} else tmp[i] = char;
+		} else tmp[i] = chrctr;
 	}
 	PERR("cmd not found in CMDFL");
 	return 6;

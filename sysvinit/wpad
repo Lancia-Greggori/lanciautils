@@ -1,0 +1,17 @@
+#!/bin/sh
+. /etc/genv
+case $1 in
+	start)
+		start-stop-daemon \
+			--start --background \
+			--exec /usr/local/mbin/wpad
+	;;
+	stop)
+		killall wpad
+	;;
+	restart)
+		$0 stop
+		$0 start
+	;;
+	*) exit 1 ;;
+esac
