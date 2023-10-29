@@ -2,14 +2,16 @@ document.querySelector('html').style.setProperty('filter', 'grayscale(100%)', 'i
 
 var elmnt = document.querySelectorAll('*');
 for (var i = 0; i < elmnt.length; i++) {
-	elmnt[i].style.color = "black";  
-	elmnt[i].style.background = "black";  
+	elmnt[i].style.color = 'black';
+	elmnt[i].style.background = 'black';
 }
 
 const tags = {
 	a: 'a',
 	p: 'p',
 	u: 'u',
+	i: 'i',
+	b: 'b',
 	h: 'h',
 	h1: 'h1',
 	h2: 'h2',
@@ -17,17 +19,30 @@ const tags = {
 	h4: 'h4',
 	h5: 'h5',
 	h6: 'h6',
+	em: 'em',
+	th: 'th',
+	td: 'td',
+	li: 'li',
+	bdi: 'bdi',
 	strong: 'strong',
+	figcaption: 'figcaption',
+	textarea: 'textarea',
 	code: 'code',
 	div: 'div',
 	input: 'input',
+	cite: 'cite',
 	span: 'span'
 };
 for (const tag in tags) {
 	var elmnt = document.getElementsByTagName(tag);
 	for (var i = 0; i < elmnt.length; i++) {
-		elmnt[i].style.color = "white";
-		elmnt[i].style.textDecoration = "none";
-		elmnt[i].style.borderBottom = "none";
+		elmnt[i].style.color = 'white';
+		elmnt[i].style.textDecoration = 'none';
+		elmnt[i].style.borderBottom = 'none';
 	}
+}
+
+var elmnt = document.getElementsByTagName('img');
+for (var i = 0; i < elmnt.length; i++) {
+	elmnt[i].style.background = 'white';
 }
