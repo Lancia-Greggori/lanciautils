@@ -1,5 +1,11 @@
 document.querySelector('html').style.setProperty('filter', 'grayscale(100%)', 'important');
 
+var elmnt = document.querySelectorAll('*');
+for (var i = 0; i < elmnt.length; i++) {
+	elmnt[i].style.color = "black";  
+	elmnt[i].style.background = "black";  
+}
+
 const tags = {
 	a: 'a',
 	p: 'p',
@@ -12,6 +18,7 @@ const tags = {
 	h5: 'h5',
 	h6: 'h6',
 	strong: 'strong',
+	code: 'code',
 	div: 'div',
 	input: 'input',
 	span: 'span'
