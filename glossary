@@ -34,3 +34,6 @@ spr: standard path run
 gres: grep espanol
 genv: global environment
 rsr: restricted run
+sns: standard network service
+esu: encrypted storage unlock
+ssd: ssid scanner daemon

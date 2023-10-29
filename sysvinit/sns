@@ -1,0 +1,34 @@
+#!/bin/sh -e
+. /etc/genv
+case $1 in
+	start)
+		ifconfig | grep -q '^lo:' || \
+			ifconfig lo inet loopback
+		ifconfig | grep -q '^wlan0:' || \
+			ifconfig wlan0 up
+		for p in ssd wpa_supplicant dhclient; do
+			if pgrep -f $p 1>/dev/null; then
+				echo "sns: [ERR]: $p already running"
+				exit 1
+			fi
+		done
+		start-stop-daemon \
+			--start --background \
+			--exec /usr/local/mbin/ssd
+		start-stop-daemon \
+			--start --background \
+			--exec /sbin/dhclient \
+			-- -d -4 -i wlan0 --no-pid
+	;;
+	stop)
+		for p in ssd wpa_supplicant dhclient; do
+			killall $p || true
+		done
+	;;
+	restart)
+		$0 stop
+		sleep 5s
+		$0 start
+	;;
+	*) exit 1 ;;
+esac
