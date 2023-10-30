@@ -1,10 +1,8 @@
 LSR="$HOME/.lsr"
-PATH="$LSR/lmbin:$LSR/bin:$LSR/sbin:$PATH"
-MANPATH="$LSR/man:$LSR/share/man:$MANPATH"
-LOGD="$HOME/.logs"
+PATH="$LSR/mbin:$LSR/bin:$LSR/sbin:$PATH:$HOME/.npm/bin"
+LOGD="$HOME/.log"
 TERMINAL=st
-EDITOR=v
 QT_QPA_PLATFORMTHEME=qt5ct
-export LSR LOGD PATH TERMINAL EDITOR QT_QPA_PLATFORMTHEME
-[ "${SHELL##*/}" = bash ] && . ~/.bashrc
-~/.launchprog
+export LSR LOGD PATH TERMINAL QT_QPA_PLATFORMTHEME
+[ "${SHELL##*/}" = bash ] && . /etc/bash.bashrc
+#~/.launchprog
