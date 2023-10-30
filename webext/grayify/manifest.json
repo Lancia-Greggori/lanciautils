@@ -23,10 +23,5 @@
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
 		}
-		//}, {
-		//	"js": ["verify.js"],
-		//	"run_at": "document_end",
-		//	"matches": ["*://*/*"]
-		//}
 	]
 }

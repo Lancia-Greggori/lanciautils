@@ -37,6 +37,7 @@ const tags = {
 	sup: 'sup',
 	pre: 'pre',
 	strong: 'strong',
+	figure: 'figure',
 	figcaption: 'figcaption',
 	textarea: 'textarea',
 	code: 'code',
