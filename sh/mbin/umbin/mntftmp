@@ -1,0 +1,3 @@
+#!/bin/sh -eu
+[ ! -e /ftmp ] && mkdir /ftmp
+mount -t tmpfs -o defaults,size=2G /ftmp

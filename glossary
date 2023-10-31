@@ -37,3 +37,5 @@ rsr: restricted run
 sns: standard network service
 esu: encrypted storage unlock
 ssd: ssid scanner daemon
+dfcmdfl: default command file
+cmdmd: command mode

@@ -1,44 +1,48 @@
 set nocompatible
-set mouse=""
+set mouse=
 set shortmess=aI
 set formatoptions=crql
 set cmdheight=2
 set tabstop=4
 set shiftwidth=4
 set laststatus=0
-let g:cmd='!'
+
+let g:cmdmd='!'
+let g:cmdfl='~/.nvimcmd/cmd'
 
 hi NonText ctermfg=gray
-hi Error ctermfg=darkred
+hi Error ctermfg=black ctermbg=white
+hi ErrorMsg ctermfg=black ctermbg=white
 hi Search ctermfg=none ctermbg=none
 
-function ChCmd()
-	if g:cmd == '!'
-		let g:cmd='terminal'
+function ChCmdMd()
+	if g:cmdmd == '!'
+		let g:cmdmd='terminal'
 	else
-		let g:cmd='!'
+		let g:cmdmd='!'
 	endif
-	echo 'cmd='.g:cmd
+	echo 'cmdmd='.g:cmdmd
 endfunction
 
 function ClFl()
-	%s/ \+$//g
+	%s/ \+$//ge
 endfunction
 
 map <C-q> :qa!<nl>
-map <C-d> :w \| execute cmd'~/.nvimcmd %'<nl>
+map <C-d> :w \| exe cmdfl' %'<nl>
 map <C-z> :u<nl>
-nnoremap <C-s> :w<nl>
+nnoremap <C-s> :call ClFl() \| w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-l> :bn<nl>
 nnoremap <C-h> :bp<nl>
-nnoremap <C-j> j5
-nnoremap <C-k> k5
-nnoremap - :e ~/.nvimcmd<nl>
-nnoremap = :call ChCmd()<nl>
+nnoremap <C-j> 5j
+nnoremap <C-k> 5k
+nnoremap - :exe 'e' cmdfl<nl>
+nnoremap _ :let cmdfl='~/.nvimcmd/'.input('cmdfl: ')<nl>
+nnoremap = :call ChCmdMd()<nl>
 inoremap <C-s> <Esc>
 vnoremap <C-s> <Esc>
 
-autocmd BufNewFile,BufRead ~/.nvimcmd
+autocmd BufNewFile,BufRead ~/.nvimcmd/*
 	\ nnoremap <buffer> - :w \| bd<nl> |
 	\ map <buffer> <C-d> <NOP>
