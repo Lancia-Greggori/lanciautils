@@ -11,8 +11,8 @@ let g:cmdmd='!'
 let g:cmdfl='~/.nvimcmd/cmd'
 
 hi NonText ctermfg=gray
-hi Error ctermfg=black ctermbg=white
-hi ErrorMsg ctermfg=black ctermbg=white
+hi Error ctermfg=white ctermbg=black
+hi ErrorMsg ctermfg=white ctermbg=black
 hi Search ctermfg=none ctermbg=none
 
 function ChCmdMd()
