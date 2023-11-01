@@ -25,7 +25,7 @@ function ChCmdMd()
 endfunction
 
 function ClFl()
-	%s/ \+$//ge
+	%s/[ 	]\+$//ge
 endfunction
 
 map <C-q> :qa!<nl>
