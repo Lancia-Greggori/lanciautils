@@ -43,6 +43,13 @@ nnoremap = :call ChCmdMd()<nl>
 inoremap <C-s> <Esc>
 vnoremap <C-s> <Esc>
 
+if !empty($DISPLAY)
+	nnoremap <F1> :%w !clipb<nl><nl>
+	nnoremap <C-c> :.w !clipb<nl><nl>
+	inoremap <C-c> <Esc>:.w !clipb<nl><insert>
+	vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+endif
+
 autocmd BufNewFile,BufRead ~/.nvimcmd/*
 	\ nnoremap <buffer> - :w \| bd<nl> |
 	\ map <buffer> <C-d> <NOP>
