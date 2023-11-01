@@ -1,9 +1,13 @@
 document.querySelector('html').style.setProperty('filter', 'grayscale(100%)', 'important');
 
 var elmnt = document.querySelectorAll('*');
-for (var i = 0; i < elmnt.length; i++) {
-	elmnt[i].style.color = 'black';
-	elmnt[i].style.background = 'black';
+for( var i = 0; i < elmnt.length; i++ ) {
+	if( elmnt[i].tagName === 'IMG' ) {
+		elmnt[i].style.filter = 'invert(100%)';
+		continue;
+	}
+	elmnt[i].style.setProperty('color', 'white', 'important');
+	elmnt[i].style.setProperty('background', 'black', 'important');
 }
 
 const tags = {
@@ -46,16 +50,11 @@ const tags = {
 	cite: 'cite',
 	span: 'span'
 };
-for (const tag in tags) {
+for( const tag in tags ) {
 	var elmnt = document.getElementsByTagName(tag);
-	for (var i = 0; i < elmnt.length; i++) {
-		elmnt[i].style.color = 'white';
-		elmnt[i].style.textDecoration = 'none';
-		elmnt[i].style.borderBottom = 'none';
+	for( var i = 0; i < elmnt.length; i++ ) {
+		elmnt[i].style.setProperty('color', 'white', 'important');
+		elmnt[i].style.setProperty('textDecoration', 'none', 'important');
+		elmnt[i].style.setProperty('borderBottom', 'none', 'important');
 	}
-}
-
-var elmnt = document.getElementsByTagName('img');
-for (var i = 0; i < elmnt.length; i++) {
-	elmnt[i].style.background = 'white';
 }
