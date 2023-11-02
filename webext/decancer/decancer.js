@@ -8,7 +8,7 @@ const exclurls = [
 ];
 
 if( ! exclurls.includes(window.location.hostname) ) {
-	let mstyle = `
+	var mstyle = `
 		*:not(img) {
 				color: white !important;
 				background: black !important;
@@ -16,10 +16,25 @@ if( ! exclurls.includes(window.location.hostname) ) {
 				border-bottom: none !important
 		}
 
+		* {
+				transition: none !important;
+				animation: none !important;
+		}
+
 		img { filter: invert(100%); }
 	`;
+} else {
+	var mstyle = `
+		* {
+				color: white !important;
+				transition: none !important;
+				animation: none !important;
+		}
 
-	let mstsh = document.createElement('style');
-	mstsh.innerText = mstyle;
-	document.head.appendChild(mstsh);
+		img { filter: invert(100%); }
+	`;
 }
+
+let mstsh = document.createElement('style');
+mstsh.innerText = mstyle;
+document.head.appendChild(mstsh);
