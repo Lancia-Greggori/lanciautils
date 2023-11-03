@@ -23,7 +23,7 @@ var mstyle = `
 `;
 
 if( ! exclurls.includes(window.location.hostname) ) {
-	var mstyle = mstyle + `
+	mstyle = mstyle + `
 		*:not(img) {
 				background: black !important;
 		}

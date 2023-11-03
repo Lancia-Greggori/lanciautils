@@ -17,7 +17,7 @@ hi Search ctermfg=none ctermbg=none
 
 function ChCmdMd()
 	if g:cmdmd == '!'
-		let g:cmdmd='terminal'
+		let g:cmdmd='term'
 	else
 		let g:cmdmd='!'
 	endif
