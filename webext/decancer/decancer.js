@@ -7,31 +7,23 @@ const exclurls = [
 	'www.youtube.com'
 ];
 
+var mstyle = `
+	*:not(img) {
+			color: white !important;
+			text-decoration: none !important;
+			border-bottom: none !important;
+			transition: none !important;
+			animation: none !important;
+	}
+
+	img { filter: invert(100%); }
+`;
+
 if( ! exclurls.includes(window.location.hostname) ) {
-	var mstyle = `
+	var mstyle = mstyle + `
 		*:not(img) {
-				color: white !important;
 				background: black !important;
-				text-decoration: none !important;
-				border-bottom: none !important
 		}
-
-		* {
-				transition: none !important;
-				animation: none !important;
-		}
-
-		img { filter: invert(100%); }
-	`;
-} else {
-	var mstyle = `
-		* {
-				color: white !important;
-				transition: none !important;
-				animation: none !important;
-		}
-
-		img { filter: invert(100%); }
 	`;
 }
 
