@@ -1,3 +1,9 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+await sleep(5000);
+
 document.querySelector("html").style.setProperty("filter", "grayscale(100%)", "important");
 
 const exclurls = [

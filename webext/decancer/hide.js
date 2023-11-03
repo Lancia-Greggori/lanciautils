@@ -1,1 +1,1 @@
-document.querySelector('html').style.visibility = "hidden";
+document.querySelector("html").style.visibility = "hidden";
