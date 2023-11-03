@@ -33,3 +33,13 @@ if( ! exclurls.includes(window.location.hostname) ) {
 let mstsh = document.createElement("style");
 mstsh.innerText = mstyle;
 document.head.appendChild(mstsh);
+
+var elmnts = document.querySelectorAll("a");
+for( let i = 0; i < elmnts.length; i++ ) {
+	elmnts[i].style.setProperty("color", "inherit", "important");
+}
+var elmnts = document.querySelectorAll("div, span");
+for( let i = 0; i < elmnts.length; i++ ) {
+	elmnts[i].style.setProperty("color", "inherit", "important");
+	elmnts[i].style.setProperty("background", "inherit", "important");
+}
