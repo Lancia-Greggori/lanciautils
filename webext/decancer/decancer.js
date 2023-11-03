@@ -12,6 +12,9 @@ var mstyle = `
 			color: white !important;
 			text-decoration: none !important;
 			border-bottom: none !important;
+	}
+
+	* {
 			transition: none !important;
 			animation: none !important;
 	}

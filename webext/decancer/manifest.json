@@ -4,7 +4,7 @@
 	"version": "1.0",
 	"browser_specific_settings": {
 		"gecko": {
-		  "id": "gray@nodomain.com"
+		  "id": "decancer@nodomain.com"
 		}
 	},
 	"content_scripts": [
