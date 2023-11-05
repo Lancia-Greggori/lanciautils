@@ -12,13 +12,13 @@ const exclurls = [
 var mstyle = `
 	*:not(img) {
 			color: white !important;
-			text-decoration: none !important;
-			border-bottom: none !important;
 	}
 
 	* {
 			transition: none !important;
 			animation: none !important;
+			text-decoration: none !important;
+			border-bottom: none !important;
 	}
 
 	img { filter: invert(100%); }
@@ -36,11 +36,7 @@ let mstsh = document.createElement("style");
 mstsh.innerText = mstyle;
 document.head.appendChild(mstsh);
 
-var elmnts = document.querySelectorAll("a");
-for( let i = 0; i < elmnts.length; i++ ) {
-	elmnts[i].style.setProperty("color", "white", "important");
-}
-var elmnts = document.querySelectorAll("div, span");
+var elmnts = document.querySelectorAll("*:not(img)");
 for( let i = 0; i < elmnts.length; i++ ) {
 	elmnts[i].style.setProperty("color", "white", "important");
 	elmnts[i].style.setProperty("background", "black", "important");
