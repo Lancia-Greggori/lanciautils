@@ -37,3 +37,8 @@ if !empty($DISPLAY)
 	inoremap <C-c> <Esc>:.w !clipb<nl><insert>
 	vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
 endif
+
+autocmd BufNewFile,BufRead ~/.vim/cmd {
+	nnoremap <buffer> - :w \| bd<nl>
+	map <buffer> <C-d> <NOP>
+}
