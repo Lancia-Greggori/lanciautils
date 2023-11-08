@@ -14,8 +14,6 @@
 			"matches": ["*://*/*"]
 		}, {
 			"js": ["decancer.js"],
-			"run_at": "document_start",
-			"run_at": "document_idle",
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
 		}, {
