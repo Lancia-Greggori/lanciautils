@@ -6,6 +6,7 @@ const exclurls = [
 	"web.whatsapp.com",
 	"web.telegram.org",
 	"app.element.io",
+	"www.google.com",
 	"www.youtube.com"
 ];
 
@@ -36,8 +37,10 @@ let mstsh = document.createElement("style");
 mstsh.innerText = mstyle;
 document.head.appendChild(mstsh);
 
-var elmnts = document.querySelectorAll("*:not(img)");
-for( let i = 0; i < elmnts.length; i++ ) {
-	elmnts[i].style.setProperty("color", "white", "important");
-	elmnts[i].style.setProperty("background", "black", "important");
+if( ! exclurls.includes(window.location.hostname) ) {
+	var elmnts = document.querySelectorAll("*:not(img)");
+	for( let i = 0; i < elmnts.length; i++ ) {
+		elmnts[i].style.setProperty("color", "white", "important");
+		elmnts[i].style.setProperty("background", "black", "important");
+	}
 }

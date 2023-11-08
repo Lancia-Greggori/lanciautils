@@ -3,7 +3,6 @@
 FCMD="$(dmenu </dev/null)"
 [ -z "$FCMD" ] && exit 0
 CMD="${FCMD%% *}"
-command -v "$CMD" 1>/dev/null 2>&1 || {
+command -v "$CMD" 1>/dev/null 2>&1 ||
 	perrex "cmd \"$CMD\" nfound" 1
-}
 eval exec "$FCMD"
