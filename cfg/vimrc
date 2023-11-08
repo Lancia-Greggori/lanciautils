@@ -1,5 +1,3 @@
-runtime! archlinux.vim
-
 set nocompatible
 set ttymouse=""
 set mouse=""
@@ -8,12 +6,18 @@ set formatoptions=crql
 set cmdheight=2
 set tabstop=4
 set shiftwidth=4
+set autoindent
+
+hi NonText ctermfg=gray
+hi Error ctermfg=white ctermbg=black
+hi ErrorMsg ctermfg=white ctermbg=black
+hi Search ctermfg=none ctermbg=none
 
 map <C-q> :qa!<nl>
-map <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| p<nl><nl>
+map <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
 map <C-z> :u<nl>
 
-nnoremap <C-s> :w<nl>
+nnoremap <C-s> :call ClFl() \| w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-l> :bn<nl>
 nnoremap <C-h> :bp<nl>
@@ -23,19 +27,13 @@ inoremap <C-s> <Esc>
 
 vnoremap <C-s> <Esc>
 
-nnoremap <F1> :%w !clipb<nl><nl>
-nnoremap <C-c> :.w !clipb<nl><nl>
-inoremap <C-c> <Esc>:.w !clipb<nl><insert>
-vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+function ClFl()
+	%s/[ 	]\+$//ge
+endfunction
 
-autocmd BufNewFile,BufRead ~/.vim/cmd {
-	nnoremap <buffer> - :w \| bd<nl>
-	map <buffer> <C-d> <NOP>
-}
-autocmd BufNewFile,BufRead */artix/forum/* {
-	inoremap <buffer> <C-b> [b][/b]<Esc>3h<insert>
-	inoremap <buffer> <C-i> [i][/i]<Esc>3h<insert>
-	inoremap <buffer> <C-u> [url=][/url]<Esc>6h<insert>
-}
-
-autocmd Filetype radiance set autoindent
+if !empty($DISPLAY)
+	nnoremap <F1> :%w !clipb<nl><nl>
+	nnoremap <C-c> :.w !clipb<nl><nl>
+	inoremap <C-c> <Esc>:.w !clipb<nl><insert>
+	vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+endif

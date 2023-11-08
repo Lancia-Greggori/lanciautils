@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ ! -e /etc/nvimrc ]; then
-	echo 'FATAL ERR: /etc/nvimrc nfound' 1>&2
+if [ ! -e /etc/vimrc ]; then
+	echo 'FATAL ERR: /etc/vimrc nfound' 1>&2
 	exit 1
 fi
-exec /usr/bin/nvim -c 'syntax off' -u /etc/nvimrc "$@"
+exec vim -c 'syntax off | map <Return> <NOP>' -u /etc/vimrc "$@"
