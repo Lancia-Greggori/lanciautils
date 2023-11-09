@@ -9,6 +9,11 @@ const bg_black_exclurls = [
 	"www.google.com",
 	"www.youtube.com"
 ];
+const font_exclurls = [
+	"math.libretexts.org",
+	"chem.libretexts.org",
+	"en.wikipedia.org"
+];
 
 var mstyle = `
 	*:not(img) {
@@ -28,7 +33,16 @@ var mstyle = `
 if( ! bg_black_exclurls.includes( window.location.hostname ) ) {
 	mstyle = mstyle + `
 		*:not(img) {
-				background: black !important;
+			background: black !important;
+		}
+	`;
+}
+if( ! font_exclurls.includes( window.location.hostname ) ) {
+	mstyle = mstyle + `
+		* {
+			font-family: sans-serif !important;
+			font-size: 17px !important;
+			font-weight: normal !important;
 		}
 	`;
 }
