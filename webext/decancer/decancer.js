@@ -34,6 +34,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 				animation: none !important;
 				text-decoration: none !important;
 				text-shadow: none !important;
+				box-shadow: none !important;
 				border-bottom: none !important;
 		}
 
