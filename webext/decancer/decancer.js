@@ -66,19 +66,15 @@ if( window.location.hostname === "www.desmos.com" ) {
 		`;
 	}
 
-	window.onload = function() {
+	document.getElementsByTagName("style")[0].innerHTML =
+		mstyle + document.getElementsByTagName("style")[0].innerHTML;
 
-		document.getElementsByTagName("style")[0].innerHTML =
-			mstyle + document.getElementsByTagName("style")[0].innerHTML;
-
-		if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
-			var elmnts = document.querySelectorAll("*:not(img)");
-			for( let i = 0; i < elmnts.length; i++ ) {
-				elmnts[i].style.setProperty("color", "white", "important");
-				elmnts[i].style.setProperty("background", "black", "important");
-			}
+	if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
+		var elmnts = document.querySelectorAll("*:not(img)");
+		for( let i = 0; i < elmnts.length; i++ ) {
+			elmnts[i].style.setProperty("color", "white", "important");
+			elmnts[i].style.setProperty("background", "black", "important");
 		}
-
 	}
 
 }
