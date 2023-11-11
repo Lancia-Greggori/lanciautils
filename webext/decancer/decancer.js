@@ -15,7 +15,6 @@ if( window.location.hostname === "www.desmos.com" ) {
 		"web.whatsapp.com",
 		"web.telegram.org",
 		"app.element.io",
-		"www.google.com",
 		"www.youtube.com"
 	];
 	const font_excl_urls = [
@@ -31,6 +30,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 
 		* {
 				transition: none !important;
+				transform: none !important;
 				animation: none !important;
 				text-decoration: none !important;
 				text-shadow: none !important;
@@ -53,6 +53,13 @@ if( window.location.hostname === "www.desmos.com" ) {
 				font-family: sans-serif !important;
 				font-size: 17px !important;
 				font-weight: normal !important;
+			}
+		`;
+	}
+	if( window.location.hostname === "www.google.com" ) {
+		mstyle = mstyle + `
+			a {
+				display: inline !important
 			}
 		`;
 	}
