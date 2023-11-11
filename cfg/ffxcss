@@ -1,3 +1,8 @@
 #viewer.pdfViewer {
 	filter: grayscale(1) invert(1) !important;
 }
+
+#main-window #nav-bar #tabbrowser-tabs {
+	/* visibility: collapse; */
+	background: black !important;
+}
