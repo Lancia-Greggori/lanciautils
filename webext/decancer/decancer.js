@@ -15,6 +15,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 		"web.whatsapp.com",
 		"web.telegram.org",
 		"app.element.io",
+		"www.geeksforgeeks.org",
 		"www.youtube.com"
 	];
 	const font_excl_urls = [
@@ -69,12 +70,18 @@ if( window.location.hostname === "www.desmos.com" ) {
 	mstsh.innerText = mstyle;
 	document.head.appendChild(mstsh);
 
-	if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
-		var elmnts = document.querySelectorAll("*:not(img)");
-		for( let i = 0; i < elmnts.length; i++ ) {
-			elmnts[i].style.setProperty("color", "white", "important");
-			elmnts[i].style.setProperty("background", "black", "important");
+	window.onload = function() {
+
+		document.head.appendChild(mstsh);
+
+		if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
+			var elmnts = document.querySelectorAll("*:not(img)");
+			for( let i = 0; i < elmnts.length; i++ ) {
+				elmnts[i].style.setProperty("color", "white", "important");
+				elmnts[i].style.setProperty("background", "black", "important");
+			}
 		}
+
 	}
 
 }
