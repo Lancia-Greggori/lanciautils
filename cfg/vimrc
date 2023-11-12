@@ -17,29 +17,30 @@ function ClFl()
 	%s/[ 	]\+$//ge
 endfunction
 
-map <C-q> :qa!<nl>
-map <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
-map <C-z> :u<nl>
+nmap <C-q> :qa!<nl>
+nmap <C-x> :q<nl>
+nmap <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
+nmap <C-s> :call ClFl() \| w<nl>
+nmap <C-z> :u<nl>
+nmap <C-l> :bn<nl>
+nmap <C-h> :bp<nl>
+nmap <C-n> nzz
+nmap <C-f> 15jzz
+nmap <C-b> 15kzz
+nmap - :e ~/.vim/cmd<nl>
 
-nnoremap <C-s> :call ClFl() \| w<nl>
-nnoremap <C-x> :q<nl>
-nnoremap <C-l> :bn<nl>
-nnoremap <C-h> :bp<nl>
-nnoremap <C-n> nzz
-nnoremap - :e ~/.vim/cmd<nl>
+imap <C-s> <Esc>
 
-inoremap <C-s> <Esc>
-
-vnoremap <C-s> <Esc>
+vmap <C-s> <Esc>
 
 if !empty($DISPLAY)
-	nnoremap <F1> :%w !clipb<nl><nl>
-	nnoremap <C-c> :.w !clipb<nl><nl>
-	inoremap <C-c> <Esc>:.w !clipb<nl><insert>
-	vnoremap <C-c> y<nl>:call system('clipb', @0)<nl>
+	nmap <F1> :%w !clipb<nl><nl>
+	nmap <C-c> :.w !clipb<nl><nl>
+	imap <C-c> <Esc>:.w !clipb<nl><insert>
+	vmap <C-c> y<nl>:call system('clipb', @0)<nl>
 endif
 
 autocmd BufNewFile,BufRead ~/.vim/cmd {
-	nnoremap <buffer> - :w \| bd<nl>
+	nmap <buffer> - :w \| bd<nl>
 	map <buffer> <C-d> <NOP>
 }
