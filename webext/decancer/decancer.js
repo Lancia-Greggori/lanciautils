@@ -38,7 +38,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 				border-bottom: none !important;
 		}
 
-		img { filter: invert(1); }
+		img,svg { filter: invert(1); }
 	`;
 
 	if( !bg_black_excl_urls.includes(window.location.hostname) &&
@@ -48,7 +48,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 					background: black !important;
 				}
 
-				* {
+				*:not(button) {
 					transform: none !important;
 				}
 			`;
