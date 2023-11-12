@@ -11,7 +11,6 @@ if( window.location.hostname === "www.desmos.com" ) {
 		"grayscale(1)", "important");
 
 	const bg_black_excl_urls = [
-		"www.desmos.com",
 		"web.whatsapp.com",
 		"web.telegram.org",
 		"app.element.io",
@@ -21,6 +20,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 	const font_excl_urls = [
 		"math.libretexts.org",
 		"chem.libretexts.org",
+		"phys.libretexts.org",
 		"en.wikipedia.org"
 	];
 
