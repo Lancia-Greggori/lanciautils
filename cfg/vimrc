@@ -13,6 +13,10 @@ hi Error ctermfg=white ctermbg=black
 hi ErrorMsg ctermfg=white ctermbg=black
 hi Search ctermfg=none ctermbg=none
 
+function ClFl()
+	%s/[ 	]\+$//ge
+endfunction
+
 map <C-q> :qa!<nl>
 map <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
 map <C-z> :u<nl>
@@ -21,15 +25,12 @@ nnoremap <C-s> :call ClFl() \| w<nl>
 nnoremap <C-x> :q<nl>
 nnoremap <C-l> :bn<nl>
 nnoremap <C-h> :bp<nl>
+nnoremap <C-n> nzz
 nnoremap - :e ~/.vim/cmd<nl>
 
 inoremap <C-s> <Esc>
 
 vnoremap <C-s> <Esc>
-
-function ClFl()
-	%s/[ 	]\+$//ge
-endfunction
 
 if !empty($DISPLAY)
 	nnoremap <F1> :%w !clipb<nl><nl>
