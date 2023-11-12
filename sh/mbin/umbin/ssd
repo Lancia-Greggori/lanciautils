@@ -7,14 +7,14 @@ while true; do
 		if [ -e /encetc/wpa/"$ssid" ]; then
 			connssid "$ssid"
 			i=0
-			sleep 10s
+			sleep 1m
 			while [ $i -lt 10 ]; do
 				if lsssids | grep -q "^${ssid}$"; then
 					i=0
 				else
 					i=$((i+1))
 				fi
-				sleep 10s
+				sleep 1m
 			done
 			killall wpa_supplicant
 			break
