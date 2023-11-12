@@ -66,8 +66,9 @@ if( window.location.hostname === "www.desmos.com" ) {
 		`;
 	}
 
-	document.getElementsByTagName("style")[0].innerHTML =
-		mstyle + document.getElementsByTagName("style")[0].innerHTML;
+	let mstsh = document.createElement("style");
+	mstsh.innerText = mstyle;
+	document.head.appendChild(mstsh);
 
 	if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
 		var elmnts = document.querySelectorAll("*:not(img)");
