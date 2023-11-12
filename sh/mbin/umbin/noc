@@ -1,10 +1,12 @@
 #!/bin/sh -e
-if [ -n "$1" -a ! -f "$1" ]; then
-		C="$1"
-		shift 1
+if [ $# -eq 0 ]; then
+	exec sed '/^$/d; /[ 	]*#/d'
+elif [ -n "$1" ] && [ ! -f "$1" ]; then
+	C="$1"
+	shift 1
 else
-		C=#
+	C=#
 fi
 for f in "$@"; do
-		sed -n "/^\$/d; /^$C/!p" "$f"
+	sed '/^$/d; /[ 	]*'$C'/d' "$f"
 done
