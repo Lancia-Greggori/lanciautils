@@ -31,7 +31,6 @@ if( window.location.hostname === "www.desmos.com" ) {
 
 		* {
 				transition: none !important;
-				transform: none !important;
 				animation: none !important;
 				text-decoration: none !important;
 				text-shadow: none !important;
@@ -48,13 +47,16 @@ if( window.location.hostname === "www.desmos.com" ) {
 				*:not(img) {
 					background: black !important;
 				}
+
+				* {
+					transform: none !important;
+				}
 			`;
 	}
 	if( !font_excl_urls.includes(window.location.hostname) ) {
 		mstyle = mstyle + `
 			* {
-				font-family: sans-serif !important;
-				font-size: 17px !important;
+				font: 18px sans-serif !important;
 				font-weight: normal !important;
 			}
 		`;
