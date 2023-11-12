@@ -23,7 +23,7 @@ else
 	PHYSETUP=0
 fi
 sp pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
-sp dunst 
+sp dunst
 export PHYSETUP
 dwm
 killall pulseaudio

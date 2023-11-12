@@ -39,3 +39,4 @@ esu: encrypted storage unlock
 ssd: ssid scanner daemon
 dfcmdfl: default command file
 cmdmd: command mode
+wsd: wpa_supplicant daemon

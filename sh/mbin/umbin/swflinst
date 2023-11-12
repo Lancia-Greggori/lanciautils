@@ -3,7 +3,7 @@
 F=/letc/swfl
 for file in "$@"; do
 	[ ! -f "$file" ] && exit 1
-	grep -q -m1 "^$(readlink -f "$file"):" $F || \
+	grep -q -m1 "^$(readlink -f "$file"):" $F ||
 		perrex "$file: nfound in $F" 2
 done
 for file in "$@"; do
