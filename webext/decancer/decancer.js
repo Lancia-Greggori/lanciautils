@@ -42,14 +42,15 @@ if( window.location.hostname === "www.desmos.com" ) {
 		img { filter: invert(1); }
 	`;
 
-	if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
-		mstyle = mstyle + `
-			*:not(img) {
-				background: black !important;
-			}
-		`;
+	if( !bg_black_excl_urls.includes(window.location.hostname) &&
+		!window.location.hostname.includes("libretexts.org") ) {
+			mstyle = mstyle + `
+				*:not(img) {
+					background: black !important;
+				}
+			`;
 	}
-	if( ! font_excl_urls.includes( window.location.hostname ) ) {
+	if( !font_excl_urls.includes(window.location.hostname) ) {
 		mstyle = mstyle + `
 			* {
 				font-family: sans-serif !important;
@@ -70,7 +71,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 	mstsh.innerText = mstyle;
 	document.head.appendChild(mstsh);
 
-	if( ! bg_black_excl_urls.includes( window.location.hostname ) ) {
+	if( !bg_black_excl_urls.includes(window.location.hostname) ) {
 		var elmnts = document.querySelectorAll("*:not(img)");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("color", "white", "important");
