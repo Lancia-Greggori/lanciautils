@@ -39,7 +39,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 				border-bottom: none !important;
 		}
 
-		img,svg { filter: invert(1); }
+		img { filter: invert(1); }
 	`;
 
 	if( !bg_black_excl_urls.includes(window.location.hostname) &&
