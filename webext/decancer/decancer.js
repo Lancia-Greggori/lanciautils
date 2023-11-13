@@ -1,4 +1,6 @@
-if( window.location.hostname === "www.desmos.com" ) {
+const hostname = window.location.hostname;
+
+if( hostname === "www.desmos.com" ) {
 
 	document.querySelector("html").
 		style.setProperty("filter",
@@ -23,6 +25,12 @@ if( window.location.hostname === "www.desmos.com" ) {
 		"phys.libretexts.org",
 		"en.wikipedia.org"
 	];
+	const transform_excl_urls = [
+		"web.whatsapp.com",
+		"web.telegram.org",
+		"www.google.com",
+		"www.quora.com"
+	];
 
 	var mstyle = `
 		*:not(img) {
@@ -31,7 +39,6 @@ if( window.location.hostname === "www.desmos.com" ) {
 
 		* {
 				transition: none !important;
-				transform: none !important;
 				animation: none !important;
 				text-decoration: none !important;
 				text-shadow: none !important;
@@ -42,15 +49,15 @@ if( window.location.hostname === "www.desmos.com" ) {
 		img { filter: invert(1); }
 	`;
 
-	if( !bg_black_excl_urls.includes(window.location.hostname) &&
-		!window.location.hostname.includes("libretexts.org") ) {
+	if( !bg_black_excl_urls.includes(hostname) &&
+		!hostname.includes("libretexts.org") ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
 				}
 			`;
 	}
-	if( !font_excl_urls.includes(window.location.hostname) ) {
+	if( !font_excl_urls.includes(hostname) ) {
 		mstyle = mstyle + `
 			* {
 				font: 18px sans-serif !important;
@@ -58,7 +65,14 @@ if( window.location.hostname === "www.desmos.com" ) {
 			}
 		`;
 	}
-	if( window.location.hostname === "www.google.com" ) {
+	if( !transform_excl_urls.includes(hostname) ) {
+		mstyle = mstyle + `
+			* {
+				transform: none !important;
+			}
+		`;
+	}
+	if( hostname === "www.google.com" ) {
 		mstyle = mstyle + `
 			a {
 				display: inline !important
@@ -70,7 +84,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 	mstsh.innerText = mstyle;
 	document.head.appendChild(mstsh);
 
-	if( !bg_black_excl_urls.includes(window.location.hostname) ) {
+	if( !bg_black_excl_urls.includes(hostname) ) {
 		var elmnts = document.querySelectorAll("*:not(img)");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("color", "white", "important");
