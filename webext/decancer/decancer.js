@@ -60,7 +60,7 @@ if( hostname === "www.desmos.com" ) {
 	if( !font_excl_urls.includes(hostname) ) {
 		mstyle = mstyle + `
 			* {
-				font: 18px sans-serif !important;
+				font: 20px sans-serif !important;
 				font-weight: normal !important;
 			}
 		`;
