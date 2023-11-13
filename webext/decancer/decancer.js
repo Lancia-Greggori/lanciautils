@@ -44,6 +44,7 @@ if( hostname === "www.desmos.com" ) {
 				text-shadow: none !important;
 				box-shadow: none !important;
 				border-bottom: none !important;
+				background-image: none !important;
 		}
 
 		img { filter: invert(1); }
