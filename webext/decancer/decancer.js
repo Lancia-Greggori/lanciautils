@@ -31,6 +31,7 @@ if( window.location.hostname === "www.desmos.com" ) {
 
 		* {
 				transition: none !important;
+				transform: none !important;
 				animation: none !important;
 				text-decoration: none !important;
 				text-shadow: none !important;
@@ -46,10 +47,6 @@ if( window.location.hostname === "www.desmos.com" ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
-				}
-
-				*:not(button) {
-					transform: none !important;
 				}
 			`;
 	}
