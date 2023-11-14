@@ -1,6 +1,6 @@
 {
 	"name": "decancer",
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"version": "1.0",
 	"browser_specific_settings": {
 		"gecko": {
@@ -11,11 +11,15 @@
 		{
 			"js": ["hide.js"],
 			"run_at": "document_start",
-			"matches": ["<all_urls>"]
+			"matches": ["*://*/*"]
 		}, {
-			"js": ["decancer.js", "show.js"],
+			"js": ["decancer.js"],
 			"run_at": "document_end",
-			"matches": ["<all_urls>"]
+			"matches": ["*://*/*"]
+		}, {
+			"js": ["show.js"],
+			"run_at": "document_end",
+			"matches": ["*://*/*"]
 		}
 	]
 }
