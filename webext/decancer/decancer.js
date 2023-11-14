@@ -1,7 +1,8 @@
-const hostname = window.location.hostname;
+const hstnm = window.location.hostname;
+const url = window.location.href;
 const hts = document.querySelector("html").style;
 
-if( hostname === "www.desmos.com" ) {
+if( hstnm === "www.desmos.com" ) {
 
 		hts.setProperty("filter",
 		"invert(1)", "important");
@@ -33,17 +34,17 @@ if( hostname === "www.desmos.com" ) {
 
 	var mstyle = `
 		*:not(img) {
-				color: white !important;
+			color: white !important;
 		}
 
 		* {
-				transition: none !important;
-				animation: none !important;
-				text-decoration: none !important;
-				text-shadow: none !important;
-				box-shadow: none !important;
-				border-bottom: none !important;
-				background-image: none !important;
+			transition: none !important;
+			animation: none !important;
+			text-decoration: none !important;
+			text-shadow: none !important;
+			box-shadow: none !important;
+			border-bottom: none !important;
+			background-image: none !important;
 		}
 
 		img {
@@ -51,15 +52,15 @@ if( hostname === "www.desmos.com" ) {
 		}
 	`;
 
-	if( !bg_black_excl_urls.includes(hostname) &&
-		!hostname.includes("libretexts.org") ) {
+	if( !bg_black_excl_urls.includes(hstnm) &&
+		!hstnm.includes("libretexts.org") ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
 				}
 			`;
 	}
-	if( !font_excl_urls.includes(hostname) ) {
+	if( !font_excl_urls.includes(hstnm) ) {
 		mstyle = mstyle + `
 			* {
 				font: 20px sans-serif !important;
@@ -67,14 +68,15 @@ if( hostname === "www.desmos.com" ) {
 			}
 		`;
 	}
-	if( !transform_excl_urls.includes(hostname) ) {
+	if( !transform_excl_urls.includes(hstnm) ) {
 		mstyle = mstyle + `
 			* {
 				transform: none !important;
 			}
 		`;
 	}
-	if( hostname === "www.google.com" ) {
+	if( hstnm === "www.google.com" &&
+		url.includes("?sca_esv") ) {
 		mstyle = mstyle + `
 			a {
 				display: inline !important
@@ -92,14 +94,14 @@ if( hostname === "www.desmos.com" ) {
 	mstsh.innerText = mstyle;
 	document.head.appendChild(mstsh);
 
-	if( !bg_black_excl_urls.includes(hostname) ) {
+	if( !bg_black_excl_urls.includes(hstnm) ) {
 		var elmnts = document.querySelectorAll("*:not(img)");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("color", "white", "important");
 			elmnts[i].style.setProperty("background", "black", "important");
 		}
 	}
-	if( !font_excl_urls.includes(hostname) ) {
+	if( !font_excl_urls.includes(hstnm) ) {
 		var elmnts = document.querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("font", "20px sans-serif", "important");
