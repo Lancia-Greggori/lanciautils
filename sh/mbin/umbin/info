@@ -1,2 +1,2 @@
-#!/bin/sh
-exec /usr/bin/info --init-file=/etc/inforc "$@"
+#!/bin/sh -e
+exec /usr/bin/info --subnodes -o - "$@" | $PAGER
