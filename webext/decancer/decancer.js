@@ -92,5 +92,12 @@ if( hostname === "www.desmos.com" ) {
 			elmnts[i].style.setProperty("background", "black", "important");
 		}
 	}
+	if( !font_excl_urls.includes(hostname) ) {
+		var elmnts = document.querySelectorAll("*");
+		for( let i = 0; i < elmnts.length; i++ ) {
+			elmnts[i].style.setProperty("font", "20px sans-serif", "important");
+			elmnts[i].style.setProperty("font-weight", "normal", "important");
+		}
+	}
 
 }

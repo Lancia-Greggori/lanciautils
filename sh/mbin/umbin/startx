@@ -1,9 +1,8 @@
 #!/bin/sh
+. /usr/subr/Xo
 if [ "$(id -u)" -eq 0 ]; then
-	echo 'ERR: startx not allowed as root' 1>&2
-	exit 1
+	perrex 'startx not allowed as root' 1
 elif pgrep -u "$USER" Xorg 1>/dev/null; then
-	echo 'ERR: an Xorg session is already running' 1>&2
-	exit 2
+	perrex 'an Xorg session is already running' 2
 fi
 exec /usr/bin/startx "$@"
