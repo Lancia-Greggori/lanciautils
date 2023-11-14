@@ -46,6 +46,7 @@ int main(int argc, char *argv[]) {
 	int chrctr = 0;
 	for (int i = 0; chrctr != EOF; i++) {
 		if (i > MAXCMDFL_LNSZ) {
+			PERR("line bigger than maxcmdfl lnsz");
 			return 5;
 		}
 		chrctr = getc(fp);
@@ -62,6 +63,6 @@ int main(int argc, char *argv[]) {
 			}
 		} else tmp[i] = chrctr;
 	}
-	PERR("cmd not found in CMDFL");
+	PERR("cmd nfound in CMDFL");
 	return 6;
 }
