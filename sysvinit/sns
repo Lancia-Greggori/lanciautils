@@ -2,9 +2,9 @@
 . /etc/genv
 case $1 in
 	start)
-		ifconfig | grep -q '^lo:' || \
+		ifconfig | grep -q '^lo:' ||
 			ifconfig lo inet loopback
-		ifconfig | grep -q '^wlan0:' || \
+		ifconfig | grep -q '^wlan0:' ||
 			ifconfig wlan0 up
 		for p in ssd wpa_supplicant dhclient; do
 			if pgrep -f $p 1>/dev/null; then

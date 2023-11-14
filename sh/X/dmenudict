@@ -9,10 +9,10 @@ elif [[ "$O" =~ ^\*$ ]]; then
 	clipb <<<"$I"
 elif [[ "$O" =~ \+\ [[:alnum:]]+ ]]; then
 	O="${O#+ }"
-	printf '%s\n%s' "$O" "$I" | \
-		dmenu -p "$I: plural of \"$O\"" | \
+	printf '%s\n%s' "$O" "$I" |
+		dmenu -p "$I: plural of \"$O\"" |
 		clipb <<<"$I"
 else
-	tr ',' '\n' <<<"${O##*: }" | \
+	tr ',' '\n' <<<"${O##*: }" |
 		dmenu | clipb
 fi
