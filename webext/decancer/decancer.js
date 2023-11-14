@@ -99,10 +99,10 @@ if( hostname === "www.desmos.com" ) {
 			elmnts[i].style.setProperty("font-weight", "normal", "important");
 		}
 	}
-	//var imgs = document.querySelectorAll("img");
-	//for( let i = 0; i < imgs.length; i++ ) {
-	//	if( !imgs[i].src.includes("svg") )
-	//		imgs[i].style.setProperty("background", "black", "important");
-	//}
+	var imgs = document.querySelectorAll("img");
+	for( let i = 0; i < imgs.length; i++ ) {
+		if( !imgs[i].src.includes("svg") )
+			imgs[i].style.setProperty("background", "black", "important");
+	}
 
 }
