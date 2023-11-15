@@ -83,19 +83,29 @@ if( hstnm === "www.desmos.com" ) {
 		`;
 	}
 	if( hstnm === "www.google.com" &&
-		url.includes("?sca_esv") ) {
+		url.includes("sca_esv") ) {
 		mstyle = mstyle + `
 			a {
-				display: inline !important
+				display: inline !important;
 			}
 		`;
 	} else {
 		mstyle = mstyle + `
 			img {
-				display: none !important
+				display: none !important;
 			}
 		`;
 	}
+	if( hstnm.includes("wikipedia.org") ) {
+		mstyle = mstyle + `
+			 .vector-feature-zebra-design-disabled
+				 #vector-toc-pinned-container
+				 .vector-toc::after {
+					background: black !important
+				}
+		`;
+	}
+
 
 	let mstsh = document.createElement("style");
 	mstsh.innerText = mstyle;
