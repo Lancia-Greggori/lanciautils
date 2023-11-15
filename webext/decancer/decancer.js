@@ -91,7 +91,7 @@ if( hstnm === "www.desmos.com" ) {
 		`;
 	} else {
 		mstyle = mstyle + `
-			img {
+			img:not([class~="math" i]) {
 				display: none !important;
 			}
 		`;
