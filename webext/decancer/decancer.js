@@ -70,7 +70,7 @@ if( hstnm === "www.desmos.com" ) {
 		!contains_mathjax ) {
 		mstyle = mstyle + `
 			* {
-				font: 25px sans-serif !important;
+				font: 20px sans-serif !important;
 				font-weight: normal !important;
 			}
 		`;
@@ -123,7 +123,7 @@ if( hstnm === "www.desmos.com" ) {
 		!contains_mathjax ) {
 		var elmnts = document.querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
-			elmnts[i].style.setProperty("font", "25px sans-serif", "important");
+			elmnts[i].style.setProperty("font", "20px sans-serif", "important");
 			elmnts[i].style.setProperty("font-weight", "normal", "important");
 		}
 	}
