@@ -1,6 +1,7 @@
 const hstnm = window.location.hostname;
 const url = window.location.href;
 const hts = document.querySelector("html").style;
+var contains_mathjax = false;
 
 if( hstnm === "www.desmos.com" ) {
 
@@ -16,13 +17,10 @@ if( hstnm === "www.desmos.com" ) {
 		"web.whatsapp.com",
 		"web.telegram.org",
 		"app.element.io",
-		"www.geeksforgeeks.org",
 		"www.youtube.com"
 	];
 	const font_excl_urls = [
-		"math.libretexts.org",
-		"chem.libretexts.org",
-		"phys.libretexts.org",
+		"ximera.osu.edu",
 		"en.wikipedia.org"
 	];
 	const transform_excl_urls = [
@@ -52,15 +50,24 @@ if( hstnm === "www.desmos.com" ) {
 		}
 	`;
 
+	var scripts = document.querySelectorAll("script");
+	for( let i = 0; i < scripts.length; i++ ) {
+		if( scripts[i].type.includes("mathjax")  ) {
+			contains_mathjax = true;
+			break;
+		}
+	}
+
 	if( !bg_black_excl_urls.includes(hstnm) &&
-		!hstnm.includes("libretexts.org") ) {
+		!contains_mathjax && hstnm !== "ximera.osu.edu" ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
 				}
 			`;
 	}
-	if( !font_excl_urls.includes(hstnm) ) {
+	if( !font_excl_urls.includes(hstnm) &&
+		!contains_mathjax ) {
 		mstyle = mstyle + `
 			* {
 				font: 20px sans-serif !important;
@@ -101,7 +108,8 @@ if( hstnm === "www.desmos.com" ) {
 			elmnts[i].style.setProperty("background", "black", "important");
 		}
 	}
-	if( !font_excl_urls.includes(hstnm) ) {
+	if( !font_excl_urls.includes(hstnm) &&
+		!contains_mathjax ) {
 		var elmnts = document.querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("font", "20px sans-serif", "important");
