@@ -42,7 +42,6 @@ if( hostname === "www.desmos.com" ) {
 			box-shadow: none !important;
 			border-bottom: none !important;
 			background-image: none !important;
-			fill: black !important;
 		}
 
 		img {
@@ -61,7 +60,7 @@ if( hostname === "www.desmos.com" ) {
 	if( !bg_black_excl_urls.includes(hostname) &&
 		!contains_math ) {
 			mstyle = mstyle + `
-				*:not(img, class="islsp") {
+				*:not(img) {
 					background: black !important;
 				}
 			`;
