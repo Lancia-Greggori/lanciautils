@@ -1,9 +1,9 @@
-const hstnm = window.location.hostname;
+const hostname = window.location.hostname;
 const url = window.location.href;
 const hts = document.querySelector("html").style;
 var contains_mathjax = false;
 
-if( hstnm === "www.desmos.com" ) {
+if( hostname === "www.desmos.com" ) {
 
 		hts.setProperty("filter",
 		"invert(1)", "important");
@@ -58,15 +58,15 @@ if( hstnm === "www.desmos.com" ) {
 		}
 	}
 
-	if( !bg_black_excl_urls.includes(hstnm) &&
-		!contains_mathjax && hstnm !== "ximera.osu.edu" ) {
+	if( !bg_black_excl_urls.includes(hostname) &&
+		!contains_mathjax && hostname !== "ximera.osu.edu" ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
 				}
 			`;
 	}
-	if( !font_excl_urls.includes(hstnm) &&
+	if( !font_excl_urls.includes(hostname) &&
 		!contains_mathjax ) {
 		mstyle = mstyle + `
 			* {
@@ -75,14 +75,14 @@ if( hstnm === "www.desmos.com" ) {
 			}
 		`;
 	}
-	if( !transform_excl_urls.includes(hstnm) ) {
+	if( !transform_excl_urls.includes(hostname) ) {
 		mstyle = mstyle + `
 			* {
 				transform: none !important;
 			}
 		`;
 	}
-	if( hstnm === "www.google.com" &&
+	if( hostname === "www.google.com" &&
 		url.includes("sca_esv") ) {
 		mstyle = mstyle + `
 			a {
@@ -97,13 +97,16 @@ if( hstnm === "www.desmos.com" ) {
 			}
 		`;
 	}
-	if( hstnm.includes("wikipedia.org") ) {
+	if( hostname.includes("wikipedia.org") ) {
 		mstyle = mstyle + `
 			 .vector-feature-zebra-design-disabled
 				 #vector-toc-pinned-container
 				 .vector-toc::after {
 					background: black !important
 				}
+			audio,video {
+				display: none !important;
+			}
 		`;
 	}
 
@@ -112,14 +115,14 @@ if( hstnm === "www.desmos.com" ) {
 	mstsh.innerText = mstyle;
 	document.head.appendChild(mstsh);
 
-	if( !bg_black_excl_urls.includes(hstnm) ) {
+	if( !bg_black_excl_urls.includes(hostname) ) {
 		var elmnts = document.querySelectorAll("*:not(img)");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("color", "white", "important");
 			elmnts[i].style.setProperty("background", "black", "important");
 		}
 	}
-	if( !font_excl_urls.includes(hstnm) &&
+	if( !font_excl_urls.includes(hostname) &&
 		!contains_mathjax ) {
 		var elmnts = document.querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
