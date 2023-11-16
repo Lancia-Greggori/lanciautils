@@ -22,4 +22,17 @@
 			"matches": ["*://*/*"]
 		}
 	]
+	//],
+	//"background": {
+	//	"scripts": ["commands.js"]
+	//},
+	//"permissions": ["scripting", "tabs"],
+	//"host_permissions": ["*://*/*"],
+	//"commands": {
+	//	"unhideimgs": {
+	//		"suggested_key": {
+	//			"default": "F1"
+	//		}
+	//	}
+	//}
 }
