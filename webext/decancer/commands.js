@@ -1,21 +1,14 @@
-//var tabid;
-//browser.tabs.query(
-//	{currentWindow: true, active : true},
-//	function(tab) {
-//		tabid = tab[0].id;
-//		browser.commands.onCommand.addListener(
-//			function(cmd) {
-//				if( cmd === "unhideimgs" ) {
-//					console.log(tabid);
-//				}
-//			}
-//		);
-//	}
-//);
-//browser.commands.onCommand.addListener(
-//	function(cmd) {
-//		if( cmd === "unhideimgs" ) {
-//			console.log("lolg");
-//		}
-//	}
-//);
+browser.commands.onCommand.addListener(
+	function(cmd) {
+		if( cmd === "unhideimgs" ) {
+			 browser.tabs.executeScript({
+			 	code: `
+				 		imgs = document.querySelectorAll("img");
+						for( let i = 0; i < imgs.length; i++ ) {
+							imgs[i].style.setProperty("display", "inline", "important");
+						}
+				`
+			});
+		}
+	}
+);
