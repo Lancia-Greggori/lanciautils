@@ -1,7 +1,7 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
 const hts = document.querySelector("html").style;
-var contains_mathjax = false;
+var contains_math = false;
 
 if( hostname === "www.desmos.com" ) {
 
@@ -20,7 +20,6 @@ if( hostname === "www.desmos.com" ) {
 		"www.youtube.com"
 	];
 	const font_excl_urls = [
-		"ximera.osu.edu",
 		"en.wikipedia.org"
 	];
 	const transform_excl_urls = [
@@ -52,22 +51,22 @@ if( hostname === "www.desmos.com" ) {
 
 	var scripts = document.querySelectorAll("script");
 	for( let i = 0; i < scripts.length; i++ ) {
-		if( scripts[i].type.includes("mathjax")  ) {
-			contains_mathjax = true;
+		if( scripts[i].type.includes("math")  ) {
+			contains_math = true;
 			break;
 		}
 	}
 
 	if( !bg_black_excl_urls.includes(hostname) &&
-		!contains_mathjax && hostname !== "ximera.osu.edu" ) {
+		!contains_math ) {
 			mstyle = mstyle + `
-				*:not(img) {
+				*:not(img, class="islsp") {
 					background: black !important;
 				}
 			`;
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_mathjax ) {
+		!contains_math ) {
 		mstyle = mstyle + `
 			* {
 				font: 20px sans-serif !important;
@@ -92,18 +91,18 @@ if( hostname === "www.desmos.com" ) {
 	} else {
 		mstyle = mstyle + `
 			img:not([class*="math" i],
-				[src*="math" i]) {
-					display: none !important;
+					[src*="math" i]) {
+						display: none !important;
 			}
 		`;
 	}
 	if( hostname.includes("wikipedia.org") ) {
 		mstyle = mstyle + `
-			 .vector-feature-zebra-design-disabled
-				 #vector-toc-pinned-container
-				 .vector-toc::after {
+			.vector-feature-zebra-design-disabled
+			#vector-toc-pinned-container
+			.vector-toc::after {
 					background: black !important
-				}
+			}
 			audio,video {
 				display: none !important;
 			}
@@ -123,7 +122,7 @@ if( hostname === "www.desmos.com" ) {
 		}
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_mathjax ) {
+		!contains_math ) {
 		var elmnts = document.querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
 			elmnts[i].style.setProperty("font", "20px sans-serif", "important");
