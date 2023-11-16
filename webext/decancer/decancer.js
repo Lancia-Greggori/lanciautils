@@ -47,6 +47,10 @@ if( hostname === "www.desmos.com" ) {
 		img {
 			filter: invert(1);
 		}
+
+		audio,video {
+			display: none !important;
+		}
 	`;
 
 	var scripts = document.querySelectorAll("script");
@@ -102,9 +106,6 @@ if( hostname === "www.desmos.com" ) {
 			#vector-toc-pinned-container
 			.vector-toc::after {
 					background: black !important
-			}
-			audio,video {
-				display: none !important;
 			}
 		`;
 	}

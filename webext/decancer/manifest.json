@@ -28,9 +28,14 @@
 	},
 	"permissions": ["*://*/*", "scripting", "tabs"],
 	"commands": {
-		"unhideimgs": {
+		"unhideelmnts": {
 			"suggested_key": {
 				"default": "F1"
+			}
+		},
+		"invertimgs": {
+			"suggested_key": {
+				"default": "F2"
 			}
 		}
 	}
