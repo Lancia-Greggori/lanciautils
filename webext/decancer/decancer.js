@@ -42,7 +42,7 @@ if( hostname === "www.desmos.com" ) {
 			box-shadow: none !important;
 			border-bottom: none !important;
 			background-image: none !important;
-			fill: none !important;
+			fill: black !important;
 		}
 
 		img {
