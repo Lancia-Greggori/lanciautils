@@ -82,7 +82,7 @@ if( hostname === "www.desmos.com" ) {
 		`;
 	}
 	if( hostname === "www.google.com" &&
-		url.includes("sca_esv") ) {
+		url.includes("tbm=isch") ) {
 		mstyle = mstyle + `
 			a {
 				display: inline !important;
