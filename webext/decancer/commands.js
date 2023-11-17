@@ -3,7 +3,7 @@ browser.commands.onCommand.addListener( function(cmd) {
 		 browser.tabs.executeScript({
 			code: `
 				elmnts = document.
-					querySelectorAll("img, audio, video");
+					querySelectorAll("img, svg, audio, video");
 				for( let i = 0; i < elmnts.length; i++ ) {
 					elmnts[i].style.
 						setProperty("display", "inline", "important");

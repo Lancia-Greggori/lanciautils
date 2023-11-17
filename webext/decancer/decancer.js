@@ -49,7 +49,7 @@ if( hostname === "www.desmos.com" ) {
 			filter: invert(1);
 		}
 
-		audio,video {
+		svg, audio, video {
 			display: none !important;
 		}
 	`;
