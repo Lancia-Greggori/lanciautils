@@ -1,6 +1,6 @@
 browser.commands.onCommand.addListener( function(cmd) {
 	if( cmd === "unhideelmnts" ) {
-		 browser.tabs.executeScript({
+		browser.tabs.executeScript({
 			code: `
 				elmnts = document.
 					querySelectorAll("img, svg, audio, video");
@@ -11,7 +11,7 @@ browser.commands.onCommand.addListener( function(cmd) {
 			`
 		});
 	} else if ( cmd === "invert-imgs" ) {
-		 browser.tabs.executeScript({
+		browser.tabs.executeScript({
 			code: `
 				imgs = document.
 					querySelectorAll("img");
