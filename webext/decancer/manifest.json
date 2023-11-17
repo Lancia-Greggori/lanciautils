@@ -24,7 +24,7 @@
 		}
 	],
 	"background": {
-		"scripts": ["commands.js"]
+		"scripts": ["cmds.js"]
 	},
 	"permissions": ["*://*/*", "scripting"],
 	"commands": {
