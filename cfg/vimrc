@@ -22,16 +22,17 @@ nmap <C-x> :q<nl>
 nmap <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
 nmap <C-s> :call ClFl() \| w<nl>
 nmap <C-z> :u<nl>
-nmap <C-l> :bn<nl>
-nmap <C-h> :bp<nl>
+nmap K :bn<nl>
+nmap J :bp<nl>
 nmap <C-n> nzz
-nmap <C-f> 15jzz
-nmap <C-b> 15kzz
+nmap <C-f> 10jzz
+nmap <C-b> 10kzz
 nmap - :e ~/.vim/cmd<nl>
 
 imap <C-s> <Esc>
 
 vmap <C-s> <Esc>
+vmap <C-z> <NOP>
 
 if !empty($DISPLAY)
 	nmap <F1> :%w !clipb<nl><nl>
