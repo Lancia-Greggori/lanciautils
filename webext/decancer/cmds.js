@@ -10,7 +10,7 @@ browser.commands.onCommand.addListener( function(cmd) {
 				}
 			`
 		});
-	} else if ( cmd === "invertimgs" ) {
+	} else if ( cmd === "invert-imgs" ) {
 		 browser.tabs.executeScript({
 			code: `
 				imgs = document.

@@ -33,7 +33,7 @@
 				"default": "F1"
 			}
 		},
-		"invertimgs": {
+		"invert-imgs": {
 			"suggested_key": {
 				"default": "F2"
 			}
