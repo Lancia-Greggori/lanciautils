@@ -26,7 +26,7 @@
 	"background": {
 		"scripts": ["commands.js"]
 	},
-	"permissions": ["*://*/*", "scripting", "tabs"],
+	"permissions": ["*://*/*", "scripting"],
 	"commands": {
 		"unhideelmnts": {
 			"suggested_key": {
