@@ -26,6 +26,7 @@ if( hostname === "www.desmos.com" ) {
 		"web.whatsapp.com",
 		"web.telegram.org",
 		"www.google.com",
+		"github.com",
 		"www.quora.com"
 	];
 
