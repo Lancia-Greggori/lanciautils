@@ -1,11 +1,11 @@
 {
-	"name": "decancer",
+	"name": "cleanser",
 	// won't work on manifest version 3
 	"manifest_version": 2,
 	"version": "1.0",
 	"browser_specific_settings": {
 		"gecko": {
-		  "id": "decancer@nodomain.com"
+		  "id": "cleanser@nodomain.com"
 		}
 	},
 	"content_scripts": [
@@ -14,7 +14,7 @@
 			"run_at": "document_start",
 			"matches": ["*://*/*"]
 		}, {
-			"js": ["decancer.js"],
+			"js": ["cleanser.js"],
 			"run_at": "document_end",
 			"matches": ["*://*/*"]
 		}, {
