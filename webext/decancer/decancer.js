@@ -108,6 +108,10 @@ if( hostname === "www.desmos.com" ) {
 			.vector-toc::after {
 					background: black !important
 			}
+
+			a[href^="#cite_note"] {
+				display: none !important;
+			}
 		`;
 	}
 
