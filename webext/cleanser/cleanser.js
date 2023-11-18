@@ -20,7 +20,8 @@ if( hostname === "www.desmos.com" ) {
 		"www.youtube.com"
 	];
 	const font_excl_urls = [
-		"en.wikipedia.org"
+		"en.wikipedia.org",
+		"es.wikipedia.org"
 	];
 	const transform_excl_urls = [
 		"web.whatsapp.com",
