@@ -1,4 +1,8 @@
 #!/bin/sh -e
 setxkbmap us
-xset dpms force off
+if [ $1 = -s ]; then
+	loginctl suspend
+else
+	xset dpms force off
+fi
 exec slock

@@ -1,0 +1,14 @@
+#!/bin/sh -e
+F="$HOME/.cache/lang"
+if [ ! -e "$F" ]; then
+	echo en > "$F"
+	setxkbmap en_US
+else
+	if [ "$(cat "$F")" = en ]; then
+		setxkbmap es
+		echo es > "$F"
+	else
+		setxkbmap en_US
+		echo en > "$F"
+	fi
+fi
