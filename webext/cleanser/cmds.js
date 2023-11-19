@@ -6,7 +6,8 @@ browser.commands.onCommand.addListener( function(cmd) {
 					querySelectorAll("img, svg, audio, video");
 				for( let i = 0; i < elmnts.length; i++ ) {
 					elmnts[i].style.
-						setProperty("display", "inline", "important");
+						setProperty("display", "inline",
+						"important");
 				}
 			`
 		});
@@ -17,7 +18,8 @@ browser.commands.onCommand.addListener( function(cmd) {
 					querySelectorAll("img");
 				for( let i = 0; i < imgs.length; i++ ) {
 					imgs[i].style.
-						setProperty("filter", "invert(0)", "important");
+						setProperty("filter", "invert(0)",
+						"important");
 				}
 			`
 		});
