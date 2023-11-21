@@ -1,5 +1,5 @@
 browser.commands.onCommand.addListener( function(cmd) {
-	if( cmd === "unhideelmnts" ) {
+	if( cmd === "unhide-visual-media" ) {
 		browser.tabs.executeScript({
 			code: `
 				elmnts = document.

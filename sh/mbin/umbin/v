@@ -3,4 +3,5 @@ if [ ! -e /etc/vimrc ]; then
 	echo 'v: [ERR]: /etc/vimrc nfound' 1>&2
 	exit 1
 fi
-exec vim -c 'syntax off | map <Return> <NOP>' -u /etc/vimrc "$@"
+exec vim -c 'syntax off |
+	map <Return> <NOP>' -u /etc/vimrc "$@"

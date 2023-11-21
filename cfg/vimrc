@@ -7,11 +7,12 @@ set cmdheight=2
 set tabstop=4
 set shiftwidth=4
 set autoindent
+set backupdir=~/.vim/bkup/
 
-hi NonText ctermfg=gray
-hi Error ctermfg=white ctermbg=black
-hi ErrorMsg ctermfg=white ctermbg=black
-hi Search ctermfg=none ctermbg=none
+hi clear NonText
+hi clear Error
+hi clear ErrorMsg
+hi clear Search
 
 function ClFl()
 	%s/[ 	]\+$//ge
@@ -19,7 +20,7 @@ endfunction
 
 nmap <C-q> :qa!<nl>
 nmap <C-x> :q<nl>
-nmap <C-d> :w \| !clear; ~/.vim/cmd % 2>&1 \| $PAGER<nl><nl>
+nmap <C-d> :w \| !clear; ~/.vim/cmd %<nl><nl>
 nmap <C-s> :call ClFl() \| w<nl>
 nmap <C-z> :u<nl>
 nmap K :bn<nl>

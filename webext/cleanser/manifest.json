@@ -28,7 +28,7 @@
 	},
 	"permissions": ["*://*/*", "scripting"],
 	"commands": {
-		"unhideelmnts": {
+		"unhide-visual-media": {
 			"suggested_key": {
 				"default": "F1"
 			}
