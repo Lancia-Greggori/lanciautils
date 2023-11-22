@@ -1,6 +1,6 @@
 . /etc/genv
 EDITOR=v
-PAGER='less -Duw -Ddw -P :'
+PAGER='less -i -Duw -Ddw -P :'
 export EDITOR PAGER
 
 if echo "$-" | grep -q i; then
