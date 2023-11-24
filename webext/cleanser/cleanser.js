@@ -55,7 +55,8 @@ if( hostname === "www.desmos.com" ) {
 		}
 	`;
 
-	var scripts = document.querySelectorAll("script");
+	var scripts = document.
+		querySelectorAll("script");
 	for( let i = 0; i < scripts.length; i++ ) {
 		if( scripts[i].type.includes("math")  ) {
 			contains_math = true;
