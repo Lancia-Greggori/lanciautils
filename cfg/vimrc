@@ -24,6 +24,10 @@ function ExecCmd()
 	endif
 endfunction
 
+function Bkup()
+	exec '!cp % '.g:bkupdir.'/%_'.localtime()
+endfunction
+
 nmap <C-q> :qa!<nl>
 nmap <C-x> :q<nl>
 nmap <C-d> :w \| call ExecCmd()<nl><nl>
