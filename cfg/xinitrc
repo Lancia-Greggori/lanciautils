@@ -1,29 +1,32 @@
 #!/bin/sh -eu
+
 cd "$HOME" || exit 1
-sp(){
+
+startproc(){
 	local C="${1%% *}"
-	command -v "$C" || exit 2
+	command -v "$C" 1>/dev/null || exit 2
 	if ! pgrep -f "$C" 1>/dev/null; then
-		$1 &
+		$@ &
 	fi
 }
-# see if an HDMI connected screen is connected. if it is, turn off laptop screen
-# PHYSETUP: 0=laptop 1=desktop
+
+# see if an HDMI connected screen is connected.
+# if it is, turn off laptop screen.
 if xrandr | grep -qF 'HDMI1 connected'; then
+	SECS="$((20 * 60))"
 	xrandr --output eDP1 --off
-	xset s "$((20 * 60))" "$((20 * 60))"
-	sp xautolock -time 20 -locker xlock
-	sp unclutter --timeout 2 --jitter 50
-	PHYSETUP=1
+	xset s $SECS $SECS
+	startproc xautolock -time 20 -locker xlock
+	PHYSETUP=desktop
 else
-	xrandr --output eDP1 --mode '1280x720'
-	xset s "$((10 * 60))" "$((10 * 60))"
-	sp xautolock -time 10 -locker xlock
-	sp unclutter --timeout 2 --jitter 100
-	PHYSETUP=0
+	S="$((10 * 60))"
+	xrandr --output eDP1 --mode '1600x900'
+	xset s $SECS $SECS
+	startproc xautolock -time 10 -locker xlock
+	PHYSETUP=laptop
 fi
-sp pulseaudio --start --log-target=file:"$LOGD/pulseaudio"
-sp dunst
 export PHYSETUP
+
+startproc unclutter -idle 1 -grab
+startproc dunst -config $HOME/.dunstrc
 dwm
-killall pulseaudio
