@@ -54,6 +54,10 @@ if( hostname === "www.desmos.com" ) {
 		svg, audio, video {
 			display: none !important;
 		}
+
+		input {
+			autofocus: false !important;
+		}
 	`;
 
 	var scripts = document.
