@@ -1,8 +1,9 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
 const hts = document.querySelector("html").style;
-var contains_math = false;
-var is_ggl_imgs = false;
+
+// either contains math or is google images
+var fragile = false;
 
 if( hostname === "www.desmos.com" ) {
 
@@ -60,21 +61,22 @@ if( hostname === "www.desmos.com" ) {
 		}
 	`;
 
-	var scripts = document.
-		querySelectorAll("script");
-	for( let i = 0; i < scripts.length; i++ ) {
-		if( scripts[i].type.includes("math")  ) {
-			contains_math = true;
-			break;
+	if( hostname === "www.google.com" &&
+		url.includes("tbm=isch") )
+			fragile = true;
+	else {
+		var scripts = document.
+			querySelectorAll("script");
+		for( let i = 0; i < scripts.length; i++ ) {
+			if( scripts[i].type.includes("math")  ) {
+				fragile = true;
+				break;
+			}
 		}
 	}
 
-	if( hostname === "www.google.com" &&
-		url.includes("tbm=isch") )
-			is_ggl_imgs = true;
-
 	if( !bg_black_excl_urls.includes(hostname) &&
-		!contains_math && !is_ggl_imgs ) {
+		!fragile ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
@@ -82,7 +84,7 @@ if( hostname === "www.desmos.com" ) {
 			`;
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_math && !is_ggl_imgs ) {
+		!fragile ) {
 		mstyle = mstyle + `
 			* {
 				font: 20px sans-serif !important;
@@ -144,7 +146,7 @@ if( hostname === "www.desmos.com" ) {
 		}
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_math && !is_ggl_imgs ) {
+		!fragile ) {
 		var elmnts = document.
 			querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {

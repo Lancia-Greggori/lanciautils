@@ -25,10 +25,6 @@ nmap <C-s> :call ClFl() \| w<nl>
 nmap <C-z> :u<nl>
 nmap K :bn<nl>
 nmap J :bp<nl>
-nmap k kzz
-nmap j jzz
-nmap n nzz
-nmap N Nzz
 nmap <C-f> 10jzz
 nmap <C-b> 10kzz
 nmap - :e ~/.vim/cmd<nl>
