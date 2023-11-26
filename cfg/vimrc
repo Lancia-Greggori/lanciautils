@@ -7,27 +7,35 @@ set cmdheight=2
 set tabstop=4
 set shiftwidth=4
 set autoindent
-set backupdir=~/.vim/bkup/
 
-hi clear NonText
-hi clear Error
-hi clear ErrorMsg
-hi clear Search
+let enablepager=1
+let bkupdir=$HOME.'/.vim/bkup'
 
-function ClFl()
-	%s/[ 	]\+$//ge
+if !isdirectory(bkupdir)
+	exec '!mkdir -p '.bkupdir
+endif
+
+function ExecCmd()
+	!clear
+	if g:enablepager == 1
+		!g:vimdir/cmd % 2>&1 | $PAGER
+	else
+		!g:vimdir/cmd %
+	endif
 endfunction
 
 nmap <C-q> :qa!<nl>
 nmap <C-x> :q<nl>
-nmap <C-d> :w \| !clear; ~/.vim/cmd %<nl><nl>
-nmap <C-s> :call ClFl() \| w<nl>
+nmap <C-d> :w \| call ExecCmd()<nl><nl>
+nmap <C-s> :%s/[ 	]\+$//ge \| w<nl>
 nmap <C-z> :u<nl>
 nmap K :bn<nl>
 nmap J :bp<nl>
 nmap <C-f> 10jzz
 nmap <C-b> 10kzz
 nmap - :e ~/.vim/cmd<nl>
+nmap = :let enablepager=1<nl>
+nmap + :let enablepager=0<nl>
 
 imap <C-s> <Esc>
 
@@ -45,3 +53,8 @@ autocmd BufNewFile,BufRead ~/.vim/cmd {
 	nmap <buffer> - :w \| bd<nl>
 	map <buffer> <C-d> <NOP>
 }
+
+hi clear NonText
+hi clear Error
+hi clear ErrorMsg
+hi clear Search
