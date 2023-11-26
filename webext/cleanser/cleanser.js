@@ -2,6 +2,7 @@ const hostname = window.location.hostname;
 const url = window.location.href;
 const hts = document.querySelector("html").style;
 var contains_math = false;
+var is_ggl_imgs = false;
 
 if( hostname === "www.desmos.com" ) {
 
@@ -64,8 +65,12 @@ if( hostname === "www.desmos.com" ) {
 		}
 	}
 
+	if( hostname === "www.google.com" &&
+		url.includes("tbm=isch") )
+			is_ggl_imgs = true;
+
 	if( !bg_black_excl_urls.includes(hostname) &&
-		!contains_math ) {
+		!contains_math && !is_ggl_imgs ) {
 			mstyle = mstyle + `
 				*:not(img) {
 					background: black !important;
@@ -73,7 +78,7 @@ if( hostname === "www.desmos.com" ) {
 			`;
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_math ) {
+		!contains_math && !is_ggl_imgs ) {
 		mstyle = mstyle + `
 			* {
 				font: 20px sans-serif !important;
@@ -135,7 +140,7 @@ if( hostname === "www.desmos.com" ) {
 		}
 	}
 	if( !font_excl_urls.includes(hostname) &&
-		!contains_math ) {
+		!contains_math && !is_ggl_imgs ) {
 		var elmnts = document.
 			querySelectorAll("*");
 		for( let i = 0; i < elmnts.length; i++ ) {
