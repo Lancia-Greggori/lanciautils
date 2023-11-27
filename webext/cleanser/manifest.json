@@ -28,14 +28,19 @@
 	},
 	"permissions": ["*://*/*", "scripting"],
 	"commands": {
-		"unhide-visual-media": {
+		"uvm": {
 			"suggested_key": {
 				"default": "F1"
 			}
 		},
-		"invert-imgs": {
+		"invimgs": {
 			"suggested_key": {
 				"default": "F2"
+			}
+		},
+		"wsfix": {
+			"suggested_key": {
+				"default": "F4"
 			}
 		}
 	}

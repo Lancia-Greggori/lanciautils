@@ -40,3 +40,5 @@ ssd: ssid scanner daemon
 dfcmdfl: default command file
 cmdmd: command mode
 wsd: wpa_supplicant daemon
+uvm: unhide visual media
+wsfix: white space fix

@@ -48,10 +48,6 @@ if( hostname === "www.desmos.com" ) {
 			background-image: none !important;
 		}
 
-		p,code {
-			white-space: pre-wrap !important;
-		}
-
 		img {
 			filter: invert(1);
 		}
