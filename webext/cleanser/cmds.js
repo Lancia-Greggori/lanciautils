@@ -20,7 +20,7 @@ var invimgs = `
 
 var wsfix = `
 	txt = document.
-		querySelectorAll("p, code");
+		querySelectorAll("p, pre, code");
 	for( let i = 0; i < txt.length; i++ ) {
 		txt[i].style.
 			setProperty("white-space", "pre-wrap",
