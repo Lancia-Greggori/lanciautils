@@ -51,6 +51,8 @@ if !empty($DISPLAY)
 	nmap <C-c> :.w !clipb<nl><nl>
 	imap <C-c> <Esc>:.w !clipb<nl><insert>
 	vmap <C-c> y<nl>:call system('clipb', @0)<nl>
+else
+	nmap <C-c> <NOP>
 endif
 
 autocmd BufNewFile,BufRead ~/.vim/cmd {

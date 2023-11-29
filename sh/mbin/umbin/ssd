@@ -5,7 +5,7 @@ pgrep -f wpa_supplicant 1>/dev/null &&
 while true; do
 	lsssids | while read -r ssid; do
 		if [ -e /encetc/wpa/"$ssid" ]; then
-			connssid "$ssid"
+			connssid "$ssid" &
 			i=0
 			sleep 1m
 			while [ $i -lt 10 ]; do

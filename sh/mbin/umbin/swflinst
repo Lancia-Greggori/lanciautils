@@ -1,15 +1,15 @@
 #!/bin/sh -eu
 . /usr/subr/o
 F=/letc/swfl
-for file in "$@"; do
-	[ ! -f "$file" ] && exit 1
-	grep -q -m1 "^$(readlink -f "$file"):" $F ||
-		perrex "$file: nfound in $F" 2
+for f in "$@"; do
+	[ ! -f "$f" ] && exit 1
+	grep -q -m1 "^$(readlink -f "$f"):" $F ||
+		perrex "$f: nfound in $F" 2
 done
-for file in "$@"; do
-	FULP="$(grep -m1 "^$(readlink -f "$file"):" $F)"
+for f in "$@"; do
+	FULP="$(grep -m1 "^$(readlink -f "$f"):" $F)"
 	DEST="$(echo "$FULP" | cut -d':' -f2)"
 	PERM="${FULP##*:}"
-	file="${file%%:*}"
-	install -m "$PERM" "$file" "$DEST"
+	f="${f%%:*}"
+	install -m "$PERM" "$f" "$DEST"
 done

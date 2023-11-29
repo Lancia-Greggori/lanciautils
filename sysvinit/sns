@@ -1,15 +1,16 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 . /etc/genv
+. /usr/subr/o
 case $1 in
 	start)
-		ifconfig | grep -q '^lo:' ||
+		O="$(ifconfig)"
+		echo "$O" | grep -q '^lo:' ||
 			ifconfig lo inet loopback
-		ifconfig | grep -q '^wlan0:' ||
+		echo "$O" | grep -q '^wlan0:' ||
 			ifconfig wlan0 up
-		for p in ssd wpa_supplicant dhclient; do
-			if pgrep -f $p 1>/dev/null; then
-				echo "sns: [ERR]: $p already running"
-				exit 1
+		for p in ssd wpa_supplicant dhcpcd; do
+			if pgrep -f ^"$p" 1>/dev/null; then
+				perrex "$p already running" 1
 			fi
 		done
 		start-stop-daemon \
@@ -17,11 +18,11 @@ case $1 in
 			--exec /usr/local/mbin/ssd
 		start-stop-daemon \
 			--start --background \
-			--exec /sbin/dhclient \
-			-- -d -4 -i wlan0 --no-pid
+			--exec /usr/sbin/dhcpcd \
+			-- -q -4 -B -C resolv.conf wlan0
 	;;
 	stop)
-		for p in ssd wpa_supplicant dhclient; do
+		for p in ssd wpa_supplicant dhcpcd; do
 			killall $p || true
 		done
 	;;

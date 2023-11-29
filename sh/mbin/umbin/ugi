@@ -1,0 +1,2 @@
+#!/bin/sh -e
+update-initramfs -u -k all && update-grub

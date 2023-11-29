@@ -4,6 +4,5 @@
 [ $# -ne 1 ] && exit 2
 [ -e /encetc/wpa/"$1" ] ||
 	perrex "/encetc/wpa/$1 nexist" 1
-exec wpa_supplicant \
-	-B -c /encetc/wpa/"$1" -i wlan0 \
-	1>/var/log/wsd 2>&1
+exec wpa_supplicant -i wlan0 \
+	-c /encetc/wpa/"$1" 1>/var/log/wsd 2>&1
