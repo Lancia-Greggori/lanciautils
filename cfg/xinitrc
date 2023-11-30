@@ -3,9 +3,9 @@
 cd "$HOME" || exit 1
 
 startproc(){
-	local C="${1%% *}"
-	command -v "$C" 1>/dev/null || exit 2
-	if ! pgrep -f "$C" 1>/dev/null; then
+	local CMD="${1%% *}"
+	command -v "$CMD" 1>/dev/null || exit 2
+	if ! pgrep -f "$CMD" 1>/dev/null; then
 		$@ &
 	fi
 }
@@ -19,7 +19,7 @@ if xrandr | grep -qF 'HDMI1 connected'; then
 	startproc xautolock -time 20 -locker xlock
 	PHYSETUP=desktop
 else
-	S="$((10 * 60))"
+	SECS="$((10 * 60))"
 	xrandr --output eDP1 --mode '1600x900'
 	xset s $SECS $SECS
 	startproc xautolock -time 10 -locker xlock

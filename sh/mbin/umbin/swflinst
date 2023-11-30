@@ -1,6 +1,10 @@
 #!/bin/sh -eu
 . /usr/subr/o
-F=/letc/swfl
+if [ "$(id -u)" -eq 0 ]; then
+	F=/letc/swfl
+else
+	F="$HOME"/.swfl
+fi
 for f in "$@"; do
 	[ ! -f "$f" ] && exit 1
 	grep -q -m1 "^$(readlink -f "$f"):" $F ||

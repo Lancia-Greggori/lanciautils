@@ -1,2 +1,7 @@
 #!/bin/sh
-exec grep "$@" /letc/swfl
+if [ -e "$HOME"/.swfl ]; then
+	F=/letc/swfl\ "$HOME"/.swfl
+else
+	F=/letc/swfl
+fi
+exec grep "$@" $F

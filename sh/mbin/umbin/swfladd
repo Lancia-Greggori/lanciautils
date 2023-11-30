@@ -7,10 +7,8 @@ if [ "$#" -lt 2 ]; then
 	exit 1
 elif [ -L "$1" ] || [ -L "$2" ]; then
 	perrex 'src or file cant be link' 2
-elif [ "$(id -u)" -ne 0 ]; then
-	exit 3
 elif [ ! -f "$1" ]; then
-	perrex 'src must be a file' 4
+	perrex 'src must be a file' 3
 fi
 
 if [ -d "$2" ]; then
@@ -29,9 +27,15 @@ else
 	PERM="$3"
 fi
 
+if [ "$(id -u)" -eq 0 ]; then
+	F=/letc/swfl
+else
+	F="$HOME"/.swfl
+fi
+
 L="$(readlink -f "$1"):$TGT:$PERM"
-grep -q "^$L\$" /letc/swfl &&
+grep -q "^$L\$" "$F" &&
 	perrex "$1: line already added" 5
-grep -q "^${L%%:*}:" /letc/swfl &&
+grep -q "^${L%%:*}:" "$F" &&
 	perrex "$1: src file already added" 6
-exec echo "$L" >>/letc/swfl
+exec echo "$L" >>"$F"

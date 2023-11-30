@@ -1,6 +1,11 @@
 #!/bin/sh -eu
 . /usr/subr/o
-sed 's/:[0-9]\+$//; s/:/ /g' /letc/swfl |
+if [ -e "$HOME"/.swfl ]; then
+	F=/letc/swfl\ "$HOME"/.swfl
+else
+	F=/letc/swfl
+fi
+sed 's/:[0-9]\+$//; s/:/ /g' $F |
 	while read -r line; do
 		SRC="${line%% *}"
 		TGT="${line##* }"
