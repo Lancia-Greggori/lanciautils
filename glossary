@@ -44,3 +44,5 @@ uvm: unhide visual media
 wsfix: white space fix
 ugi: update grub and initramfs
 lmbin: lsr mbin
+mstsh: my style sheet
+anything prepended with an -m: my/mine

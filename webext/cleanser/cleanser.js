@@ -1,18 +1,18 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
-const hts = document.querySelector("html").style;
+const htmlstyle = document.querySelector("html").style;
 
 // either contains math or is google images
 var fragile = false;
 
 if( hostname === "www.desmos.com" ) {
 
-		hts.setProperty("filter",
+		htmlstyle.setProperty("filter",
 		"invert(1)", "important");
 
 } else {
 
-		hts.setProperty("filter",
+		htmlstyle.setProperty("filter",
 		"grayscale(1)", "important");
 
 	const bg_black_excl_urls = [
