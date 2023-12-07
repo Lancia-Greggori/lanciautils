@@ -2,7 +2,7 @@
 
 . /usr/subr/o
 
-if [ "$#" -lt 2 ]; then
+if [ "$#" -lt 3 ]; then
 	echo "USAGE: $PRGN @src @tgt #perm"
 	exit 1
 elif [ -L "$1" ] || [ -L "$2" ]; then
@@ -11,20 +11,12 @@ elif [ ! -f "$1" ]; then
 	perrex 'src must be a file' 3
 fi
 
+PERM="$3"
+
 if [ -d "$2" ]; then
 	TGT="${2%/}/${1##*/}"
 else
 	TGT="$2"
-fi
-
-if [ "$#" -lt 3 ]; then
-	if [ -d "$2" ]; then
-		PERM=0644
-	elif [ -f "$2" ]; then
-		PERM="$(stat -c "%a" "$2")"
-	fi
-else
-	PERM="$3"
 fi
 
 if [ "$(id -u)" -eq 0 ]; then

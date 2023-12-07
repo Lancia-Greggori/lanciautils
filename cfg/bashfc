@@ -1,8 +1,8 @@
-JF="$HOME/.jmpdirs"
+JMPFL="$HOME/.jmpdirs"
 
 j() {
 	local D
-	if [ ! -e "$JF" ]; then
+	if [ ! -e "$JMPFL" ]; then
 		echo 'jmp file nexist'
 		return 1
 	elif [ "$#" -ne 1 ]; then
@@ -16,10 +16,6 @@ j() {
 	cd "$D" || return 4
 }
 
-jmpcmd() {
-	(j "$1" && $2)
-}
-
 jmpadd() {
 	if [ "$#" -gt 2 ] || [ "$#" -eq 0 ]; then
 		echo 'USAGE: jmpadd @dir OR jmpadd @dir @alias'
@@ -31,24 +27,12 @@ jmpadd() {
 			return 2
 		}
 		local N="$(basename "$1")"
-		echo "$N:$(readlink -f "$1")" >> "$JF"
+		echo "$N:$(readlink -f "$1")" >> "$JMPFL"
 	else
 		[ -e "$1" ] || {
 			echo "$2: nexist"
 			return 2
 		}
-		echo "$2:$(readlink -f "$1")" >> "$JF"
+		echo "$2:$(readlink -f "$1")" >> "$JMPFL"
 	fi
-}
-
-mkdircd() {
-	mkdir $1 && cd $1
-}
-
-cheat() {
-	curl https://cheat.sh/$1
-}
-
-dlcmd() {
-	(j $1 && shift 1 && wget "$@")
 }

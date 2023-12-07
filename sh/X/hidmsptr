@@ -1,0 +1,2 @@
+#!/bin/sh
+exec unclutter -idle 1 -grab
