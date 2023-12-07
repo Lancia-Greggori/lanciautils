@@ -1,9 +1,12 @@
 #!/bin/sh -e
-[ "$(id -u)" -ne 0 ] && exit 1
-[ "$#" -eq 0 ] && exit 2
+[ "$#" -eq 0 ] && exit 1
 . /usr/subr/o
 D=/mnt/strg/enc/bkup
-[ ! -e $D ] && perrex "$D: nexist" 3
+if [ ! -e $D ]; then
+	perrex "$D: nexist" 2
+elif [ "$(stat -c '%a' "$D")" -ne 1777 ]; then
+	perrex "$D: bad permission, not 1777" 3
+fi
 for d in "$@"; do
 	[ -d "$d" ] || perrex "$d: ndir" 4
 done
