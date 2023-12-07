@@ -30,6 +30,12 @@ function ExecCmdFl()
 	endif
 endfunction
 
+function Paste()
+	set paste
+	r !clipb -o
+	set nopaste
+endfunction
+
 function Bkup()
 	exec '!cp % '.g:bkupdir.'/%_'.localtime()
 endfunction
