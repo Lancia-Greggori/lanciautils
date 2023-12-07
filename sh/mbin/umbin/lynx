@@ -1,3 +1,4 @@
 #!/bin/sh
-[ "$(id -u)" -eq 0 ] && exec rsr /usr/bin/lynx -nocolor -vikeys "$@"
+[ "$(id -u)" -eq 0 ] &&
+	exec rsr /usr/bin/lynx -nocolor -vikeys "$@"
 exec /usr/bin/lynx -nocolor -vikeys "$@"

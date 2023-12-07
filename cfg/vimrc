@@ -1,4 +1,5 @@
 set nocompatible
+set autoindent
 set ttymouse=""
 set mouse=""
 set shortmess=aI

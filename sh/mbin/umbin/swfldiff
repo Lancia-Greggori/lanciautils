@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/sh -e
 . /usr/subr/o
 if [ -e "$HOME"/.swfl ]; then
 	F=/letc/swfl\ "$HOME"/.swfl
@@ -16,5 +16,10 @@ sed 's/:[0-9]\+$//; s/:/ /g' $F |
 			pwrn "$TGT: nexist"
 			continue
 		fi
-		diff $line || echo "@ $line"
+		if ! diff -q $line 1>/dev/null; then
+			echo "--- $line"
+			if [ "$1" = -v ]; then
+				diff $line || true
+			fi
+		fi
 	done
