@@ -48,7 +48,7 @@ if( hostname === "www.desmos.com" ) {
 			background-image: none !important;
 		}
 
-		button,select {
+		button, select {
 			color: white !important;
 			background: black !important;
 		}
