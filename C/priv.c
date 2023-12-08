@@ -5,7 +5,7 @@
 
 #define CMDFL "/letc/priv"
 #define AUTHUID 1000
-#define AUTHPATH "/usr/local/mbin:/bin:/sbin:/usr/bin:/usr/sbin"
+#define AUTHPATH "/usr/mbin:/bin:/sbin:/usr/bin:/usr/sbin"
 #define MAXCMDLN_ARGSZ 100
 #define MAXCMDFL_LNSZ MAXCMDLN_ARGSZ
 #define PERR(S) fprintf(stderr, S"\n")

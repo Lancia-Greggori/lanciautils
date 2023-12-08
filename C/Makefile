@@ -1,5 +1,5 @@
 CC = cc -Wall -g
-UMBIN = /usr/local/mbin
+UMBIN = /usr/mbin
 
 nothing:
 	@echo make what?
