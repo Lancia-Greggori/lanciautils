@@ -48,6 +48,11 @@ if( hostname === "www.desmos.com" ) {
 			background-image: none !important;
 		}
 
+		button,select {
+			color: white !important;
+			background: black !important;
+		}
+
 		img {
 			filter: invert(1);
 		}
