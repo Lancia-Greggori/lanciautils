@@ -34,7 +34,9 @@ if( hostname === "www.desmos.com" ) {
 	];
 
 	var mstyle = `
-		*:not(img), *::after, *::before {
+
+		*:not(img), *::after, *::before,
+		*::first-letter {
 			color: white !important;
 		}
 
@@ -94,6 +96,12 @@ if( hostname === "www.desmos.com" ) {
 			*, *::after, *::before {
 				font: 20px sans-serif !important;
 				font-weight: normal !important;
+			}
+			*::first-letter {
+				font: 20px sans-serif !important;
+				font-weight: normal !important;
+				float: none !important;
+				margin: 0 !important;
 			}
 		`;
 	}
