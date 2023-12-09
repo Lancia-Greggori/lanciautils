@@ -122,12 +122,12 @@ if( hostname === "www.desmos.com" ) {
 	} else {
 		mstyle = mstyle + `
 			img:not(
-					[class*="math" i],
-					[src*="math" i],
-					[src*="gstatic.com/education" i]
-				) {
-					display: none !important;
-				}
+				[class*="math" i],
+				[src*="math" i],
+				[src*="gstatic.com/education" i]
+			) {
+				display: none !important;
+			}
 		`;
 	}
 	if( hostname.includes("wikipedia.org") ) {
