@@ -8,7 +8,7 @@
 #define AUTHPATH "/usr/mbin:/bin:/sbin:/usr/bin:/usr/sbin"
 #define MAXCMDLN_ARGSZ 100
 #define MAXCMDFL_LNSZ MAXCMDLN_ARGSZ
-#define PERR(S) fprintf(stderr, S"\n")
+#define PERR(S) fprintf(stderr, "priv: [ERR]: " S "\n")
 
 int main(int argc, char *argv[]) {
 
