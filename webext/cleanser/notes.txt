@@ -1,0 +1,3 @@
+@ apparently, on libretexts.org, when I try to apply
+	a "background: black !important;" to a "span" tag
+	using CSS, the math breaks

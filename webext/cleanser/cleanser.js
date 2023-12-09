@@ -1,22 +1,20 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
-const htmlstyle = document.querySelector("html").style;
-// either contains math or is google images
+const htmlst = document.querySelector("html").style;
 var fragile = false;
 const appinv = [
 	"www.desmos.com",
-	"openstax.org"
 ];
 
 if( appinv.includes(hostname) ) {
 
-		htmlstyle.setProperty("filter",
-		"invert(1)", "important");
+	htmlst.setProperty("filter",
+	"invert(1)", "important");
 
 } else {
 
-		htmlstyle.setProperty("filter",
-		"grayscale(1)", "important");
+	htmlst.setProperty("filter",
+	"grayscale(1)", "important");
 
 	const bg_black_excl_urls = [
 		"web.whatsapp.com",
@@ -69,19 +67,53 @@ if( appinv.includes(hostname) ) {
 		input {
 			autofocus: false !important;
 		}
+
 	`;
 
 	if( hostname === "www.google.com" &&
-		url.includes("tbm=isch") )
+		url.includes("tbm=isch") ) {
+
+			mstyle = mstyle + `
+				a {
+					display: inline !important;
+				}
+			`;
 			fragile = true;
-	else {
-		var scripts = document.
-			querySelectorAll("script");
+
+	} else {
+
+		mstyle = mstyle + `
+			img:not(
+				[class*="math" i],
+				[src*="math" i],
+				[src*="wikimedia.org"][src$=".svg.png"],
+				[src*="gstatic.com/education"]
+			) {
+				display: none !important;
+			}
+		`;
+		if( hostname.includes("wikipedia.org") ) {
+			mstyle = mstyle + `
+				a[href^="#cite_note"] {
+					display: none !important;
+				}
+			`;
+		}
+		var scripts = document.querySelectorAll("script");
 		for( let i = 0; i < scripts.length; i++ ) {
 			if( scripts[i].type.includes("math") ||
 				scripts[i].src.includes("math") ) {
+
+					mstyle = mstyle + `
+						body, div, *::after,
+						*::before, section {
+							background: black !important;
+							background-color: black !important;
+						}
+					`;
 					fragile = true;
 					break;
+
 			}
 		}
 	}
@@ -89,7 +121,8 @@ if( appinv.includes(hostname) ) {
 	if( !bg_black_excl_urls.includes(hostname) &&
 		!fragile ) {
 			mstyle = mstyle + `
-				*:not(img), *::after, *::before {
+				*:not(img), *::after, *::before,
+				section, div {
 					background: black !important;
 				}
 			`;
@@ -113,32 +146,6 @@ if( appinv.includes(hostname) ) {
 		mstyle = mstyle + `
 			*, *::after, *::before {
 				transform: none !important;
-			}
-		`;
-	}
-	if( hostname === "www.google.com" &&
-		url.includes("tbm=isch") ) {
-		mstyle = mstyle + `
-			a {
-				display: inline !important;
-			}
-		`;
-	} else {
-		mstyle = mstyle + `
-			img:not(
-				[class*="math" i],
-				[src*="math" i],
-				[src*="wikimedia.org"][src$=".svg.png"],
-				[src*="gstatic.com/education"]
-			) {
-				display: none !important;
-			}
-		`;
-	}
-	if( hostname.includes("wikipedia.org") ) {
-		mstyle = mstyle + `
-			a[href^="#cite_note"] {
-				display: none !important;
 			}
 		`;
 	}
