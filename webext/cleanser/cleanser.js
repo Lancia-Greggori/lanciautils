@@ -124,7 +124,8 @@ if( hostname === "www.desmos.com" ) {
 			img:not(
 				[class*="math" i],
 				[src*="math" i],
-				[src*="gstatic.com/education" i]
+				[src*="wikimedia.org"][src$=".svg.png"],
+				[src*="gstatic.com/education"]
 			) {
 				display: none !important;
 			}
