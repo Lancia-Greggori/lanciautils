@@ -1,0 +1,11 @@
+#!/bin/sh -eu
+. /usr/subr/o
+if [ "$#" -eq 1 ]; then
+	git add --all
+	git commit -m "$1"
+	git push
+elif [ "$#" -eq 2 ]; then
+	git add $1
+	git commit -m "$2"
+	git push
+fi
