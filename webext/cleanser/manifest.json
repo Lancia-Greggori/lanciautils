@@ -5,7 +5,7 @@
 	"version": "1.0",
 	"browser_specific_settings": {
 		"gecko": {
-		  "id": "cleanser@nodomain.com"
+			"id": "cleanser@nodomain.com"
 		}
 	},
 	"content_scripts": [

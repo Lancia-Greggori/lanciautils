@@ -1,11 +1,14 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
 const htmlstyle = document.querySelector("html").style;
-
 // either contains math or is google images
 var fragile = false;
+const appinv = [
+	"www.desmos.com",
+	"openstax.org"
+];
 
-if( hostname === "www.desmos.com" ) {
+if( appinv.includes(hostname) ) {
 
 		htmlstyle.setProperty("filter",
 		"invert(1)", "important");
@@ -75,9 +78,10 @@ if( hostname === "www.desmos.com" ) {
 		var scripts = document.
 			querySelectorAll("script");
 		for( let i = 0; i < scripts.length; i++ ) {
-			if( scripts[i].type.includes("math")  ) {
-				fragile = true;
-				break;
+			if( scripts[i].type.includes("math") ||
+				scripts[i].src.includes("math") ) {
+					fragile = true;
+					break;
 			}
 		}
 	}
