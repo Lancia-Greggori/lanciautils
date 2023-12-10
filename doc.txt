@@ -21,13 +21,12 @@ PRGN, PRGN: program name
 CONFF, CFGF: config file
 CONFD, CFGD: config directory
 FULP: full path
+
 wm: wireless manager
 dict: dictionary
 swfl: system wide file list
 ncurl: nobody curl ( as user )
 dmgr: swfl diff manager
-@option: mandatory option
-#option: optional option
 brsr: browser
 badopt: bad option
 spr: standard path run
@@ -45,4 +44,8 @@ wsfix: white space fix
 ugi: update grub and initramfs
 lmbin: lsr mbin
 mstsh: my style sheet
-anything prepended with an -m: my/mine
+
+anything prepended with an m-: my/mine
+anything prepended with an en-: enable
+@option: mandatory option
+#option: optional option
