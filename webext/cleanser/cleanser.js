@@ -1,6 +1,6 @@
 const hostname = window.location.hostname;
 const url = window.location.href;
-const htmlst = document.querySelector("html").style;
+const hts = document.querySelector("html").style;
 var fragile = false;
 const appinv = [
 	"www.desmos.com",
@@ -8,12 +8,12 @@ const appinv = [
 
 if( appinv.includes(hostname) ) {
 
-	htmlst.setProperty("filter",
+	hts.setProperty("filter",
 	"invert(1)", "important");
 
 } else {
 
-	htmlst.setProperty("filter",
+	hts.setProperty("filter",
 	"grayscale(1)", "important");
 
 	const bg_black_excl_urls = [
@@ -105,8 +105,8 @@ if( appinv.includes(hostname) ) {
 				scripts[i].src.includes("math") ) {
 
 					mstyle = mstyle + `
-						body, div, *::after,
-						*::before, section {
+						body, *::after, *::before,
+						div, section {
 							background: black !important;
 							background-color: black !important;
 						}
