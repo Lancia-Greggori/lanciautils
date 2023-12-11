@@ -8,6 +8,7 @@ set cmdheight=2
 set tabstop=4
 set shiftwidth=4
 
+let euid=system('id -u')
 let enpager=1
 let vimdir=$HOME.'/.vim'
 let cmdfl=vimdir.'/cmd'
@@ -47,7 +48,7 @@ function Paste()
 endfunction
 
 function Bkup()
-	exec '!cp % '.g:bkupdir.'/%_'.localtime()
+	exec '!F=%; cp % '.g:bkupdir.'/${F\#\#*/}_'.localtime()
 endfunction
 
 nmap <C-q> :qa!<nl>
@@ -90,6 +91,6 @@ hi clear Error
 hi clear ErrorMsg
 hi clear Search
 
-if filereadable('./lvimrc')
+if euid != 0 && filereadable('./lvimrc')
 	source ./lvimrc
 endif
