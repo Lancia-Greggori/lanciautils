@@ -10,6 +10,7 @@ set shiftwidth=4
 
 let enpager=1
 let vimdir=$HOME.'/.vim'
+let cmdfl=vimdir.'/cmd'
 let bkupdir=vimdir.'/bkup'
 
 if !isdirectory(vimdir)
@@ -24,9 +25,9 @@ endif
 function ExecCmdFl()
 	silent !clear
 	if g:enpager == 1
-		exec '!'.g:vimdir.'/cmd % 2>&1 | $PAGER'
+		exec '!'.g:vimdir.g:cmdfl % 2>&1 | $PAGER'
 	else
-		exec '!'.g:vimdir.'/cmd %'
+		exec '!'.g:vimdir.g:cmdfl %'
 	endif
 endfunction
 
@@ -57,7 +58,8 @@ nmap K :bn<nl>
 nmap J :bp<nl>
 nmap <C-f> 10jzz
 nmap <C-b> 10kzz
-nmap - :e ~/.vim/cmd<nl>
+nmap - :exec 'e '.cmdfl<nl>
+nmap _ :let cmdfl=
 nmap = :call ChEnPager()<nl>
 
 nmap <C-s> :%s/[ 	]\+$//ge \| w<nl>
@@ -76,9 +78,11 @@ else
 	nmap <C-c> <NOP>
 endif
 
-autocmd BufNewFile,BufRead ~/.vim/cmd {
-	nmap <buffer> - :w \| bd<nl>
-	map <buffer> <C-d> <NOP>
+autocmd BufNewFile,BufRead * {
+	if expand('%') == g:cmdfl
+		nmap <buffer> - :w \| bd<nl>
+		map <buffer> <C-d> <NOP>
+	endif
 }
 
 hi clear NonText

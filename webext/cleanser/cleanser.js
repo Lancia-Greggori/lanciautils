@@ -36,12 +36,12 @@ if( appinv.includes(hostname) ) {
 
 	var mstyle = `
 
-		*:not(img), *::after, *::before,
-		*::first-letter {
+		*:not(img), ::after, ::before,
+		::first-letter {
 			color: white !important;
 		}
 
-		*, *::after, *::before {
+		*, ::after, ::before {
 			transition: none !important;
 			animation: none !important;
 			text-decoration: none !important;
@@ -105,7 +105,7 @@ if( appinv.includes(hostname) ) {
 				scripts[i].src.includes("math") ) {
 
 					mstyle = mstyle + `
-						body, *::after, *::before,
+						body, ::after, ::before,
 						div, section {
 							background: black !important;
 							background-color: black !important;
@@ -121,7 +121,7 @@ if( appinv.includes(hostname) ) {
 	if( !bg_black_excl_urls.includes(hostname) &&
 		!fragile ) {
 			mstyle = mstyle + `
-				*:not(img), *::after, *::before,
+				*:not(img), ::after, ::before,
 				section, div {
 					background: black !important;
 				}
@@ -130,11 +130,11 @@ if( appinv.includes(hostname) ) {
 	if( !font_excl_urls.includes(hostname) &&
 		!fragile ) {
 		mstyle = mstyle + `
-			*, *::after, *::before {
+			*, ::after, ::before {
 				font: 20px sans-serif !important;
 				font-weight: normal !important;
 			}
-			*::first-letter {
+			::first-letter {
 				font: 20px sans-serif !important;
 				font-weight: normal !important;
 				float: none !important;
@@ -144,7 +144,7 @@ if( appinv.includes(hostname) ) {
 	}
 	if( !transform_excl_urls.includes(hostname) ) {
 		mstyle = mstyle + `
-			*, *::after, *::before {
+			*, ::after, ::before {
 				transform: none !important;
 			}
 		`;
