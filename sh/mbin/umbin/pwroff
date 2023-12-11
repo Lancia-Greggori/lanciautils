@@ -1,0 +1,6 @@
+#!/bin/sh -eu
+. /usr/subr/o
+if who -a | grep -q ^root; then
+	perrex 'cant pwroff, root logged in' 1
+fi
+exec /sbin/poweroff
