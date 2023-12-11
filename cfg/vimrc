@@ -54,7 +54,6 @@ endfunction
 nmap <C-q> :qa!<nl>
 nmap <C-x> :q<nl>
 nmap <C-d> :w \| call ExecCmdFl()<nl><nl>
-nmap <C-z> :u<nl>
 nmap K :bn<nl>
 nmap J :bp<nl>
 nmap <C-f> 10jzz
@@ -62,6 +61,9 @@ nmap <C-b> 10kzz
 nmap - :exec 'e '.cmdfl<nl>
 nmap _ :let cmdfl=
 nmap = :call ChEnPager()<nl>
+
+imap <C-z> <Esc>ui
+nmap <C-z> :u<nl>
 
 nmap <C-s> :%s/[ 	]\+$//ge \| w<nl>
 imap <C-s> <Esc>
