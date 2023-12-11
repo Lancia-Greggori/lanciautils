@@ -25,9 +25,9 @@ endif
 function ExecCmdFl()
 	silent !clear
 	if g:enpager == 1
-		exec '!'.g:vimdir.g:cmdfl % 2>&1 | $PAGER'
+		exec '!'.g:cmdfl.' % 2>&1 | $PAGER'
 	else
-		exec '!'.g:vimdir.g:cmdfl %'
+		exec '!'.g:cmdfl.' %'
 	endif
 endfunction
 
