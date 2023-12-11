@@ -89,3 +89,7 @@ hi clear NonText
 hi clear Error
 hi clear ErrorMsg
 hi clear Search
+
+if filereadable('./lvimrc')
+	source ./lvimrc
+endif
