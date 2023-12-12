@@ -84,7 +84,6 @@ endif
 autocmd BufNewFile,BufRead * {
 	if expand('%') == g:cmdfl
 		nmap <buffer> - :w \| bd<nl>
-		map <buffer> <C-d> <NOP>
 	endif
 }
 
