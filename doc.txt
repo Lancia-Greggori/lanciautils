@@ -46,6 +46,7 @@ lmbin: lsr mbin
 mstsh: my style sheet
 codcomm: code comment.txt
 findoc: final document
+lnf: line not finished
 
 m-: my/mine
 en-: enable
