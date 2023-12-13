@@ -4,6 +4,8 @@ const hts = document.querySelector("html").style;
 var fragile = false;
 const appinv = [
 	"www.desmos.com",
+	"www.ejemplos.co",
+	"sintaxis.org"
 ];
 
 if( appinv.includes(hostname) ) {
