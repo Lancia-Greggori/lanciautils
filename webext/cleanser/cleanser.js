@@ -94,6 +94,7 @@ if( appinv.includes(hostname) ) {
 				display: none !important;
 			}
 		`;
+
 		if( hostname.includes("wikipedia.org") ) {
 			mstyle = mstyle + `
 				a[href^="#cite_note"] {
@@ -101,21 +102,25 @@ if( appinv.includes(hostname) ) {
 				}
 			`;
 		}
+
+		tmpstyle = `
+			body, ::after, ::before,
+			div, section {
+				background: black !important;
+				background-color: black !important;
+			}
+		`;
 		var scripts = document.querySelectorAll("script");
 		for( let i = 0; i < scripts.length; i++ ) {
-			if( scripts[i].type.includes("math") ||
+			if( scripts[i].type.includes("math") ) {
+				mstyle += tmpstyle;
+				fragile = true;
+				break;
+			} else if( typeof scripts[i].src !== "undefined" &&
 				scripts[i].src.includes("math") ) {
-
-					mstyle = mstyle + `
-						body, ::after, ::before,
-						div, section {
-							background: black !important;
-							background-color: black !important;
-						}
-					`;
+					mstyle += tmpstyle;
 					fragile = true;
 					break;
-
 			}
 		}
 	}
