@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define CMDFL "/letc/priv"
+#define CMDFL "/letc/privcmdfl"
 #define AUTHUID 1000
 #define AUTHPATH "/usr/mbin:/bin:/sbin:/usr/bin:/usr/sbin"
 #define MAXCMDLN_ARGSZ 100
