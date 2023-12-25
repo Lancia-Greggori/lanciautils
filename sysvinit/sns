@@ -8,6 +8,8 @@ case $1 in
 			ifconfig lo inet loopback
 		echo "$O" | grep -q '^wlan0:' ||
 			ifconfig wlan0 up
+		iwconfig wlan0 | grep -q 'Power Management:off' &&
+			iwconfig wlan0 power off
 		for p in ssd wpa_supplicant dhcpcd; do
 			if pgrep -f ^"$p" 1>/dev/null; then
 				perrex "$p already running" 1
@@ -33,3 +35,4 @@ case $1 in
 	;;
 	*) exit 1 ;;
 esac
+iwconfig wlan0 power off
