@@ -84,16 +84,22 @@ if( appinv.includes(hostname) ) {
 
 	} else {
 
-		mstyle = mstyle + `
-			img:not(
-				[class*="math" i],
-				[src*="math" i],
-				[src*="wikimedia.org"][src$=".svg.png"],
-				[src*="gstatic.com/education"]
-			) {
-				display: none !important;
-			}
-		`;
+		if(
+			!url.includes(".jpg") &&
+			!url.includes(".png") &&
+			!url.includes(".gif")
+		) {
+			mstyle = mstyle + `
+				img:not(
+					[class*="math" i],
+					[src*="math" i],
+					[src*="wikimedia.org"][src$=".svg.png"],
+					[src*="gstatic.com/education"]
+				) {
+					display: none !important;
+				}
+			`;
+		}
 
 		if( hostname.includes("wikipedia.org") ) {
 			mstyle = mstyle + `
