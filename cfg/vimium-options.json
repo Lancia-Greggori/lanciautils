@@ -1,0 +1,7 @@
+{
+  "keyMappings": "map D scrollPageUp",
+  "regexFindMode": true,
+  "searchEngines": "ingles: https://www.ingles.com/traductor/%s ingles.com\nwrdrf: https://www.wordreference.com/es/en/translation.asp?spen=%s wordrefrence Spanish to English\nwrdrfen: https://www.wordreference.com/es/translation.asp?tranword=%s wordrefrence English to Spanish\nsilabas: https://www.silabas.net/index-es.php?p=%s silabas\ngglimgs: https://www.google.com/search?q=%s&tbm=isch gglimgs",
+  "settingsVersion": "2.0.6",
+  "exclusionRules": []
+}

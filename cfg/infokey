@@ -1,3 +1,0 @@
-l 	select-reference-this-line
-g	goto-node
-^x	quit
